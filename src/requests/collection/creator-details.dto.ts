@@ -14,9 +14,9 @@ class MintingListingDto extends CollectionMintProfileDoc {
 }
 
 export class CreatorDetailsDto extends CreatorProfileDoc {
-  @ApiProperty({ type: MintingListingDto, isArray: true })
+  @ApiProperty({ type: MintingListingDto, isArray: true, required: false })
   listing?: MintingListingDto[];
 
-  @ApiProperty({ type: EventProfileDoc, isArray: true })
+  @ApiProperty({ type: EventProfileDoc, isArray: true, required: false })
   events?: EventProfileDoc[] | EventProfile[];
 }

@@ -4,7 +4,7 @@ import {
   EsdtTokenSubType,
   ActivityChain,
 } from '../../../common/enums';
-import { Socials } from '../../../common/socials';
+import { SocialsDto } from '../../../common/socials';
 import {
   CollectionStatistics,
   StatisticsDto,
@@ -13,19 +13,112 @@ import {
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from './dataTypes';
 
+export class Rule {
+  @ApiProperty({ description: 'Rule type' })
+  type!: 'kiosk_lock_rule' | 'royalty_rule';
+
+  @ApiProperty({ description: 'Rule amount bp', required: false })
+  amount_bp?: number;
+
+  @ApiProperty({ description: 'Rule min amount', required: false })
+  min_amount?: string;
+}
+
+export class TransferPolicy {
+  @ApiProperty({ description: 'Transfer policy id' })
+  id!: string;
+
+  @ApiProperty({ description: 'Transfer policy type' })
+  type!: string;
+
+  @ApiProperty({ description: 'Transfer policy rules' })
+  rules!: Rule[];
+
+  @ApiProperty({ description: 'Transfer policy is origin byte' })
+  is_origin_byte!: boolean;
+}
+
 export class CollectionProfileDoc {
+  @ApiProperty({
+    description: 'Data type identifier for the collection profile',
+    enum: CollectionDataType,
+    example: CollectionDataType.CollectionProfile,
+  })
   dataType: CollectionDataType = CollectionDataType.CollectionProfile;
+
+  @ApiProperty({
+    description: 'Collection identifier',
+    example: 'COLLECTION-123456',
+  })
   collection: string = '';
+
+  @ApiProperty({
+    description: 'Original collection identifier',
+    example: 'ORIGINAL-123456',
+  })
   originalCollection: string = '';
+
+  @ApiProperty({
+    description: 'Name of the collection',
+    example: 'My NFT Collection',
+  })
   name: string = '';
+
+  @ApiProperty({
+    description: 'Description of the collection',
+    example: 'A unique collection of digital artwork',
+  })
   description: string = '';
+
+  @ApiProperty({
+    description: 'Whether the collection is visible to the public',
+    example: true,
+  })
   isVisible: boolean = true;
+
+  @ApiProperty({
+    description: 'Whether the collection is verified',
+    example: false,
+  })
   isVerified: boolean = false;
-  socials!: Socials;
+
+  @ApiProperty({
+    description: 'Social media links for the collection',
+    type: SocialsDto,
+  })
+  socials!: SocialsDto;
+
+  @ApiProperty({
+    description: 'Token type',
+    enum: EsdtTokenType,
+    example: EsdtTokenType.NonFungibleESDT,
+  })
   type!: EsdtTokenType;
+
+  @ApiProperty({
+    description: 'Token subtype',
+    enum: EsdtTokenSubType,
+    required: false,
+    example: EsdtTokenSubType.NonFungibleESDTv2,
+  })
   subType?: EsdtTokenSubType;
-  profile!: string; // TODO: Set default later in the code
-  banner!: string; // TODO: Set default later in the code
+
+  @ApiProperty({
+    description: 'Profile image URL',
+    example: 'https://example.com/profile.jpg',
+  })
+  profile!: string;
+
+  @ApiProperty({
+    description: 'Banner image URL',
+    example: 'https://example.com/banner.jpg',
+  })
+  banner!: string;
+
+  @ApiProperty({
+    description: 'Collection statistics',
+    type: StatisticsDto,
+  })
   statistics: CollectionStatistics = new StatisticsDto({
     other: new StatisticsOtherDto({
       followCount: 0,
@@ -33,17 +126,83 @@ export class CollectionProfileDoc {
       holdersCount: 0,
     }),
   });
+
+  @ApiProperty({
+    description: 'Blockchain chain',
+    enum: ActivityChain,
+    example: ActivityChain.MULTIVERSX,
+  })
   chain: ActivityChain = ActivityChain.MULTIVERSX;
+
+  @ApiProperty({
+    description: 'Transfer policies for the collection',
+    type: [TransferPolicy],
+  })
   transferPolicies: TransferPolicy[] = [];
+
+  @ApiProperty({
+    description: 'Owner address of the collection',
+    example: 'erd1...',
+  })
   owner: string = '';
+
+  @ApiProperty({
+    description: 'Creator address of the collection',
+    example: 'erd1...',
+  })
   creator: string = '';
+
+  @ApiProperty({
+    description: 'Whether the collection is mintable',
+    example: false,
+  })
   isMintable: boolean = false;
+
+  @ApiProperty({
+    description: 'Whether the collection has staking',
+    example: false,
+  })
   hasStaking: boolean = false;
+
+  @ApiProperty({
+    description: 'Whether the collection is an event',
+    example: false,
+  })
   isEvent: boolean = false;
+
+  @ApiProperty({
+    description: 'Roles associated with the collection',
+    type: 'object',
+    example: { ESDTRoleNFTCreate: ['erd1...'] },
+  })
   roles: Record<string, string[]> = {};
+
+  @ApiProperty({
+    description: 'Event ID if this is an event collection',
+    required: false,
+    example: 'event-123',
+  })
   eventId?: string;
+
+  @ApiProperty({
+    description: 'Timestamp when pinned at drops',
+    required: false,
+    example: 1640995200,
+  })
   pinnedAtDrops?: number;
+
+  @ApiProperty({
+    description: 'Timestamp when pinned',
+    required: false,
+    example: 1640995200,
+  })
   pinnedAt?: number;
+
+  @ApiProperty({
+    description: 'Custom configuration for the collection',
+    required: false,
+    type: XoxnoMarketplaceScCollectionConfig,
+  })
   customConfig?: XoxnoMarketplaceScCollectionConfig;
 
   @ApiProperty({
@@ -75,7 +234,17 @@ export class CollectionProfileDoc {
     required: false,
   })
   minSalePrice?: string;
+
+  @ApiProperty({
+    description: 'Unique identifier for the document',
+    example: 'COLLECTION-123456-CollectionProfile',
+  })
   id: string = '';
+
+  @ApiProperty({
+    description: 'Timestamp of the document',
+    example: 1640995200,
+  })
   _ts: number = 0;
 
   constructor(props?: Partial<CollectionProfileDoc>) {
@@ -99,28 +268,3 @@ export class CollectionProfileDoc {
 }
 
 export type CollectionProfileDocType = CollectionProfileDoc;
-
-export class Rule {
-  @ApiProperty({ description: 'Rule type' })
-  type!: 'kiosk_lock_rule' | 'royalty_rule';
-
-  @ApiProperty({ description: 'Rule amount bp' })
-  amount_bp?: number;
-
-  @ApiProperty({ description: 'Rule min amount' })
-  min_amount?: string;
-}
-
-export class TransferPolicy {
-  @ApiProperty({ description: 'Transfer policy id' })
-  id!: string;
-
-  @ApiProperty({ description: 'Transfer policy type' })
-  type!: string;
-
-  @ApiProperty({ description: 'Transfer policy rules' })
-  rules!: Rule[];
-
-  @ApiProperty({ description: 'Transfer policy is origin byte' })
-  is_origin_byte!: boolean;
-}

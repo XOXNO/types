@@ -70,6 +70,7 @@ export class NftSaleInfo {
   @ApiProperty({
     example: 10,
     description: 'This value is the one set by the owner at listing time',
+    required: false,
   })
   royalties?: number;
 }

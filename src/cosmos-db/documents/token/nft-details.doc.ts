@@ -201,7 +201,7 @@ export class NftDoc {
   metadata?: NftMetadata = { attributes: [] };
   @ApiProperty({
     type: Boolean,
-    required: true,
+    required: false,
     description: 'Whether the NFT is a ticket',
   })
   // Encapsulate event-specific data in a separate key

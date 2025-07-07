@@ -127,6 +127,7 @@ export class StakingSummary {
   @ApiProperty({
     description: 'Pool description',
     example: 'The largest staking pool',
+    required: false,
   })
   description?: string;
 

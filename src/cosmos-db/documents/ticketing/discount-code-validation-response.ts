@@ -15,7 +15,7 @@ export class DiscountCodeValidationResponse {
   @IsNumber()
   discountAmount!: number;
 
-  @ApiProperty({ type: Number })
+  @ApiProperty({ type: Number, required: false })
   @IsNumber()
   @IsOptional()
   discountMaxAmount?: number;

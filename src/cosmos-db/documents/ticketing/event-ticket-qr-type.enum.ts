@@ -135,6 +135,7 @@ export class EventCheckInQR {
     description: 'Selected Tickets',
     type: TicketsType,
     isArray: true,
+    required: false,
   })
   @IsArray()
   @IsOptional()

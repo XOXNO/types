@@ -3,6 +3,7 @@ import tseslint from 'typescript-eslint';
 import prettierPluginRecommended from 'eslint-plugin-prettier/recommended';
 import globals from 'globals';
 import fixUninitializedProperties from './eslint-rules/fix-uninitialized-properties.js';
+import apiPropertyOptionalRequired from './eslint-rules/api-property-optional-required.js';
 
 export default [
   {
@@ -19,14 +20,16 @@ export default [
       },
     },
     plugins: {
-      'custom': {
+      custom: {
         rules: {
           'fix-uninitialized-properties': fixUninitializedProperties,
+          'api-property-optional-required': apiPropertyOptionalRequired,
         },
       },
     },
     rules: {
       'custom/fix-uninitialized-properties': 'error',
+      'custom/api-property-optional-required': 'error',
     },
   },
-]; 
+];

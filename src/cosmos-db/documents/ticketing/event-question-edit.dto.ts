@@ -42,6 +42,7 @@ export class EventQuestionEditDto {
     description:
       'Indicates whether the question has a time component when the answer type is date.',
     type: 'boolean',
+    required: false,
   })
   requireTime?: boolean;
 

@@ -50,6 +50,7 @@ export class EventReferralFilterCriteriaDto {
 
   @ApiProperty({
     description: 'The ID of the referral configuration this referral follows.',
+    required: false,
   })
   @IsOptional()
   @IsString()

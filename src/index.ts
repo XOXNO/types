@@ -23,6 +23,9 @@ export { TradingStatistics as KustoTradingStatistics } from './common/kusto/trad
 export * from './common/kusto/user-trading-summary';
 export * from './common/kusto/volume-graph';
 export * from './common/kusto/wallet-stats';
+export * from './common/kusto/lending-market-analytics';
+export * from './common/kusto/lending-overall-stats';
+export * from './common/kusto/lending-position-status';
 
 /**
  * Cosmos DB Core
@@ -260,3 +263,8 @@ export * from './requests/user-data/token-inventory';
 export * from './requests/user-data/tradesilvania.dto';
 export * from './requests/user-data/user-network';
 export * from './requests/user-data/verify-email.dto';
+
+/**
+ * Requests - Lending
+ */
+export * from './requests/lending/lending-market-profile.filter';

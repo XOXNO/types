@@ -51,7 +51,7 @@ export class TicketPricesResponse {
   @Type(() => StagePrice)
   stagePrices!: StagePrice[];
 
-  @ApiProperty({ type: Number })
+  @ApiProperty({ type: Number, required: false })
   @IsNumber()
   @IsOptional()
   vat?: number;

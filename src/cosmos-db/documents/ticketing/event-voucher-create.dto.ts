@@ -100,6 +100,7 @@ export class EventVoucherCreateDto extends PartialType(
   @ApiProperty({
     description: 'Indicates whether the voucher is currently active.',
     type: 'boolean',
+    required: false,
   })
   @IsOptional()
   @IsBoolean()

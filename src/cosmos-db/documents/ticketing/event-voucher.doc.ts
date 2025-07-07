@@ -84,6 +84,7 @@ export class EventVoucherDoc {
   @ApiProperty({
     description:
       'List of specific stage IDs where the voucher can be applied, optional.',
+    required: false,
   })
   stageIds?: string[];
 
@@ -131,6 +132,7 @@ export class EventVoucherDoc {
 
   @ApiProperty({
     description: 'Optional ID of the owner who can use this voucher.',
+    required: false,
   })
   ownerId?: string;
 

@@ -1,8 +1,9 @@
 // DTO Type
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 import { CollectionInfoDto } from './collection-info.dto';
-import { NftMedia } from '../../cosmos-db/documents/token/nft-details.doc';
+import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
+import { NftActivityData } from '../../cosmos-db/documents/activity/nft-activity-data';
 
 class FromToDto {
   @ApiProperty({
@@ -19,38 +20,24 @@ class FromToDto {
   username!: string;
 }
 
-class NftInfoDto {
-  @ApiProperty({ example: 'EBMC-8a2d40-0ad0' })
-  identifier!: string;
-
-  @ApiProperty({ example: 'EBMC-8a2d40' })
-  collection!: string;
-
-  @ApiProperty({ example: 'Elrond Billionair Monkeys Club #2768' })
-  name!: string;
-
+class NftInfoDto extends PickType(NftDoc, [
+  'identifier',
+  'collection',
+  'name',
+  'url',
+  'wasProcessed',
+  'media',
+] as const) {
   @ApiProperty({ example: { rarity: { rank: 2606 } } })
   metadata!: object;
-
-  @ApiProperty({
-    example:
-      'https://media.elrond.com/nfts/asset/bafybeigwxctbhty5eei3lrievjecqgnqvwyt4qtbsi6kuaukp7jfafzztq/1868.png',
-  })
-  url!: string;
-
-  @ApiProperty({ example: true })
-  wasProcessed!: boolean;
-
-  @ApiProperty({ type: NftMedia })
-  media!: NftMedia;
 }
 
-class ActivityDataDto {
+class ActivityDataDto implements NftActivityData {
   @ApiProperty({ example: 'EBMC-8a2d40' })
   collection!: string;
 
-  @ApiProperty({ example: 'EBMC-8a2d40-0ad0' })
-  identifier!: string;
+  @ApiProperty({ example: 'EBMC-8a2d40-0ad0', required: false })
+  identifier?: string;
 
   @ApiProperty({ example: 0.05 })
   price!: number;
@@ -70,11 +57,17 @@ class ActivityDataDto {
   @ApiProperty({ example: 0.05 })
   egldValue!: number;
 
-  @ApiProperty({ example: 'Nft' })
-  auctionType!: string;
+  @ApiProperty({ example: 'Nft', required: false })
+  auctionType?: string;
 
-  @ApiProperty({ type: NftInfoDto })
-  nftInfo!: NftInfoDto;
+  deadline?: number;
+  originalPayment?: {
+    paymentToken: string;
+    price: number;
+  };
+
+  @ApiProperty({ type: NftInfoDto, required: false })
+  nftInfo?: Partial<NftDoc>;
 
   @ApiProperty({ type: CollectionInfoDto })
   collectionInfo!: CollectionInfoDto;

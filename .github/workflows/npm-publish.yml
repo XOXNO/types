@@ -1,9 +1,9 @@
-name: npm publish to alpha
+name: npm publish to main
 
 on:
   push:
     branches:
-      - alpha
+      - main
 
 permissions:
   contents: write

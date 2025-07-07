@@ -80,6 +80,7 @@ export class EventUserRoleDoc {
     description: 'Status of the user role.',
     enum: RoleStatus,
     enumName: 'RoleStatus',
+    required: false,
   })
   status?: RoleStatus;
 

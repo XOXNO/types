@@ -5,6 +5,7 @@ import { IsBoolean, IsString, Length } from 'class-validator';
 export class EventGuestApproveDto {
   @ApiProperty({
     type: String,
+    required: false,
   })
   @IsString()
   @Length(62, 62)

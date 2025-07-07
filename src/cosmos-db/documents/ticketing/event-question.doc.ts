@@ -51,6 +51,7 @@ export class EventQuestionDoc {
   @ApiProperty({
     description:
       'Optional array of possible answers for select-type questions.',
+    required: false,
   })
   answers?: string[];
 

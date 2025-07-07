@@ -2,19 +2,21 @@ module.exports = {
   meta: {
     type: 'problem',
     docs: {
-      description: 'Add definite assignment assertion (!) to uninitialized class properties',
+      description:
+        'Add definite assignment assertion (!) to uninitialized class properties',
       category: 'TypeScript',
       recommended: false,
     },
     fixable: 'code',
     schema: [],
     messages: {
-      addDefiniteAssignment: 'Add definite assignment assertion (!) to property "{{name}}"',
+      addDefiniteAssignment:
+        'Add definite assignment assertion (!) to property "{{name}}"',
     },
   },
   create(context) {
     const sourceCode = context.getSourceCode();
-    
+
     return {
       PropertyDefinition(node) {
         // Check if this is a TypeScript file
@@ -38,7 +40,10 @@ module.exports = {
                 // Get the property name end position
                 const propertyNameEnd = node.key.range[1];
                 // Insert ! after the property name
-                return fixer.insertTextAfterRange([propertyNameEnd, propertyNameEnd], '!');
+                return fixer.insertTextAfterRange(
+                  [propertyNameEnd, propertyNameEnd],
+                  '!',
+                );
               },
             });
           }

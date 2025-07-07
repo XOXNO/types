@@ -17,7 +17,7 @@ import {
 } from './event-user-roles.enum';
 
 export class EventUserRoleCreateDto {
-  @ApiProperty({ description: 'User wallet address' })
+  @ApiProperty({ description: 'User wallet address', required: false })
   @IsString()
   @IsOptional()
   wallet?: string;
@@ -26,7 +26,7 @@ export class EventUserRoleCreateDto {
   @IsString()
   name!: string;
 
-  @ApiProperty({ description: 'User email' })
+  @ApiProperty({ description: 'User email', required: false })
   @IsEmail()
   @IsOptional()
   email?: string;

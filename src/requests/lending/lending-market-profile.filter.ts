@@ -1,0 +1,145 @@
+import { ApiProperty } from '@nestjs/swagger';
+import {
+  RangeFilter,
+  CosmosDbGenericFilter,
+} from '../../cosmos-db/cosmos-db-generic-filter';
+import { LendingDataType } from '../../cosmos-db/documents/lending/lending-data-type.enum';
+
+export class LendingMarketProfileFilterCriteriaDto {
+  @ApiProperty({ required: false, type: String, isArray: true })
+  token?: string[];
+
+  @ApiProperty({ required: false, type: RangeFilter, isArray: true })
+  range?: RangeFilter[];
+
+  @ApiProperty({ required: false, type: Boolean })
+  eMode?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  flashLoan?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  isolated?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  siloed?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  canBeCollateral?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  canBeBorrowed?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  canBorrowInIsolation?: boolean;
+
+  @ApiProperty({ required: false, type: Boolean })
+  isDebtCeilingReached?: boolean;
+}
+
+export class LendingMarketProfileExtraProperties {
+  @ApiProperty({ required: false, type: 'boolean' })
+  eModeCategoryProfile?: boolean;
+
+  @ApiProperty({ required: false, type: 'boolean' })
+  oraclePrice?: boolean;
+
+  @ApiProperty({ required: false, type: 'boolean' })
+  participants?: boolean;
+}
+
+export class LendingMarketProfileFilter extends CosmosDbGenericFilter {
+  @ApiProperty({
+    type: LendingMarketProfileFilterCriteriaDto,
+  })
+  filters: {
+    range?: RangeFilter[];
+    token?: string[];
+    canBeCollateral?: boolean;
+    canBeBorrowed?: boolean;
+    eMode?: boolean;
+    isolated?: boolean;
+    siloed?: boolean;
+    flashLoan?: boolean;
+    canBorrowInIsolation?: boolean;
+    isDebtCeilingReached?: boolean;
+    pk?: string;
+  } = {
+    pk: LendingDataType.MARKET_PROFILE,
+  };
+  @ApiProperty({ required: false, type: 'boolean', default: false })
+  strictSelect?: boolean = false;
+
+  @ApiProperty({ required: false, type: 'boolean', default: false })
+  includeCount?: boolean = false;
+
+  @ApiProperty({
+    required: false,
+    type: LendingMarketProfileExtraProperties,
+  })
+  extraProperties?: {
+    eModeCategoryProfile: boolean;
+    oraclePrice: boolean;
+    participants: boolean;
+  } = {
+    eModeCategoryProfile: false,
+    oraclePrice: true,
+    participants: false,
+  };
+
+  constructor(props: Partial<LendingMarketProfileFilter>) {
+    super(props);
+    this.filters = {
+      ...this.filters,
+      ...props?.filters,
+    };
+    // Assign other properties
+    const { filters, ...otherProps } = props;
+    Object.assign(this, otherProps);
+
+    this.applySelectPropertyLogic(props);
+  }
+
+  private applySelectPropertyLogic(
+    props?: Partial<LendingMarketProfileFilter>,
+  ) {
+    if (Array.isArray(this.select)) {
+      const defaultProperties = this.getDefaultProperties();
+      this.select = this.select.concat(defaultProperties);
+    }
+
+    if (this.strictSelect) {
+      this.select = props?.select;
+    }
+  }
+
+  private getDefaultProperties() {
+    return [
+      'decimals',
+      'name',
+      'token',
+      'address',
+      'canBeCollateral',
+      'canBeBorrowed',
+      'eMode',
+      'isolated',
+      'siloed',
+      'supplyIndex',
+      'borrowIndex',
+      'canBorrowInIsolation',
+      'eModeCategories',
+      'ltv',
+      'liquidationThreshold',
+      'borrowApy',
+      'supplyApy',
+      'utilizationRate',
+      'maxDebtUsd',
+      'supplyCap',
+      'borrowCap',
+      'reserves',
+      'supplyAmountScaled',
+      'borrowAmountScaled',
+      'debtCeiling',
+    ];
+  }
+}

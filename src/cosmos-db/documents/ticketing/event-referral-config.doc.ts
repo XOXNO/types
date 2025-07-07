@@ -36,6 +36,7 @@ export class RewardDetails {
   @ApiProperty({
     example: 'RON',
     description: 'Currency type in case of conditionType = revenueCount',
+    required: false,
   })
   currency?: string;
 

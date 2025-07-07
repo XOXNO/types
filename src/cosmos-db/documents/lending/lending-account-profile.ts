@@ -1,25 +1,155 @@
+import { ApiProperty, PickType } from '@nestjs/swagger';
+
 import { LendingDataType } from './lending-data-type.enum';
+import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
+import { LendingMarketProfile } from './lending-market-profile.doc';
+import { PositionMode } from './lending-nft-attributes';
 
 export class LendingAccountProfileDoc {
-  dataType: LendingDataType = LendingDataType.ACCOUNT_PROFILE;
+  @ApiProperty({
+    enum: LendingDataType,
+    enumName: 'LendingDataType',
+    example: LendingDataType.ACCOUNT_PROFILE,
+  })
+  dataType: string = LendingDataType.ACCOUNT_PROFILE;
+
+  @ApiProperty({
+    description: 'Unique identifier for the lending account',
+    example: 'account123',
+  })
   identifier!: string;
+
+  @ApiProperty({
+    description: 'A unique number to ensure uniqueness of the identifier',
+    example: 1,
+  })
   nonce!: number;
+
+  @ApiProperty({
+    description: 'The token associated with the lending account',
+    example: 'EGLD',
+  })
   token!: string;
-  supplyAmountScaled: string = '0';
-  borrowAmountScaled: string = '0';
-  supplyIndex: string = '0';
-  borrowIndex: string = '0';
-  isVault!: boolean;
+
+  @ApiProperty({
+    description: 'The amount supplied in the lending account',
+    example: '1000',
+  })
+  supplyAmountScaled = '0';
+
+  @ApiProperty({
+    description: 'The amount borrowed from the lending account',
+    example: '500',
+  })
+  borrowAmountScaled = '0';
+
+  @ApiProperty({
+    description: 'Supply index',
+    example: 0,
+  })
+  supplyIndex = 0;
+
+  @ApiProperty({
+    description: 'Borrow index',
+    example: 0,
+  })
+  borrowIndex = 0;
+
+  @ApiProperty({
+    description: 'Entry liquidation threshold',
+    example: '780000000000000000000',
+  })
   entryLiquidationThreshold!: string;
+
+  @ApiProperty({
+    description: 'Entry liquidation bonus',
+    example: '800000000000000000000',
+  })
   entryLiquidationBonus!: string;
+
+  @ApiProperty({
+    description: 'Entry liquidation fee',
+    example: '100000000000000000000',
+  })
   entryLiquidationFee!: string;
+
+  @ApiProperty({
+    description: 'Entry loan to value',
+    example: '650000000000000000000',
+  })
   entryLtv!: string;
+
+  @ApiProperty({
+    description: 'Indicates if the asset is isolated',
+    example: false,
+    required: false,
+  })
   isolated?: boolean;
-  isolatedToken?: string;
+
+  @ApiProperty({
+    description: 'Position mode',
+    example: PositionMode.Normal,
+    enum: PositionMode,
+    enumName: 'PositionMode',
+  })
+  positionMode!: PositionMode;
+
+  @ApiProperty({
+    description: 'eMode category',
+    example: '1',
+    required: false,
+  })
   eModeCategory?: string;
-  address!: string; // address can change in the scenario of a user transferring their position(NFT) to another address
+
+  @ApiProperty({
+    description: 'Address of the lending account',
+    example: 'erd123',
+  })
+  address!: string;
+
+  @ApiProperty({
+    description: 'Initial strategy values',
+    example: {
+      leverageInitialSupply: '1000',
+      leverageInitialSupplyPrice: '1000',
+    },
+    required: false,
+  })
+  leverageInitialSupply?: number;
+
+  @ApiProperty({
+    description: 'Initial strategy values',
+    example: {
+      leverageInitialSupply: '1000',
+      leverageInitialSupplyPrice: '1000',
+    },
+    required: false,
+  })
+  leverageInitialSupplyPrice?: number;
+
+  @ApiProperty({
+    description: 'Initial strategy values',
+    example: {
+      leverageInitialBorrow: '1000',
+      leverageInitialBorrowPrice: '1000',
+    },
+    required: false,
+  })
+  leverageInitialBorrow?: number;
+
+  @ApiProperty({
+    description: 'Initial strategy values',
+    example: {
+      leverageInitialBorrow: '1000',
+      leverageInitialBorrowPrice: '1000',
+    },
+    required: false,
+  })
+  leverageInitialBorrowPrice?: number;
+
   id!: string;
   pk!: string;
+  _ts!: number;
 
   constructor(init?: Partial<LendingAccountProfileDoc>) {
     Object.assign(this, init);
@@ -28,4 +158,103 @@ export class LendingAccountProfileDoc {
   }
 }
 
-export type LendingAccountProfileDocType = LendingAccountProfileDoc;
+export class LendingAccountProfile extends LendingAccountProfileDoc {
+  @ApiProperty({
+    description: 'The amount supplied in the lending account',
+    example: '1000',
+  })
+  supplyAmount!: string;
+
+  @ApiProperty({
+    description: 'The amount borrowed from the lending account',
+    example: '500',
+  })
+  borrowAmount!: string;
+
+  @ApiProperty({
+    description: 'EMode profile',
+    required: false,
+  })
+  eModeCategoryProfile?: LendingEModeCategoryProfileDoc;
+
+  @ApiProperty({
+    description: 'Lending market partial profile',
+    required: false,
+    type: PickType(LendingMarketProfile, [
+      'token',
+      'name',
+      'supplyApy',
+      'borrowApy',
+      'decimals',
+      'reserves',
+      'supplyCap',
+      'borrowCap',
+      'supplyAmount',
+      'siloed',
+      'supplyIndex',
+      'borrowIndex',
+      'rewardsReserve',
+      'maxDebtUsd',
+      'debtCeiling',
+      'isolated',
+      'canBeCollateral',
+      'timestamp',
+      'canBeBorrowed',
+      'canBorrowInIsolation',
+      'extraApy',
+      'flashLoanFee',
+      'utilizationRate',
+      'borrowAmount',
+      'borrowAmountScaled',
+      'supplyAmountScaled',
+      'optimalUsageRate',
+      'slopeRate1',
+      'slopeRate2',
+      'slopeRate3',
+      'midUsageRate',
+      'baseRate',
+      'maxBorrowRate',
+      'reserveFactor',
+    ]),
+  })
+  marketProfile?: Pick<
+    LendingMarketProfile,
+    | 'token'
+    | 'name'
+    | 'supplyApy'
+    | 'borrowApy'
+    | 'decimals'
+    | 'siloed'
+    | 'reserves'
+    | 'supplyCap'
+    | 'borrowCap'
+    | 'supplyAmount'
+    | 'ltv'
+    | 'liquidationBonus'
+    | 'oraclePrice'
+    | 'rewardsReserve'
+    | 'timestamp'
+    | 'maxDebtUsd'
+    | 'debtCeiling'
+    | 'isolated'
+    | 'supplyIndex'
+    | 'borrowIndex'
+    | 'supplyAmountScaled'
+    | 'borrowAmountScaled'
+    | 'canBeCollateral'
+    | 'canBeBorrowed'
+    | 'canBorrowInIsolation'
+    | 'extraApy'
+    | 'flashLoanFee'
+    | 'utilizationRate'
+    | 'borrowAmount'
+    | 'optimalUsageRate'
+    | 'slopeRate1'
+    | 'slopeRate2'
+    | 'slopeRate3'
+    | 'midUsageRate'
+    | 'baseRate'
+    | 'maxBorrowRate'
+    | 'reserveFactor'
+  >;
+}
