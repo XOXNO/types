@@ -1,0 +1,54 @@
+{
+  "name": "@xoxno/types",
+  "version": "1.0.0",
+  "description": "Shared types and utilities for our applications.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "prepublishOnly": "npm run build",
+    "lint": "eslint 'src/**/*.ts'",
+    "lint:fix": "eslint 'src/**/*.ts' --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/XOXNO/types.git"
+  },
+  "keywords": [
+    "types",
+    "utils"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/XOXNO/types/issues"
+  },
+  "homepage": "https://github.com/XOXNO/types#readme",
+  "peerDependencies": {
+    "@nestjs/swagger": ">=7.0.0"
+  },
+  "devDependencies": {
+    "@nestjs/swagger": "^7.3.1",
+    "@types/node": "^24.0.10",
+    "@typescript-eslint/eslint-plugin": "^8.35.1",
+    "@typescript-eslint/parser": "^8.35.1",
+    "eslint": "^9.30.1",
+    "eslint-config-prettier": "^10.1.5",
+    "eslint-plugin-prettier": "^5.5.1",
+    "prettier": "^3.6.2",
+    "typescript": "^5.8.3",
+    "typescript-eslint": "^8.35.1"
+  },
+  "dependencies": {
+    "@azure/cosmos": "^4.4.1",
+    "@multiversx/sdk-nestjs-common": "^6.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "uuid": "^11.1.0"
+  }
+}
