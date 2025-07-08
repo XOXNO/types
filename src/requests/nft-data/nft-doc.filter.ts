@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain, AuctionTypes } from '../../common/enums';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
 import { TokenDataType } from '../../cosmos-db/documents/token/token-data.enum';
 import {
@@ -23,7 +23,7 @@ export class SaleInfoFilterDto {
   marketplace?: string[];
 
   @ApiProperty({ required: false, type: String, isArray: true })
-  auctionType?: string[];
+  auctionType?: AuctionTypes[];
 }
 
 export class MetadataAttributesDto {
@@ -99,7 +99,7 @@ export class NftDocFilter extends CosmosDbGenericFilter {
       seller?: string[];
       paymentToken?: string[];
       marketplace?: string[];
-      auctionType?: string[];
+      auctionType?: AuctionTypes[];
     };
     range?: RangeFilter[];
     metadata?: {

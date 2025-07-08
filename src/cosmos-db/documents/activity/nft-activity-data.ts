@@ -1,3 +1,4 @@
+import { AuctionTypes } from '../../../common/enums';
 import { NftDoc } from '../token/nft-details.doc';
 
 export interface NftActivityData {
@@ -9,7 +10,7 @@ export interface NftActivityData {
   scId: number;
   usdValue: number;
   egldValue: number;
-  auctionType?: string; // available for listingCreate
+  auctionType?: AuctionTypes; // available for listingCreate
   deadline?: number; // available for offerCreate & auctions
   originalPayment?: {
     paymentToken: string;

@@ -4,6 +4,7 @@ import { ApiProperty, PickType } from '@nestjs/swagger';
 import { CollectionInfoDto } from './collection-info.dto';
 import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 import { NftActivityData } from '../../cosmos-db/documents/activity/nft-activity-data';
+import { AuctionTypes } from '../../common/enums';
 
 class FromToDto {
   @ApiProperty({
@@ -58,7 +59,7 @@ class ActivityDataDto implements NftActivityData {
   egldValue!: number;
 
   @ApiProperty({ example: 'Nft', required: false })
-  auctionType?: string;
+  auctionType?: AuctionTypes;
 
   deadline?: number;
   originalPayment?: {

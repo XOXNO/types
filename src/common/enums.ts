@@ -55,3 +55,10 @@ export enum MarketplacesOnSaleNames {
   DEADRARE_MARKETPLACE = 'deadrare',
   KROGAN_MARKETPLACE = 'krogan',
 }
+
+export enum AuctionTypes {
+  FixedPrice = 'FixedPrice',
+  Auctions = 'Auctions',
+  All = 'All',
+  AllListed = 'AllListed',
+}
