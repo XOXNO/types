@@ -54,7 +54,7 @@ export class CollectionStatsFilter extends CosmosDbGenericFilter {
           : props?.filters?.chain,
     };
     // Assign other properties
-    const { filters, ...otherProps } = props ?? {};
+    const { filters: _, ...otherProps } = props ?? {};
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);

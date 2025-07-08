@@ -58,7 +58,7 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter {
       ...props?.filters,
     };
     // Assign other properties
-    const { filters, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props;
     Object.assign(this, otherProps);
 
     this.setPk();
@@ -69,12 +69,12 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter {
 
     const uniqueCollections = new Set<string>();
     const { collection, identifier } = this.filters;
-    if (collection?.length! > 0) {
+    if ((collection?.length ?? 0) > 0) {
       collection!.forEach((coll) => {
         uniqueCollections.add(coll);
       });
     }
-    if (identifier?.length! > 0) {
+    if ((identifier?.length ?? 0) > 0) {
       identifier!.forEach((id) => {
         // Extract collection ticker from identifier (format: COLLECTION-NONCE)
         const collectionTicker = id.split('-').slice(0, -1).join('-');

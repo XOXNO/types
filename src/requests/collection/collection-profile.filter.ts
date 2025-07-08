@@ -32,7 +32,7 @@ export class CollectionProfileFilter extends CosmosDbGenericFilter {
     };
 
     // Assign other properties
-    const { filters, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props;
     Object.assign(this, otherProps);
   }
 }

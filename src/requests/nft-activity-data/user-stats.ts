@@ -1,13 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
-import {
-  IsBoolean,
-  IsNumber,
-  IsObject,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { IsBoolean, IsNumber, IsString, ValidateNested } from 'class-validator';
+import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 
 class WalletDto {
   @ApiProperty({ description: 'User wallet address' })
@@ -43,36 +38,6 @@ class WalletDto {
   followCount!: number;
 }
 
-class NftInfoDto {
-  @ApiProperty({ description: 'NFT identifier' })
-  @IsString()
-  identifier!: string;
-
-  @ApiProperty({ description: 'NFT collection' })
-  @IsString()
-  collection!: string;
-
-  @ApiProperty({ description: 'NFT name' })
-  @IsString()
-  name!: string;
-
-  @ApiProperty({ description: 'NFT metadata' })
-  @IsObject()
-  metadata!: Record<string, any>;
-
-  @ApiProperty({ description: 'NFT URL' })
-  @IsString()
-  url!: string;
-
-  @ApiProperty({ description: 'Whether the NFT was processed' })
-  @IsBoolean()
-  wasProcessed!: boolean;
-
-  @ApiProperty({ description: 'NFT media information' })
-  @IsObject()
-  media!: Record<string, any>;
-}
-
 class PriceDataDto {
   @ApiProperty({ description: 'Price of the NFT' })
   @IsNumber()
@@ -94,10 +59,10 @@ class PriceDataDto {
   @IsNumber()
   usdValue!: number;
 
-  @ApiProperty({ type: NftInfoDto, description: 'NFT information' })
+  @ApiProperty({ type: PartialType<NftDoc>, description: 'NFT information' })
   @ValidateNested()
-  @Type(() => NftInfoDto)
-  nftInfo!: NftInfoDto;
+  @Type(() => PartialType<NftDoc>)
+  nftInfo!: Partial<NftDoc>;
 }
 
 class UserStatsDto {

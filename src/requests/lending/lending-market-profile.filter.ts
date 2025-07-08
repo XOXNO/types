@@ -94,7 +94,7 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter {
       ...props?.filters,
     };
     // Assign other properties
-    const { filters, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props;
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);

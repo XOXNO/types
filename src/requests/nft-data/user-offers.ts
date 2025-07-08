@@ -1,75 +1,6 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { OwnerDto } from '../../common/owner.dto';
-
-class NftInfoDto {
-  @ApiProperty({ example: 'HLSR-374950-1934' })
-  identifier!: string;
-
-  @ApiProperty({ example: 6452 })
-  nonce!: number;
-
-  @ApiProperty({ example: '37.43 EGLD' })
-  name!: string;
-
-  @ApiProperty({
-    example:
-      'https://arweave.net/mfjIHO6ckE8m1ck_b46BdV4ZFVGEEHJSno2MnFKuzgk/undelegate-nft.png',
-  })
-  url!: string;
-
-  @ApiProperty({ example: true })
-  wasProcessed!: boolean;
-
-  @ApiProperty({
-    example: {
-      avifUrl: 'https://media.xoxno.com/nftmedia/HLSR-374950/receipt.avif',
-      webpUrl: 'https://media.xoxno.com/nftmedia/HLSR-374950/receipt.webp',
-      originalMedia: {
-        contentLength: 2639394,
-        contentType: 'image/png',
-      },
-    },
-  })
-  media!: Record<string, any>;
-
-  @ApiProperty({ example: false })
-  onSale!: boolean;
-
-  @ApiProperty({ example: {} })
-  saleInfo!: Record<string, any>;
-
-  @ApiProperty({
-    example: {
-      rarity: {
-        rank: 202,
-      },
-    },
-  })
-  metadata!: Record<string, any>;
-
-  @ApiProperty({
-    example: {
-      address: 'erd1vdr8jnyhp0wlk3cwe2j5ejwkzwepexqgtnqxanravgv0d6vg59dqnfkjmm',
-      profile:
-        'https://media.xoxno.com/userprofile/erd1vdr8jnyhp0wlk3cwe2j5ejwkzwepexqgtnqxanravgv0d6vg59dqnfkjmm/profilePicture.webp',
-      username: '@xtrading',
-    },
-  })
-  owner!: OwnerDto;
-
-  @ApiProperty({
-    example: {
-      address: 'erd1vdr8jnyhp0wlk3cwe2j5ejwkzwepexqgtnqxanravgv0d6vg59dqnfkjmm',
-      profile:
-        'https://media.xoxno.com/userprofile/erd1vdr8jnyhp0wlk3cwe2j5ejwkzwepexqgtnqxanravgv0d6vg59dqnfkjmm/profilePicture.webp',
-      username: '@xtrading',
-    },
-  })
-  currentOwner!: OwnerDto;
-
-  @ApiProperty({ example: true })
-  receiverIsNotOwner!: boolean;
-}
+import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 
 export class OfferDto {
   @ApiProperty({ example: true })
@@ -123,9 +54,9 @@ export class OfferDto {
   floorPrice!: number;
 
   @ApiProperty({
-    type: NftInfoDto,
+    type: PartialType<NftDoc>,
   })
-  nftInfo!: NftInfoDto;
+  nftInfo!: Partial<NftDoc>;
 }
 
 export class GetUserOffersResponseDto {

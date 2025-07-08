@@ -35,6 +35,7 @@ export class WalletTradingStats {
   sellerMinPriceData!: PriceData | null;
   chain!: ActivityChain;
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   constructor(data: any) {
     this.wallet = data.Address;
     this.totalVolume = data.TotalVolume;

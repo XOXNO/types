@@ -7,7 +7,6 @@ import {
   RangeFilter,
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { tickerFromIdentifier } from '../../utils/generic';
 
 export class ActivityDataDto {
   @ApiProperty({
@@ -109,7 +108,7 @@ export class NftActivityFilter extends CosmosDbGenericFilter {
     };
     // Assign other properties
     if (props) {
-      const { filters, ...otherProps } = props;
+      const { filters: _, ...otherProps } = props;
       Object.assign(this, otherProps);
     }
     this.setPk();
@@ -120,12 +119,12 @@ export class NftActivityFilter extends CosmosDbGenericFilter {
 
     const uniqueCollections = new Set<string>();
     const activityData = this.filters.activityData;
-    if (activityData?.collection?.length! > 0) {
+    if ((activityData?.collection?.length ?? 0) > 0) {
       activityData!.collection!.forEach((collection) => {
         uniqueCollections.add(collection);
       });
     }
-    if (activityData?.identifier?.length! > 0) {
+    if ((activityData?.identifier?.length ?? 0) > 0) {
       activityData!.identifier!.forEach((identifier) => {
         // Extract collection ticker from identifier (format: COLLECTION-NONCE)
         const collectionTicker = identifier.split('-').slice(0, -1).join('-');

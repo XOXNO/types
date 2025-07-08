@@ -61,7 +61,7 @@ export class EventGuestFilter extends CosmosDbGenericFilter {
       ...props?.filters,
     };
     // Assign other properties
-    const { filters, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props;
     Object.assign(this, otherProps);
 
     this.setPk();

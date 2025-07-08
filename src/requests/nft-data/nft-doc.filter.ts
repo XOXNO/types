@@ -1,11 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain, AuctionTypes } from '../../common/enums';
+import { ActivityChain } from '../../common/enums';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
 import { TokenDataType } from '../../cosmos-db/documents/token/token-data.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
+import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
 export class SaleInfoFilterDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -23,7 +24,7 @@ export class SaleInfoFilterDto {
   marketplace?: string[];
 
   @ApiProperty({ required: false, type: String, isArray: true })
-  auctionType?: AuctionTypes[];
+  auctionType?: XoxnoAuctionTypeString[];
 }
 
 export class MetadataAttributesDto {
@@ -99,7 +100,7 @@ export class NftDocFilter extends CosmosDbGenericFilter {
       seller?: string[];
       paymentToken?: string[];
       marketplace?: string[];
-      auctionType?: AuctionTypes[];
+      auctionType?: XoxnoAuctionTypeString[];
     };
     range?: RangeFilter[];
     metadata?: {
@@ -135,7 +136,7 @@ export class NftDocFilter extends CosmosDbGenericFilter {
           : props.filters?.chain,
     };
     // Assign other properties
-    const { filters, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props;
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);
@@ -147,12 +148,12 @@ export class NftDocFilter extends CosmosDbGenericFilter {
 
     const uniqueCollections = new Set<string>();
     const { collection, identifier } = this.filters;
-    if (collection?.length! > 0) {
+    if ((collection?.length ?? 0) > 0) {
       collection!.forEach((coll) => {
         uniqueCollections.add(coll);
       });
     }
-    if (identifier?.length! > 0) {
+    if ((identifier?.length ?? 0) > 0) {
       identifier!.forEach((id) => {
         // Extract collection ticker from identifier (format: COLLECTION-NONCE)
         const collectionTicker = id.split('-').slice(0, -1).join('-');

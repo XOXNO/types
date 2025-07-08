@@ -30,6 +30,17 @@ export default [
     rules: {
       'custom/fix-uninitialized-properties': 'error',
       'custom/api-property-optional-required': 'error',
+      '@typescript-eslint/no-unused-vars': [
+        'warn',
+        {
+          args: 'all',
+          argsIgnorePattern: '^_',
+          caughtErrors: 'all',
+          caughtErrorsIgnorePattern: '^_',
+          destructuredArrayIgnorePattern: '^_',
+          varsIgnorePattern: '^(_|translations$)',
+        },
+      ],
     },
   },
 ];

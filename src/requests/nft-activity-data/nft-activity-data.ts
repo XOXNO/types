@@ -1,4 +1,5 @@
-import { AuctionTypes } from '../../common/enums';
+import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
+import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
 export interface NftActivityData {
   collection: string;
@@ -9,13 +10,13 @@ export interface NftActivityData {
   scId: number;
   usdValue: number;
   egldValue: number;
-  auctionType?: AuctionTypes; // available for listingCreate
+  auctionType?: XoxnoAuctionTypeString; // available for listingCreate
   deadline?: number; // available for offerCreate & auctions
   originalPayment?: {
     paymentToken: string;
     price: number;
   }; // for ash buy events
-  nftInfo?: any; // set on query
+  nftInfo?: Partial<NftDoc>; // set on query
 }
 
 export interface NftMvxBuiltIn {

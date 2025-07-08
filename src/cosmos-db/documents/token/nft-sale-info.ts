@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OwnerDto } from '../../../common/owner.dto';
-import { AuctionTypes, MarketplacesOnSaleNames } from '../../../common/enums';
+import { MarketplacesOnSaleNames } from '../../../common/enums';
+import { XoxnoAuctionTypeString } from '../../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
 export class NftSaleInfo {
   @ApiProperty()
@@ -37,7 +38,7 @@ export class NftSaleInfo {
   paymentTokenNonce!: number;
 
   @ApiProperty()
-  auctionType!: AuctionTypes;
+  auctionType!: XoxnoAuctionTypeString;
 
   @ApiProperty()
   timestamp!: number;

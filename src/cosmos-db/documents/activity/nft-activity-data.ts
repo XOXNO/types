@@ -1,4 +1,4 @@
-import { AuctionTypes } from '../../../common/enums';
+import { XoxnoAuctionTypeString } from '../../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 import { NftDoc } from '../token/nft-details.doc';
 
 export interface NftActivityData {
@@ -10,7 +10,7 @@ export interface NftActivityData {
   scId: number;
   usdValue: number;
   egldValue: number;
-  auctionType?: AuctionTypes; // available for listingCreate
+  auctionType?: XoxnoAuctionTypeString; // available for listingCreate
   deadline?: number; // available for offerCreate & auctions
   originalPayment?: {
     paymentToken: string;

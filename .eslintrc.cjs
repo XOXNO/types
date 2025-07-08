@@ -8,6 +8,17 @@ module.exports = {
   plugins: ['@typescript-eslint', 'prettier'],
   rules: {
     'prettier/prettier': 'error',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        args: 'all',
+        argsIgnorePattern: '^_',
+        caughtErrors: 'all',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+        varsIgnorePattern: '^(_|translations$)',
+      },
+    ],
   },
   parserOptions: {
     ecmaVersion: 2020,
