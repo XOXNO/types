@@ -5,6 +5,7 @@ import {
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
+import { GlobalOfferDoc } from '../../cosmos-db/documents/collection/globalOffer';
 
 export class CollectionOffersFilterCriteriaDto {
   @ApiProperty({
@@ -43,7 +44,7 @@ export class CollectionOffersFilterCriteriaDto {
   marketplace?: string[];
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<GlobalOfferDoc>[];
 
   @ApiProperty({ required: false, type: NftMetadataAttributes, isArray: true })
   attributes?: NftMetadataAttributes[];
@@ -66,7 +67,7 @@ export class CollectionOffersFilter extends CosmosDbGenericFilter {
     offerId?: number[];
     owner?: string[];
     marketplace?: string[];
-    range?: RangeFilter[];
+    range?: RangeFilter<GlobalOfferDoc>[];
     attributes?: NftMetadataAttributes[];
     isActive?: boolean;
     withAttributes?: boolean;

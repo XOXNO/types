@@ -7,6 +7,7 @@ import {
   RangeFilter,
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
+import { NftActivityDoc } from '../../cosmos-db/documents/activity/nft-activity.doc';
 
 export class ActivityDataDto {
   @ApiProperty({
@@ -63,7 +64,7 @@ export class NftActivityFilterCriteriaDto {
     type: RangeFilter,
     isArray: true,
   })
-  range?: RangeFilter[];
+  range?: RangeFilter<NftActivityDoc>[];
 
   @ApiProperty({ required: false, type: ActivityDataDto })
   activityData?: ActivityDataDto;
@@ -83,7 +84,7 @@ export class NftActivityFilter extends CosmosDbGenericFilter {
     to?: string[];
     activityType?: NftActivityType[];
     source?: NftActivityEventSource[];
-    range?: RangeFilter[]; // can be used to filter trade timestamp or egldValue within activity data
+    range?: RangeFilter<NftActivityDoc>[]; // can be used to filter trade timestamp or egldValue within activity data
     chain?: ActivityChain[];
     activityData?: {
       collection?: string[];

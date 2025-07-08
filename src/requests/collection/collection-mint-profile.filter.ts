@@ -4,12 +4,13 @@ import {
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionMintProfileDoc } from '../../cosmos-db/documents/collection/mintProfile';
 
 export class CollectionMintProfileFilter extends CosmosDbGenericFilter {
   filters: {
     dataType?: CollectionDataType;
     collection?: string[];
-    range?: RangeFilter[]; // this can be used to filter by mint start time
+    range?: RangeFilter<CollectionMintProfileDoc>[]; // this can be used to filter by mint start time
     mintToken?: string[]; // this can be used to filter by mint token identifiers()
     contractAddress?: string[];
     isSoldOut?: boolean;

@@ -11,7 +11,7 @@ import {
   IsNumber,
 } from 'class-validator';
 
-import { VoucherType } from './event-voucher.doc';
+import { EventVoucherDoc, VoucherType } from './event-voucher.doc';
 import { TicketingDataType } from './ticketing-data-type.enum';
 import {
   CosmosDbGenericFilter,
@@ -116,7 +116,7 @@ export class EventVoucherFilterCriteriaDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => RangeFilter)
-  range?: RangeFilter[];
+  range?: RangeFilter<EventVoucherDoc>[];
 }
 
 export class EventVoucherFilter extends CosmosDbGenericFilter {
@@ -134,7 +134,7 @@ export class EventVoucherFilter extends CosmosDbGenericFilter {
     maxUsesPerUser?: number;
     isActive?: boolean;
     ownerId?: string;
-    range?: RangeFilter[];
+    range?: RangeFilter<EventVoucherDoc>[];
     dataType?: string[];
     eventId?: string[];
   } = {

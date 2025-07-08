@@ -4,6 +4,7 @@ import {
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { TokenDataType } from '../../cosmos-db/documents/token/token-data.enum';
+import { NftOfferDoc } from '../../cosmos-db/documents/token/nft-offer.doc';
 
 export class NftOfferDocFilterCriteria {
   @ApiProperty({ required: false, type: Boolean, isArray: true })
@@ -25,7 +26,7 @@ export class NftOfferDocFilterCriteria {
   marketplace?: string[];
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<NftOfferDoc>[];
 }
 
 export class NftOfferDocFilter extends CosmosDbGenericFilter {
@@ -39,7 +40,7 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter {
     collection?: string[];
     owner?: string[];
     marketplace?: string[];
-    range?: RangeFilter[];
+    range?: RangeFilter<NftOfferDoc>[];
   } = {
     dataType: [TokenDataType.Offer],
   };

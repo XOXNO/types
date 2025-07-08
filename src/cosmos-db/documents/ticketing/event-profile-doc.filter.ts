@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { TicketingDataType } from './ticketing-data-type.enum';
 import { RangeFilter } from '../../cosmos-db-generic-filter';
 import { CosmosDbGenericFilter } from '../../cosmos-db-generic-filter';
+import { EventProfileDoc } from './event-profile.doc';
 
 export class EventProfileFilterCriteriaDto {
   @ApiProperty({ required: false, type: String })
@@ -12,7 +13,7 @@ export class EventProfileFilterCriteriaDto {
   area?: string[];
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<EventProfileDoc>[];
 
   @ApiProperty({ required: false, type: String, isArray: true })
   category?: string[];
@@ -42,7 +43,7 @@ export class EventProfileFilter extends CosmosDbGenericFilter {
     id?: string[];
     category?: string[];
     subCategory?: string[];
-    range?: RangeFilter[];
+    range?: RangeFilter<EventProfileDoc>[];
     registration?: {
       visibility?: string;
       isPublished?: boolean;

@@ -6,6 +6,7 @@ import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
+import { EventGuestDoc } from './event-guest.doc';
 
 export class EventGuestFilterCriteriaDto {
   @ApiProperty({ required: false, type: String })
@@ -30,7 +31,7 @@ export class EventGuestFilterCriteriaDto {
   questionnaireFilled?: boolean;
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<EventGuestDoc>[];
 }
 
 export class EventGuestFilter extends CosmosDbGenericFilter {
@@ -44,7 +45,7 @@ export class EventGuestFilter extends CosmosDbGenericFilter {
     eventId?: string[];
     status?: EventGuestStatus[];
     questionnaireFilled?: boolean;
-    range?: RangeFilter[];
+    range?: RangeFilter<EventGuestDoc>[];
   } = {
     dataType: [TicketingDataType.EVENT_GUEST],
   };

@@ -14,6 +14,7 @@ import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
+import { EventReferralConfigDoc } from './event-referral-config.doc';
 
 export class EventReferralConfigFilterCriteriaDto {
   @ApiProperty({
@@ -62,7 +63,7 @@ export class EventReferralConfigFilterCriteriaDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => RangeFilter)
-  createdAt?: RangeFilter[];
+  createdAt?: RangeFilter<EventReferralConfigDoc>[];
 }
 
 export class EventReferralConfigFilter extends CosmosDbGenericFilter {
@@ -76,7 +77,7 @@ export class EventReferralConfigFilter extends CosmosDbGenericFilter {
     createdBy?: string[];
     isActive?: boolean;
     isSelfService?: boolean;
-    createdAt?: RangeFilter[];
+    createdAt?: RangeFilter<EventReferralConfigDoc>[];
     dataType?: string[];
     eventId?: string[];
   } = {

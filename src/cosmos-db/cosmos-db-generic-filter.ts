@@ -1,8 +1,28 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { NftMetadataAttributes } from './documents/token/nft-metadata-attributes';
+import { NftDoc } from './documents/token/nft-details.doc';
 
-export class RangeFilter {
+type IsLeaf<T> = [T] extends [object]
+  ? // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-function-type
+    T extends Function | any[]
+    ? true
+    : keyof T extends never
+      ? true
+      : false
+  : true;
+
+type LeafKeyPaths<T, Prefix extends string = ''> = T extends string
+  ? string
+  : {
+      [K in keyof T]-?: IsLeaf<NonNullable<T[K]>> extends true
+        ? `${Prefix}${Extract<K, string>}`
+        : LeafKeyPaths<NonNullable<T[K]>, `${Prefix}${Extract<K, string>}.`>;
+    }[keyof T];
+
+type Test = LeafKeyPaths<NftDoc>;
+
+export class RangeFilter<T> {
   @ApiProperty({ required: false, type: 'number' })
   min?: number;
 
@@ -10,7 +30,7 @@ export class RangeFilter {
   max?: number;
 
   @ApiProperty({ required: false, type: 'string' })
-  field?: string;
+  field?: LeafKeyPaths<T>;
 }
 
 export class CosmosDbGenericFilter {
@@ -22,7 +42,7 @@ export class CosmosDbGenericFilter {
     | string[]
     | number
     | number[]
-    | RangeFilter[]
+    | RangeFilter<string>[]
     | NftMetadataAttributes[]
   > = {};
   @ApiProperty({

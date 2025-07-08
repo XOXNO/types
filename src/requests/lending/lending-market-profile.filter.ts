@@ -4,13 +4,14 @@ import {
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { LendingDataType } from '../../cosmos-db/documents/lending/lending-data-type.enum';
+import { LendingMarketProfileDoc } from '../../cosmos-db/documents/lending/lending-market-profile.doc';
 
 export class LendingMarketProfileFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
   token?: string[];
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<LendingMarketProfileDoc>[];
 
   @ApiProperty({ required: false, type: Boolean })
   eMode?: boolean;
@@ -53,7 +54,7 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter {
     type: LendingMarketProfileFilterCriteriaDto,
   })
   filters: {
-    range?: RangeFilter[];
+    range?: RangeFilter<LendingMarketProfileDoc>[];
     token?: string[];
     canBeCollateral?: boolean;
     canBeBorrowed?: boolean;

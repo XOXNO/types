@@ -5,6 +5,7 @@ import {
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionStatsDoc } from '../../cosmos-db/documents/collection/stats';
 
 export class CollectionStatsFilterCriteriaDto {
   @ApiProperty({
@@ -22,7 +23,7 @@ export class CollectionStatsFilterCriteriaDto {
   verifiedOnly?: boolean;
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<CollectionStatsDoc>[];
 }
 
 export class CollectionStatsFilter extends CosmosDbGenericFilter {
@@ -33,7 +34,7 @@ export class CollectionStatsFilter extends CosmosDbGenericFilter {
     dataType?: CollectionDataType;
     collection?: string[];
     verifiedOnly?: boolean;
-    range?: RangeFilter[];
+    range?: RangeFilter<CollectionStatsDoc>[];
     chain?: ActivityChain[];
   } = {
     dataType: CollectionDataType.CollectionStats,

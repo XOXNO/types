@@ -7,6 +7,7 @@ import {
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
+import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 
 export class SaleInfoFilterDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -61,7 +62,7 @@ export class NftDocFilterCriteriaDto {
   saleInfo?: SaleInfoFilterDto;
 
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  range?: RangeFilter<NftDoc>[];
 
   @ApiProperty({ required: false, type: MetadataAttributesDto })
   metadata?: MetadataAttributesDto;
@@ -102,7 +103,7 @@ export class NftDocFilter extends CosmosDbGenericFilter {
       marketplace?: string[];
       auctionType?: XoxnoAuctionTypeString[];
     };
-    range?: RangeFilter[];
+    range?: RangeFilter<NftDoc>[];
     metadata?: {
       attributes?: NftMetadataAttributes[];
     };

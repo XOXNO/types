@@ -6,6 +6,7 @@ import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
+import { EventInvitationDoc } from './event-invitation.doc';
 
 export class EventInvitationFilterCriteriaDto {
   @ApiProperty({ required: false, type: String })
@@ -35,8 +36,12 @@ export class EventInvitationFilterCriteriaDto {
   @ApiProperty({ required: false, type: Boolean })
   isUsed?: boolean;
 
-  @ApiProperty({ required: false, type: RangeFilter, isArray: true })
-  range?: RangeFilter[];
+  @ApiProperty({
+    required: false,
+    type: RangeFilter,
+    isArray: true,
+  })
+  range?: RangeFilter<EventInvitationDoc>[];
 }
 
 export class EventInvitationFilter extends CosmosDbGenericFilter {
@@ -55,7 +60,7 @@ export class EventInvitationFilter extends CosmosDbGenericFilter {
     // TODO: Handle ticket filter on cosmos query
     tickets?: unknown[];
     claimedBy?: string[];
-    range?: RangeFilter[];
+    range?: RangeFilter<EventInvitationDoc>[];
   } = {
     dataType: [TicketingDataType.INVITATION],
   };
