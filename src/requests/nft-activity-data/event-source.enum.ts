@@ -1,0 +1,15 @@
+export enum NftActivityEventSource {
+  MVX_BUILT_IN = 'mvxBuiltIn',
+  XOXNO_MARKETPLACE = 'xoxno',
+  FRAMEIT_MARKETPLACE = 'frameit',
+  DEADRARE_MARKETPLACE = 'deadrare',
+  KROGAN_MARKETPLACE = 'krogan',
+  XOXNO_LAUNCHPAD = 'xoxnoLaunchpad',
+  XOXNO_STAKING = 'xoxnoStaking',
+  XOXNO_P2P = 'xoxnoP2P',
+  XOXNO_LS = 'xoxnoLs',
+  XOXNO_EGLD_LS = 'xoxnoEgldLs',
+  XOXNO_LENDING = 'xoxnoLending',
+  BOBER_BATTLE = 'boberBattle',
+  BOBER_WHEEL = 'boberWheel',
+}

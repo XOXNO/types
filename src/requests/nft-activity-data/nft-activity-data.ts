@@ -1,0 +1,23 @@
+export interface NftActivityData {
+  collection: string;
+  identifier?: string; // missing in globalOfferCreate
+  price: number;
+  paymentToken: string;
+  quantity: number;
+  scId: number;
+  usdValue: number;
+  egldValue: number;
+  auctionType?: string; // available for listingCreate
+  deadline?: number; // available for offerCreate & auctions
+  originalPayment?: {
+    paymentToken: string;
+    price: number;
+  }; // for ash buy events
+  nftInfo?: any; // set on query
+}
+
+export interface NftMvxBuiltIn {
+  collection: string;
+  identifier: string;
+  // creator/burner will be the from field
+}

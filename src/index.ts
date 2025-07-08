@@ -268,3 +268,36 @@ export * from './requests/user-data/verify-email.dto';
  * Requests - Lending
  */
 export * from './requests/lending/lending-market-profile.filter';
+
+/**
+ * Requests - NFT Data
+ */
+export * from './requests/nft-data/inventory-summary';
+export * from './requests/nft-data/like-nft.dto';
+export * from './requests/nft-data/nft-doc.filter';
+// nft-extra-attributes.type is already exported from cosmos-db/documents/token
+export * from './requests/nft-data/nft-offer-doc.filter';
+export * from './requests/nft-data/nft-offers';
+export * from './requests/nft-data/sign-data.dto';
+export * from './requests/nft-data/sign-mintdto';
+export * from './requests/nft-data/sign-withdraw.dto';
+export * from './requests/nft-data/user-offers';
+/**
+ * Requests - NFT Activity Data
+ */
+export * from './requests/nft-activity-data/analytics-overview';
+export * from './requests/nft-activity-data/analytics-volume';
+export * from './requests/nft-activity-data/bober-battle-activity.enum';
+// event-source.enum is already exported from cosmos-db/documents/activity
+// marketplace-activity.enum is already exported from common/enums
+// nft-activity-data is already exported from cosmos-db/documents/activity
+// nft-activity-type.enum is already exported from cosmos-db/documents/activity
+export * from './requests/nft-activity-data/nft-activity.filter';
+export * from './requests/nft-activity-data/user-analytics.dto';
+export * from './requests/nft-activity-data/user-stats';
+export * from './requests/nft-activity-data/xoxno-egld-ls-activity.enum';
+export * from './requests/nft-activity-data/xoxno-ls-activity.enum';
+/**
+ * Utils
+ */
+export * from './utils/generic';
