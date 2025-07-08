@@ -18,9 +18,3 @@ export class OwnerDto {
   @IsUrl()
   profile!: string;
 }
-
-/**
- * The lightweight, compile-time-only type for frontend use.
- * `import type { Owner } from '@your-org/types';`
- */
-export type Owner = OwnerDto;

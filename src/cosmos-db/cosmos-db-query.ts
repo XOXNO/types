@@ -2,10 +2,7 @@ import { SqlParameter, SqlQuerySpec } from '@azure/cosmos';
 
 import { CosmosDbGenericFilter } from './cosmos-db-generic-filter';
 import { EsdtTokenType } from '../common/enums';
-import {
-  NftMetadataAttributes,
-  NftMetadataAttributesType,
-} from './documents/token/nft-metadata-attributes';
+import { NftMetadataAttributes } from './documents/token/nft-metadata-attributes';
 
 export enum QueryConditionOperator {
   EQUAL = 'EQUAL',
@@ -587,10 +584,10 @@ export class CosmosDbQueryBuilder {
     return { filterString, parameters };
   }
 
-  groupAttributesByTrait(attributes: NftMetadataAttributesType[]) {
+  groupAttributesByTrait(attributes: NftMetadataAttributes[]) {
     type GroupedAttribute = { trait_type: string; values: string[] };
     return attributes.reduce(
-      (accumulator: GroupedAttribute[], current: NftMetadataAttributesType) => {
+      (accumulator: GroupedAttribute[], current: NftMetadataAttributes) => {
         // Find the index of the object with the same trait_type
         const index = accumulator.findIndex(
           (item) => item.trait_type === current.trait_type,

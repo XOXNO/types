@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { Socials } from '../../../common/socials';
 import { UserDataType } from './user-data.type';
+import { SocialsDto } from '../../../common/socials';
 
 export class CreatorProfileDoc {
   @ApiProperty({ example: 'creatorProfile', enum: UserDataType })
@@ -63,7 +63,7 @@ export class CreatorProfileDoc {
   description?: string;
 
   @ApiPropertyOptional({ description: 'Creator social media links' })
-  socials?: Socials;
+  socials?: SocialsDto;
 
   @ApiProperty({
     example:

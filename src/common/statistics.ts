@@ -31,5 +31,3 @@ export class StatisticsDto {
     Object.assign(this, props);
   }
 }
-
-export type CollectionStatistics = StatisticsDto;

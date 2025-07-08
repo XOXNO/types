@@ -214,5 +214,3 @@ export class CollectionStatsDoc {
     this.id = `${this.collection}-${this.dataType}`;
   }
 }
-
-export type CollectionStatsDocType = CollectionStatsDoc;

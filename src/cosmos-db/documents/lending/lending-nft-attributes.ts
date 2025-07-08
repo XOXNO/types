@@ -17,5 +17,3 @@ export class LendingNftAttributes {
     Object.assign(this, init);
   }
 }
-
-export type LendingNftAttributesType = LendingNftAttributes;

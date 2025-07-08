@@ -21,6 +21,3 @@ export interface CollectionExtraFeesConfig {
   amount: number;
   address: string;
 }
-
-export type XoxnoMarketplaceScCollectionConfigType =
-  XoxnoMarketplaceScCollectionConfig;

@@ -32,5 +32,3 @@ export class SocialsDto {
     Object.assign(this, props);
   }
 }
-
-export type Socials = SocialsDto;

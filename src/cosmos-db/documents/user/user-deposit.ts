@@ -35,5 +35,3 @@ export class UserDeposit {
     Object.assign(this, props);
   }
 }
-
-export type UserDepositType = UserDeposit;

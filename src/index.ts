@@ -181,7 +181,6 @@ export * from './cosmos-db/documents/ticketing/ticketing-data-type.enum';
  * Cosmos DB Documents - Token
  */
 export * from './cosmos-db/documents/token/nft-details.doc';
-export type { NftDocType } from './cosmos-db/documents/token/nft-details.doc';
 export * from './cosmos-db/documents/token/nft-extra-attributes.type';
 export * from './cosmos-db/documents/token/nft-extra-metadata.doc';
 export * from './cosmos-db/documents/token/nft-metadata-attributes';

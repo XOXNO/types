@@ -194,5 +194,3 @@ export class CollectionMintProfileDoc {
     }
   }
 }
-
-export type CollectionMintProfileDocType = CollectionMintProfileDoc;

@@ -8,7 +8,7 @@ import {
 } from '../../../common/enums';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CollectionProfileDoc } from '../collection/profile';
-import { Owner, OwnerDto } from '../../../common/owner.dto';
+import { OwnerDto } from '../../../common/owner.dto';
 // Sale: Check Last Owner nfts from GuestDoc [1,2,3] -> 0 -> Delete GuestDoc > 0: Edit GuestDoc nftIds [1,2]
 // New Owner: Get GuestDoc -> YES -> nfts insert new ID [0,3] -> NO -> Empty Guest Doc with nfts insert [3]
 
@@ -168,13 +168,13 @@ export class NftDoc {
     required: false,
     description: 'The current owner of the NFT',
   })
-  currentOwner?: string | Owner;
+  currentOwner?: string | OwnerDto;
   @ApiProperty({
     type: OwnerDto,
     required: false,
     description: 'The owner of the NFT',
   })
-  owner?: string | Owner;
+  owner?: string | OwnerDto;
   @ApiProperty({
     type: Boolean,
     required: true,
@@ -260,8 +260,6 @@ export class NftDoc {
     }
   }
 }
-
-export type NftDocType = NftDoc;
 
 export class ExtraProperties {
   @ApiProperty({

@@ -39,5 +39,3 @@ export class LendingTokenEModeProfileDoc {
     this.id = `${this.token}_${this.eModeCategory}_${this.dataType}`;
   }
 }
-
-export type LendingTokenEModeProfileDocType = LendingTokenEModeProfileDoc;

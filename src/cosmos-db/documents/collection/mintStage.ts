@@ -22,5 +22,3 @@ export class CollectionMintStageDoc {
     this.id = `${this.collection}-${this.name}-${this.dataType}`;
   }
 }
-
-export type CollectionMintStageDocType = CollectionMintStageDoc;

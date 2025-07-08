@@ -5,11 +5,7 @@ import {
   ActivityChain,
 } from '../../../common/enums';
 import { SocialsDto } from '../../../common/socials';
-import {
-  CollectionStatistics,
-  StatisticsDto,
-  StatisticsOtherDto,
-} from '../../../common/statistics';
+import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from './dataTypes';
 
@@ -119,7 +115,7 @@ export class CollectionProfileDoc {
     description: 'Collection statistics',
     type: StatisticsDto,
   })
-  statistics: CollectionStatistics = new StatisticsDto({
+  statistics = new StatisticsDto({
     other: new StatisticsOtherDto({
       followCount: 0,
       nftCount: 0,
@@ -266,5 +262,3 @@ export class CollectionProfileDoc {
     }
   }
 }
-
-export type CollectionProfileDocType = CollectionProfileDoc;

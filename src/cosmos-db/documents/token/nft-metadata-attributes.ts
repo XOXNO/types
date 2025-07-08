@@ -12,5 +12,3 @@ export class NftMetadataAttributes {
     this.value = json?.value?.toString().trim() ?? '';
   }
 }
-
-export type NftMetadataAttributesType = NftMetadataAttributes;
