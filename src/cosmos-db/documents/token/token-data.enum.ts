@@ -3,6 +3,6 @@ export enum TokenDataType {
   SftOwner = 'sftOwner',
   Offer = 'offer',
   SyntheticNft = 'syntheticNft',
-  FungibleTokenInfo = 'fungibleTokenInfo',
+  FungibleTokenInfo = 'fungibleTokenProfile',
   NftExtraMetadata = 'nftExtraMetadata',
 }
