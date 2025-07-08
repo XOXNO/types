@@ -194,7 +194,6 @@ export * from './cosmos-db/documents/token/token-data.enum';
 /**
  * Cosmos DB Documents - User
  */
-export * from './cosmos-db/documents/user/account-on-network';
 export * from './cosmos-db/documents/user/user-creator-profile.doc';
 export * from './cosmos-db/documents/user/user-data.type';
 export * from './cosmos-db/documents/user/user-deposit';

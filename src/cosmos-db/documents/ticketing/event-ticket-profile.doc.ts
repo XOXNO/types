@@ -35,7 +35,7 @@ export class EventTicketProfileDoc {
       'URL of the image that will be used as the NFT representing this ticket type.',
     required: false,
   })
-  profile?: string; // TODO: StaticConfig.getDefaultTicketProfilePicture();
+  profile?: string;
 
   @ApiProperty({
     required: false,

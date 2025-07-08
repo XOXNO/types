@@ -36,13 +36,13 @@ export class UserProfileDoc {
     example: 'https://media.xoxno.com/userprofile/erd1.../profilePicture.webp',
     description: 'Profile picture URL',
   })
-  profile!: string; // TODO: Add default image
+  profile!: string;
 
   @ApiProperty({
     example: 'https://media.xoxno.com/userprofile/erd1.../profileBanner.webp',
     description: 'Profile banner URL',
   })
-  banner!: string; // TODO: Add default iamge
+  banner!: string;
 
   @ApiProperty({
     example: 'NFT collector and trader',

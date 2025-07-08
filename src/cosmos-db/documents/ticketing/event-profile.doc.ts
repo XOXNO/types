@@ -282,7 +282,7 @@ export class EventProfileDoc {
     description: 'URL to the profile image in Azure storage.',
     // default: StaticConfig.getDefaultProfilePicture(),
   })
-  profile!: string; // TODO: Set default event image  = ConfigHelper.getDefaultEventProfilePicture();
+  profile!: string;
 
   @ApiProperty({
     description: 'Category of the event.',
