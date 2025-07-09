@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { NftMetadataAttributes } from './documents/token/nft-metadata-attributes';
-import { NftDoc } from './documents/token/nft-details.doc';
 
 type IsLeaf<T> = [T] extends [object]
   ? // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-function-type

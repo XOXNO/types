@@ -1,5 +1,5 @@
 // file: dtos/staking-summary.dto.ts
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-doc';
 
 // class Reward {
