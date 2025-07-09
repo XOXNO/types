@@ -146,11 +146,11 @@ export class NftDoc {
   })
   uris?: string[];
   @ApiProperty({
-    type: String,
+    type: OwnerDto,
     required: false,
     description: 'The creator of the NFT',
   })
-  creator?: string;
+  creator?: string | OwnerDto;
   @ApiProperty({
     type: Boolean,
     required: true,
