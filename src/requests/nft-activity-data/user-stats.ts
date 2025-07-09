@@ -59,10 +59,14 @@ class PriceDataDto {
   @IsNumber()
   usdValue!: number;
 
-  @ApiProperty({ type: PartialType<NftDoc>, description: 'NFT information' })
+  @ApiProperty({
+    type: PartialType<NftDoc>,
+    description: 'NFT information',
+    required: false,
+  })
   @ValidateNested()
   @Type(() => PartialType<NftDoc>)
-  nftInfo!: Partial<NftDoc>;
+  nftInfo?: Partial<NftDoc>;
 }
 
 export class UserStatsDto {
