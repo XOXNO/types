@@ -1,17 +1,18 @@
 import { ActivityChain } from '../../common/enums';
 
-export type IAirdropRaw = {
-  wallet: string;
-  tokenAllocation: number;
-  totalScore: number;
-  rank: number;
+class AirdropRawClass {
+  tokenAllocation!: number;
+  totalScore!: number;
+  rank!: number;
   isClaimed?: boolean;
   signature?: {
     signature: string;
     data: string;
   };
   amount?: string;
-};
+}
+
+export type AirdropRaw = AirdropRawClass & { wallet: string };
 
 export interface Wallet {
   address: string;
@@ -22,15 +23,6 @@ export interface Wallet {
   chain?: ActivityChain;
 }
 
-export type IAirdrop = {
-  wallet: Wallet;
-  tokenAllocation: number;
-  totalScore: number;
-  rank: number;
-  isClaimed?: boolean;
-  signature?: {
-    signature: string;
-    data: string;
-  };
-  amount?: string;
-};
+export class AirdropDto extends AirdropRawClass {
+  wallet!: Wallet;
+}

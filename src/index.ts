@@ -132,6 +132,7 @@ export * from './cosmos-db/documents/user/user-favorite-type.enum';
 export * from './cosmos-db/documents/user/user-favorite.doc';
 export * from './cosmos-db/documents/user/user-profile.doc';
 export * from './cosmos-db/documents/user/user-settings.doc';
+export * from './entities/airdrop/airdrop.dto';
 export * from './entities/auth/auth-strategy.enum';
 export * from './entities/auth/login-request.dto';
 export * from './entities/auth/role.enum';
