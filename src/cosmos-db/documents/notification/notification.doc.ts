@@ -1,6 +1,6 @@
 import { NotificationDataType } from './notification-data-type.enum';
 import { NotificationAssetType } from './notification-asset-type.enum';
-import { MarketplaceActivity } from '../../../common/enums';
+import { MarketplaceActivity } from '../../../requests/nft-activity-data/marketplace-activity.enum';
 
 export class NotificationDoc {
   dataType: string = NotificationDataType.Notification;

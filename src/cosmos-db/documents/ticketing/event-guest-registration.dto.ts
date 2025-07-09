@@ -18,24 +18,7 @@ import {
 } from 'class-validator';
 
 import { EventQuestionAnswerDto } from './event-question-answer.doc';
-
-export class CallbackUrl {
-  @ApiProperty()
-  @IsString()
-  success!: string;
-
-  @ApiProperty()
-  @IsString()
-  error!: string;
-
-  @ApiProperty()
-  @IsString()
-  successClose!: string;
-
-  @ApiProperty()
-  @IsString()
-  errorClose!: string;
-}
+import { CallbackUrl } from '../external-payment/external-payment-request';
 
 export class TicketSelectionDto {
   @ApiProperty({

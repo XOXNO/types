@@ -1,8 +1,8 @@
-import { StakingIssuingTypeString } from './staking-issuing-type-string.enum';
-import { StakingPoolTypeString } from './staking-pool-type-string.enum';
-import { StakingDataType } from './staking-data-type.enum';
 import { ApiProperty } from '@nestjs/swagger';
 import { NftProps } from '../token/nft-details.doc';
+import { StakingDataType } from '../../../entities/staking-data/staking-data-type.enum';
+import { StakingIssuingTypeString } from '../../../entities/staking-data/staking-issuing-type-string.enum';
+import { StakingPoolTypeString } from '../../../entities/staking-data/staking-pool-type-string.enum';
 
 export class StakingPoolDoc {
   dataType: StakingDataType = StakingDataType.Pool;

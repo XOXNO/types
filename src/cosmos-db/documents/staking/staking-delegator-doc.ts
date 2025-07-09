@@ -1,4 +1,4 @@
-import { StakingDataType } from './staking-data-type.enum';
+import { StakingDataType } from '../../../entities/staking-data/staking-data-type.enum';
 import { XoxnoStakingRewardClaim } from './staking-pool-doc';
 
 export class StakingDelegatorDoc {
