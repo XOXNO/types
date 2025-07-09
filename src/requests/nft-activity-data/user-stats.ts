@@ -65,7 +65,7 @@ class PriceDataDto {
   nftInfo!: Partial<NftDoc>;
 }
 
-class UserStatsDto {
+export class UserStatsDto {
   @ApiProperty({ type: WalletDto, description: 'User wallet information' })
   @ValidateNested()
   @Type(() => WalletDto)
@@ -150,15 +150,4 @@ class UserStatsDto {
   @ValidateNested()
   @Type(() => PriceDataDto)
   sellerMinPriceData!: PriceDataDto;
-}
-
-export class GetUsersStatsResponseDto {
-  @ApiProperty({
-    type: UserStatsDto,
-    isArray: true,
-    description: 'List of user stats',
-  })
-  @ValidateNested({ each: true })
-  @Type(() => UserStatsDto)
-  usersStats!: UserStatsDto[];
 }
