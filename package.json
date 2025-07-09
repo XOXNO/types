@@ -8,9 +8,9 @@
     "dist"
   ],
   "scripts": {
-    "build": "tsc",
+    "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc",
     "build:watch": "tsc --watch",
-    "prepublishOnly": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && npm run build",
+    "prepublishOnly": "npm run build",
     "lint": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
