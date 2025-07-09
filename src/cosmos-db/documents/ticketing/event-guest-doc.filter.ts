@@ -34,7 +34,7 @@ export class EventGuestFilterCriteriaDto {
   range?: RangeFilter<EventGuestDoc>[];
 }
 
-export class EventGuestFilter extends CosmosDbGenericFilter {
+export class EventGuestFilter extends CosmosDbGenericFilter<EventGuestDoc> {
   @ApiProperty({
     type: EventGuestFilterCriteriaDto,
   })

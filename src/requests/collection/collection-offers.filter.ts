@@ -56,7 +56,7 @@ export class CollectionOffersFilterCriteriaDto {
   withAttributes?: boolean;
 }
 
-export class CollectionOffersFilter extends CosmosDbGenericFilter {
+export class CollectionOffersFilter extends CosmosDbGenericFilter<GlobalOfferDoc> {
   @ApiProperty({
     type: CollectionOffersFilterCriteriaDto,
     required: false,

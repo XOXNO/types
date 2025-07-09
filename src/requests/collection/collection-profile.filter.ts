@@ -1,8 +1,12 @@
 import { ActivityChain } from '../../common/enums';
-import { CosmosDbGenericFilter } from '../../cosmos-db/cosmos-db-generic-filter';
+import {
+  CosmosDbGenericFilter,
+  RangeFilter,
+} from '../../cosmos-db/cosmos-db-generic-filter';
 import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
 
-export class CollectionProfileFilter extends CosmosDbGenericFilter {
+export class CollectionProfileFilter extends CosmosDbGenericFilter<CollectionProfileDoc> {
   filters: {
     dataType?: CollectionDataType;
     collection?: string[];
@@ -13,6 +17,7 @@ export class CollectionProfileFilter extends CosmosDbGenericFilter {
     isVerified?: boolean;
     isMintable?: boolean;
     chain?: ActivityChain[];
+    range?: RangeFilter<CollectionProfileDoc>[];
   } = {
     dataType: CollectionDataType.CollectionProfile,
   };

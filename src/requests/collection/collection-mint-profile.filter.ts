@@ -6,7 +6,7 @@ import {
 import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
 import { CollectionMintProfileDoc } from '../../cosmos-db/documents/collection/mintProfile';
 
-export class CollectionMintProfileFilter extends CosmosDbGenericFilter {
+export class CollectionMintProfileFilter extends CosmosDbGenericFilter<CollectionMintProfileDoc> {
   filters: {
     dataType?: CollectionDataType;
     collection?: string[];
@@ -22,7 +22,7 @@ export class CollectionMintProfileFilter extends CosmosDbGenericFilter {
     isSoldOut: false,
     activeMint: true,
   };
-  orderBy?: string[] = ['startTime desc'];
+  orderBy = ['startTime desc' as const];
   strictSelect?: boolean = false;
 
   constructor(props: Partial<CollectionMintProfileFilter>) {

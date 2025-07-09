@@ -20,8 +20,6 @@ type LeafKeyPaths<T, Prefix extends string = ''> = T extends string
         : LeafKeyPaths<NonNullable<T[K]>, `${Prefix}${Extract<K, string>}.`>;
     }[keyof T];
 
-type Test = LeafKeyPaths<NftDoc>;
-
 export class RangeFilter<T> {
   @ApiProperty({ required: false, type: 'number' })
   min?: number;
@@ -33,7 +31,7 @@ export class RangeFilter<T> {
   field?: LeafKeyPaths<T>;
 }
 
-export class CosmosDbGenericFilter {
+export class CosmosDbGenericFilter<T> {
   filters: Record<
     string,
     | object
@@ -42,7 +40,7 @@ export class CosmosDbGenericFilter {
     | string[]
     | number
     | number[]
-    | RangeFilter<string>[]
+    | RangeFilter<T>[]
     | NftMetadataAttributes[]
   > = {};
   @ApiProperty({
@@ -50,13 +48,13 @@ export class CosmosDbGenericFilter {
     items: { type: 'string' },
     required: false,
   })
-  select?: string[] = [];
+  select?: (LeafKeyPaths<T> | keyof T)[] = [];
   @ApiProperty({
     type: 'array',
     items: { type: 'string' },
     required: false,
   })
-  orderBy?: string[] = [];
+  orderBy?: `${LeafKeyPaths<T>} ${'asc' | 'desc'}`[] = [];
 
   @ApiProperty({ required: false, type: 'boolean' })
   includeCount?: boolean;
@@ -69,7 +67,7 @@ export class CosmosDbGenericFilter {
   @ApiProperty({ required: false, type: 'integer' })
   skip?: number = 0;
 
-  constructor(props?: Partial<CosmosDbGenericFilter>) {
+  constructor(props?: Partial<CosmosDbGenericFilter<T>>) {
     Object.assign(this, props);
   }
 }

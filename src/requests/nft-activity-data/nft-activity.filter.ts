@@ -72,7 +72,7 @@ export class NftActivityFilterCriteriaDto {
   pk?: string[];
 }
 
-export class NftActivityFilter extends CosmosDbGenericFilter {
+export class NftActivityFilter extends CosmosDbGenericFilter<NftActivityDoc> {
   @ApiProperty({
     required: false,
     type: NftActivityFilterCriteriaDto,

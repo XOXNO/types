@@ -44,7 +44,7 @@ export class EventInvitationFilterCriteriaDto {
   range?: RangeFilter<EventInvitationDoc>[];
 }
 
-export class EventInvitationFilter extends CosmosDbGenericFilter {
+export class EventInvitationFilter extends CosmosDbGenericFilter<EventInvitationDoc> {
   @ApiProperty({
     type: EventInvitationFilterCriteriaDto,
   })

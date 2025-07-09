@@ -49,7 +49,7 @@ export class LendingMarketProfileExtraProperties {
   participants?: boolean;
 }
 
-export class LendingMarketProfileFilter extends CosmosDbGenericFilter {
+export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMarketProfileDoc> {
   @ApiProperty({
     type: LendingMarketProfileFilterCriteriaDto,
   })
@@ -141,6 +141,6 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter {
       'supplyAmountScaled',
       'borrowAmountScaled',
       'debtCeiling',
-    ];
+    ] as const;
   }
 }

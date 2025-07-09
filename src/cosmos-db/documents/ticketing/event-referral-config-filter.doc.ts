@@ -66,7 +66,7 @@ export class EventReferralConfigFilterCriteriaDto {
   createdAt?: RangeFilter<EventReferralConfigDoc>[];
 }
 
-export class EventReferralConfigFilter extends CosmosDbGenericFilter {
+export class EventReferralConfigFilter extends CosmosDbGenericFilter<EventReferralConfigDoc> {
   @ApiProperty({
     type: EventReferralConfigFilterCriteriaDto,
     description: 'Criteria to filter event referral configs.',

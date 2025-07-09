@@ -33,7 +33,7 @@ export class EventExtraProperties {
   startsFrom?: boolean;
 }
 
-export class EventProfileFilter extends CosmosDbGenericFilter {
+export class EventProfileFilter extends CosmosDbGenericFilter<EventProfileDoc> {
   @ApiProperty({
     type: EventProfileFilterCriteriaDto,
   })
@@ -111,7 +111,6 @@ export class EventProfileFilter extends CosmosDbGenericFilter {
       'startTime',
       'endTime',
       'isVirtualEvent',
-      'type',
       'location',
       'profile',
       'descriptionUrl',
@@ -119,6 +118,6 @@ export class EventProfileFilter extends CosmosDbGenericFilter {
       'slug',
       'background',
       'creatorAddress',
-    ];
+    ] as const;
   }
 }

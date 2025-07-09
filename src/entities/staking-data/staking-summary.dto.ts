@@ -2,31 +2,31 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-doc';
 
-class Reward {
-  @ApiProperty({ description: 'Token identifier', example: 'RARE-99e8b0' })
-  tokenIdentifier!: string;
+// class Reward {
+//   @ApiProperty({ description: 'Token identifier', example: 'RARE-99e8b0' })
+//   tokenIdentifier!: string;
 
-  @ApiProperty({ description: 'Token nonce', example: 0 })
-  tokenNonce!: number;
+//   @ApiProperty({ description: 'Token nonce', example: 0 })
+//   tokenNonce!: number;
 
-  @ApiProperty({
-    description: 'Reward balance',
-    example: '322605500000000000000000',
-  })
-  rewardBalance!: string;
+//   @ApiProperty({
+//     description: 'Reward balance',
+//     example: '322605500000000000000000',
+//   })
+//   rewardBalance!: string;
 
-  @ApiProperty({ description: 'Short reward balance', example: 322605.5 })
-  rewardBalanceShort!: number;
+//   @ApiProperty({ description: 'Short reward balance', example: 322605.5 })
+//   rewardBalanceShort!: number;
 
-  @ApiProperty({ description: 'Reward per epoch short', example: 8000 })
-  rewardPerEpochShort!: number;
+//   @ApiProperty({ description: 'Reward per epoch short', example: 8000 })
+//   rewardPerEpochShort!: number;
 
-  @ApiProperty({ description: 'Reward per day per NFT', example: 1 })
-  rewardPerDayPerNft!: number;
+//   @ApiProperty({ description: 'Reward per day per NFT', example: 1 })
+//   rewardPerDayPerNft!: number;
 
-  @ApiProperty({ description: 'USD value', example: 27.64023234925034 })
-  usdValue!: number;
-}
+//   @ApiProperty({ description: 'USD value', example: 27.64023234925034 })
+//   usdValue!: number;
+// }
 
 // export class StakingSummary {
 //   @ApiProperty({ description: 'Pool ID', example: 3 })

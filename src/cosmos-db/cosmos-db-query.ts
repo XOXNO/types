@@ -154,8 +154,8 @@ export class CosmosDbQueryBuilder {
     return this;
   }
 
-  selectFields(fields: string[]): CosmosDbQueryBuilder {
-    this.query.selectFields = fields;
+  selectFields(fields: (string | number | symbol)[]): CosmosDbQueryBuilder {
+    this.query.selectFields = fields as string[];
     return this;
   }
 
@@ -369,7 +369,7 @@ export class CosmosDbQueryBuilder {
     }
   }
 
-  fromFilter(filter: CosmosDbGenericFilter): CosmosDbQueryBuilder {
+  fromFilter<T>(filter: CosmosDbGenericFilter<T>): CosmosDbQueryBuilder {
     const defaultMin = 0;
     const defaultMax = Number.MAX_SAFE_INTEGER;
 

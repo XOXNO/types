@@ -119,7 +119,7 @@ export class EventVoucherFilterCriteriaDto {
   range?: RangeFilter<EventVoucherDoc>[];
 }
 
-export class EventVoucherFilter extends CosmosDbGenericFilter {
+export class EventVoucherFilter extends CosmosDbGenericFilter<EventVoucherDoc> {
   @ApiProperty({
     type: EventVoucherFilterCriteriaDto,
     description: 'Criteria to filter event vouchers.',

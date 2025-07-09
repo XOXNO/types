@@ -26,7 +26,7 @@ export class CollectionStatsFilterCriteriaDto {
   range?: RangeFilter<CollectionStatsDoc>[];
 }
 
-export class CollectionStatsFilter extends CosmosDbGenericFilter {
+export class CollectionStatsFilter extends CosmosDbGenericFilter<CollectionStatsDoc> {
   @ApiProperty({
     type: CollectionStatsFilterCriteriaDto,
   })
@@ -87,6 +87,6 @@ export class CollectionStatsFilter extends CosmosDbGenericFilter {
       'tradingStats.totalTrades',
       'floorPrice',
       'listedCount',
-    ];
+    ] as const;
   }
 }

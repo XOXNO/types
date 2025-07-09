@@ -29,7 +29,7 @@ export class NftOfferDocFilterCriteria {
   range?: RangeFilter<NftOfferDoc>[];
 }
 
-export class NftOfferDocFilter extends CosmosDbGenericFilter {
+export class NftOfferDocFilter extends CosmosDbGenericFilter<NftOfferDoc> {
   @ApiProperty({
     type: NftOfferDocFilterCriteria,
   })
@@ -50,7 +50,7 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter {
     items: { type: 'string', enum: ['priceShort desc'] },
     required: false,
   })
-  orderBy?: string[] = ['priceShort desc'];
+  orderBy? = ['priceShort desc' as const];
 
   constructor(props: Partial<NftOfferDocFilter>) {
     super(props);
