@@ -15,7 +15,7 @@ export class FilterQueryDto {
   top?: number = 25;
   @ApiProperty({ required: false, type: 'integer' })
   skip?: number = 0;
-  chain?: ActivityChain;
+  chain?: ActivityChain[];
   orderBy?: string[];
   select?: string[];
 }
