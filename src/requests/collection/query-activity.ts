@@ -72,6 +72,12 @@ class ActivityDataDto implements NftActivityData {
 
   @ApiProperty({ type: CollectionInfoDto })
   collectionInfo!: CollectionInfoDto;
+
+  originalTokenAmount?: string;
+  originalTokenAmountShort?: number;
+  originalTokenEgldValue?: number;
+  originalTokenUsdValue?: number;
+  originalTokenIdentifier?: string;
 }
 
 export class ActivityBodyDto {
