@@ -1,4 +1,4 @@
-import { Wallet } from '../../entities/airdrop/airdrop.dto';
+import { Wallet } from '../../utils/types';
 
 export class BoberBattleLeaderboardDto {
   GamesCreated!: number;
@@ -36,6 +36,6 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
   }
 }
 
-export class BoberBattleUserFullDto extends BoberBattleLeaderboardDto {
+export class BoberBattleUserDtoHydrated extends BoberBattleLeaderboardDto {
   wallet!: Wallet;
 }

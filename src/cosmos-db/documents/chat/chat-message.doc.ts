@@ -2,12 +2,48 @@ import { v4 } from 'uuid';
 
 import { ChatDataType } from './chat-data-type.enum';
 import { ChatMessageContentType } from './chat-message-content-type.enum';
+import { OwnerDto } from '../../../common/owner.dto';
 
-export class ChatMessageDoc {
-  dataType: string = ChatDataType.MESSAGE;
-  chatId!: string;
+interface IType {
+  dataType: ChatDataType;
+  chatId: string;
+  isGroupChat: boolean;
+  message: ChatMessage;
+  pk: string;
+  id: string;
+  ttl?: number;
+  _ts?: number;
+}
+
+export class ChatMessageDoc implements IType {
   sender!: string;
   receiver!: string;
+
+  dataType = ChatDataType.MESSAGE;
+  chatId!: string;
+  isGroupChat!: boolean;
+  message!: ChatMessage;
+  pk!: string;
+  id!: string;
+  ttl?: number;
+  _ts?: number;
+
+  constructor(props: Partial<ChatMessageDoc>) {
+    Object.assign(this, props);
+    this.id = v4();
+    this.pk = props.chatId!;
+    if (this.isGroupChat) {
+      this.ttl = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7; // 7 days
+    }
+  }
+}
+
+export class ChatMessageDocHyrated implements IType {
+  sender!: OwnerDto;
+  receiver!: OwnerDto;
+
+  dataType = ChatDataType.MESSAGE;
+  chatId!: string;
   isGroupChat!: boolean;
   message!: ChatMessage;
   pk!: string;

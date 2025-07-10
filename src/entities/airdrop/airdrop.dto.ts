@@ -1,28 +1,30 @@
-import { ActivityChain } from '../../common/enums';
+import { Wallet } from '../../utils/types';
 
-class AirdropRawClass {
-  tokenAllocation!: number;
-  totalScore!: number;
-  rank!: number;
+interface IType {
+  tokenAllocation: number;
+  totalScore: number;
+  rank: number;
   isClaimed?: boolean;
-  signature?: {
+  signature: {
     signature: string;
     data: string;
   };
   amount?: string;
 }
 
-export type AirdropRaw = AirdropRawClass & { wallet: string };
+export type AirdropDto = IType & { wallet: string };
 
-export interface Wallet {
-  address: string;
-  addressTrimmed: string;
-  profile: string;
-  username: string;
-  isVerified: boolean;
-  chain?: ActivityChain;
-}
-
-export class AirdropDto extends AirdropRawClass {
+export class AirdropDtoHydrated implements IType {
   wallet!: Wallet;
+
+  tokenAllocation!: number;
+  totalScore!: number;
+  rank!: number;
+  isClaimed?: boolean | undefined;
+  signature!: { signature: string; data: string };
+  amount?: string | undefined;
+
+  constructor(args: Partial<AirdropDtoHydrated>) {
+    Object.assign(this, args);
+  }
 }
