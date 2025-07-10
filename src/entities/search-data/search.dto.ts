@@ -5,6 +5,7 @@ import { IsOptional } from 'class-validator';
 import { MetadataDto } from '../../requests/collection/listings';
 import { NftMedia } from '../../cosmos-db/documents/token/nft-details.doc';
 import { StatisticsDto } from '../../common/statistics';
+import { ActivityChain } from '../../common/enums';
 
 class CollectionDto {
   @ApiProperty({ example: 'EAPES-8f3c1f' })
@@ -33,6 +34,9 @@ class CollectionDto {
 
   @ApiProperty({ example: 3.1 })
   floorPrice!: number;
+
+  @ApiProperty({ type: ActivityChain, required: false })
+  chain?: ActivityChain;
 }
 
 class UserDto {
@@ -58,6 +62,9 @@ class UserDto {
 
   @ApiProperty({ example: 'erd1...cu4q' })
   addressTrimmed!: string;
+
+  @ApiProperty({ type: ActivityChain, required: false })
+  chain?: ActivityChain;
 }
 
 class CreatorDto {
@@ -93,6 +100,9 @@ class CreatorDto {
     example: 'https://media.xoxno.com/utils/defaultProfilePic.webp',
   })
   profile!: string;
+
+  @ApiProperty({ type: ActivityChain, required: false })
+  chain?: ActivityChain.MVX;
 }
 
 class NftDto {
@@ -122,6 +132,9 @@ class NftDto {
 
   @ApiProperty({ type: MetadataDto })
   metadata!: MetadataDto;
+
+  @ApiProperty({ type: ActivityChain, required: false })
+  chain?: ActivityChain;
 }
 
 class GlobalSearchResourcesDto {
