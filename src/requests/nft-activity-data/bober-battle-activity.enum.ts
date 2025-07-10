@@ -13,7 +13,7 @@ export enum BoberBattleGames {
   BOBER_WHEEL = 'bober-wheel',
 }
 
-interface IBoberBattleGlobal {
+/* interface IBoberBattleGlobal {
   GamesCreated: number;
   GamesCreatedHead: number;
   GamesCreatedTail: number;
@@ -81,4 +81,4 @@ export type IGameAnalytics =
   | IBoberBattleGlobalResult
   | IBoberBattlePlayerResult
   | IBoberWheelGlobalResult
-  | IBoberWheelPlayerResult;
+  | IBoberWheelPlayerResult; */
