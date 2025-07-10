@@ -16,7 +16,9 @@ export class StakingExploreDto {
 
   @ApiProperty({ type: String, isArray: true })
   rewardTickers!: string[];
+}
 
+export class StakingExploreDtoHydrated extends StakingExploreDto {
   @ApiProperty({ type: () => CollectionInfoDto })
   collectionInfo!: CollectionInfoDto;
 }
