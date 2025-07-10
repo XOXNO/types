@@ -35,7 +35,7 @@ class CollectionDto {
   @ApiProperty({ example: 3.1 })
   floorPrice!: number;
 
-  @ApiProperty({ type: ActivityChain, required: false })
+  @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain;
 }
 
@@ -63,7 +63,7 @@ class UserDto {
   @ApiProperty({ example: 'erd1...cu4q' })
   addressTrimmed!: string;
 
-  @ApiProperty({ type: ActivityChain, required: false })
+  @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain;
 }
 
@@ -101,7 +101,7 @@ class CreatorDto {
   })
   profile!: string;
 
-  @ApiProperty({ type: ActivityChain, required: false })
+  @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain.MVX;
 }
 
@@ -133,7 +133,7 @@ class NftDto {
   @ApiProperty({ type: MetadataDto })
   metadata!: MetadataDto;
 
-  @ApiProperty({ type: ActivityChain, required: false })
+  @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain;
 }
 
