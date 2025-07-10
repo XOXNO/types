@@ -41,6 +41,10 @@ export class InventorySummaryDtoHydrated extends InventorySummaryDto {
   @IsUrl()
   profile!: string;
 
+  @ApiProperty({ description: 'Banner URL of the collection' })
+  @IsUrl()
+  banner!: string;
+
   @ApiProperty({ description: 'Value of the collection' })
   @IsNumber()
   value!: number;
