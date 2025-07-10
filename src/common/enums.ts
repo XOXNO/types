@@ -1,5 +1,5 @@
 export enum ActivityChain {
-  MULTIVERSX = 'MVX',
+  MVX = 'MVX',
   SUI = 'SUI',
 }
 

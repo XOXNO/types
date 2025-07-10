@@ -118,11 +118,11 @@ export class NftOfferDoc {
   isActive: boolean = true;
 
   @ApiProperty({
-    example: ActivityChain.MULTIVERSX,
+    example: ActivityChain.MVX,
     enum: ActivityChain,
     description: 'Blockchain network of the offer',
   })
-  chain: ActivityChain = ActivityChain.MULTIVERSX;
+  chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
     example: 'COLLECTION-1234-5678-1-xoxno-offer',

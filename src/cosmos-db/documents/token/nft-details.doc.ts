@@ -219,7 +219,7 @@ export class NftDoc {
     required: true,
     description: 'The chain of the NFT',
   })
-  chain: ActivityChain = ActivityChain.MULTIVERSX;
+  chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
     type: String,

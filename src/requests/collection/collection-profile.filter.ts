@@ -31,7 +31,7 @@ export class CollectionProfileFilter extends CosmosDbGenericFilter<CollectionPro
       chain:
         props.filters?.chain &&
         props.filters.chain.length === 1 &&
-        props.filters.chain[0] === ActivityChain.MULTIVERSX
+        props.filters.chain[0] === ActivityChain.MVX
           ? undefined
           : props.filters?.chain,
     };

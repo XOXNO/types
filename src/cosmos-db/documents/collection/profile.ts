@@ -126,9 +126,9 @@ export class CollectionProfileDoc {
   @ApiProperty({
     description: 'Blockchain chain',
     enum: ActivityChain,
-    example: ActivityChain.MULTIVERSX,
+    example: ActivityChain.MVX,
   })
-  chain: ActivityChain = ActivityChain.MULTIVERSX;
+  chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
     description: 'Transfer policies for the collection',

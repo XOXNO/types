@@ -34,11 +34,11 @@ export class NftActivityDoc {
   eventOrder?: number;
 
   @ApiProperty({
-    example: ActivityChain.MULTIVERSX,
+    example: ActivityChain.MVX,
     enum: ActivityChain,
     description: 'Blockchain network where the activity occurred',
   })
-  chain: ActivityChain = ActivityChain.MULTIVERSX;
+  chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
     example: NftActivityEventSource.XOXNO_MARKETPLACE,
@@ -95,6 +95,6 @@ export class NftActivityDoc {
     Object.assign(this, data);
     this.id = v4();
     this.pk = this.activityData.collection;
-    this.chain = this.chain || ActivityChain.MULTIVERSX;
+    this.chain = this.chain || ActivityChain.MVX;
   }
 }

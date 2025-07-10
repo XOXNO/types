@@ -93,6 +93,6 @@ export class WalletTradingStats {
             usdValue: data.SellerMinPriceData?.UsdValue ?? null,
           }
         : null;
-    this.chain = data.chain ?? ActivityChain.MULTIVERSX;
+    this.chain = data.chain ?? ActivityChain.MVX;
   }
 }

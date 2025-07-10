@@ -68,8 +68,8 @@ export class UserProfileDoc {
   @ApiProperty({ type: [UserDeposit], description: 'User deposit information' })
   userDeposit: UserDeposit[] = [];
 
-  @ApiProperty({ example: ActivityChain.MULTIVERSX, enum: ActivityChain })
-  chain: ActivityChain = ActivityChain.MULTIVERSX;
+  @ApiProperty({ example: ActivityChain.MVX, enum: ActivityChain })
+  chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({ example: 1640995200, description: 'Cosmos DB timestamp' })
   _ts: number = 0;
