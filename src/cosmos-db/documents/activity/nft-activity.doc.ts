@@ -3,10 +3,7 @@ import { ActivityChain } from '../../../common/enums';
 
 import { v4 } from 'uuid';
 import { NftActivityEventSource } from '../../../requests/nft-activity-data/event-source.enum';
-import {
-  NftActivityData,
-  NftMvxBuiltIn,
-} from '../../../requests/nft-activity-data/nft-activity-data';
+import { NftActivityData } from '../../../requests/nft-activity-data/nft-activity-data';
 import { NftActivityType } from '../../../requests/nft-activity-data/nft-activity-type.enum';
 
 export class NftActivityDoc {
@@ -74,7 +71,7 @@ export class NftActivityDoc {
     description:
       'Activity data containing details about the NFT transaction or built-in operation',
   })
-  activityData!: NftActivityData | NftMvxBuiltIn;
+  activityData!: NftActivityData;
 
   @ApiProperty({
     example: 'abc123-def456-ghi789',
