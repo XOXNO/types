@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { NftActivityEventSource } from './event-source.enum';
-import { NftActivityType } from './nft-activity-type.enum';
 import { ActivityChain } from '../../common/enums';
 import {
-  RangeFilter,
   CosmosDbGenericFilter,
+  RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { NftActivityDoc } from '../../cosmos-db/documents/activity/nft-activity.doc';
+import { ActivityBodyDto } from '../collection/query-activity';
+import { NftActivityEventSource } from './event-source.enum';
+import { NftActivityType } from './nft-activity-type.enum';
 
 export class ActivityDataDto {
   @ApiProperty({
@@ -64,7 +64,7 @@ export class NftActivityFilterCriteriaDto {
     type: RangeFilter,
     isArray: true,
   })
-  range?: RangeFilter<NftActivityDoc>[];
+  range?: RangeFilter<ActivityBodyDto>[];
 
   @ApiProperty({ required: false, type: ActivityDataDto })
   activityData?: ActivityDataDto;
@@ -72,7 +72,7 @@ export class NftActivityFilterCriteriaDto {
   pk?: string[];
 }
 
-export class NftActivityFilter extends CosmosDbGenericFilter<NftActivityDoc> {
+export class NftActivityFilter extends CosmosDbGenericFilter<ActivityBodyDto> {
   @ApiProperty({
     required: false,
     type: NftActivityFilterCriteriaDto,
@@ -84,7 +84,7 @@ export class NftActivityFilter extends CosmosDbGenericFilter<NftActivityDoc> {
     to?: string[];
     activityType?: NftActivityType[];
     source?: NftActivityEventSource[];
-    range?: RangeFilter<NftActivityDoc>[]; // can be used to filter trade timestamp or egldValue within activity data
+    range?: RangeFilter<ActivityBodyDto>[]; // can be used to filter trade timestamp or egldValue within activity data
     chain?: ActivityChain[];
     activityData?: {
       collection?: string[];

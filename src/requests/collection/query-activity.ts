@@ -74,7 +74,7 @@ class ActivityDataDto implements NftActivityData {
   collectionInfo!: CollectionInfoDto;
 }
 
-class ActivityBodyDto {
+export class ActivityBodyDto {
   @ApiProperty({
     example: '0ee3f1f8effcfa49e0b397cae16e24382087581da5c9f47a64a071e7e5dd2cb4',
   })

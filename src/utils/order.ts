@@ -1,13 +1,13 @@
 import { IOrderBy } from '../cosmos-db/cosmos-db-generic-filter';
-import { NftActivityDoc } from '../cosmos-db/documents/activity/nft-activity.doc';
 import { CollectionStatsDoc } from '../cosmos-db/documents/collection/stats';
 import { NftDoc } from '../cosmos-db/documents/token/nft-details.doc';
 import { CollectionProfileDto } from '../requests/collection/collections';
 import { DropResourceDto } from '../requests/collection/drops-query';
+import { ActivityBodyDto } from '../requests/collection/query-activity';
 import { GlobalOfferDto } from '../requests/collection/query-global-offers';
 
 export type OrderByTradingActivity = IOrderBy<
-  NftActivityDoc,
+  ActivityBodyDto,
   'activityData.egldValue' | 'timestamp' | 'activityData.originalTokenUsdValue'
 >;
 
