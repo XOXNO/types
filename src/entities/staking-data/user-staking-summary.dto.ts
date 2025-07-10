@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { XoxnoStakingReward } from '../../cosmos-db/documents/staking/staking-pool-doc';
 
 export class RewardDto {
   @ApiProperty({ description: 'Token identifier', example: 'WXMEX-794dbd' })
@@ -56,4 +57,8 @@ export class UserStakingSummaryDto {
     description: 'Rewards information',
   })
   reward!: RewardDto[];
+
+  poolIds!: number[];
+
+  userReward!: XoxnoStakingReward[];
 }
