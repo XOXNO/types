@@ -13,7 +13,7 @@ import { EventGuestProfile } from './event-guest.doc';
 import { EventInvitation } from './event-invitation.doc';
 import { EventScanStatus, EventScanMessage } from './event-scan-status.enum';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
-import { NftDoc } from '../token/nft-details.doc';
+import { NftDoc, NftProps } from '../token/nft-details.doc';
 
 export enum EventTicketQrType {
   BADGE = 'badge',
@@ -84,10 +84,10 @@ export class TicketValidationResult {
   invitation?: EventInvitation;
   @ApiProperty({
     description: 'NFTs used for check in, if any',
-    type: [NftDoc],
+    type: [NftProps],
     required: false,
   })
-  nfts?: NftDoc[];
+  nfts?: NftProps[];
 
   @ApiProperty({
     description: 'Tickets to select from when required for bulk scan',
