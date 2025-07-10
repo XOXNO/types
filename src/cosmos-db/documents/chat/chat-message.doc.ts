@@ -4,21 +4,7 @@ import { ChatDataType } from './chat-data-type.enum';
 import { ChatMessageContentType } from './chat-message-content-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 
-interface IType {
-  dataType: ChatDataType;
-  chatId: string;
-  isGroupChat: boolean;
-  message: ChatMessage;
-  pk: string;
-  id: string;
-  ttl?: number;
-  _ts?: number;
-}
-
-export class ChatMessageDoc implements IType {
-  sender!: string;
-  receiver!: string;
-
+class ChatMessageDocBase {
   dataType = ChatDataType.MESSAGE;
   chatId!: string;
   isGroupChat!: boolean;
@@ -38,26 +24,21 @@ export class ChatMessageDoc implements IType {
   }
 }
 
-export class ChatMessageDocHyrated implements IType {
+export class ChatMessageDoc extends ChatMessageDocBase {
+  sender!: string;
+  receiver!: string;
+
+  constructor(props: Partial<ChatMessageDocBase>) {
+    super(props);
+  }
+}
+
+export class ChatMessageDocHyrated extends ChatMessageDocBase {
   sender!: OwnerDto;
   receiver!: OwnerDto;
 
-  dataType = ChatDataType.MESSAGE;
-  chatId!: string;
-  isGroupChat!: boolean;
-  message!: ChatMessage;
-  pk!: string;
-  id!: string;
-  ttl?: number;
-  _ts?: number;
-
-  constructor(props: Partial<ChatMessageDoc>) {
-    Object.assign(this, props);
-    this.id = v4();
-    this.pk = props.chatId!;
-    if (this.isGroupChat) {
-      this.ttl = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7; // 7 days
-    }
+  constructor(props: Partial<ChatMessageDocBase>) {
+    super(props);
   }
 }
 

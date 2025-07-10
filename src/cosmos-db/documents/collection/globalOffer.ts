@@ -3,8 +3,9 @@ import { ActivityChain } from '../../../common/enums';
 import { NftMetadataAttributes } from '../token/nft-metadata-attributes';
 import { CollectionDataType } from './dataTypes';
 import { CollectionProfileDoc } from './profile';
+import { OwnerDto } from '../../../common/owner.dto';
 
-export class GlobalOfferDoc {
+class GlobalOfferDocBase {
   @ApiProperty({
     description: 'Data type identifier for the global offer',
     enum: CollectionDataType,
@@ -23,12 +24,6 @@ export class GlobalOfferDoc {
     example: 'COLLECTION-123456',
   })
   collection!: string;
-
-  @ApiProperty({
-    description: 'Owner/creator of the offer',
-    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
-  })
-  owner!: string;
 
   @ApiProperty({
     description: 'Offer price in atomic units',
@@ -134,5 +129,29 @@ export class GlobalOfferDoc {
   constructor(props?: Partial<GlobalOfferDoc>) {
     Object.assign(this, props);
     this.id = `${this.collection}-${this.offerId}-${this.marketplace}-${this.dataType}`;
+  }
+}
+
+export class GlobalOfferDoc extends GlobalOfferDocBase {
+  @ApiProperty({
+    description: 'Owner/creator of the offer',
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+  })
+  owner!: string;
+
+  constructor(props: Partial<GlobalOfferDocBase>) {
+    super(props);
+  }
+}
+
+export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
+  usdValue!: number;
+  owner!: OwnerDto;
+  floorPrice!: number;
+  floorPriceMargin!: number;
+  collectionInfo!: Partial<CollectionProfileDoc>;
+
+  constructor(props: Partial<GlobalOfferDocBase>) {
+    super(props);
   }
 }

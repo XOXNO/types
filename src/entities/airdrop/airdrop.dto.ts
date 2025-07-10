@@ -1,30 +1,30 @@
 import { Wallet } from '../../utils/types';
 
-interface IType {
-  tokenAllocation: number;
-  totalScore: number;
-  rank: number;
-  isClaimed?: boolean;
-  signature: {
-    signature: string;
-    data: string;
-  };
-  amount?: string;
-}
-
-export type AirdropDto = IType & { wallet: string };
-
-export class AirdropDtoHydrated implements IType {
-  wallet!: Wallet;
-
+class AirdropDtoBase {
   tokenAllocation!: number;
   totalScore!: number;
   rank!: number;
-  isClaimed?: boolean | undefined;
-  signature!: { signature: string; data: string };
-  amount?: string | undefined;
 
-  constructor(args: Partial<AirdropDtoHydrated>) {
-    Object.assign(this, args);
+  constructor(props: Partial<AirdropDtoBase>) {
+    Object.assign(this, props);
+  }
+}
+
+export class AirdropDto extends AirdropDtoBase {
+  wallet!: string;
+
+  constructor(props: Partial<AirdropDtoBase>) {
+    super(props);
+  }
+}
+
+export class AirdropDtoHydrated extends AirdropDtoBase {
+  wallet!: Wallet;
+  signature!: { signature: string; data: string };
+  isClaimed!: boolean;
+  amount!: string;
+
+  constructor(props: Partial<AirdropDtoBase>) {
+    super(props);
   }
 }
