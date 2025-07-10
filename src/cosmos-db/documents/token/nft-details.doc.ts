@@ -280,9 +280,6 @@ export class NftProps extends NftDoc {
     super(props);
   }
 
-  @ApiProperty({ type: Boolean, required: false })
-  receiverIsNotOwner?: boolean;
-
   @ApiProperty({
     type: Number,
     required: false,

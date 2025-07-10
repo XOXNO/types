@@ -18,7 +18,9 @@ export class InventorySummaryDto {
   @ApiProperty({ description: 'Number of staked NFTs' })
   @IsNumber()
   stakedCount!: number;
+}
 
+export class InventorySummaryDtoHydrated extends InventorySummaryDto {
   @ApiProperty({ description: 'Floor price of the collection' })
   @IsNumber()
   floorPrice!: number;
