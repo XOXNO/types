@@ -17,6 +17,10 @@ export interface NftActivityData {
     price: number;
   }; // for ash buy events
   nftInfo?: Partial<NftDoc>; // set on query
+  originalTokenAmount?: string;
+  originalTokenAmountShort?: number;
+  originalTokenEgldValue?: number;
+  originalTokenUsdValue?: number;
 }
 
 export interface NftMvxBuiltIn {

@@ -1,5 +1,3 @@
-import { ActivityChain } from '../../common/enums';
-
 export enum BoberBattleActivity {
   NEW_GAME = 'newGame',
   END_GAME = 'endGame',
