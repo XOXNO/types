@@ -198,13 +198,6 @@ export class CollectionStatsDoc {
   })
   id!: string;
 
-  @ApiProperty({
-    description: 'Collection profile information',
-    required: false,
-    type: PartialType(CollectionProfileDoc),
-  })
-  collectionInfo?: Partial<CollectionProfileDoc>;
-
   constructor(props?: Partial<CollectionStatsDoc>) {
     if (!props?.collection) {
       throw new Error('collection is required');
@@ -212,5 +205,18 @@ export class CollectionStatsDoc {
     Object.assign(this, props);
     this.collection = this.collection.replace(/::/g, '-');
     this.id = `${this.collection}-${this.dataType}`;
+  }
+}
+
+export class CollectionStatsDocHydrated extends CollectionStatsDoc {
+  @ApiProperty({
+    description: 'Collection profile information',
+    required: false,
+    type: PartialType(CollectionProfileDoc),
+  })
+  collectionInfo!: Partial<CollectionProfileDoc>;
+
+  constructor(props: Partial<CollectionStatsDocHydrated>) {
+    super(props);
   }
 }
