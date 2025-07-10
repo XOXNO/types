@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 import { CollectionDataType } from './dataTypes';
+import { CollectionProfileDoc } from './profile';
+import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
 
 export class CollectionMintProfileDoc {
   @ApiProperty({
@@ -193,4 +195,9 @@ export class CollectionMintProfileDoc {
       this.tags = this.tags.split(',');
     }
   }
+}
+
+export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
+  collectionInfo!: Partial<CollectionProfileDoc>;
+  creatorInfo!: Partial<CreatorProfileDoc>;
 }
