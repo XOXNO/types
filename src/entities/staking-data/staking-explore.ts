@@ -1,5 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { CollectionInfoDto } from '../../requests/collection/collection-info.dto';
+import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
 
 export class StakingExploreDto {
   @ApiProperty()
@@ -19,6 +19,6 @@ export class StakingExploreDto {
 }
 
 export class StakingExploreDtoHydrated extends StakingExploreDto {
-  @ApiProperty({ type: () => CollectionInfoDto })
-  collectionInfo!: CollectionInfoDto;
+  @ApiProperty({ type: () => PartialType<CollectionProfileDoc> })
+  collectionInfo!: Partial<CollectionProfileDoc>;
 }
