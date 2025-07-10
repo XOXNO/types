@@ -60,5 +60,5 @@ export class GetSingleNftOfferResponseDto {
   resources!: OfferDto[];
 
   @ApiProperty({ example: false })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 }

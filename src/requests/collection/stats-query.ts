@@ -8,5 +8,5 @@ export class ExploreCollectionsStatisticsDto {
   resources!: CollectionStatsDto[];
 
   @ApiProperty({ example: true })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 }

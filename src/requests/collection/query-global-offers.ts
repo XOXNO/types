@@ -34,5 +34,5 @@ export class GlobalOffersDto {
   resources!: GlobalOfferDto[];
 
   @ApiProperty({ example: true })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 }

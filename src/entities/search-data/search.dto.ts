@@ -156,7 +156,7 @@ export class GlobalSearchResponseDto {
   count!: number;
 
   @ApiProperty({ example: true })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({ type: GlobalSearchResourcesDto })
   resources!: GlobalSearchResourcesDto;

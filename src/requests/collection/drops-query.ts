@@ -61,7 +61,7 @@ export class DropsQueryDto {
   count!: number | null;
 
   @ApiProperty({ example: true })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({ type: DropResourceDto, isArray: true })
   resources!: DropResourceDto[];

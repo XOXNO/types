@@ -145,36 +145,28 @@ export class NftOfferDoc {
   }
 }
 
-export class NftOfferProps extends NftOfferDoc {
-  constructor(props?: Partial<NftOfferDoc>) {
-    super(props);
-  }
-
+export class NftOfferDocHydrated extends NftOfferDoc {
   @ApiProperty({
     example: 150.75,
     description: 'USD value of the offer',
-    required: false,
   })
-  usdValue?: number;
+  usdValue!: number;
 
   @ApiProperty({
     example: 0.15,
     description: 'Margin compared to floor price as percentage',
-    required: false,
   })
-  floorPriceMargin?: number;
+  floorPriceMargin!: number;
 
   @ApiProperty({
     example: 1.25,
     description: 'Current floor price of the collection',
-    required: false,
   })
-  floorPrice?: number;
+  floorPrice!: number;
 
   @ApiProperty({
     type: () => NftProps,
     description: 'NFT information related to the offer',
-    required: false,
   })
-  nftInfo?: Partial<NftProps>;
+  nftInfo!: Partial<NftProps>;
 }

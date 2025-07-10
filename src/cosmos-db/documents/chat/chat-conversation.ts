@@ -77,7 +77,7 @@ export class ChatConversationDto {
 
 export class FetchChatConversationsSummaryDto {
   @ApiProperty({ example: false })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({ type: ChatConversationDto, isArray: true })
   resources!: ChatConversationDto[];

@@ -108,7 +108,7 @@ export class ChatMessageDto {
 
 export class FetchChatMessagesDto {
   @ApiProperty({ example: false })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({ type: ProfileDto })
   receiver!: ProfileDto;

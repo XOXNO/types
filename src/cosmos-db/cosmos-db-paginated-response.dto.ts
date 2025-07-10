@@ -12,7 +12,7 @@ export class CosmosPaginatedResponse<T> {
     description: 'Indicates if there are more documents available',
     example: true,
   })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({
     description: 'List of documents',

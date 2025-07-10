@@ -64,7 +64,7 @@ export class GetUserOffersResponseDto {
   count!: number;
 
   @ApiProperty({ example: false })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 
   @ApiProperty({
     type: OfferDto,

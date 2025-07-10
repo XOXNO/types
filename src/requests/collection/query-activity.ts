@@ -74,5 +74,5 @@ export class ActivityHistoryDto {
   resources!: ActivityBodyDto[];
 
   @ApiProperty({ example: true })
-  hasMoreResults!: boolean;
+  hasMoreResults: boolean = false;
 }
