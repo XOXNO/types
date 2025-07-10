@@ -20,7 +20,7 @@ class RarityDto {
   rank!: number;
 }
 
-class MetadataDto {
+export class MetadataDto {
   @ApiProperty({ type: RarityDto })
   rarity!: RarityDto;
 }

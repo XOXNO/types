@@ -30,6 +30,11 @@ export class RangeFilter<T> {
   field?: LeafKeyPaths<T>;
 }
 
+export type IOrderBy<
+  T,
+  E = LeafKeyPaths<T>,
+> = `${Extract<LeafKeyPaths<T>, E>} ${'asc' | 'desc'}`;
+
 export class CosmosDbGenericFilter<T> {
   filters: Record<
     string,
@@ -53,7 +58,7 @@ export class CosmosDbGenericFilter<T> {
     items: { type: 'string' },
     required: false,
   })
-  orderBy?: `${LeafKeyPaths<T>} ${'asc' | 'desc'}`[] = [];
+  orderBy?: IOrderBy<T>[] = [];
 
   @ApiProperty({ required: false, type: 'boolean' })
   includeCount?: boolean;

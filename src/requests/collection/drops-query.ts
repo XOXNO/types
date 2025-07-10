@@ -18,7 +18,7 @@ class CreatorInfoDto {
   profile!: string;
 }
 
-class DropResourceDto {
+export class DropResourceDto {
   @ApiProperty({ type: EgldOrEsdtTokenPayment, isArray: true })
   prices!: EgldOrEsdtTokenPayment[];
 

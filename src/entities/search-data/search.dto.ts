@@ -2,33 +2,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { IsOptional } from 'class-validator';
-
-class TradeDataDto {
-  @ApiProperty({ example: 0 })
-  dayEgldVolume!: number;
-
-  @ApiProperty({ example: 116.67 })
-  weekEgldVolume!: number;
-
-  @ApiProperty({ example: 128123.25 })
-  totalEgldVolume!: number;
-}
-
-class OtherStatsDto {
-  @ApiProperty({ example: 10000 })
-  nftCount!: number;
-
-  @ApiProperty({ example: 525 })
-  followCount!: number;
-}
-
-class StatisticsDto {
-  @ApiProperty({ type: TradeDataDto })
-  tradeData!: TradeDataDto;
-
-  @ApiProperty({ type: OtherStatsDto })
-  other!: OtherStatsDto;
-}
+import { MetadataDto } from '../../requests/collection/listings';
+import { NftMedia } from '../../cosmos-db/documents/token/nft-details.doc';
+import { StatisticsDto } from '../../common/statistics';
 
 class CollectionDto {
   @ApiProperty({ example: 'EAPES-8f3c1f' })
@@ -119,6 +95,35 @@ class CreatorDto {
   profile!: string;
 }
 
+class NftDto {
+  @ApiProperty({ example: 'EAPES-8f3c1f-0209' })
+  identifier!: string;
+
+  @ApiProperty({ example: 'EAPES' })
+  name!: string;
+
+  @ApiProperty({ example: 'EAPES-8f3c1f' })
+  collection!: string;
+
+  @ApiProperty({ example: true })
+  onSale!: boolean;
+
+  @ApiProperty({
+    example:
+      'https://media.elrond.com/nfts/asset/QmRP9FVznm1xxa3FEsDENXhafRDaRWY6LKQdg8GygHNHKw/520.png',
+  })
+  url!: string;
+
+  @ApiProperty({ type: NftMedia })
+  media!: NftMedia;
+
+  @ApiProperty({ example: true })
+  wasProcessed!: boolean;
+
+  @ApiProperty({ type: MetadataDto })
+  metadata!: MetadataDto;
+}
+
 class GlobalSearchResourcesDto {
   @ApiProperty({ type: CollectionDto, isArray: true })
   collections!: CollectionDto[];
@@ -129,8 +134,8 @@ class GlobalSearchResourcesDto {
   @ApiProperty({ type: CreatorDto, isArray: true })
   creators!: CreatorDto[];
 
-  @ApiProperty({ type: Object, isArray: true })
-  nft!: object[];
+  @ApiProperty({ type: NftDto, isArray: true })
+  nft!: NftDto[];
 }
 
 export class GlobalSearchResponseDto {

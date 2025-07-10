@@ -4,7 +4,7 @@ import { OwnerDto } from '../../common/owner.dto';
 import { NftOfferDoc } from '../../cosmos-db/documents/token/nft-offer.doc';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
 
-class ResourceDto extends PickType(NftOfferDoc, [
+export class GlobalOfferDto extends PickType(NftOfferDoc, [
   'offerId',
   'collection',
   'quantity',
@@ -30,8 +30,8 @@ class ResourceDto extends PickType(NftOfferDoc, [
 }
 
 export class GlobalOffersDto {
-  @ApiProperty({ type: ResourceDto, isArray: true })
-  resources!: ResourceDto[];
+  @ApiProperty({ type: GlobalOfferDto, isArray: true })
+  resources!: GlobalOfferDto[];
 
   @ApiProperty({ example: true })
   hasMoreResults!: boolean;
