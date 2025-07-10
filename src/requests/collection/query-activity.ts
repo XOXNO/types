@@ -34,53 +34,6 @@ class NftInfoDto extends PickType(NftDoc, [
   metadata!: object;
 }
 
-class ActivityDataDto implements NftActivityData {
-  @ApiProperty({ example: 'EBMC-8a2d40' })
-  collection!: string;
-
-  @ApiProperty({ example: 'EBMC-8a2d40-0ad0', required: false })
-  identifier?: string;
-
-  @ApiProperty({ example: 0.05 })
-  price!: number;
-
-  @ApiProperty({ example: 'EGLD' })
-  paymentToken!: string;
-
-  @ApiProperty({ example: 1 })
-  quantity!: number;
-
-  @ApiProperty({ example: 489392 })
-  scId!: number;
-
-  @ApiProperty({ example: 1.6446 })
-  usdValue!: number;
-
-  @ApiProperty({ example: 0.05 })
-  egldValue!: number;
-
-  @ApiProperty({ example: 'Nft', required: false })
-  auctionType?: XoxnoAuctionTypeString;
-
-  deadline?: number;
-  originalPayment?: {
-    paymentToken: string;
-    price: number;
-  };
-
-  @ApiProperty({ type: NftInfoDto, required: false })
-  nftInfo?: Partial<NftDoc>;
-
-  @ApiProperty({ type: CollectionInfoDto })
-  collectionInfo!: CollectionInfoDto;
-
-  originalTokenAmount?: string;
-  originalTokenAmountShort?: number;
-  originalTokenEgldValue?: number;
-  originalTokenUsdValue?: number;
-  originalTokenIdentifier?: string;
-}
-
 export class ActivityBodyDto {
   @ApiProperty({
     example: '0ee3f1f8effcfa49e0b397cae16e24382087581da5c9f47a64a071e7e5dd2cb4',
@@ -105,8 +58,8 @@ export class ActivityBodyDto {
   @ApiProperty({ type: FromToDto })
   to!: FromToDto;
 
-  @ApiProperty({ type: ActivityDataDto })
-  activityData!: ActivityDataDto;
+  @ApiProperty({ type: NftActivityData })
+  activityData!: NftActivityData;
 
   @ApiProperty({
     example: ActivityChain.MVX,

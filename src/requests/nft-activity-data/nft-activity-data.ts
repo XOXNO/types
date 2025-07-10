@@ -1,15 +1,16 @@
+import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
 import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
-export interface NftActivityData {
-  collection: string;
+export class NftActivityData {
+  collection!: string;
   identifier?: string; // missing in globalOfferCreate
-  price: number;
-  paymentToken: string;
-  quantity: number;
-  scId: number;
-  usdValue: number;
-  egldValue: number;
+  price!: number;
+  paymentToken!: string;
+  quantity!: number;
+  scId!: number;
+  usdValue!: number;
+  egldValue!: number;
   auctionType?: XoxnoAuctionTypeString; // available for listingCreate
   deadline?: number; // available for offerCreate & auctions
   originalPayment?: {
@@ -17,11 +18,16 @@ export interface NftActivityData {
     price: number;
   }; // for ash buy events
   nftInfo?: Partial<NftDoc>; // set on query
+  collectionInfo?: Partial<CollectionProfileDoc>;
   originalTokenAmount?: string;
   originalTokenAmountShort?: number;
   originalTokenEgldValue?: number;
   originalTokenUsdValue?: number;
   originalTokenIdentifier?: string;
+
+  constructor(props: Partial<NftActivityData>) {
+    Object.assign(this, props);
+  }
 }
 
 export interface NftMvxBuiltIn {

@@ -5,8 +5,9 @@ import { v4 } from 'uuid';
 import { NftActivityEventSource } from '../../../requests/nft-activity-data/event-source.enum';
 import { NftActivityData } from '../../../requests/nft-activity-data/nft-activity-data';
 import { NftActivityType } from '../../../requests/nft-activity-data/nft-activity-type.enum';
+import { OwnerDto } from '../../../common/owner.dto';
 
-export class NftActivityDoc {
+class NftActivityDocBase {
   @ApiProperty({
     example: 1640995200,
     description: 'Unix timestamp when the activity occurred',
@@ -55,19 +56,6 @@ export class NftActivityDoc {
   activityType!: NftActivityType;
 
   @ApiProperty({
-    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
-    description:
-      'Address of the user who initiated the activity or seller in case of trades',
-  })
-  from!: string;
-
-  @ApiProperty({
-    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
-    description: 'Address used in case of trades; buyer or receiver',
-  })
-  to!: string;
-
-  @ApiProperty({
     description:
       'Activity data containing details about the NFT transaction or built-in operation',
   })
@@ -97,4 +85,24 @@ export class NftActivityDoc {
     this.pk = this.activityData.collection;
     this.chain = this.chain || ActivityChain.MVX;
   }
+}
+
+export class NftActivityDoc extends NftActivityDocBase {
+  @ApiProperty({
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+    description:
+      'Address of the user who initiated the activity or seller in case of trades',
+  })
+  from!: string;
+
+  @ApiProperty({
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+    description: 'Address used in case of trades; buyer or receiver',
+  })
+  to!: string;
+}
+
+export class NftActivityDocHydrated extends NftActivityDocBase {
+  from!: OwnerDto;
+  to!: OwnerDto;
 }

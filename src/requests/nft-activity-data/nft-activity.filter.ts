@@ -9,7 +9,7 @@ import { ActivityBodyDto } from '../collection/query-activity';
 import { NftActivityEventSource } from './event-source.enum';
 import { NftActivityType } from './nft-activity-type.enum';
 
-export class ActivityDataDto {
+class ActivityDataDto {
   @ApiProperty({
     required: false,
     type: 'array',
