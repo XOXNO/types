@@ -21,6 +21,7 @@ export interface NftActivityData {
   originalTokenAmountShort?: number;
   originalTokenEgldValue?: number;
   originalTokenUsdValue?: number;
+  originalTokenIdentifier?: string;
 }
 
 export interface NftMvxBuiltIn {
