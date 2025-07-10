@@ -2,8 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain } from '../../../common/enums';
 import { NftProps } from './nft-details.doc';
 import { TokenDataType } from './token-data.enum';
+import { OwnerDto } from '../../../common/owner.dto';
 
-export class NftOfferDoc {
+class NftOfferDocBase {
   @ApiProperty({
     example: TokenDataType.Offer,
     enum: TokenDataType,
@@ -81,12 +82,6 @@ export class NftOfferDoc {
 
   @ApiProperty({
     example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
-    description: 'Address of the offer creator',
-  })
-  owner!: string;
-
-  @ApiProperty({
-    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
     description: 'Address of the NFT owner',
     required: false,
   })
@@ -145,7 +140,21 @@ export class NftOfferDoc {
   }
 }
 
-export class NftOfferDocHydrated extends NftOfferDoc {
+export class NftOfferDoc extends NftOfferDocBase {
+  @ApiProperty({
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+    description: 'Address of the offer creator',
+  })
+  owner!: string;
+}
+
+export class NftOfferDocHydrated extends NftOfferDocBase {
+  @ApiProperty({
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+    description: 'Address of the offer creator',
+  })
+  owner!: OwnerDto;
+
   @ApiProperty({
     example: 150.75,
     description: 'USD value of the offer',
