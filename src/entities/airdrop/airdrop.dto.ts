@@ -16,7 +16,7 @@ export class AirdropDto extends AirdropDtoBase {
 
 export class AirdropDtoHydrated extends AirdropDtoBase {
   wallet!: Wallet;
-  signature!: { signature: string; data: string };
-  isClaimed!: boolean;
-  amount!: string;
+  signature?: { signature: string; data: string };
+  isClaimed?: boolean;
+  amount?: string;
 }
