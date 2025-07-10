@@ -3,18 +3,12 @@ import { OwnerDto } from '../../../common/owner.dto';
 import { MarketplacesOnSaleNames } from '../../../common/enums';
 import { XoxnoAuctionTypeString } from '../../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
-export class NftSaleInfo {
+class NftSaleInfoBase {
   @ApiProperty()
   auctionId!: number;
 
   @ApiProperty()
   seller!: string;
-
-  @ApiProperty({
-    required: false,
-    type: OwnerDto,
-  })
-  currentWinner?: string | OwnerDto;
 
   @ApiProperty()
   minBid!: string;
@@ -74,4 +68,19 @@ export class NftSaleInfo {
     required: false,
   })
   royalties?: number;
+}
+
+export class NftSaleInfo extends NftSaleInfoBase {
+  @ApiProperty({
+    required: false,
+    type: String,
+  })
+  currentWinner?: string;
+}
+export class NftSaleInfoHydrated extends NftSaleInfoBase {
+  @ApiProperty({
+    required: false,
+    type: OwnerDto,
+  })
+  currentWinner?: OwnerDto;
 }

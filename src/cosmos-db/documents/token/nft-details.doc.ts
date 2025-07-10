@@ -1,6 +1,6 @@
 import { TokenDataType } from './token-data.enum';
 import { NftMetadata } from './nft-metadata';
-import { NftSaleInfo } from './nft-sale-info';
+import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
 import {
   ActivityChain,
   EsdtTokenSubType,
@@ -58,7 +58,7 @@ class NftStats {
   likedCount?: number;
 }
 
-export class NftDoc {
+class NftDocBase {
   dataType: TokenDataType = TokenDataType.Nft;
   @ApiProperty({
     type: String,
@@ -145,12 +145,7 @@ export class NftDoc {
     description: 'The URIs of the NFT',
   })
   uris?: string[];
-  @ApiProperty({
-    type: OwnerDto,
-    required: false,
-    description: 'The creator of the NFT',
-  })
-  creator?: string | OwnerDto;
+
   @ApiProperty({
     type: Boolean,
     required: true,
@@ -163,30 +158,6 @@ export class NftDoc {
     description: 'The media of the NFT',
   })
   media?: NftMedia;
-  @ApiProperty({
-    type: OwnerDto,
-    required: false,
-    description: 'The current owner of the NFT',
-  })
-  currentOwner?: string | OwnerDto;
-  @ApiProperty({
-    type: OwnerDto,
-    required: false,
-    description: 'The owner of the NFT',
-  })
-  owner?: string | OwnerDto;
-  @ApiProperty({
-    type: Boolean,
-    required: true,
-    description: 'Whether the NFT is on sale',
-  })
-  onSale: boolean = false;
-  @ApiProperty({
-    type: NftSaleInfo,
-    required: false,
-    description: 'The sale info of the NFT',
-  })
-  saleInfo?: NftSaleInfo;
   @ApiProperty({
     type: NftStats,
     required: false,
@@ -234,7 +205,12 @@ export class NftDoc {
     required: false,
   })
   kiosk?: string;
-
+  @ApiProperty({
+    type: Boolean,
+    required: true,
+    description: 'Whether the NFT is on sale',
+  })
+  onSale: boolean = false;
   @ApiProperty({
     type: String,
     required: false,
@@ -261,6 +237,33 @@ export class NftDoc {
   }
 }
 
+export class NftDoc extends NftDocBase {
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'The creator of the NFT',
+  })
+  creator?: string;
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'The current owner of the NFT',
+  })
+  currentOwner?: string;
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'The owner of the NFT',
+  })
+  owner?: string;
+  @ApiProperty({
+    type: NftSaleInfo,
+    required: false,
+    description: 'The sale info of the NFT',
+  })
+  saleInfo?: NftSaleInfo;
+}
+
 export class ExtraProperties {
   @ApiProperty({
     required: false,
@@ -275,10 +278,34 @@ export class ExtraProperties {
   level?: number;
 }
 
-export class NftProps extends NftDoc {
-  constructor(props?: Partial<NftDoc>) {
-    super(props);
-  }
+export class NftProps extends NftDocBase {
+  @ApiProperty({
+    type: OwnerDto,
+    required: false,
+    description: 'The creator of the NFT',
+  })
+  creator?: OwnerDto;
+
+  @ApiProperty({
+    type: OwnerDto,
+    required: false,
+    description: 'The current owner of the NFT',
+  })
+  currentOwner?: OwnerDto;
+
+  @ApiProperty({
+    type: OwnerDto,
+    required: false,
+    description: 'The owner of the NFT',
+  })
+  owner?: OwnerDto;
+
+  @ApiProperty({
+    type: NftSaleInfoHydrated,
+    required: false,
+    description: 'The sale info of the NFT',
+  })
+  saleInfo?: NftSaleInfoHydrated;
 
   @ApiProperty({
     type: Number,
