@@ -5,6 +5,7 @@ import { CollectionInfoDto } from './collection-info.dto';
 import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
 import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 import { NftActivityData } from '../nft-activity-data/nft-activity-data';
+import { ActivityChain } from '../../common/enums';
 
 class FromToDto {
   @ApiProperty({
@@ -106,6 +107,13 @@ export class ActivityBodyDto {
 
   @ApiProperty({ type: ActivityDataDto })
   activityData!: ActivityDataDto;
+
+  @ApiProperty({
+    example: ActivityChain.MVX,
+    enum: ActivityChain,
+    description: 'Blockchain network where the activity occurred',
+  })
+  chain: ActivityChain = ActivityChain.MVX;
 }
 
 export class ActivityHistoryDto {
