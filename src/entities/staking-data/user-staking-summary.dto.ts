@@ -1,29 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { XoxnoStakingReward } from '../../cosmos-db/documents/staking/staking-pool-doc';
 
-export class RewardDto {
-  @ApiProperty({ description: 'Token identifier', example: 'WXMEX-794dbd' })
-  tokenIdentifier!: string;
-
-  @ApiProperty({ description: 'Token nonce', example: 0 })
-  tokenNonce!: number;
-
-  @ApiProperty({
-    description: 'Amount of reward',
-    example: '140649439520333680917622',
-  })
-  amount!: string;
-
-  @ApiProperty({ description: 'Short amount of reward', example: 140649.4395 })
-  amountShort!: number;
-
-  @ApiProperty({
-    description: 'USD value of reward',
-    example: 0.6295776701542604,
-  })
-  usdValue!: number;
-}
-
 export class UserStakingSummaryDto {
   @ApiProperty({ description: 'Collection identifier', example: 'MICE-a0c447' })
   collection!: string;
@@ -50,13 +27,6 @@ export class UserStakingSummaryDto {
       'https://media.xoxno.com/collectionprofile/MICE-a0c447/profilebanner.webp',
   })
   banner!: string;
-
-  @ApiProperty({
-    type: RewardDto,
-    isArray: true,
-    description: 'Rewards information',
-  })
-  reward!: RewardDto[];
 
   poolIds!: number[];
 
