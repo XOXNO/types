@@ -1,3 +1,5 @@
+import { Wallet } from '../../entities/airdrop/airdrop.dto';
+
 export class BoberBattleLeaderboardDto {
   GamesCreated!: number;
   GamesCreatedHead!: number;
@@ -32,4 +34,8 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
     super(data);
     Object.assign(this, data);
   }
+}
+
+export class BoberBattleUserFullDto extends BoberBattleLeaderboardDto {
+  wallet!: Wallet;
 }
