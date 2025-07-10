@@ -27,19 +27,11 @@ class ChatMessageDocBase {
 export class ChatMessageDoc extends ChatMessageDocBase {
   sender!: string;
   receiver!: string;
-
-  constructor(props: Partial<ChatMessageDocBase>) {
-    super(props);
-  }
 }
 
 export class ChatMessageDocHyrated extends ChatMessageDocBase {
   sender!: OwnerDto;
   receiver!: OwnerDto;
-
-  constructor(props: Partial<ChatMessageDocBase>) {
-    super(props);
-  }
 }
 
 export interface ChatMessage {

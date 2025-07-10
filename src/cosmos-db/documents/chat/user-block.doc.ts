@@ -17,17 +17,9 @@ class UserBlockDocBase {
 export class UserBlockDoc extends UserBlockDocBase {
   sender!: string; //blockedUser
   receiver!: string; //blockedBy
-
-  constructor(props: Partial<UserBlockDocBase>) {
-    super(props);
-  }
 }
 
 export class UserBlockDocHydrated extends UserBlockDocBase {
   sender!: OwnerDto; //blockedUser
   receiver!: OwnerDto; //blockedBy
-
-  constructor(props: Partial<UserBlockDocBase>) {
-    super(props);
-  }
 }

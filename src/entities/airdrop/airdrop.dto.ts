@@ -12,10 +12,6 @@ class AirdropDtoBase {
 
 export class AirdropDto extends AirdropDtoBase {
   wallet!: string;
-
-  constructor(props: Partial<AirdropDtoBase>) {
-    super(props);
-  }
 }
 
 export class AirdropDtoHydrated extends AirdropDtoBase {
@@ -23,8 +19,4 @@ export class AirdropDtoHydrated extends AirdropDtoBase {
   signature!: { signature: string; data: string };
   isClaimed!: boolean;
   amount!: string;
-
-  constructor(props: Partial<AirdropDtoBase>) {
-    super(props);
-  }
 }

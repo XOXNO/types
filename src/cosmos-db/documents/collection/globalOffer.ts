@@ -138,10 +138,6 @@ export class GlobalOfferDoc extends GlobalOfferDocBase {
     example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
   })
   owner!: string;
-
-  constructor(props: Partial<GlobalOfferDocBase>) {
-    super(props);
-  }
 }
 
 export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
@@ -150,8 +146,4 @@ export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
   floorPrice!: number;
   floorPriceMargin!: number;
   collectionInfo!: Partial<CollectionProfileDoc>;
-
-  constructor(props: Partial<GlobalOfferDocBase>) {
-    super(props);
-  }
 }
