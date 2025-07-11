@@ -199,6 +199,7 @@ export class CollectionMintProfileDoc {
 }
 
 export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
+  collection!: string;
   collectionInfo!: Partial<CollectionProfileDoc>;
   creatorInfo!: Partial<CreatorProfileDoc>;
   isExcludedFromMint!: boolean;
