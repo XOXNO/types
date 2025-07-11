@@ -137,7 +137,7 @@ class NftDto {
   chain?: ActivityChain;
 }
 
-class GlobalSearchResourcesDto {
+export class GlobalSearchResourcesDto {
   @ApiProperty({ type: CollectionDto, isArray: true })
   collections!: CollectionDto[];
 
@@ -149,15 +149,4 @@ class GlobalSearchResourcesDto {
 
   @ApiProperty({ type: NftDto, isArray: true })
   nft!: NftDto[];
-}
-
-export class GlobalSearchResponseDto {
-  @ApiProperty({ example: 30 })
-  count!: number;
-
-  @ApiProperty({ example: true })
-  hasMoreResults: boolean = false;
-
-  @ApiProperty({ type: GlobalSearchResourcesDto })
-  resources!: GlobalSearchResourcesDto;
 }

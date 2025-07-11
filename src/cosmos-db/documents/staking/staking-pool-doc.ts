@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { NftProps } from '../token/nft-details.doc';
+import { NftHydrated } from '../token/nft-details.doc';
 import { StakingDataType } from '../../../entities/staking-data/staking-data-type.enum';
 import { StakingIssuingTypeString } from '../../../entities/staking-data/staking-issuing-type-string.enum';
 import { StakingPoolTypeString } from '../../../entities/staking-data/staking-pool-type-string.enum';
@@ -235,8 +235,8 @@ export class StakingUserPoolNfts {
   @ApiProperty({ type: StakingSummary })
   poolInfo!: StakingSummary;
 
-  @ApiProperty({ type: NftProps, isArray: true })
-  nftDocs: NftProps[] = [];
+  @ApiProperty({ type: NftHydrated, isArray: true })
+  nftDocs: NftHydrated[] = [];
 
   @ApiProperty({ example: 12, type: Number })
   count: number = 0;

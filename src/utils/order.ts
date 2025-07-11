@@ -1,13 +1,13 @@
 import { IOrderBy } from '../cosmos-db/cosmos-db-generic-filter';
+import { NftActivityDoc } from '../cosmos-db/documents/activity/nft-activity.doc';
+import { GlobalOfferDoc } from '../cosmos-db/documents/collection/globalOffer';
+import { CollectionMintProfileDoc } from '../cosmos-db/documents/collection/mintProfile';
+import { CollectionProfileDoc } from '../cosmos-db/documents/collection/profile';
 import { CollectionStatsDoc } from '../cosmos-db/documents/collection/stats';
 import { NftDoc } from '../cosmos-db/documents/token/nft-details.doc';
-import { CollectionProfileDto } from '../requests/collection/collections';
-import { DropResourceDto } from '../requests/collection/drops-query';
-import { ActivityBodyDto } from '../requests/collection/query-activity';
-import { GlobalOfferDto } from '../requests/collection/query-global-offers';
 
 export type OrderByTradingActivity = IOrderBy<
-  ActivityBodyDto,
+  NftActivityDoc,
   'activityData.egldValue' | 'timestamp' | 'activityData.originalTokenUsdValue'
 >;
 
@@ -37,10 +37,10 @@ export type SearchOrderBy = IOrderBy<
   | 'nonce'
 >;
 
-export type DropsOrderBy = IOrderBy<DropResourceDto, 'startTime'>;
+export type DropsOrderBy = IOrderBy<CollectionMintProfileDoc, 'startTime'>;
 
 export type CollectionsOrderBy = IOrderBy<
-  CollectionProfileDto,
+  CollectionProfileDoc,
   | 'statistics.tradeData.weekEgldVolume'
   | 'statistics.tradeData.dayEgldVolume'
   | 'statistics.tradeData.totalEgldVolume'
@@ -52,6 +52,6 @@ export type CollectionsOrderBy = IOrderBy<
 >;
 
 export type GlobalOfferOrderBy = IOrderBy<
-  GlobalOfferDto,
+  GlobalOfferDoc,
   'priceShort' | 'offerId' | 'timestamp'
 >;

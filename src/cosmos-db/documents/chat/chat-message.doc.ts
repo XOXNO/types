@@ -3,12 +3,61 @@ import { v4 } from 'uuid';
 import { ChatDataType } from './chat-data-type.enum';
 import { ChatMessageContentType } from './chat-message-content-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
+import { ApiProperty } from '@nestjs/swagger';
+
+class MessageContentReplyToDto {
+  @ApiProperty({ example: 'message' })
+  type!: string;
+  @ApiProperty({ example: 'Hello world' })
+  value!: string;
+}
+
+class ReplyToDto {
+  @ApiProperty({ type: OwnerDto })
+  sender!: OwnerDto;
+
+  @ApiProperty({ type: MessageContentReplyToDto })
+  content!: MessageContentReplyToDto;
+
+  @ApiProperty({ example: 1720468991 })
+  timestamp!: number;
+
+  @ApiProperty({ example: 'b02f639a-abcf-4db8-9397-bdb3b60cef6a' })
+  id!: string;
+}
+
+class MessageContentDto {
+  @ApiProperty({ example: 'message' })
+  type!: string;
+
+  @ApiProperty({ example: 'Vv' })
+  value!: string;
+
+  @ApiProperty({ required: false, type: ReplyToDto })
+  replyTo?: ReplyToDto;
+}
+
+export class MessageDto {
+  @ApiProperty({ type: MessageContentDto })
+  content!: MessageContentDto;
+
+  @ApiProperty({ example: true })
+  isRead!: boolean;
+
+  @ApiProperty({ example: 1720468991 })
+  timestamp!: number;
+}
+
+export interface ChatMessageContent {
+  type: ChatMessageContentType;
+  value: string;
+}
 
 class ChatMessageDocBase {
   dataType = ChatDataType.MESSAGE;
   chatId!: string;
   isGroupChat!: boolean;
-  message!: ChatMessage;
+  message!: MessageDto;
   pk!: string;
   id!: string;
   ttl?: number;
@@ -29,40 +78,7 @@ export class ChatMessageDoc extends ChatMessageDocBase {
   receiver!: string;
 }
 
-export class ChatMessageDocHyrated extends ChatMessageDocBase {
+export class ChatMessageDocHydrated extends ChatMessageDocBase {
   sender!: OwnerDto;
   receiver!: OwnerDto;
-}
-
-export interface ChatMessage {
-  content: ChatMessageContent;
-  timestamp: number;
-  sender?: string; // used for conversation last message
-  isRead?: boolean;
-  replyTo?: string;
-  isDeletedFor?: string[]; // array of user addresses
-}
-
-export interface ChatMessageContent {
-  type: ChatMessageContentType;
-  value: string;
-}
-
-export interface ChatMessageDetails {
-  dataType: string;
-  chatId: string;
-  isGroupChat: boolean;
-  message: ChatMessage;
-  sender: {
-    address: string;
-    username: string;
-    profile: string;
-  };
-  receiver: {
-    address: string;
-    username: string;
-    profile: string;
-  };
-  chatName: string;
-  id: string;
 }

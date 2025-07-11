@@ -278,7 +278,7 @@ export class ExtraProperties {
   level?: number;
 }
 
-export class NftProps extends NftDocBase {
+export class NftHydrated extends NftDocBase {
   @ApiProperty({
     type: OwnerDto,
     required: false,
@@ -349,15 +349,4 @@ export class NftProps extends NftDocBase {
     description: 'Extra props for the specific NFT',
   })
   extraProperties?: ExtraProperties;
-}
-
-export class NftCosmosResponse {
-  @ApiProperty({ type: NftProps, isArray: true })
-  resources: NftProps[] = [];
-
-  @ApiProperty({ example: true, type: Boolean })
-  hasMoreResults: boolean = false;
-
-  @ApiProperty({ example: 12, type: Number, required: false })
-  count?: number;
 }

@@ -1,13 +1,13 @@
 import { OwnerDto } from '../../../common/owner.dto';
 import { ChatDataType } from './chat-data-type.enum';
-import { ChatMessage } from './chat-message.doc';
+import { MessageDto } from './chat-message.doc';
 
 class UserConversationDocBase {
   dataType = ChatDataType.CONVERSATION;
   chatName?: string | undefined;
   isGroupChat!: boolean;
   chatId!: string;
-  message!: ChatMessage;
+  message!: MessageDto;
   deleteTimestamp?: number | undefined;
   unreadCount?: number | undefined;
   id!: string;

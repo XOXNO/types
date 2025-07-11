@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain } from '../../../common/enums';
-import { NftProps } from './nft-details.doc';
+import { NftHydrated } from './nft-details.doc';
 import { TokenDataType } from './token-data.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 
@@ -174,8 +174,8 @@ export class NftOfferDocHydrated extends NftOfferDocBase {
   floorPrice!: number;
 
   @ApiProperty({
-    type: () => NftProps,
+    type: () => NftHydrated,
     description: 'NFT information related to the offer',
   })
-  nftInfo!: Partial<NftProps>;
+  nftInfo!: Partial<NftHydrated>;
 }
