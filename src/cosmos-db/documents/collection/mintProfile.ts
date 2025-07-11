@@ -3,6 +3,7 @@ import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 import { CollectionDataType } from './dataTypes';
 import { CollectionProfileDoc } from './profile';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
+import { CollectionMintStageDoc } from './mintStage';
 
 export class CollectionMintProfileDoc {
   @ApiProperty({
@@ -200,4 +201,7 @@ export class CollectionMintProfileDoc {
 export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
   collectionInfo!: Partial<CollectionProfileDoc>;
   creatorInfo!: Partial<CreatorProfileDoc>;
+  isExcludedFromMint!: boolean;
+  userMintsGlobal!: number;
+  mintStages!: CollectionMintStageDoc[];
 }
