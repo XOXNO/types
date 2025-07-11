@@ -23,7 +23,7 @@ export class UserConversationPaginated extends CosmosPaginatedResponse<UserConve
 export class ChatMessagePaginated extends CosmosPaginatedResponse<ChatMessageDocHydrated> {
   receiver!: OwnerDto;
 }
-export class NftActivityPagined extends CosmosPaginatedResponse<NftActivityDocHydrated> {}
+export class NftActivityPaginated extends CosmosPaginatedResponse<NftActivityDocHydrated> {}
 export class NftPaginated extends CosmosPaginatedResponse<NftHydrated> {}
 export class CollectionProfilePaginated extends CosmosPaginatedResponse<CollectionProfileDoc> {}
 export class CollectionMintProfilePaginated extends CosmosPaginatedResponse<CollectionMintProfileDocHydrated> {}
