@@ -1,3 +1,4 @@
+import { OwnerDto } from '../common/owner.dto';
 import { GlobalSearchResourcesDto } from '../entities/search-data/search.dto';
 import { CosmosPaginatedResponse } from './cosmos-db-paginated-response.dto';
 import { NftActivityDocHydrated } from './documents/activity/nft-activity.doc';
@@ -19,6 +20,9 @@ export class GlobalSearchResourcesPaginated extends CosmosPaginatedResponse<Glob
 
 export class UserBlockPaginated extends CosmosPaginatedResponse<UserBlockDocHydrated> {}
 export class UserConversationPaginated extends CosmosPaginatedResponse<UserConversationDocHydrated> {}
+export class UserConversationPaginatedWithReceiver extends UserConversationPaginated {
+  receiver!: OwnerDto;
+}
 export class NftActivityPagined extends CosmosPaginatedResponse<NftActivityDocHydrated> {}
 export class ChatMessagePaginated extends CosmosPaginatedResponse<ChatMessageDocHydrated> {}
 export class NftPaginated extends CosmosPaginatedResponse<NftHydrated> {}
