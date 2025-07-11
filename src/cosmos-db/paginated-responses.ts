@@ -20,11 +20,10 @@ export class GlobalSearchResourcesPaginated extends CosmosPaginatedResponse<Glob
 
 export class UserBlockPaginated extends CosmosPaginatedResponse<UserBlockDocHydrated> {}
 export class UserConversationPaginated extends CosmosPaginatedResponse<UserConversationDocHydrated> {}
-export class UserConversationPaginatedWithReceiver extends UserConversationPaginated {
+export class ChatMessagePaginated extends CosmosPaginatedResponse<ChatMessageDocHydrated> {
   receiver!: OwnerDto;
 }
 export class NftActivityPagined extends CosmosPaginatedResponse<NftActivityDocHydrated> {}
-export class ChatMessagePaginated extends CosmosPaginatedResponse<ChatMessageDocHydrated> {}
 export class NftPaginated extends CosmosPaginatedResponse<NftHydrated> {}
 export class CollectionProfilePaginated extends CosmosPaginatedResponse<CollectionProfileDoc> {}
 export class CollectionMintProfilePaginated extends CosmosPaginatedResponse<CollectionMintProfileDocHydrated> {}
