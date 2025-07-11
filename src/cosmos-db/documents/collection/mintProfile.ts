@@ -198,8 +198,13 @@ export class CollectionMintProfileDoc {
   }
 }
 
-export class CollectionMintProfileDocHydrated extends PickType(
-  CollectionMintProfileDoc,
+export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
+  collectionInfo!: Partial<CollectionProfileDoc>;
+  creatorInfo!: Partial<CreatorProfileDoc>;
+}
+
+export class CollectionMintProfileDocWithStages extends PickType(
+  CollectionMintProfileDocHydrated,
   [
     'contractAddress',
     'collectionTag',
@@ -212,13 +217,10 @@ export class CollectionMintProfileDocHydrated extends PickType(
     'globalWalletLimit',
     'totalNftMinted',
     'hasAttributes',
+    'collectionInfo',
+    'creatorInfo',
   ] as const,
 ) {
-  collectionInfo!: Partial<CollectionProfileDoc>;
-  creatorInfo!: Partial<CreatorProfileDoc>;
-}
-
-export class CollectionMintProfileDocWithStages extends CollectionMintProfileDocHydrated {
   collection!: string;
   isExcludedFromMint!: boolean;
   userMintsGlobal!: number;
