@@ -198,22 +198,29 @@ export class CollectionMintProfileDoc {
   }
 }
 
-export type CollectionMintProfileDocHydrated = Pick<
+export class CollectionMintProfileDocHydrated extends PickType(
   CollectionMintProfileDoc,
-  | 'contractAddress'
-  | 'collectionTag'
-  | 'nftTransferLimited'
-  | 'hasBotProtection'
-  | 'kycRequired'
-  | 'collectionSize'
-  | 'cid'
-  | 'mediaType'
-  | 'globalWalletLimit'
-> & {
-  collection: string;
-  collectionInfo: Partial<CollectionProfileDoc>;
-  creatorInfo: Partial<CreatorProfileDoc>;
-  isExcludedFromMint: boolean;
-  userMintsGlobal: number;
-  mintStages: CollectionMintStageDoc[];
-};
+  [
+    'contractAddress',
+    'collectionTag',
+    'nftTransferLimited',
+    'hasBotProtection',
+    'kycRequired',
+    'collectionSize',
+    'cid',
+    'mediaType',
+    'globalWalletLimit',
+    'totalNftMinted',
+    'hasAttributes',
+  ] as const,
+) {
+  collectionInfo!: Partial<CollectionProfileDoc>;
+  creatorInfo!: Partial<CreatorProfileDoc>;
+}
+
+export class CollectionMintProfileDocWithStages extends CollectionMintProfileDocHydrated {
+  collection!: string;
+  isExcludedFromMint!: boolean;
+  userMintsGlobal!: number;
+  mintStages!: CollectionMintStageDoc[];
+}
