@@ -17,4 +17,5 @@ export enum MarketplaceActivity {
   GLOBAL_OFFER_TRADE = 'globalOfferTrade',
   DEPOSIT = 'deposit',
   WITHDRAW_DEPOSIT = 'withdrawDeposit',
+  SET_COLLECTION_CONFIG = 'setCollectionConfig',
 }
