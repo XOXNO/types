@@ -46,6 +46,9 @@ export class MessageDto {
 
   @ApiProperty({ example: 1720468991 })
   timestamp!: number;
+
+  sender?: string;
+  isDeletedFor?: string[]; // array of user addresses
 }
 
 export interface ChatMessageContent {
