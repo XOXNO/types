@@ -1,6 +1,9 @@
 import { OwnerDto } from '../common/owner.dto';
 import { GlobalSearchResourcesDto } from '../entities/search-data/search.dto';
-import { CosmosPaginatedResponse } from './cosmos-db-paginated-response.dto';
+import {
+  CosmosPaginatedResponse,
+  CosmosPaginatedSingleResponse,
+} from './cosmos-db-paginated-response.dto';
 import { NftActivityDocHydrated } from './documents/activity/nft-activity.doc';
 import { ChatMessageDocHydrated } from './documents/chat/chat-message.doc';
 import { UserBlockDocHydrated } from './documents/chat/user-block.doc';
@@ -16,7 +19,7 @@ import { NftOfferDocHydrated } from './documents/token/nft-offer.doc';
 
 export class EventReferralConfigPaginated extends CosmosPaginatedResponse<EventReferralConfigDoc> {}
 export class EventReferralPaginated extends CosmosPaginatedResponse<EventReferralDoc> {}
-export class GlobalSearchResourcesPaginated extends CosmosPaginatedResponse<GlobalSearchResourcesDto> {}
+export class GlobalSearchResourcesPaginated extends CosmosPaginatedSingleResponse<GlobalSearchResourcesDto> {}
 
 export class UserBlockPaginated extends CosmosPaginatedResponse<UserBlockDocHydrated> {}
 export class UserConversationPaginated extends CosmosPaginatedResponse<UserConversationDocHydrated> {}
