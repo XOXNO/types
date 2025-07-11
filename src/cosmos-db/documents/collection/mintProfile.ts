@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 import { CollectionDataType } from './dataTypes';
 import { CollectionProfileDoc } from './profile';
@@ -198,11 +198,22 @@ export class CollectionMintProfileDoc {
   }
 }
 
-export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
-  collection!: string;
-  collectionInfo!: Partial<CollectionProfileDoc>;
-  creatorInfo!: Partial<CreatorProfileDoc>;
-  isExcludedFromMint!: boolean;
-  userMintsGlobal!: number;
-  mintStages!: CollectionMintStageDoc[];
-}
+export type CollectionMintProfileDocHydrated = Pick<
+  CollectionMintProfileDoc,
+  | 'contractAddress'
+  | 'collectionTag'
+  | 'nftTransferLimited'
+  | 'hasBotProtection'
+  | 'kycRequired'
+  | 'collectionSize'
+  | 'cid'
+  | 'mediaType'
+  | 'globalWalletLimit'
+> & {
+  collection: string;
+  collectionInfo: Partial<CollectionProfileDoc>;
+  creatorInfo: Partial<CreatorProfileDoc>;
+  isExcludedFromMint: boolean;
+  userMintsGlobal: number;
+  mintStages: CollectionMintStageDoc[];
+};
