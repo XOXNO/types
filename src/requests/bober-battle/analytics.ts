@@ -36,6 +36,6 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
   }
 }
 
-export class BoberBattleUserDtoHydrated extends BoberBattleLeaderboardDto {
+export class BoberBattleUserDtoHydrated extends BoberBattleUserDto {
   wallet!: Wallet;
 }
