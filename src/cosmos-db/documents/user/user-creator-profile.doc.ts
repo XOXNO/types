@@ -72,11 +72,16 @@ export class CreatorProfileDoc {
     example:
       'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq-creatorProfile',
     description: 'Document ID',
+    required: false,
   })
-  id!: string;
+  id?: string;
 
-  @ApiProperty({ example: 1640995200, description: 'Cosmos DB timestamp' })
-  _ts!: number;
+  @ApiProperty({
+    example: 1640995200,
+    description: 'Cosmos DB timestamp',
+    required: false,
+  })
+  _ts?: number;
 
   constructor(props?: Partial<CreatorProfileDoc>) {
     Object.assign(this, props);
