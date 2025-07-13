@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import {
@@ -40,9 +40,10 @@ export class Web2UserDoc {
   @IsBoolean()
   hasNativeWallet = false;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: () => Web2UserWallet,
     description: "User's wallet information",
+    required: false,
   })
   @IsOptional()
   @Type(() => Web2UserWallet)
@@ -52,17 +53,19 @@ export class Web2UserDoc {
   @IsString()
   salt!: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: () => Web2UserAccount,
     description: "User's Google account information",
+    required: false,
   })
   @IsOptional()
   @Type(() => Web2UserAccount)
   google?: Web2UserAccount;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: () => Web2UserAccount,
     description: "User's Apple account information",
+    required: false,
   })
   @IsOptional()
   @Type(() => Web2UserAccount)
@@ -72,7 +75,7 @@ export class Web2UserDoc {
   @IsString()
   pk!: string;
 
-  @ApiPropertyOptional({ description: 'Timestamp of the last update' })
+  @ApiProperty({ description: 'Timestamp of the last update', required: false })
   @IsOptional()
   @IsNumber()
   _ts?: number;

@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { IsBoolean, IsOptional, IsPhoneNumber } from 'class-validator';
 
@@ -10,9 +10,10 @@ export class SetPhoneDto {
   @IsBoolean()
   readonly enabled!: boolean;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'The phone number to be set',
     example: '+1234567890',
+    required: false,
   })
   @IsOptional()
   @IsPhoneNumber()

@@ -1,28 +1,30 @@
-import { ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { IsObject, IsOptional, IsString, Length } from 'class-validator';
 import { SocialsDto } from '../../common/socials';
 
 export class EditUserProfileDto {
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'User description',
     maxLength: 300,
     example: 'I am a user',
+    required: false,
   })
   @IsString()
   @Length(1, 300)
   @IsOptional()
   description?: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Profile picture URL',
     example: 'https://media.xoxno.com/example-01',
+    required: false,
   })
   @IsString()
   @IsOptional()
   profile?: string;
 
-  @ApiPropertyOptional({ description: 'Social media profiles' })
+  @ApiProperty({ description: 'Social media profiles', required: false })
   @IsObject()
   @IsOptional()
   socials?: SocialsDto;

@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { UserDataType } from './user-data.type';
 import { SocialsDto } from '../../../common/socials';
 
@@ -27,14 +27,16 @@ export class CreatorProfileDoc {
   @ApiProperty({
     example: 'erd1qqqqqqqqqqqqqpgqcollection123456789abcdef',
     description: 'Contract address for regular NFT creators',
+    required: false,
   })
-  contractAddress!: string; // for regular NFT creators
+  contractAddress?: string; // for regular NFT creators
 
   @ApiProperty({
     example: 'erd1qqqqqqqqqqqqqpgqticket123456789abcdef',
     description: 'Contract address for ticketing creators',
+    required: false,
   })
-  ticketingContractAddress!: string; // for ticketing creators
+  ticketingContractAddress?: string; // for ticketing creators
 
   @ApiProperty({
     example:
@@ -56,13 +58,14 @@ export class CreatorProfileDoc {
   })
   joinedDate: number = Math.floor(Date.now() / 1000);
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     example: 'Leading NFT creator and artist',
     description: 'Creator description',
+    required: false,
   })
   description?: string;
 
-  @ApiPropertyOptional({ description: 'Creator social media links' })
+  @ApiProperty({ description: 'Creator social media links', required: false })
   socials?: SocialsDto;
 
   @ApiProperty({

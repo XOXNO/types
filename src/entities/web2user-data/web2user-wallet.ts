@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { IsEnum, IsString, IsNumber, IsOptional } from 'class-validator';
 import { v4 } from 'uuid';
@@ -18,12 +18,12 @@ export class Web2UserWallet {
   @IsString()
   address!: string;
 
-  @ApiPropertyOptional({ description: 'Wallet index' })
+  @ApiProperty({ description: 'Wallet index', required: false })
   @IsOptional()
   @IsNumber()
   index?: number;
 
-  @ApiPropertyOptional({ description: 'Signature for the wallet' })
+  @ApiProperty({ description: 'Signature for the wallet', required: false })
   @IsOptional()
   @IsString()
   signature?: string;
@@ -40,13 +40,17 @@ export class Web2UserWallet {
   @IsEnum(WalletClientType)
   walletClientType!: WalletClientType;
 
-  @ApiPropertyOptional({ description: 'Method used for wallet recovery' })
+  @ApiProperty({
+    description: 'Method used for wallet recovery',
+    required: false,
+  })
   @IsOptional()
   @IsString()
   recoveryMethod?: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'Unique identifier for the wallet',
+    required: false,
   })
   @IsOptional()
   @IsString()

@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { IsBoolean, IsEmail, IsOptional } from 'class-validator';
 
@@ -10,9 +10,10 @@ export class SetEmailDto {
   @IsBoolean()
   readonly enabled!: boolean;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     description: 'The email address to be set',
     example: 'example@example.com',
+    required: false,
   })
   @IsOptional()
   @IsEmail()

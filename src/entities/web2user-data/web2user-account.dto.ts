@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { IsEnum, IsOptional, IsString } from 'class-validator';
 
@@ -17,17 +17,20 @@ export class Web2UserAccountDto {
   @IsString()
   subject!: string;
 
-  @ApiPropertyOptional({ description: "URL of the user's profile picture" })
+  @ApiProperty({
+    description: "URL of the user's profile picture",
+    required: false,
+  })
   @IsOptional()
   @IsString()
   profilePicture?: string;
 
-  @ApiPropertyOptional({ description: "User's email address" })
+  @ApiProperty({ description: "User's email address", required: false })
   @IsOptional()
   @IsString()
   email?: string;
 
-  @ApiPropertyOptional({ description: "User's username" })
+  @ApiProperty({ description: "User's username", required: false })
   @IsOptional()
   @IsString()
   username?: string;

@@ -1,8 +1,4 @@
-import {
-  ApiProperty,
-  ApiPropertyOptional,
-  getSchemaPath,
-} from '@nestjs/swagger';
+import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import {
@@ -121,12 +117,12 @@ export class ExternalPaymentRequest {
   @IsString()
   name!: string;
 
-  @ApiPropertyOptional({ type: String, isArray: true })
+  @ApiProperty({ type: String, isArray: true, required: false })
   @IsArray()
   @IsOptional()
   images?: string[];
 
-  @ApiPropertyOptional({ enum: ['embedded', 'custom'] })
+  @ApiProperty({ enum: ['embedded', 'custom'], required: false })
   @IsEnum(['embedded', 'custom'])
   @IsOptional()
   uiMode?: 'embedded' | 'custom';
@@ -150,46 +146,46 @@ export class ExternalPaymentRequest {
     | LaunchpadCustomData
     | TwispayEventTicketCustomData;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
   description?: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
   amount?: number;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
   egldPrice?: number;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
   egldFiatPrice?: number;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsOptional()
   collection?: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsNumber()
   @IsOptional()
   nftNonce?: number;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
   identifier?: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
   paymentProviderId?: string;
 
-  @ApiPropertyOptional()
+  @ApiProperty({ required: false })
   @IsString()
   @IsOptional()
   docId?: string;

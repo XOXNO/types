@@ -1,4 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { LinkedAccountType } from './linked-account-type.enum';
 
@@ -18,31 +18,35 @@ export class Web2UserAccount {
   })
   subject!: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: String,
     description: "User's name",
     example: 'John Doe',
+    required: false,
   })
   name?: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: String,
     description: "URL of the user's profile picture",
     example: 'https://example.com/profile.jpg',
+    required: false,
   })
   profilePicture?: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: String,
     description: "User's email address",
     example: 'john.doe@example.com',
+    required: false,
   })
   email?: string;
 
-  @ApiPropertyOptional({
+  @ApiProperty({
     type: String,
     description: "User's username",
     example: 'johndoe123',
+    required: false,
   })
   username?: string;
 
