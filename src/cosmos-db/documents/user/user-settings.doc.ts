@@ -83,35 +83,57 @@ export class UserBillingDetails {
 }
 
 export class UserNotificationPreferences {
-  @ApiProperty({ description: 'Sales notifications' })
+  @ApiProperty({ description: 'Sales notifications', required: false })
   sales = false;
 
-  @ApiProperty({ description: 'Bids notifications' })
+  @ApiProperty({ description: 'Bids notifications', required: false })
   bids = false;
 
-  @ApiProperty({ description: 'Offers received notifications' })
+  @ApiProperty({
+    description: 'Offers received notifications',
+    required: false,
+  })
   offersReceived = false;
 
-  @ApiProperty({ description: 'Offers accepted notifications' })
+  @ApiProperty({
+    description: 'Offers accepted notifications',
+    required: false,
+  })
   offersAccepted = false;
 
-  @ApiProperty({ description: 'Offers rejected notifications' })
+  @ApiProperty({
+    description: 'Offers rejected notifications',
+    required: false,
+  })
   offersRejected = false;
 
-  @ApiProperty({ description: 'Deposits notifications' })
+  @ApiProperty({
+    description: 'Deposits notifications',
+    required: false,
+  })
   deposits = false;
 
-  @ApiProperty({ description: 'Event updates from organizers' })
-  eventUpdates = true;
+  @ApiProperty({
+    description: 'Event updates from organizers',
+    required: false,
+  })
+  eventUpdates = false;
 
-  @ApiProperty({ description: 'Event reminders before start time' })
+  @ApiProperty({
+    description: 'Event reminders before start time',
+    required: false,
+  })
   eventReminders = true;
 
-  @ApiProperty({ description: 'Event check-in notifications' })
+  @ApiProperty({
+    description: 'Event check-in notifications',
+    required: false,
+  })
   eventCheckIn = true;
 
   @ApiProperty({
     description: 'Marketing notifications from past event creators',
+    required: false,
   })
   eventMarketing = false;
 

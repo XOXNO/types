@@ -234,14 +234,16 @@ export class CollectionProfileDoc {
   @ApiProperty({
     description: 'Unique identifier for the document',
     example: 'COLLECTION-123456-CollectionProfile',
+    required: false,
   })
-  id: string = '';
+  id!: string;
 
   @ApiProperty({
     description: 'Timestamp of the document',
     example: 1640995200,
+    required: false,
   })
-  _ts: number = 0;
+  _ts?: number;
 
   constructor(props?: Partial<CollectionProfileDoc>) {
     Object.assign(this, props);
