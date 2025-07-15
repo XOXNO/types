@@ -11,7 +11,7 @@ export class TraitInfo {
   attributeRarityNormed!: number;
 }
 
-interface ValueFp {
+export class ValueFp {
   floorPrice?: number;
   onSaleCount?: number;
   usdValue?: number;
