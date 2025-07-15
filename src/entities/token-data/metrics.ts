@@ -1,5 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export class ProtocolAprType {
+  @ApiProperty()
+  apr!: number;
+
+  @ApiProperty()
+  apy?: number;
+}
+
 export class RateType {
   @ApiProperty()
   rateShort!: number;
