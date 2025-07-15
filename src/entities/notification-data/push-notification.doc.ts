@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 } from 'uuid';
 
-import { NotificationDataType } from './notification-data-type.enum';
 import { NotificationMetadata } from './notification-template';
+import { NotificationDataType } from '../../cosmos-db/documents/notification/notification-data-type.enum';
 
 export enum PushNotificationType {
   EVENT_APPROVED = 'eventApproved',
