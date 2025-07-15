@@ -83,57 +83,73 @@ export class UserBillingDetails {
 }
 
 export class UserNotificationPreferences {
-  @ApiProperty({ description: 'Sales notifications', required: false })
+  @ApiProperty({
+    description: 'Sales notifications',
+    required: false,
+    type: Boolean,
+  })
   sales = false;
 
-  @ApiProperty({ description: 'Bids notifications', required: false })
+  @ApiProperty({
+    description: 'Bids notifications',
+    required: false,
+    type: Boolean,
+  })
   bids = false;
 
   @ApiProperty({
     description: 'Offers received notifications',
     required: false,
+    type: Boolean,
   })
   offersReceived = false;
 
   @ApiProperty({
     description: 'Offers accepted notifications',
     required: false,
+    type: Boolean,
   })
   offersAccepted = false;
 
   @ApiProperty({
     description: 'Offers rejected notifications',
     required: false,
+    type: Boolean,
   })
   offersRejected = false;
 
   @ApiProperty({
     description: 'Deposits notifications',
     required: false,
+    type: Boolean,
   })
   deposits = false;
 
   @ApiProperty({
     description: 'Event updates from organizers',
     required: false,
+    type: Boolean,
   })
   eventUpdates = false;
 
   @ApiProperty({
     description: 'Event reminders before start time',
     required: false,
+    type: Boolean,
   })
   eventReminders = true;
 
   @ApiProperty({
     description: 'Event check-in notifications',
     required: false,
+    type: Boolean,
   })
   eventCheckIn = true;
 
   @ApiProperty({
     description: 'Marketing notifications from past event creators',
     required: false,
+    type: Boolean,
   })
   eventMarketing = false;
 
@@ -207,7 +223,10 @@ export class UserSettingsDoc {
   @ApiProperty({ description: 'Phone notification settings', required: false })
   phoneNotifications?: UserPhoneNotificationSettings;
 
-  @ApiProperty({ description: 'Notification preferences' })
+  @ApiProperty({
+    description: 'Notification preferences',
+    type: UserNotificationPreferences,
+  })
   notificationPreferences: UserNotificationPreferences =
     new UserNotificationPreferences();
 
