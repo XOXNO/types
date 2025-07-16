@@ -72,7 +72,7 @@ for (let i = 0; i < dtsLines.length; i++) {
 
     outputLines.push(`declare const ${nestBaseName}: ${baseType};`);
     outputLines.push(
-      `declare class ${nestClassName} extends ${nestBaseName} {`,
+      `export declare class ${nestClassName} extends ${nestBaseName} {`,
     );
     outputLines.push(...bodyLines.map((l) => '    ' + l + ';'));
     outputLines.push('}');
