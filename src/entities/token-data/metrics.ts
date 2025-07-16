@@ -1,5 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
 
+export interface TokenValue {
+  usdPrice: number;
+  egldPrice: number;
+}
+
 export class ProtocolAprType {
   @ApiProperty()
   apr!: number;

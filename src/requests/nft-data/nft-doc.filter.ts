@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
-import { TokenDataType } from '../../cosmos-db/documents/token/token-data.enum';
+import { TokenDataType } from '../../enums/token-data.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
+import { XoxnoAuctionTypeString } from '../../enums/xoxno-auction-type.enum';
 import { NftDocHydrated } from '../../cosmos-db/documents/token/nft-details.doc';
 
 export class SaleInfoFilterDto {

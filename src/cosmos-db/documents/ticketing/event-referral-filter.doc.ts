@@ -11,8 +11,8 @@ import {
   IsNumber,
 } from 'class-validator';
 
-import { ReferralConditionType } from './event-referral-config.doc';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { ReferralConditionType } from '../../../enums/event-referral-config.doc';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,

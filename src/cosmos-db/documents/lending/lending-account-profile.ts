@@ -1,6 +1,6 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
-import { LendingDataType } from './lending-data-type.enum';
+import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { LendingMarketProfile } from './lending-market-profile.doc';
 import { PositionMode } from './lending-nft-attributes';

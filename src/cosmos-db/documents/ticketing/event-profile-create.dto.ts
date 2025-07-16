@@ -18,12 +18,11 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { EventCategory, EventSubCategory } from './event-category.enum';
-
-export enum Visibility {
-  PUBLIC = 'public',
-  PRIVATE = 'private',
-}
+import {
+  EventCategory,
+  EventSubCategory,
+} from '../../../enums/event-category.enum';
+import { Visibility } from '../../../enums/ticketing-visibility.enum';
 
 export class EventSeoDto {
   @ApiProperty({ example: 'This is a description', required: false })

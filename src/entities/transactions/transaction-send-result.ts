@@ -1,7 +1,7 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
 import { IsEnum, IsNumber, IsString } from 'class-validator';
-import { TransactionStatus } from './transaction.status';
+import { TransactionStatus } from '../../enums/transaction-status.enum';
 
 export class TransactionSendResult {
   constructor(init?: Partial<TransactionSendResult>) {

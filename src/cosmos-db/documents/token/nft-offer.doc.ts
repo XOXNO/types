@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../../common/enums';
+import { ActivityChain } from '../../../enums/common.enum';
 import { NftDocHydrated } from './nft-details.doc';
-import { TokenDataType } from './token-data.enum';
+import { TokenDataType } from '../../../enums/token-data.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 
 class NftOfferDocBase {

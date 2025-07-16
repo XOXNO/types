@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsOptional, ValidateNested, IsBoolean } from 'class-validator';
 
-import { RewardDetails } from './event-referral-config.doc';
+import { RewardDetails } from '../../../enums/event-referral-config.doc';
 import { EventVoucherDoc } from './event-voucher.doc';
 
 export class EventReferralConfigCreateDto {

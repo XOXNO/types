@@ -12,7 +12,7 @@ import {
 } from 'class-validator';
 
 import { EventVoucherDoc, VoucherType } from './event-voucher.doc';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,

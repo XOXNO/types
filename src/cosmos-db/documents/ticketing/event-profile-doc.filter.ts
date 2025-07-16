@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { RangeFilter } from '../../cosmos-db-generic-filter';
 import { CosmosDbGenericFilter } from '../../cosmos-db-generic-filter';
 import { EventProfileDoc } from './event-profile.doc';

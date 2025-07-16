@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 import {
   RangeFilter,
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionDataType } from '../../enums/collection.enum';
 import { CollectionStatsDoc } from '../../cosmos-db/documents/collection/stats';
 
 export class CollectionStatsFilterCriteriaDto {

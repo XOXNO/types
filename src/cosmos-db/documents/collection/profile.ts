@@ -3,11 +3,11 @@ import {
   EsdtTokenType,
   EsdtTokenSubType,
   ActivityChain,
-} from '../../../common/enums';
+} from '../../../enums/common.enum';
 import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
-import { CollectionDataType } from './dataTypes';
+import { CollectionDataType } from '../../../enums/collection.enum';
 
 export class Rule {
   @ApiProperty({ description: 'Rule type' })

@@ -4,12 +4,8 @@ import { IsInt, IsNumber, IsBoolean } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { EventVoucherDoc } from './event-voucher.doc'; // Assume VoucherDoc is in the relevant module
-import { TicketingDataType } from './ticketing-data-type.enum';
-
-export enum ReferralConditionType {
-  TicketsSoldCount = 'ticketsSoldCount',
-  RevenueCount = 'revenueCount',
-}
+import { ReferralConditionType } from '../../../enums/event-referral-config.doc';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
 export class RewardDetails {
   @ApiProperty({

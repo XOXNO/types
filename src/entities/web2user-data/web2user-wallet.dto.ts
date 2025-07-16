@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsEnum, IsNumber, IsOptional, IsString } from 'class-validator';
 
-import { LinkedAccountType } from './linked-account-type.enum';
-import { WalletClientType } from './wallet-client-type.enum';
+import { LinkedAccountType } from '../../enums/linked-account-type.enum';
+import { WalletClientType } from '../../enums/wallet-client-type.enum';
 
 export class Web2WalletDto {
   @ApiProperty({

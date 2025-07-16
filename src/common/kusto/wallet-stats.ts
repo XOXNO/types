@@ -1,4 +1,4 @@
-import { ActivityChain } from '../enums';
+import { ActivityChain } from '../../enums/common.enum';
 
 export interface PriceData {
   price: number;

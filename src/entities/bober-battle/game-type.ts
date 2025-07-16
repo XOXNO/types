@@ -1,4 +1,4 @@
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 import { TokenDataDoc } from '../token-data/token-data.doc';
 
 export interface BoberBattleGame {

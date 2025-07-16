@@ -1,6 +1,6 @@
 import { BadRequestException } from '@nestjs/common';
 
-import { EventQuestionAnswerType } from './event-question-answer-type.enum';
+import { EventQuestionAnswerType } from '../../../enums/event-question-answer-type.enum';
 import { EventQuestionDoc } from './event-question.doc';
 
 export class EventQuestionValidator {

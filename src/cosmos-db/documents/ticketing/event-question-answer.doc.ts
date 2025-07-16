@@ -4,7 +4,7 @@ import { IsOptional, IsUUID, IsEnum, IsString, IsInt } from 'class-validator';
 import { v4 as uuidv4 } from 'uuid';
 
 import { EventQuestionDoc } from './event-question.doc';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
 export class EventGuestAnswerDoc {
   @ApiProperty({

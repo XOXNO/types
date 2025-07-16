@@ -11,6 +11,19 @@ export enum BinanceGoodsType {
   VIRTUAL = '02',
 }
 
+export enum BinanceBizType {
+  PAY = 'PAY',
+  REFUND = 'REFUND',
+  PAYOUT = 'PAYOUT',
+  PAY_REFUND = 'PAY_REFUND',
+  BALANCE = 'BALANCE',
+}
+
+export enum BinanceBizStatus {
+  PAY_SUCCESS = 'PAY_SUCCESS',
+  PAY_CLOSED = 'PAY_CLOSED',
+}
+
 export enum BinanceGoodsCategory {
   ELECTRONICS_COMPUTERS = '0000',
   BOOKS_MUSIC_MOVIES = '1000',

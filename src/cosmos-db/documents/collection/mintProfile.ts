@@ -1,6 +1,6 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
-import { CollectionDataType } from './dataTypes';
+import { CollectionDataType } from '../../../enums/collection.enum';
 import { CollectionProfileDoc } from './profile';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
 import { MintStageDto } from '../../../requests/collection/creator-drop-info';

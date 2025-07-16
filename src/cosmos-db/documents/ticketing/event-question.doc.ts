@@ -2,8 +2,8 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsInt, IsBoolean } from 'class-validator';
 
-import { EventQuestionAnswerType } from './event-question-answer-type.enum';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { EventQuestionAnswerType } from '../../../enums/event-question-answer-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
 export class EventQuestionDoc {
   @ApiProperty({

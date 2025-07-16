@@ -1,11 +1,11 @@
-import { TokenDataType } from './token-data.enum';
+import { TokenDataType } from '../../../enums/token-data.enum';
 import { NftMetadata } from './nft-metadata';
 import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
 import {
   ActivityChain,
   EsdtTokenSubType,
   EsdtTokenType,
-} from '../../../common/enums';
+} from '../../../enums/common.enum';
 import { ApiProperty, PartialType } from '@nestjs/swagger';
 import { CollectionProfileDoc } from '../collection/profile';
 import { OwnerDto } from '../../../common/owner.dto';

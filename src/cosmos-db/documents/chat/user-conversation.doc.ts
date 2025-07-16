@@ -1,5 +1,5 @@
 import { OwnerDto } from '../../../common/owner.dto';
-import { ChatDataType } from './chat-data-type.enum';
+import { ChatDataType } from '../../../enums/chat-data-type.enum';
 import { MessageDto } from './chat-message.doc';
 
 class UserConversationDocBase {

@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { IsString } from 'class-validator';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 
 export class FilterQueryDto {
   @ApiProperty({

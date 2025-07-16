@@ -3,7 +3,7 @@ import {
   NftDoc,
   NftDocHydrated,
 } from '../../cosmos-db/documents/token/nft-details.doc';
-import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
+import { XoxnoAuctionTypeString } from '../../enums/xoxno-auction-type.enum';
 
 export class NftActivityData {
   collection!: string;

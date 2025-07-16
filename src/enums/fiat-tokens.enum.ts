@@ -4,8 +4,3 @@ export enum FiatTokens {
   EUR = 'EUR',
   USD = 'USD',
 }
-
-export interface TokenValue {
-  usdPrice: number;
-  egldPrice: number;
-}

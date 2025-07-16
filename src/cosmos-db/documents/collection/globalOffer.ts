@@ -1,7 +1,7 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ActivityChain } from '../../../common/enums';
+import { ActivityChain } from '../../../enums/common.enum';
 import { NftMetadataAttributes } from '../token/nft-metadata-attributes';
-import { CollectionDataType } from './dataTypes';
+import { CollectionDataType } from '../../../enums/collection.enum';
 import { CollectionProfileDoc } from './profile';
 import { OwnerDto } from '../../../common/owner.dto';
 

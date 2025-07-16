@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { OwnerDto } from '../../../common/owner.dto';
-import { MarketplacesOnSaleNames } from '../../../common/enums';
-import { XoxnoAuctionTypeString } from '../../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
+import { MarketplacesOnSaleNames } from '../../../enums/common.enum';
+import { XoxnoAuctionTypeString } from '../../../enums/xoxno-auction-type.enum';
 
 class NftSaleInfoBase {
   @ApiProperty()

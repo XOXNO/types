@@ -1,6 +1,6 @@
 import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
 
-import { LendingDataType } from './lending-data-type.enum';
+import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';

@@ -9,7 +9,7 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { ChatMessageContentType } from './chat-message-content-type.enum';
+import { ChatMessageContentType } from '../../../enums/chat-message-content-type.enum';
 import { ChatMessageReplyDto } from './chat-message-reply.dto';
 
 export class ChatMessageContentDto {

@@ -3,17 +3,12 @@ import { AddressUtils } from '@multiversx/sdk-nestjs-common';
 import { ApiProperty } from '@nestjs/swagger';
 
 import { IsInt } from 'class-validator';
-
+import { RoleStatus } from '../../../enums/event-user-role.doc';
 import {
   EventUserRoles,
   EventUserRolePermission,
-} from './event-user-roles.enum';
-import { TicketingDataType } from './ticketing-data-type.enum';
-
-export enum RoleStatus {
-  ACTIVE = 'active',
-  PENDING = 'pending',
-}
+} from '../../../enums/event-user-roles.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
 export class EventUserRoleDoc {
   @ApiProperty({

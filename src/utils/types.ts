@@ -1,4 +1,4 @@
-import { ActivityChain } from '../common/enums';
+import { ActivityChain } from '../enums/common.enum';
 
 export type PublicOnly<T> = {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-function-type

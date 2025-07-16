@@ -3,10 +3,10 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsInt } from 'class-validator';
 import { v4 } from 'uuid';
 
-import { EventInvitationStatus } from './event-invitation-status.enum';
+import { EventInvitationStatus } from '../../../enums/event-invitation-status.enum';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
 import { TicketsType } from './event-ticket-qr-type.enum';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 
 export class EventInvitationDoc {

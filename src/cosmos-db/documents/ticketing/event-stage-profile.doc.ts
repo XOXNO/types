@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsInt } from 'class-validator';
 import { v4 } from 'uuid';
 
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 
 export class EventStageProfileDoc {

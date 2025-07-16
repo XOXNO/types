@@ -3,7 +3,7 @@ import {
   RangeFilter,
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { LendingDataType } from '../../cosmos-db/documents/lending/lending-data-type.enum';
+import { LendingDataType } from '../../enums/lending-data-type.enum';
 import { LendingMarketProfileDoc } from '../../cosmos-db/documents/lending/lending-market-profile.doc';
 
 export class LendingMarketProfileFilterCriteriaDto {

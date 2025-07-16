@@ -1,3 +1,5 @@
+import { BinanceBizStatus, BinanceBizType } from '../../../enums/binance.enum';
+
 interface PaymentInstruction {
   currency: string;
   amount: number; // decimal mapped to number in TypeScript
@@ -34,17 +36,4 @@ export interface BinanceRequestParameters {
   bizStatus: BinanceBizStatus;
   data: string; // Assuming this is a JSON string representation of NotificationData
   childAttribute?: BinanceNotificationData; // Assuming child attribute holds NotificationData, and is optional
-}
-
-export enum BinanceBizType {
-  PAY = 'PAY',
-  REFUND = 'REFUND',
-  PAYOUT = 'PAYOUT',
-  PAY_REFUND = 'PAY_REFUND',
-  BALANCE = 'BALANCE',
-}
-
-export enum BinanceBizStatus {
-  PAY_SUCCESS = 'PAY_SUCCESS',
-  PAY_CLOSED = 'PAY_CLOSED',
 }

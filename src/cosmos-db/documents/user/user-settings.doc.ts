@@ -8,16 +8,7 @@ import {
   IsString,
   Length,
 } from 'class-validator';
-import { UserDataType } from './user-data.type';
-
-export enum NotificationPreferenceType {
-  SALES = 'sales',
-  BIDS = 'bids',
-  OFFERS_RECEIVED = 'offersReceived',
-  OFFERS_ACCEPTED = 'offersAccepted',
-  OFFERS_REJECTED = 'offersRejected',
-  DEPOSITS = 'deposits',
-}
+import { UserDataType } from '../../../enums/user-data-type.enum';
 
 export class UserBillingDetails {
   @IsBoolean()

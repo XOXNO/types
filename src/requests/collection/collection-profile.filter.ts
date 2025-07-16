@@ -1,9 +1,9 @@
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionDataType } from '../../enums/collection.enum';
 import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
 
 export class CollectionProfileFilter extends CosmosDbGenericFilter<CollectionProfileDoc> {

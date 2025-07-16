@@ -1,10 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { NotificationDataType } from '../../cosmos-db/documents/notification/notification-data-type.enum';
-
-export enum DevicePlatform {
-  IOS = 'ios',
-  ANDROID = 'android',
-}
+import { DevicePlatform } from '../../enums/mobile-device.enum';
+import { NotificationDataType } from '../../enums/notification-data-type.enum';
 
 export class MobileDeviceDoc {
   @ApiProperty({ description: 'Document type identifier' })

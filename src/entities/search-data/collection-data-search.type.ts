@@ -1,4 +1,4 @@
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 
 export interface CollectionDataSearchResult {
   collection: string;

@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserDataType } from './user-data.type';
-import { UserFavoriteType } from './user-favorite-type.enum';
+import { UserDataType } from '../../../enums/user-data-type.enum';
+import { UserFavoriteType } from '../../../enums/user-favorite-type.enum';
 
 export class UserFavorite {
   address!: string;

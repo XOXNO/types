@@ -1,3 +1,5 @@
+import { ItemType } from '../../../enums/external-payment-status.enum';
+
 //https://twispay.github.io/
 export interface TwispayCartItems {
   item: string; //name of the product
@@ -7,9 +9,4 @@ export interface TwispayCartItems {
   code: string; //code of the item => string - varchar 64
   vatPercent?: number; //VAT percent
   itemDescription: string; //string - varchar 500
-}
-
-export enum ItemType {
-  physical = 'physical',
-  digital = 'digital',
 }

@@ -9,7 +9,7 @@ import {
   ArrayUnique,
 } from 'class-validator';
 
-import { EventQuestionAnswerType } from './event-question-answer-type.enum';
+import { EventQuestionAnswerType } from '../../../enums/event-question-answer-type.enum';
 
 export class EventQuestionEditDto {
   @ApiProperty({ description: 'The actual question text.', required: false })

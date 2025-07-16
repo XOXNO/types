@@ -1,10 +1,4 @@
-export enum PositionMode {
-  None = 'None',
-  Normal = 'Normal',
-  Multiply = 'Multiply',
-  Long = 'Long',
-  Short = 'Short',
-}
+import { PositionMode } from '../../../enums/lending.enum';
 
 export class LendingNftAttributes {
   isolated!: boolean;

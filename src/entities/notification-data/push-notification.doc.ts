@@ -2,27 +2,12 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { v4 } from 'uuid';
 
+import { NotificationDataType } from '../../enums/notification-data-type.enum';
+import {
+  PushNotificationType,
+  PushNotificationStatus,
+} from '../../enums/push-notification.enum';
 import { NotificationMetadata } from './notification-template';
-import { NotificationDataType } from '../../cosmos-db/documents/notification/notification-data-type.enum';
-
-export enum PushNotificationType {
-  EVENT_APPROVED = 'eventApproved',
-  EVENT_UPDATE = 'eventUpdate',
-  EVENT_REMINDER = 'eventReminder',
-  EVENT_CHECK_IN = 'eventCheckIn',
-  EVENT_MARKETING = 'eventMarketing',
-  NFT_SOLD = 'nftSold',
-  OFFER_RECEIVED = 'offerReceived',
-  USER_SPECIFIC = 'userSpecific',
-  BROADCAST = 'broadcast',
-}
-
-export enum PushNotificationStatus {
-  SENT = 'sent',
-  DELIVERED = 'delivered',
-  FAILED = 'failed',
-  PENDING = 'pending',
-}
 
 class PushNotificationEventDto {
   @ApiProperty({ required: false })

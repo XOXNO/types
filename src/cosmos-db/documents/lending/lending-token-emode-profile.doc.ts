@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { LendingDataType } from './lending-data-type.enum';
+import { LendingDataType } from '../../../enums/lending-data-type.enum';
 
 export class LendingTokenEModeProfileDoc {
   @ApiProperty({

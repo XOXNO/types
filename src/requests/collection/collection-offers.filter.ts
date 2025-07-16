@@ -3,7 +3,7 @@ import {
   RangeFilter,
   CosmosDbGenericFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { CollectionDataType } from '../../cosmos-db/documents/collection/dataTypes';
+import { CollectionDataType } from '../../enums/collection.enum';
 import { NftMetadataAttributes } from '../../cosmos-db/documents/token/nft-metadata-attributes';
 import { GlobalOfferDoc } from '../../cosmos-db/documents/collection/globalOffer';
 

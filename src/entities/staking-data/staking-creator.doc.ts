@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { StakingDataType } from './staking-data-type.enum';
+import { StakingDataType } from '../../enums/staking-data-type.enum';
 
 export class StakingCreatorDoc {
   @ApiProperty({

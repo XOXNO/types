@@ -1,5 +1,5 @@
-import { EsdtTokenType } from '../../../common/enums';
-import { TokenDataType } from './token-data.enum';
+import { EsdtTokenType } from '../../../enums/common.enum';
+import { TokenDataType } from '../../../enums/token-data.enum';
 
 export class SftOwnerDoc {
   dataType: string = TokenDataType.SftOwner;

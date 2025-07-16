@@ -14,7 +14,7 @@ import {
 import {
   EventUserRoles,
   EventUserRolePermission,
-} from './event-user-roles.enum';
+} from '../../../enums/event-user-roles.enum';
 
 export class EventUserRoleCreateDto {
   @ApiProperty({ description: 'User wallet address', required: false })

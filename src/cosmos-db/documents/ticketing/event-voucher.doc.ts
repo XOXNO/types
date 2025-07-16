@@ -2,13 +2,9 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { IsInt, IsNumber, IsBoolean } from 'class-validator';
 
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
-
-export enum VoucherType {
-  FIXED = 'fixed',
-  PERCENTAGE = 'percentage',
-}
+import { VoucherType } from '../../../enums/voucher-type.enum';
 
 export class EventVoucherDoc {
   @ApiProperty({

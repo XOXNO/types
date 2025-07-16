@@ -1,5 +1,5 @@
-import { NftExtraAttributesType } from '../../../requests/nft-data/nft-extra-attributes.type';
-import { TokenDataType } from './token-data.enum';
+import { NftExtraAttributesType } from '../../../enums/nft-extra-attributes.enum';
+import { TokenDataType } from '../../../enums/token-data.enum';
 
 export class NftExtraMetadata {
   dataType: TokenDataType = TokenDataType.NftExtraMetadata;

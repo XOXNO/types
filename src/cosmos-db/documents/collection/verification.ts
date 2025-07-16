@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CollectionDataType } from './dataTypes';
+import { CollectionDataType } from '../../../enums/collection.enum';
 
 export class CollectionVerificationDoc {
   @ApiProperty({

@@ -13,7 +13,7 @@ import { CollectionMintProfileDocHydrated } from './documents/collection/mintPro
 import { CollectionProfileDoc } from './documents/collection/profile';
 import { CollectionStatsDocHydrated } from './documents/collection/stats';
 import { NotificationDoc } from './documents/notification/notification.doc';
-import { EventReferralConfigDoc } from './documents/ticketing/event-referral-config.doc';
+import { EventReferralConfigDoc } from '../enums/event-referral-config.doc';
 import { EventReferralDoc } from './documents/ticketing/event-referral.doc';
 import { NftDocHydrated } from './documents/token/nft-details.doc';
 import { NftOfferDocHydrated } from './documents/token/nft-offer.doc';

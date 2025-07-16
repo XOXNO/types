@@ -3,9 +3,9 @@ import {
   MarketplaceCustomData,
   TwispayEventTicketCustomData,
 } from './external-payment-request';
-import { ExternalPaymentInternalStatus } from './external-payment-status.enum';
-import { PaymentProvider } from './payment-provider.enum';
-import { PurchaseType } from './purchase-type.enum';
+import { ExternalPaymentInternalStatus } from '../../../enums/external-payment-status.enum';
+import { PaymentProvider } from '../../../enums/payment-provider.enum';
+import { PurchaseType } from '../../../enums/purchase-type.enum';
 
 export class ExternalPayment {
   internalStatus!: ExternalPaymentInternalStatus;

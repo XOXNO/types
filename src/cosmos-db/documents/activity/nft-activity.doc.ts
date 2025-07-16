@@ -1,13 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../../common/enums';
+import { ActivityChain } from '../../../enums/common.enum';
 
 import { v4 } from 'uuid';
-import { NftActivityEventSource } from '../../../requests/nft-activity-data/event-source.enum';
+import { NftActivityEventSource } from '../../../enums/event-source.enum';
 import {
   NftActivityData,
   NftActivityDataHydrated,
 } from '../../../requests/nft-activity-data/nft-activity-data';
-import { NftActivityType } from '../../../requests/nft-activity-data/nft-activity-type.enum';
+import { NftActivityType } from '../../../enums/nft-activity-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 
 class NftActivityDocBase {

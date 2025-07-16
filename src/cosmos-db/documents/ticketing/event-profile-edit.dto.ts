@@ -13,7 +13,10 @@ import {
   IsEnum,
 } from 'class-validator';
 
-import { EventCategory, EventSubCategory } from './event-category.enum';
+import {
+  EventCategory,
+  EventSubCategory,
+} from '../../../enums/event-category.enum';
 import {
   EventLocationDto,
   EventSeoDto,

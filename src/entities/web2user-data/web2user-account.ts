@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { LinkedAccountType } from './linked-account-type.enum';
+import { LinkedAccountType } from '../../enums/linked-account-type.enum';
 
 export class Web2UserAccount {
   @ApiProperty({

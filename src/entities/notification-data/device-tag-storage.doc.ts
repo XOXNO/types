@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { PrioritizedTag } from './tag-priority';
-import { NotificationDataType } from '../../cosmos-db/documents/notification/notification-data-type.enum';
+import { NotificationDataType } from '../../enums/notification-data-type.enum';
 
 export class DeviceTagStorageDoc {
   @ApiProperty()

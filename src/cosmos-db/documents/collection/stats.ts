@@ -1,6 +1,6 @@
 import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ActivityChain } from '../../../common/enums';
-import { CollectionDataType } from './dataTypes';
+import { ActivityChain } from '../../../enums/common.enum';
+import { CollectionDataType } from '../../../enums/collection.enum';
 import { CollectionProfileDoc } from './profile';
 
 class TradingDataSummary {

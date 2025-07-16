@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../../common/enums';
+import { ActivityChain } from '../../../enums/common.enum';
 import { SocialsDto } from '../../../common/socials';
-import { UserDataType } from './user-data.type';
+import { UserDataType } from '../../../enums/user-data-type.enum';
 import { UserDeposit } from './user-deposit';
 
 export class UserProfileDoc {

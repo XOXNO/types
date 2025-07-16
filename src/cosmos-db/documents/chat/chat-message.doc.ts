@@ -1,7 +1,7 @@
 import { v4 } from 'uuid';
 
-import { ChatDataType } from './chat-data-type.enum';
-import { ChatMessageContentType } from './chat-message-content-type.enum';
+import { ChatDataType } from '../../../enums/chat-data-type.enum';
+import { ChatMessageContentType } from '../../../enums/chat-message-content-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 import { ApiProperty } from '@nestjs/swagger';
 

@@ -11,16 +11,13 @@ import {
 
 import { EventGuestProfile } from './event-guest.doc';
 import { EventInvitation } from './event-invitation.doc';
-import { EventScanStatus, EventScanMessage } from './event-scan-status.enum';
+import {
+  EventScanStatus,
+  EventScanMessage,
+} from '../../../enums/event-scan-status.enum';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
 import { NftDoc, NftDocHydrated } from '../token/nft-details.doc';
-
-export enum EventTicketQrType {
-  BADGE = 'badge',
-  OFFLINE = 'offline',
-  GOOGLE = 'google',
-  MANUAL = 'manual',
-}
+import { EventTicketQrType } from '../../../enums/ticketing-visibility.enum';
 
 export class TicketSelection {
   @ApiProperty({

@@ -5,7 +5,7 @@ import { IsOptional } from 'class-validator';
 import { MetadataDto } from '../../requests/collection/listings';
 import { NftMedia } from '../../cosmos-db/documents/token/nft-details.doc';
 import { StatisticsDto } from '../../common/statistics';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 
 class CollectionDto {
   @ApiProperty({ example: 'EAPES-8f3c1f' })

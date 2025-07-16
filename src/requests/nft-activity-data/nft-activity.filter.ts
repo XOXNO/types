@@ -1,12 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
-import { NftActivityEventSource } from './event-source.enum';
-import { NftActivityType } from './nft-activity-type.enum';
+import { NftActivityEventSource } from '../../enums/event-source.enum';
+import { NftActivityType } from '../../enums/nft-activity-type.enum';
 import { NftActivityDoc } from '../../cosmos-db/documents/activity/nft-activity.doc';
 
 class ActivityDataDto {

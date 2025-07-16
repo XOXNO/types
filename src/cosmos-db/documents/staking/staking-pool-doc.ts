@@ -1,8 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { NftDocHydrated } from '../token/nft-details.doc';
-import { StakingDataType } from '../../../entities/staking-data/staking-data-type.enum';
-import { StakingIssuingTypeString } from '../../../entities/staking-data/staking-issuing-type-string.enum';
-import { StakingPoolTypeString } from '../../../entities/staking-data/staking-pool-type-string.enum';
+import { StakingDataType } from '../../../enums/staking-data-type.enum';
+import { StakingIssuingTypeString } from '../../../enums/staking-issuing-type-string.enum';
+import { StakingPoolTypeString } from '../../../enums/staking-pool-type-string.enum';
 
 export class StakingPoolDoc {
   dataType: StakingDataType = StakingDataType.Pool;

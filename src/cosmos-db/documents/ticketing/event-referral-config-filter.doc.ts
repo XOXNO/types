@@ -9,12 +9,12 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
-import { EventReferralConfigDoc } from './event-referral-config.doc';
+import { EventReferralConfigDoc } from '../../../enums/event-referral-config.doc';
 
 export class EventReferralConfigFilterCriteriaDto {
   @ApiProperty({

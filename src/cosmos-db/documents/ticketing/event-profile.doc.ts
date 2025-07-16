@@ -5,8 +5,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsEnum, IsInt, IsBoolean, IsString, IsNumber } from 'class-validator';
 import { v4 } from 'uuid';
 
-import { EventCategory, EventSubCategory } from './event-category.enum';
-import { EventGuestStatus } from './event-guest-status.enum';
+import {
+  EventCategory,
+  EventSubCategory,
+} from '../../../enums/event-category.enum';
+import { EventGuestStatus } from '../../../enums/event-guest-status.enum';
 import { EventGuestDoc } from './event-guest.doc';
 import {
   EventLocationDto,
@@ -15,7 +18,7 @@ import {
 } from './event-profile-create.dto';
 import { EventTicketQrType } from './event-ticket-qr-type.enum';
 import { EventUserRoleDoc } from './event-user-role.doc';
-import { TicketingDataType } from './ticketing-data-type.enum';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
 export class RegistrationType {

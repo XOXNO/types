@@ -4,7 +4,7 @@ import {
   ApiPropertyOptional,
 } from '@nestjs/swagger';
 import { EventGuestDoc } from './event-guest.doc';
-import { PaymentProvider } from '../external-payment/payment-provider.enum';
+import { PaymentProvider } from '../../../enums/payment-provider.enum';
 
 class TwispayPaymentFormData {
   @ApiProperty()

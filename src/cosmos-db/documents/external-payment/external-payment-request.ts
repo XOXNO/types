@@ -10,8 +10,8 @@ import {
   ValidateNested,
 } from 'class-validator';
 
-import { PaymentProvider } from './payment-provider.enum';
-import { PurchaseType } from './purchase-type.enum';
+import { PaymentProvider } from '../../../enums/payment-provider.enum';
+import { PurchaseType } from '../../../enums/purchase-type.enum';
 
 export class CallbackUrl {
   @ApiProperty()

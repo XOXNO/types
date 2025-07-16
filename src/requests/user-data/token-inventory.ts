@@ -1,6 +1,6 @@
 // DTO Type
 import { ApiProperty } from '@nestjs/swagger';
-import { ActivityChain } from '../../common/enums';
+import { ActivityChain } from '../../enums/common.enum';
 
 class TokenAssetsDto {
   @ApiProperty({

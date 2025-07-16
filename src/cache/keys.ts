@@ -1,4 +1,4 @@
-import { ActivityChain } from '../common/enums';
+import { ActivityChain } from '../enums/common.enum';
 import { TTLS } from './ttl';
 
 function serializeChain(chain?: ActivityChain[]) {

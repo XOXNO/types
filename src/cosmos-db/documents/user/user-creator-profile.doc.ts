@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { UserDataType } from './user-data.type';
+import { UserDataType } from '../../../enums/user-data-type.enum';
 import { SocialsDto } from '../../../common/socials';
 
 export class CreatorProfileDoc {

@@ -10,7 +10,7 @@ import {
   IsOptional,
 } from 'class-validator';
 
-import { EventQuestionAnswerType } from './event-question-answer-type.enum';
+import { EventQuestionAnswerType } from '../../../enums/event-question-answer-type.enum';
 
 export class EventQuestionCreateDto {
   @ApiProperty({ description: 'The actual question text.' })
