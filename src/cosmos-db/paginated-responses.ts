@@ -15,7 +15,7 @@ import { CollectionStatsDocHydrated } from './documents/collection/stats';
 import { NotificationDoc } from './documents/notification/notification.doc';
 import { EventReferralConfigDoc } from './documents/ticketing/event-referral-config.doc';
 import { EventReferralDoc } from './documents/ticketing/event-referral.doc';
-import { NftHydrated } from './documents/token/nft-details.doc';
+import { NftDocHydrated } from './documents/token/nft-details.doc';
 import { NftOfferDocHydrated } from './documents/token/nft-offer.doc';
 
 export class EventReferralConfigPaginated extends CosmosPaginatedResponse<EventReferralConfigDoc> {}
@@ -29,7 +29,7 @@ export class ChatMessagePaginated extends CosmosPaginatedResponse<ChatMessageDoc
   receiver!: OwnerDto;
 }
 export class NftActivityPaginated extends CosmosPaginatedResponse<NftActivityDocHydrated> {}
-export class NftPaginated extends CosmosPaginatedResponse<NftHydrated> {}
+export class NftPaginated extends CosmosPaginatedResponse<NftDocHydrated> {}
 export class CollectionProfilePaginated extends CosmosPaginatedResponse<CollectionProfileDoc> {}
 export class CollectionMintProfilePaginated extends CosmosPaginatedResponse<CollectionMintProfileDocHydrated> {}
 export class GlobalOfferPaginated extends CosmosPaginatedResponse<GlobalOfferDocHydrated> {}

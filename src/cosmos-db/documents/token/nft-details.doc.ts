@@ -278,7 +278,7 @@ export class ExtraProperties {
   level?: number;
 }
 
-export class NftHydrated extends NftDocBase {
+export class NftDocHydrated extends NftDocBase {
   @ApiProperty({
     type: OwnerDto,
     required: false,

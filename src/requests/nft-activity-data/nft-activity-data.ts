@@ -1,5 +1,8 @@
 import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
-import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
+import {
+  NftDoc,
+  NftDocHydrated,
+} from '../../cosmos-db/documents/token/nft-details.doc';
 import { XoxnoAuctionTypeString } from '../../entities/xoxno-marketplace-sc/xoxno-auction-type.enum';
 
 export class NftActivityData {
@@ -29,7 +32,7 @@ export class NftActivityData {
 }
 
 export class NftActivityDataHydrated extends NftActivityData {
-  nftInfo!: NftDoc;
+  nftInfo!: NftDocHydrated;
   collectionInfo!: CollectionProfileDoc;
 }
 
