@@ -138,5 +138,5 @@ export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
   owner!: OwnerDto;
   floorPrice!: number;
   floorPriceMargin!: number;
-  collectionInfo!: CollectionProfileDoc;
+  collectionInfo!: Partial<CollectionProfileDoc>;
 }

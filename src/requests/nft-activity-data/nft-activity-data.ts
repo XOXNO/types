@@ -32,8 +32,8 @@ export class NftActivityData {
 }
 
 export class NftActivityDataHydrated extends NftActivityData {
-  nftInfo!: NftDocHydrated;
-  collectionInfo!: CollectionProfileDoc;
+  nftInfo!: Partial<NftDocHydrated>;
+  collectionInfo!: Partial<CollectionProfileDoc>;
 }
 
 export interface NftMvxBuiltIn {
