@@ -308,6 +308,13 @@ export class NftHydrated extends NftDocBase {
   saleInfo?: NftSaleInfoHydrated;
 
   @ApiProperty({
+    type: CollectionProfileDoc,
+    description:
+      'The extra information about the collection of this specific NFT',
+  })
+  collectionInfo!: CollectionProfileDoc;
+
+  @ApiProperty({
     type: Number,
     required: false,
     description: 'Balance owned by the user',
@@ -334,14 +341,6 @@ export class NftHydrated extends NftDocBase {
     description: 'The epoch day when the NFT will be available for claiming',
   })
   unboundEpoch?: number;
-
-  @ApiProperty({
-    type: PartialType<CollectionProfileDoc>,
-    required: false,
-    description:
-      'The extra information about the collection of this specific NFT',
-  })
-  collectionInfo?: Partial<CollectionProfileDoc>;
 
   @ApiProperty({
     type: ExtraProperties,

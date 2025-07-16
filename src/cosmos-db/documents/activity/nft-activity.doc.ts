@@ -3,7 +3,10 @@ import { ActivityChain } from '../../../common/enums';
 
 import { v4 } from 'uuid';
 import { NftActivityEventSource } from '../../../requests/nft-activity-data/event-source.enum';
-import { NftActivityData } from '../../../requests/nft-activity-data/nft-activity-data';
+import {
+  NftActivityData,
+  NftActivityDataHydrated,
+} from '../../../requests/nft-activity-data/nft-activity-data';
 import { NftActivityType } from '../../../requests/nft-activity-data/nft-activity-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 
@@ -56,12 +59,6 @@ class NftActivityDocBase {
   activityType!: NftActivityType;
 
   @ApiProperty({
-    description:
-      'Activity data containing details about the NFT transaction or built-in operation',
-  })
-  activityData!: NftActivityData;
-
-  @ApiProperty({
     example: 'abc123-def456-ghi789',
     description: 'Unique identifier for the activity document',
   })
@@ -82,7 +79,6 @@ class NftActivityDocBase {
   constructor(data: Partial<NftActivityDoc>) {
     Object.assign(this, data);
     this.id = v4();
-    this.pk = this.activityData.collection;
     this.chain = this.chain || ActivityChain.MVX;
   }
 }
@@ -100,9 +96,26 @@ export class NftActivityDoc extends NftActivityDocBase {
     description: 'Address used in case of trades; buyer or receiver',
   })
   to!: string;
+
+  @ApiProperty({
+    description:
+      'Activity data containing details about the NFT transaction or built-in operation',
+  })
+  activityData!: NftActivityData;
+
+  constructor(data: Partial<NftActivityDoc>) {
+    super(data);
+    this.pk = this.activityData.collection;
+  }
 }
 
 export class NftActivityDocHydrated extends NftActivityDocBase {
   from!: OwnerDto;
   to!: OwnerDto;
+  activityData!: NftActivityDataHydrated;
+
+  constructor(data: Partial<NftActivityDoc>) {
+    super(data);
+    this.pk = this.activityData.collection;
+  }
 }

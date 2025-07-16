@@ -94,13 +94,6 @@ class GlobalOfferDocBase {
   isActive: boolean = true;
 
   @ApiProperty({
-    description: 'Collection information (used on user profile offers)',
-    type: PartialType(CollectionProfileDoc),
-    required: false,
-  })
-  collectionInfo?: Partial<CollectionProfileDoc>;
-
-  @ApiProperty({
     description: 'Blockchain chain',
     enum: ActivityChain,
     example: ActivityChain.MVX,
@@ -145,5 +138,5 @@ export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
   owner!: OwnerDto;
   floorPrice!: number;
   floorPriceMargin!: number;
-  collectionInfo!: Partial<CollectionProfileDoc>;
+  collectionInfo!: CollectionProfileDoc;
 }

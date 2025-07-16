@@ -17,8 +17,6 @@ export class NftActivityData {
     paymentToken: string;
     price: number;
   }; // for ash buy events
-  nftInfo?: Partial<NftDoc>; // set on query
-  collectionInfo?: Partial<CollectionProfileDoc>;
   originalTokenAmount?: string;
   originalTokenAmountShort?: number;
   originalTokenEgldValue?: number;
@@ -28,6 +26,11 @@ export class NftActivityData {
   constructor(props: Partial<NftActivityData>) {
     Object.assign(this, props);
   }
+}
+
+export class NftActivityDataHydrated extends NftActivityData {
+  nftInfo!: NftDoc;
+  collectionInfo!: CollectionProfileDoc;
 }
 
 export interface NftMvxBuiltIn {
