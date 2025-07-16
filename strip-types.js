@@ -5,12 +5,6 @@ const path = require('path');
 const FILE_PATH = path.join(__dirname, 'dist/index.d.ts');
 let lines = fs.readFileSync(FILE_PATH, 'utf8').split('\n');
 
-// 1. Strip NestJS import entirely
-lines = lines.filter(
-  (line) => !line.includes(`import * as _nestjs_common from '@nestjs/common'`),
-);
-
-// 2. NestJS type cleaner
 function stripNestjsType(typeString) {
   const target = '_nestjs_common.Type<';
   while (typeString.includes(target)) {
