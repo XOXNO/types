@@ -4,7 +4,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { CollectionInfoDto } from './collection-info.dto';
 import { EgldOrEsdtTokenPayment } from '../../common/tokenPayent';
 
-class MintStageDto {
+export class MintStageDto {
   @ApiProperty({ example: 'mintStage' })
   dataType!: string;
 
@@ -59,9 +59,12 @@ class MintStageDto {
   maxBuyable!: number | null;
 }
 
-class CreatorInfoDto {
+export class CreatorInfoDto {
   @ApiProperty({ example: 'MiceCityClub' })
   name!: string;
+
+  @ApiProperty({ example: 'Welcome to the 1980s' })
+  description!: string;
 
   @ApiProperty({
     example: 'erd1qqqqqqqqqqqqqpgq2t6ef4u9ts3j86504sx0zlvw0vujfq6yys5sqfg40f',
