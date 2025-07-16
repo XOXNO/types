@@ -1,8 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { IsString, IsEnum, IsOptional, IsArray } from 'class-validator';
-
-import { DevicePlatform } from './mobile-device.doc';
+import { DevicePlatform } from '../../enums/mobile-device.enum';
 
 export class MobileDeviceRegistrationDto {
   @ApiProperty({

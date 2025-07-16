@@ -11,16 +11,15 @@ import {
 } from '../../../enums/event-category.enum';
 import { EventGuestStatus } from '../../../enums/event-guest-status.enum';
 import { EventGuestDoc } from './event-guest.doc';
-import {
-  EventLocationDto,
-  EventSeoDto,
-  Visibility,
-} from './event-profile-create.dto';
-import { EventTicketQrType } from './event-ticket-qr-type.enum';
+import { EventLocationDto, EventSeoDto } from './event-profile-create.dto';
 import { EventUserRoleDoc } from './event-user-role.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
+import {
+  Visibility,
+  EventTicketQrType,
+} from '../../../enums/ticketing-visibility.enum';
 export class RegistrationType {
   @ApiProperty({
     enum: Visibility,

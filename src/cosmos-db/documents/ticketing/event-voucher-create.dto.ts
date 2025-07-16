@@ -12,7 +12,8 @@ import {
   IsInt,
 } from 'class-validator';
 
-import { EventVoucherDoc, VoucherType } from './event-voucher.doc';
+import { EventVoucherDoc } from './event-voucher.doc';
+import { VoucherType } from '../../../enums/voucher-type.enum';
 
 export class EventVoucherCreateDto extends PartialType(
   OmitType(EventVoucherDoc, [

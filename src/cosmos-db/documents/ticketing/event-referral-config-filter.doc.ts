@@ -14,7 +14,7 @@ import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
-import { EventReferralConfigDoc } from '../../../enums/event-referral-config.doc';
+import { EventReferralConfigDoc } from './event-referral-config.doc';
 
 export class EventReferralConfigFilterCriteriaDto {
   @ApiProperty({

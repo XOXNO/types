@@ -1,5 +1,5 @@
+import { TwispayTransactionStatus } from '../../../enums/twispay.enum';
 import { ExternalPaymentRequest } from './external-payment-request';
-import { TwispayTransactionStatus } from './twispay-transaction';
 
 export interface TwispayCallBackData {
   transactionStatus: TwispayTransactionStatus;

@@ -11,12 +11,13 @@ import {
   IsNumber,
 } from 'class-validator';
 
-import { EventVoucherDoc, VoucherType } from './event-voucher.doc';
+import { EventVoucherDoc } from './event-voucher.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import {
   CosmosDbGenericFilter,
   RangeFilter,
 } from '../../cosmos-db-generic-filter';
+import { VoucherType } from '../../../enums/voucher-type.enum';
 
 export class EventVoucherFilterCriteriaDto {
   @ApiProperty({
