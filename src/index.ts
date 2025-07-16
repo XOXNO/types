@@ -17,7 +17,6 @@ export * from './common/tokenPayent';
 export * from './cosmos-db/cosmos-db-container.enum';
 export * from './cosmos-db/cosmos-db-generic-filter';
 export * from './cosmos-db/cosmos-db-paginated-response.dto';
-export * from './cosmos-db/cosmos-db-query';
 export * from './cosmos-db/documents/activity/nft-activity.doc';
 export * from './cosmos-db/documents/chat/block-user.dto';
 export * from './cosmos-db/documents/chat/chat-data-type.enum';

@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc",
+    "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc && rollup -c && node strip-types.js",
     "build:watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "lint": "eslint 'src/**/*.ts'",
@@ -41,6 +41,8 @@
     "eslint-config-prettier": "^10.1.5",
     "eslint-plugin-prettier": "^5.5.1",
     "prettier": "^3.6.2",
+    "rollup": "^4.45.1",
+    "rollup-plugin-dts": "^6.2.1",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.35.1"
   },
