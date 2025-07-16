@@ -33,7 +33,6 @@ export * from './cosmos-db/documents/collection/collectionConfig';
 export * from './cosmos-db/documents/collection/dataTypes';
 export * from './cosmos-db/documents/collection/globalOffer';
 export * from './cosmos-db/documents/collection/mintProfile';
-export * from './cosmos-db/documents/collection/mintStage';
 export * from './cosmos-db/documents/collection/profile';
 export * from './cosmos-db/documents/collection/stats';
 export * from './cosmos-db/documents/collection/verification';

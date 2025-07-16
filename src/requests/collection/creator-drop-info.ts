@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { CollectionInfoDto } from './collection-info.dto';
 import { EgldOrEsdtTokenPayment } from '../../common/tokenPayent';
+import { SocialsDto } from '../../common/socials';
 
 export class MintStageDto {
   @ApiProperty({ example: 'mintStage' })
@@ -89,6 +90,9 @@ export class CreatorInfoDto {
 
   @ApiProperty({ example: 'MiceCityClub' })
   creatorTag!: string;
+
+  @ApiProperty({ description: 'Creator social media links', required: false })
+  socials?: SocialsDto;
 }
 
 export class DropInfoDto {

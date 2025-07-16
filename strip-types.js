@@ -5,12 +5,12 @@ const path = require('path');
 const FILE_PATH = path.join(__dirname, 'dist/index.d.ts');
 let lines = fs.readFileSync(FILE_PATH, 'utf8').split('\n');
 
-// Remove NestJS import
+// 1. Strip NestJS import entirely
 lines = lines.filter(
   (line) => !line.includes(`import * as _nestjs_common from '@nestjs/common'`),
 );
 
-// Flatten _nestjs_common.Type<...>
+// 2. NestJS type cleaner
 function stripNestjsType(typeString) {
   const target = '_nestjs_common.Type<';
   while (typeString.includes(target)) {
@@ -28,52 +28,69 @@ function stripNestjsType(typeString) {
   return typeString;
 }
 
-// Transformations
+// 3. Transform types and classes
 const outputLines = [];
 for (let i = 0; i < lines.length; i++) {
   const line = lines[i];
 
-  // Match: declare const Foo_base: _nestjs_common.Type<...>;
   const baseMatch = line.match(/declare const (\w+_base): (.+);/);
   if (baseMatch) {
-    const [, baseName, baseType] = baseMatch;
-    const cleanType = stripNestjsType(baseType);
-    outputLines.push(`declare type ${baseName} = ${cleanType};`);
+    const [_, baseName, baseType] = baseMatch;
+    const classLine = lines[i + 1] || '';
+    const classMatch = classLine.match(
+      /declare class (\w+) extends (\w+_base) \{/,
+    );
 
-    // Look ahead for `declare class Foo extends Foo_base`
-    const nextLine = lines[i + 1];
-    const classMatch =
-      nextLine && nextLine.match(/declare class (\w+) extends (\w+_base) \{/);
-    if (classMatch && classMatch[2] === baseName) {
-      const className = classMatch[1];
-      const bodyLines = [];
-
-      // Read the class body until we hit a closing `}`
-      let j = i + 2;
-      while (j < lines.length && !lines[j].startsWith('}')) {
-        const trimmed = lines[j].trim();
-        if (trimmed) bodyLines.push(trimmed.replace(/;$/, ''));
-        j++;
-      }
-
-      // Build new type
-      const bodyStr = bodyLines.length
-        ? '& {\n' + bodyLines.map((b) => '    ' + b + ';').join('\n') + '\n}'
-        : '';
-
-      outputLines.push(`declare type ${className} = ${baseName} ${bodyStr}`);
-      i = j; // Skip class body
+    if (!classMatch || classMatch[2] !== baseName) {
+      // Not part of a DTO pair — copy line as is
+      outputLines.push(line);
       continue;
     }
 
+    const flatBaseName = baseName;
+    const flatClassName = classMatch[1];
+    const nestBaseName = `${flatClassName}Nest_base`;
+    const nestClassName = `${flatClassName}Nest`;
+
+    const flattenedBaseType = stripNestjsType(baseType);
+
+    // 1. Output flattened type
+    outputLines.push(`declare type ${flatBaseName} = ${flattenedBaseType};`);
+
+    // 2. Extract class body
+    const bodyLines = [];
+    let j = i + 2;
+    while (j < lines.length && !lines[j].startsWith('}')) {
+      const trimmed = lines[j].trim();
+      if (trimmed) bodyLines.push(trimmed.replace(/;$/, ''));
+      j++;
+    }
+
+    const bodyStr = bodyLines.length
+      ? '& {\n' + bodyLines.map((l) => '    ' + l + ';').join('\n') + '\n};'
+      : ';';
+
+    outputLines.push(
+      `declare type ${flatClassName} = ${flatBaseName} ${bodyStr}`,
+    );
+
+    // 3. Append original NestJS version, renamed
+    outputLines.push(`declare const ${nestBaseName}: ${baseType};`);
+    outputLines.push(
+      `export declare class ${nestClassName} extends ${nestBaseName} {`,
+    );
+    outputLines.push(...bodyLines.map((l) => '    ' + l + ';'));
+    outputLines.push('}');
+
+    i = j; // skip past class
     continue;
   }
 
-  // Default: just output line
+  // default case — just pass line through
   outputLines.push(line);
 }
 
-// Save final output
+// Save the transformed result
 fs.writeFileSync(FILE_PATH, outputLines.join('\n'));
 
-console.log(`✅ Fully flattened types saved to: ${FILE_PATH}`);
+console.log(`✅ Flattened DTOs saved to: ${FILE_PATH}`);
