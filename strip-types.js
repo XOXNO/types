@@ -3,15 +3,11 @@ const fs = require('fs');
 const path = require('path');
 const glob = require('glob');
 
-// Input .d.ts file
-const DTS_PATH = path.join(__dirname, 'dist/index.d.ts');
-const dtsLines = fs.readFileSync(DTS_PATH, 'utf8').split('\n');
-
 // Track names where we generate Nest suffixes
 const renamedNames = [];
 
 function stripNestjsType(typeString) {
-  const target = '_nestjs_common.Type<';
+  const target = 'import("@nestjs/common").Type<';
   while (typeString.includes(target)) {
     let i = typeString.indexOf(target) + target.length;
     let depth = 1;
@@ -27,69 +23,79 @@ function stripNestjsType(typeString) {
   return typeString;
 }
 
-const outputLines = [];
-for (let i = 0; i < dtsLines.length; i++) {
-  const line = dtsLines[i];
+// Step 1: Flatten all .d.ts files (except index.d.ts if needed)
+const dtsFiles = glob.sync(path.join(__dirname, 'dist/**/*.d.ts'));
 
-  const baseMatch = line.match(/declare const (\w+_base): (.+);/);
-  if (baseMatch) {
-    const [_, baseName, baseType] = baseMatch;
-    const classLine = dtsLines[i + 1] || '';
-    const classMatch = classLine.match(
-      /declare class (\w+) extends (\w+_base) \{/,
-    );
-
-    if (!classMatch || classMatch[2] !== baseName) {
-      outputLines.push(line);
-      continue;
-    }
-
-    const flatBaseName = baseName;
-    const flatClassName = classMatch[1];
-    const nestBaseName = `${flatClassName}Nest_base`;
-    const nestClassName = `${flatClassName}Nest`;
-
-    renamedNames.push(flatClassName);
-
-    const flattenedBaseType = stripNestjsType(baseType);
-    outputLines.push(`declare type ${flatBaseName} = ${flattenedBaseType};`);
-
-    const bodyLines = [];
-    let j = i + 2;
-    while (j < dtsLines.length && !dtsLines[j].startsWith('}')) {
-      const trimmed = dtsLines[j].trim();
-      if (trimmed) bodyLines.push(trimmed.replace(/;$/, ''));
-      j++;
-    }
-
-    const bodyStr = bodyLines.length
-      ? '& {\n' + bodyLines.map((l) => '    ' + l + ';').join('\n') + '\n};'
-      : ';';
-
-    outputLines.push(
-      `declare type ${flatClassName} = ${flatBaseName} ${bodyStr}`,
-    );
-
-    outputLines.push(`declare const ${nestBaseName}: ${baseType};`);
-    outputLines.push(
-      `export declare class ${nestClassName} extends ${nestBaseName} {`,
-    );
-    outputLines.push(...bodyLines.map((l) => '    ' + l + ';'));
-    outputLines.push('}');
-
-    i = j;
+for (const file of dtsFiles) {
+  if (path.basename(file) === 'index.d.ts') {
+    console.log(`⏩ Skipped index.d.ts: ${file}`);
     continue;
   }
 
-  outputLines.push(line);
+  const dtsLines = fs.readFileSync(file, 'utf8').split('\n');
+  const outputLines = [];
+
+  for (let i = 0; i < dtsLines.length; i++) {
+    const line = dtsLines[i];
+
+    const baseMatch = line.match(/declare const (\w+_base): (.+);/);
+    if (baseMatch) {
+      const [_, baseName, baseType] = baseMatch;
+      const classLine = dtsLines[i + 1] || '';
+      const classMatch = classLine.match(
+        /declare class (\w+) extends (\w+_base) \{/,
+      );
+
+      if (!classMatch || classMatch[2] !== baseName) {
+        outputLines.push(line);
+        continue;
+      }
+
+      const flatBaseName = baseName;
+      const flatClassName = classMatch[1];
+      const nestBaseName = `${flatClassName}Nest_base`;
+      const nestClassName = `${flatClassName}Nest`;
+
+      renamedNames.push(flatClassName);
+
+      const flattenedBaseType = stripNestjsType(baseType);
+      outputLines.push(`declare type ${flatBaseName} = ${flattenedBaseType};`);
+
+      const bodyLines = [];
+      let j = i + 2;
+      while (j < dtsLines.length && !dtsLines[j].startsWith('}')) {
+        const trimmed = dtsLines[j].trim();
+        if (trimmed) bodyLines.push(trimmed.replace(/;$/, ''));
+        j++;
+      }
+
+      const bodyStr = bodyLines.length
+        ? '& {\n' + bodyLines.map((l) => '    ' + l + ';').join('\n') + '\n};'
+        : ';';
+
+      outputLines.push(
+        `export declare type ${flatClassName} = ${flatBaseName} ${bodyStr}`,
+      );
+
+      outputLines.push(`declare const ${nestBaseName}: ${baseType};`);
+      outputLines.push(
+        `export declare class ${nestClassName} extends ${nestBaseName} {`,
+      );
+      outputLines.push(...bodyLines.map((l) => '    ' + l + ';'));
+      outputLines.push('}');
+
+      i = j;
+      continue;
+    }
+
+    outputLines.push(line);
+  }
+
+  fs.writeFileSync(file, outputLines.join('\n'));
+  console.log(`✅ Flattened: ${file}`);
 }
 
-// Write transformed .d.ts
-const outDtsPath = DTS_PATH; // .replace('.d.ts', '.flattened.d.ts');
-fs.writeFileSync(outDtsPath, outputLines.join('\n'));
-console.log(`✅ Flattened .d.ts written to ${outDtsPath}`);
-
-// Patch .js files to add runtime exports
+// Step 2: Patch JS files for runtime exports
 const jsFiles = glob.sync(path.join(__dirname, 'dist/**/*.js'));
 
 renamedNames.forEach((name) => {
@@ -100,7 +106,6 @@ renamedNames.forEach((name) => {
       const appendLine = `\nexports.${name}Nest = ${name};\n`;
       if (!code.includes(`exports.${name}Nest =`)) {
         fs.appendFileSync(file, appendLine);
-        console.log(`🔧 Patched ${file} with exports.${name}Nest = ${name};`);
       }
     }
   });

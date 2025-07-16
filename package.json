@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc && rollup -c && node strip-types.js",
+    "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc && node strip-types.js",
     "build:watch": "tsc --watch",
     "prepublishOnly": "npm run build",
     "lint": "eslint 'src/**/*.ts'",
