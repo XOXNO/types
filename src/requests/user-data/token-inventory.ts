@@ -14,7 +14,7 @@ class TokenAssetsDto {
   svgUrl!: string;
 }
 
-class TokenDto {
+export class TokenDto {
   @ApiProperty({ example: 0 })
   nonce!: number;
 
