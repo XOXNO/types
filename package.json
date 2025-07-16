@@ -1,6 +1,6 @@
 {
   "name": "@xoxno/types",
-  "version": "1.0.77",
+  "version": "1.0.78",
   "description": "Shared types and utilities for XOXNO API.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
