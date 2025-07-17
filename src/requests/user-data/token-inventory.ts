@@ -14,6 +14,13 @@ class TokenAssetsDto {
   svgUrl!: string;
 }
 
+export class SuiCoinObjectDto {
+  objectId!: string;
+  balance!: string;
+  digest!: string;
+  version!: string;
+}
+
 export class TokenDto {
   @ApiProperty({ example: 0 })
   nonce!: number;
@@ -53,6 +60,8 @@ export class TokenDto {
 
   @ApiProperty({ example: 83.21 })
   weight!: number;
+
+  objects?: SuiCoinObjectDto[];
 }
 
 class WalletDto {
