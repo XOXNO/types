@@ -3,6 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsString, ValidateNested } from 'class-validator';
 import { ShortNftDoc } from '../../cosmos-db/documents/short/short-nft.doc';
+import { ActivityChain } from '../../enums/common.enum';
 
 class WalletDto {
   @ApiProperty({ description: 'User wallet address' })
@@ -36,6 +37,8 @@ class WalletDto {
   @ApiProperty({ description: 'Number of followers' })
   @IsNumber()
   followCount!: number;
+
+  chain?: ActivityChain;
 }
 
 class PriceDataDto {
