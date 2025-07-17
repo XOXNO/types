@@ -272,9 +272,8 @@ export class EventProfile extends EventProfileDoc {
   @ApiProperty({
     description: 'Creator profile data including name, profile, and herotag.',
     type: () => CreatorProfileDoc,
-    required: false,
   })
-  creatorProfile?: CreatorProfileDoc;
+  creatorProfile!: CreatorProfileDoc;
 
   @ApiProperty({
     description: 'Summary of the guests attending the event.',

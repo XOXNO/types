@@ -119,7 +119,7 @@ export class RegistrationDetailsDto {
   @ApiProperty()
   @IsBoolean()
   @IsOptional()
-  allowCrypto?: boolean;
+  acceptCrypto?: boolean;
 
   @ApiProperty({
     type: 'integer',
