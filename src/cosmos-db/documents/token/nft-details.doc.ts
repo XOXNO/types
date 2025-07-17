@@ -6,7 +6,7 @@ import {
   EsdtTokenType,
 } from '../../../enums/common.enum';
 import { TokenDataType } from '../../../enums/token-data.enum';
-import { CollectionProfileDoc } from '../collection/profile';
+import { ShortNftCollectionInfoDoc } from '../short/short-nft-collection-info.doc';
 import { NftMetadata } from './nft-metadata';
 import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
 // Sale: Check Last Owner nfts from GuestDoc [1,2,3] -> 0 -> Delete GuestDoc > 0: Edit GuestDoc nftIds [1,2]
@@ -308,11 +308,11 @@ export class NftDocHydrated extends NftDocBase {
   saleInfo?: NftSaleInfoHydrated;
 
   @ApiProperty({
-    type: CollectionProfileDoc,
+    type: ShortNftCollectionInfoDoc,
     description:
       'The extra information about the collection of this specific NFT',
   })
-  collectionInfo!: CollectionProfileDoc;
+  collectionInfo!: ShortNftCollectionInfoDoc;
 
   @ApiProperty({
     type: Number,
