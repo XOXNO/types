@@ -151,8 +151,8 @@ export class LendingAccountProfileDoc {
   pk!: string;
   _ts!: number;
 
-  constructor(init?: Partial<LendingAccountProfileDoc>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingAccountProfileDoc>) {
+    Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.identifier}_${this.token}`;
   }

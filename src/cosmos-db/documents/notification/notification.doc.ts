@@ -17,8 +17,8 @@ export class NotificationDoc {
   pk?: string;
   _ts?: number;
 
-  constructor(pros: Partial<NotificationDoc>) {
-    Object.assign(this, pros);
+  constructor(props?: Partial<NotificationDoc>) {
+    Object.assign(this, props);
     this.pk = this.owner;
   }
 }

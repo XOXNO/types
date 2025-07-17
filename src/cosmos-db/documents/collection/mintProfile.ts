@@ -1,9 +1,9 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 import { CollectionDataType } from '../../../enums/collection.enum';
-import { CollectionProfileDoc } from './profile';
-import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
 import { MintStageDto } from '../../../requests/collection/creator-drop-info';
+import { ShortCollectionDoc } from '../short/short-collection.doc';
+import { ShortCreatorDoc } from '../short/short-creator.doc';
 
 export class CollectionMintProfileDoc {
   @ApiProperty({
@@ -199,8 +199,8 @@ export class CollectionMintProfileDoc {
 }
 
 export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
-  collectionInfo!: Partial<CollectionProfileDoc>;
-  creatorInfo!: Partial<CreatorProfileDoc>;
+  collectionInfo!: ShortCollectionDoc;
+  creatorInfo!: ShortCreatorDoc;
 }
 
 export class CollectionMintProfileDocWithStages extends PickType(

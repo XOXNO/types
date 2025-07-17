@@ -210,8 +210,8 @@ export class LendingMarketProfileDoc {
   pk!: string;
   _ts!: number;
 
-  constructor(init?: Partial<LendingMarketProfileDoc>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingMarketProfileDoc>) {
+    Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.token}_${this.dataType}`;
   }

@@ -4,8 +4,8 @@ import { IsEnum, IsNumber, IsString } from 'class-validator';
 import { TransactionStatus } from '../../enums/transaction-status.enum';
 
 export class TransactionSendResult {
-  constructor(init?: Partial<TransactionSendResult>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<TransactionSendResult>) {
+    Object.assign(this, props);
   }
 
   @ApiProperty({ description: 'The receiver address', type: String })

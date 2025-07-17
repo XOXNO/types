@@ -76,14 +76,14 @@ export class CollectionOffersFilter extends CosmosDbGenericFilter<GlobalOfferDoc
     // isActive: true,
   };
 
-  constructor(props: Partial<CollectionOffersFilter>) {
+  constructor(props?: Partial<CollectionOffersFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
   }
 }

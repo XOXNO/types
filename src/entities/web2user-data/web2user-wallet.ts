@@ -56,7 +56,7 @@ export class Web2UserWallet {
   @IsString()
   id?: string;
 
-  constructor(props: Partial<Web2UserWallet>) {
+  constructor(props?: Partial<Web2UserWallet>) {
     Object.assign(this, props);
     this.id = v4();
   }

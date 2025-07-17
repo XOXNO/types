@@ -66,10 +66,10 @@ class ChatMessageDocBase {
   ttl?: number;
   _ts?: number;
 
-  constructor(props: Partial<ChatMessageDoc>) {
+  constructor(props?: Partial<ChatMessageDoc>) {
     Object.assign(this, props);
     this.id = v4();
-    this.pk = props.chatId!;
+    this.pk = props!.chatId!;
     if (this.isGroupChat) {
       this.ttl = Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7; // 7 days
     }

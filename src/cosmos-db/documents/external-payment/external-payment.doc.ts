@@ -47,8 +47,8 @@ export class ExternalPayment {
   pk!: string;
   _ts!: number;
 
-  constructor(pros: Partial<ExternalPayment>) {
-    Object.assign(this, pros);
+  constructor(props?: Partial<ExternalPayment>) {
+    Object.assign(this, props);
     this.pk = this.address;
   }
 }

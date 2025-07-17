@@ -150,7 +150,7 @@ export class EventVoucherFilter extends CosmosDbGenericFilter<EventVoucherDoc> {
   })
   includeCount?: boolean = false;
 
-  constructor(props: Partial<EventVoucherFilter>) {
+  constructor(props?: Partial<EventVoucherFilter>) {
     super(props);
     this.filters = {
       ...this.filters,

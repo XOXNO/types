@@ -13,8 +13,8 @@ export class UserFavorite {
   id!: string;
   _ts!: number;
 
-  constructor(init: Partial<UserFavorite>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<UserFavorite>) {
+    Object.assign(this, props);
     this.timestamp = Math.floor(Date.now() / 1000);
     this.id = `${this.address}-${this.type}`;
     switch (this.type) {

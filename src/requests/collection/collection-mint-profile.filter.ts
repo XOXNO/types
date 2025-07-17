@@ -25,8 +25,8 @@ export class CollectionMintProfileFilter extends CosmosDbGenericFilter<Collectio
   orderBy = ['startTime desc' as const];
   strictSelect?: boolean = false;
 
-  constructor(props: Partial<CollectionMintProfileFilter>) {
-    if (!props?.filters?.range) {
+  constructor(props?: Partial<CollectionMintProfileFilter>) {
+    if (props && !props?.filters?.range) {
       // default range filter to get only active mints
       props.filters = {
         ...props.filters,
@@ -48,7 +48,7 @@ export class CollectionMintProfileFilter extends CosmosDbGenericFilter<Collectio
     };
 
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
   }
 }

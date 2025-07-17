@@ -11,8 +11,8 @@ export class BoberBattleLeaderboardDto {
   TotalVolume!: number;
   TotalVolumeUSD!: number;
 
-  constructor(data: Partial<BoberBattleLeaderboardDto>) {
-    Object.assign(this, data);
+  constructor(props?: Partial<BoberBattleLeaderboardDto>) {
+    Object.assign(this, props);
   }
 }
 
@@ -30,9 +30,9 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
   GamesLost!: number;
   WinRate!: number;
 
-  constructor(data: Partial<BoberBattleUserDto>) {
-    super(data);
-    Object.assign(this, data);
+  constructor(props?: Partial<BoberBattleUserDto>) {
+    super(props);
+    Object.assign(this, props);
   }
 }
 

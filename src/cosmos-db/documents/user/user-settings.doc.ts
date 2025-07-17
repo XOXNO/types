@@ -227,7 +227,7 @@ export class UserSettingsDoc {
   @ApiProperty({ description: 'Timestamp', required: false })
   _ts?: number;
 
-  constructor(props: Partial<UserSettingsDoc>) {
+  constructor(props?: Partial<UserSettingsDoc>) {
     Object.assign(this, props);
     this.id = `${this.address}-${this.dataType}`;
   }

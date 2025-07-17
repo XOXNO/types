@@ -14,10 +14,10 @@ class UserConversationDocBase {
   pk!: string;
   _ts!: number;
 
-  constructor(props: Partial<UserConversationDoc>) {
+  constructor(props?: Partial<UserConversationDoc>) {
     Object.assign(this, props);
-    this.id = props.chatId!;
-    this.pk = props.sender!;
+    this.id = props!.chatId!;
+    this.pk = props!.sender!;
   }
 }
 

@@ -5,7 +5,7 @@ class AirdropDtoBase {
   totalScore!: number;
   rank!: number;
 
-  constructor(props: Partial<AirdropDtoBase>) {
+  constructor(props?: Partial<AirdropDtoBase>) {
     Object.assign(this, props);
   }
 }

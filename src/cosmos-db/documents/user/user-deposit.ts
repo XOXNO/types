@@ -31,7 +31,7 @@ export class UserDeposit {
   })
   usdPrice!: number;
 
-  constructor(props: Partial<UserDeposit>) {
+  constructor(props?: Partial<UserDeposit>) {
     Object.assign(this, props);
   }
 }

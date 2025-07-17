@@ -1,9 +1,9 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ActivityChain } from '../../../enums/common.enum';
-import { NftMetadataAttributes } from '../token/nft-metadata-attributes';
-import { CollectionDataType } from '../../../enums/collection.enum';
-import { CollectionProfileDoc } from './profile';
+import { ApiProperty } from '@nestjs/swagger';
 import { OwnerDto } from '../../../common/owner.dto';
+import { CollectionDataType } from '../../../enums/collection.enum';
+import { ActivityChain } from '../../../enums/common.enum';
+import { ShortCollectionDoc } from '../short/short-collection.doc';
+import { NftMetadataAttributes } from '../token/nft-metadata-attributes';
 
 class GlobalOfferDocBase {
   @ApiProperty({
@@ -138,5 +138,5 @@ export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
   owner!: OwnerDto;
   floorPrice!: number;
   floorPriceMargin!: number;
-  collectionInfo!: Partial<CollectionProfileDoc>;
+  collectionInfo!: ShortCollectionDoc;
 }

@@ -29,8 +29,8 @@ export class LendingEModeCategoryProfileDoc {
   pk!: string;
   _ts?: number;
 
-  constructor(init?: Partial<LendingEModeCategoryProfileDoc>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingEModeCategoryProfileDoc>) {
+    Object.assign(this, props);
     this.pk = this.dataType;
   }
 }

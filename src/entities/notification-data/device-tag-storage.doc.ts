@@ -37,7 +37,7 @@ export class DeviceTagStorageDoc {
   @ApiProperty({ required: false })
   _ts?: number;
 
-  constructor(props: Partial<DeviceTagStorageDoc>) {
+  constructor(props?: Partial<DeviceTagStorageDoc>) {
     Object.assign(this, props);
 
     this.id = this.installationId;

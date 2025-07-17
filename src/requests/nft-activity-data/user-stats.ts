@@ -1,8 +1,8 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import { IsBoolean, IsNumber, IsString, ValidateNested } from 'class-validator';
-import { NftDoc } from '../../cosmos-db/documents/token/nft-details.doc';
+import { ShortNftDoc } from '../../cosmos-db/documents/short/short-nft.doc';
 
 class WalletDto {
   @ApiProperty({ description: 'User wallet address' })
@@ -60,13 +60,13 @@ class PriceDataDto {
   usdValue!: number;
 
   @ApiProperty({
-    type: PartialType<NftDoc>,
+    type: ShortNftDoc,
     description: 'NFT information',
     required: false,
   })
   @ValidateNested()
-  @Type(() => PartialType<NftDoc>)
-  nftInfo?: Partial<NftDoc>;
+  @Type(() => ShortNftDoc)
+  nftInfo?: ShortNftDoc;
 }
 
 export class UserStatsDto {

@@ -67,8 +67,8 @@ export class EventGuestAnswerDoc {
 
   pk!: string;
 
-  constructor(partial: Partial<EventGuestAnswerDoc>) {
-    Object.assign(this, partial);
+  constructor(props?: Partial<EventGuestAnswerDoc>) {
+    Object.assign(this, props);
     this.id = `${this.eventId}-${this.questionId}-${this.wallet}`;
     this.pk = this.eventId;
   }

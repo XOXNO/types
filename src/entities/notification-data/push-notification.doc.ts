@@ -116,7 +116,7 @@ export class PushNotificationDoc {
   @ApiProperty({ required: false })
   _ts?: number;
 
-  constructor(props: Partial<PushNotificationDoc>) {
+  constructor(props?: Partial<PushNotificationDoc>) {
     Object.assign(this, props);
 
     this.id = v4();

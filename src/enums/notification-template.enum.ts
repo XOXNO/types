@@ -1,5 +1,3 @@
-import { ApiProperty } from '@nestjs/swagger';
-
 export enum NotificationAction {
   OPEN_EVENT = 'open_event',
   OPEN_PROFILE = 'open_profile',

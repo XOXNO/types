@@ -92,14 +92,14 @@ export class EventReferralConfigFilter extends CosmosDbGenericFilter<EventReferr
   })
   includeCount?: boolean = false;
 
-  constructor(props: Partial<EventReferralConfigFilter>) {
+  constructor(props?: Partial<EventReferralConfigFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties if any
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.setPk();

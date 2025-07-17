@@ -70,14 +70,14 @@ export class EventInvitationFilter extends CosmosDbGenericFilter<EventInvitation
   @ApiProperty({ required: false, type: 'boolean', default: false })
   includeCount?: boolean = false;
 
-  constructor(props: Partial<EventInvitationFilter>) {
+  constructor(props?: Partial<EventInvitationFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.setPk();

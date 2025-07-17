@@ -1,8 +1,5 @@
-import { CollectionProfileDoc } from '../../cosmos-db/documents/collection/profile';
-import {
-  NftDoc,
-  NftDocHydrated,
-} from '../../cosmos-db/documents/token/nft-details.doc';
+import { ShortCollectionDoc } from '../../cosmos-db/documents/short/short-collection.doc';
+import { ShortNftDoc } from '../../cosmos-db/documents/short/short-nft.doc';
 import { XoxnoAuctionTypeString } from '../../enums/xoxno-auction-type.enum';
 
 export class NftActivityData {
@@ -26,14 +23,14 @@ export class NftActivityData {
   originalTokenUsdValue?: number;
   originalTokenIdentifier?: string;
 
-  constructor(props: Partial<NftActivityData>) {
+  constructor(props?: Partial<NftActivityData>) {
     Object.assign(this, props);
   }
 }
 
 export class NftActivityDataHydrated extends NftActivityData {
-  nftInfo!: Partial<NftDocHydrated>;
-  collectionInfo!: Partial<CollectionProfileDoc>;
+  nftInfo!: ShortNftDoc;
+  collectionInfo!: ShortCollectionDoc;
 }
 
 export interface NftMvxBuiltIn {

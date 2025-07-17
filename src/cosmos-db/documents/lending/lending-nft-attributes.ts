@@ -7,7 +7,7 @@ export class LendingNftAttributes {
   positionMode!: PositionMode;
   isolatedToken?: string;
 
-  constructor(init?: Partial<LendingNftAttributes>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingNftAttributes>) {
+    Object.assign(this, props);
   }
 }

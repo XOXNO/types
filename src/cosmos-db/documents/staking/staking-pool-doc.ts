@@ -37,8 +37,8 @@ export class StakingPoolDoc {
 }
 
 export class XoxnoStakingReward {
-  constructor(init?: Partial<XoxnoStakingReward>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<XoxnoStakingReward>) {
+    Object.assign(this, props);
   }
 
   @ApiProperty({ description: 'Token identifier', example: 'RARE-99e8b0' })
@@ -95,8 +95,8 @@ export class XoxnoStakingReward {
 }
 
 export class XoxnoStakingRewardClaim {
-  constructor(init?: Partial<XoxnoStakingRewardClaim>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<XoxnoStakingRewardClaim>) {
+    Object.assign(this, props);
   }
 
   tokenIdentifier!: string;
@@ -105,8 +105,8 @@ export class XoxnoStakingRewardClaim {
 }
 
 export class XoxnoStakingIssuingReward {
-  constructor(init?: Partial<XoxnoStakingIssuingReward>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<XoxnoStakingIssuingReward>) {
+    Object.assign(this, props);
   }
 
   tokenIdentifier!: string;
@@ -226,8 +226,8 @@ export class StakingSummary {
   @ApiProperty({ description: 'Percentage filled', example: 36.84375 })
   percentageFilled!: number;
 
-  constructor(init?: Partial<StakingSummary>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<StakingSummary>) {
+    Object.assign(this, props);
   }
 }
 

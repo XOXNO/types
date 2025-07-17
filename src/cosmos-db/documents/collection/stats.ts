@@ -1,7 +1,7 @@
-import { ApiProperty, PartialType } from '@nestjs/swagger';
-import { ActivityChain } from '../../../enums/common.enum';
+import { ApiProperty } from '@nestjs/swagger';
 import { CollectionDataType } from '../../../enums/collection.enum';
-import { CollectionProfileDoc } from './profile';
+import { ActivityChain } from '../../../enums/common.enum';
+import { ShortCollectionDoc } from '../short/short-collection.doc';
 
 class TradingDataSummary {
   @ApiProperty({
@@ -212,11 +212,11 @@ export class CollectionStatsDocHydrated extends CollectionStatsDoc {
   @ApiProperty({
     description: 'Collection profile information',
     required: false,
-    type: PartialType(CollectionProfileDoc),
+    type: ShortCollectionDoc,
   })
-  collectionInfo!: Partial<CollectionProfileDoc>;
+  collectionInfo!: ShortCollectionDoc;
 
-  constructor(props: Partial<CollectionStatsDocHydrated>) {
+  constructor(props?: Partial<CollectionStatsDocHydrated>) {
     super(props);
   }
 }

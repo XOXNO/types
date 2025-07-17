@@ -3,8 +3,8 @@ import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { IsNumber, IsOptional, IsString } from 'class-validator';
 
 export class TransactionCreate {
-  constructor(init?: Partial<TransactionCreate>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<TransactionCreate>) {
+    Object.assign(this, props);
   }
 
   @ApiProperty({ description: 'The chain ID', type: String })

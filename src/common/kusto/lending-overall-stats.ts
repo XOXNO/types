@@ -44,7 +44,7 @@ export class LendingOverallStats {
   })
   borrowedMargin!: number;
 
-  constructor(init?: Partial<LendingOverallStats>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingOverallStats>) {
+    Object.assign(this, props);
   }
 }

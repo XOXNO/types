@@ -1,14 +1,14 @@
-import { TokenDataType } from '../../../enums/token-data.enum';
-import { NftMetadata } from './nft-metadata';
-import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
+import { ApiProperty } from '@nestjs/swagger';
+import { OwnerDto } from '../../../common/owner.dto';
 import {
   ActivityChain,
   EsdtTokenSubType,
   EsdtTokenType,
 } from '../../../enums/common.enum';
-import { ApiProperty, PartialType } from '@nestjs/swagger';
+import { TokenDataType } from '../../../enums/token-data.enum';
 import { CollectionProfileDoc } from '../collection/profile';
-import { OwnerDto } from '../../../common/owner.dto';
+import { NftMetadata } from './nft-metadata';
+import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
 // Sale: Check Last Owner nfts from GuestDoc [1,2,3] -> 0 -> Delete GuestDoc > 0: Edit GuestDoc nftIds [1,2]
 // New Owner: Get GuestDoc -> YES -> nfts insert new ID [0,3] -> NO -> Empty Guest Doc with nfts insert [3]
 

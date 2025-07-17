@@ -124,20 +124,23 @@ export class NftDocFilter extends CosmosDbGenericFilter<NftDocHydrated> {
   @ApiProperty({ required: false, type: 'boolean' })
   applyNftExtraDetails?: boolean = true;
 
-  constructor(props: Partial<NftDocFilter>) {
+  constructor(props?: Partial<NftDocFilter>) {
     super(props);
-    this.filters = {
-      ...this.filters,
-      ...props?.filters,
-      chain:
-        props.filters?.chain &&
-        props.filters.chain.length === 1 &&
-        props.filters.chain[0] === ActivityChain.MVX
-          ? undefined
-          : props.filters?.chain,
-    };
+
+    if (props) {
+      this.filters = {
+        ...this.filters,
+        ...props?.filters,
+        chain:
+          props.filters?.chain &&
+          props.filters.chain.length === 1 &&
+          props.filters.chain[0] === ActivityChain.MVX
+            ? undefined
+            : props.filters?.chain,
+      };
+    }
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);

@@ -79,14 +79,14 @@ export class EventProfileFilter extends CosmosDbGenericFilter<EventProfileDoc> {
     startsFrom: true,
   };
 
-  constructor(props: Partial<EventProfileFilter>) {
+  constructor(props?: Partial<EventProfileFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);

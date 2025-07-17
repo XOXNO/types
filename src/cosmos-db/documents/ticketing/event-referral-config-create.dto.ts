@@ -5,6 +5,7 @@ import { IsOptional, ValidateNested, IsBoolean } from 'class-validator';
 
 import { EventVoucherDoc } from './event-voucher.doc';
 import { RewardDetails } from './event-referral-config.doc';
+import { ShortVoucherDoc } from '../short/short-voucher.doc';
 
 export class EventReferralConfigCreateDto {
   @ApiProperty({
@@ -15,8 +16,8 @@ export class EventReferralConfigCreateDto {
   })
   @IsOptional()
   @ValidateNested()
-  @Type(() => EventVoucherDoc)
-  appliedVoucher?: Partial<EventVoucherDoc>;
+  @Type(() => ShortVoucherDoc)
+  appliedVoucher?: ShortVoucherDoc;
 
   @ApiProperty({
     description:

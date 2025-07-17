@@ -23,21 +23,24 @@ export class CollectionProfileFilter extends CosmosDbGenericFilter<CollectionPro
   };
   strictSelect?: boolean = false;
 
-  constructor(props: Partial<CollectionProfileFilter>) {
+  constructor(props?: Partial<CollectionProfileFilter>) {
     super(props);
-    this.filters = {
-      ...this.filters,
-      ...props?.filters,
-      chain:
-        props.filters?.chain &&
-        props.filters.chain.length === 1 &&
-        props.filters.chain[0] === ActivityChain.MVX
-          ? undefined
-          : props.filters?.chain,
-    };
+
+    if (props) {
+      this.filters = {
+        ...this.filters,
+        ...props?.filters,
+        chain:
+          props.filters?.chain &&
+          props.filters.chain.length === 1 &&
+          props.filters.chain[0] === ActivityChain.MVX
+            ? undefined
+            : props.filters?.chain,
+      };
+    }
 
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
   }
 }

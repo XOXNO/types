@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsInt, IsNumber, IsBoolean } from 'class-validator';
+import { IsBoolean, IsInt, IsNumber } from 'class-validator';
 import { v4 } from 'uuid';
 
-import { EventVoucherDoc } from './event-voucher.doc'; // Assume VoucherDoc is in the relevant module
 import { ReferralConditionType } from '../../../enums/event-referral-config.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
+import { ShortVoucherDoc } from '../short/short-voucher.doc';
 
 export class RewardDetails {
   @ApiProperty({
@@ -40,9 +40,9 @@ export class RewardDetails {
     required: false,
     description:
       'Voucher details that will be issued when the condition is met.',
-    type: EventVoucherDoc,
+    type: ShortVoucherDoc,
   })
-  voucherInfo?: Partial<EventVoucherDoc>; // Use this to define the settings of the voucher to be issued
+  voucherInfo?: ShortVoucherDoc;
 
   constructor(props?: Partial<RewardDetails>) {
     Object.assign(this, props);
@@ -72,10 +72,10 @@ export class EventReferralConfigDoc {
   @ApiProperty({
     description:
       'Indicates if a voucher should be automatically applied as a discount when this referral code is used.',
-    type: EventVoucherDoc,
+    type: ShortVoucherDoc,
     required: false,
   })
-  appliedVoucher?: Partial<EventVoucherDoc>; // This voucher can be automatically applied as a discount for users using the referral code
+  appliedVoucher?: ShortVoucherDoc; // This voucher can be automatically applied as a discount for users using the referral code
 
   @ApiProperty({
     required: false,

@@ -76,8 +76,8 @@ class NftActivityDocBase {
   })
   _ts!: number;
 
-  constructor(data: Partial<NftActivityDoc>) {
-    Object.assign(this, data);
+  constructor(props?: Partial<NftActivityDoc>) {
+    Object.assign(this, props);
     this.id = v4();
     this.chain = this.chain || ActivityChain.MVX;
   }
@@ -103,8 +103,8 @@ export class NftActivityDoc extends NftActivityDocBase {
   })
   activityData!: NftActivityData;
 
-  constructor(data: Partial<NftActivityDoc>) {
-    super(data);
+  constructor(props?: Partial<NftActivityDoc>) {
+    super(props);
     this.pk = this.activityData.collection;
   }
 }
@@ -114,8 +114,8 @@ export class NftActivityDocHydrated extends NftActivityDocBase {
   to!: OwnerDto;
   activityData!: NftActivityDataHydrated;
 
-  constructor(data: Partial<NftActivityDoc>) {
-    super(data);
+  constructor(props?: Partial<NftActivityDoc>) {
+    super(props);
     this.pk = this.activityData.collection;
   }
 }

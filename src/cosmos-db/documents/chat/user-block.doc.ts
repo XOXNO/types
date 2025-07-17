@@ -8,10 +8,10 @@ class UserBlockDocBase {
   pk!: string; //blockedBy
   _ts!: number;
 
-  constructor(props: Partial<UserBlockDoc>) {
+  constructor(props?: Partial<UserBlockDoc>) {
     Object.assign(this, props);
-    this.id = props.sender!;
-    this.pk = props.receiver!;
+    this.id = props!.sender!;
+    this.pk = props!.receiver!;
   }
 }
 export class UserBlockDoc extends UserBlockDocBase {

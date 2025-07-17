@@ -7,8 +7,8 @@ export class XoxnoMarketplaceScCollectionConfig {
   extraFees?: CollectionExtraFeesConfig;
   adminAddress?: string;
 
-  constructor(init?: Partial<CollectionExtraFeesConfig>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<CollectionExtraFeesConfig>) {
+    Object.assign(this, props);
     this.maxRoyalties = parseInt(this.maxRoyalties.toString()) / 100;
     this.minRoyalties = parseInt(this.minRoyalties.toString()) / 100;
     if (this.extraFees) {

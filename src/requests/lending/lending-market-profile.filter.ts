@@ -88,14 +88,14 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
     participants: false,
   };
 
-  constructor(props: Partial<LendingMarketProfileFilter>) {
+  constructor(props?: Partial<LendingMarketProfileFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.applySelectPropertyLogic(props);

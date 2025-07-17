@@ -65,7 +65,7 @@ export class MobileDeviceDoc {
   @ApiProperty({ required: false })
   _ts?: number;
 
-  constructor(props: Partial<MobileDeviceDoc>) {
+  constructor(props?: Partial<MobileDeviceDoc>) {
     Object.assign(this, props);
 
     this.id = `${this.web2UserId}-${this.deviceUUID}`;

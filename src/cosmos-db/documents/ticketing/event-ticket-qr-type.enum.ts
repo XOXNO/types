@@ -9,15 +9,15 @@ import {
   IsString,
 } from 'class-validator';
 
+import {
+  EventScanMessage,
+  EventScanStatus,
+} from '../../../enums/event-scan-status.enum';
+import { EventTicketQrType } from '../../../enums/ticketing-visibility.enum';
+import { NftDocHydrated } from '../token/nft-details.doc';
 import { EventGuestProfile } from './event-guest.doc';
 import { EventInvitation } from './event-invitation.doc';
-import {
-  EventScanStatus,
-  EventScanMessage,
-} from '../../../enums/event-scan-status.enum';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
-import { NftDoc, NftDocHydrated } from '../token/nft-details.doc';
-import { EventTicketQrType } from '../../../enums/ticketing-visibility.enum';
 
 export class TicketSelection {
   @ApiProperty({

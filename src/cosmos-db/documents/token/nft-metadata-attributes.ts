@@ -7,8 +7,8 @@ export class NftMetadataAttributes {
   @ApiProperty({ required: true, type: String, example: 'Black' })
   value!: string;
 
-  constructor(json: Partial<NftMetadataAttributes>) {
-    this.trait_type = json?.trait_type?.toString().trim() ?? '';
-    this.value = json?.value?.toString().trim() ?? '';
+  constructor(props?: Partial<NftMetadataAttributes>) {
+    this.trait_type = props?.trait_type?.toString().trim() ?? '';
+    this.value = props?.value?.toString().trim() ?? '';
   }
 }

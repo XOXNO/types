@@ -52,14 +52,14 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter<NftOfferDoc> {
   })
   orderBy? = ['priceShort desc' as const];
 
-  constructor(props: Partial<NftOfferDocFilter>) {
+  constructor(props?: Partial<NftOfferDocFilter>) {
     super(props);
     this.filters = {
       ...this.filters,
       ...props?.filters,
     };
     // Assign other properties
-    const { filters: _, ...otherProps } = props;
+    const { filters: _, ...otherProps } = props!;
     Object.assign(this, otherProps);
 
     this.setPk();

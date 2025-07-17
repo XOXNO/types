@@ -4,34 +4,31 @@ import { EventQuestionAnswerType } from '../../../enums/event-question-answer-ty
 import { EventQuestionDoc } from './event-question.doc';
 
 export class EventQuestionValidator {
-  static validate(question: Partial<EventQuestionDoc>): void {
+  static validate(props?: Partial<EventQuestionDoc>): void {
     const multipleChoiceTypes = [
       EventQuestionAnswerType.RADIO,
       EventQuestionAnswerType.DROPDOWN,
       EventQuestionAnswerType.CHECKBOX,
     ];
     // Check for minimum answers for certain types
-    if (
-      question.answerType &&
-      multipleChoiceTypes.includes(question.answerType)
-    ) {
-      if (!question.answers || question.answers.length < 2) {
+    if (props?.answerType && multipleChoiceTypes.includes(props.answerType)) {
+      if (!props.answers || props.answers.length < 2) {
         throw new BadRequestException(
-          `[${question.answerType}] questions require at least 2 answer options`,
+          `[${props.answerType}] questions require at least 2 answer options`,
         );
       }
     }
     // Ensure answers array is empty for non-multiple choice questions
-    else if (question.answers && question.answers.length > 0) {
+    else if (props?.answers && props.answers.length > 0) {
       throw new BadRequestException(
-        `[${question.answerType}] questions should not have predefined answers`,
+        `[${props.answerType}] questions should not have predefined answers`,
       );
     }
 
     // Check for duplicate answers
-    if (question.answers) {
-      const uniqueAnswers = new Set(question.answers);
-      if (uniqueAnswers.size !== question.answers.length) {
+    if (props?.answers) {
+      const uniqueAnswers = new Set(props.answers);
+      if (uniqueAnswers.size !== props.answers.length) {
         throw new BadRequestException('Duplicate answers are not allowed');
       }
     }

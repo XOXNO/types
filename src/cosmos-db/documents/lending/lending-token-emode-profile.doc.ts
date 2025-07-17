@@ -33,8 +33,8 @@ export class LendingTokenEModeProfileDoc {
   pk!: string;
   _ts!: number;
 
-  constructor(init?: Partial<LendingTokenEModeProfileDoc>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<LendingTokenEModeProfileDoc>) {
+    Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.token}_${this.eModeCategory}_${this.dataType}`;
   }

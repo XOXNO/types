@@ -26,7 +26,7 @@ export class EgldOrEsdtTokenPayment {
   @IsInt()
   decimals?: number; // Applied after
 
-  constructor(init?: Partial<EgldOrEsdtTokenPayment>) {
-    Object.assign(this, init);
+  constructor(props?: Partial<EgldOrEsdtTokenPayment>) {
+    Object.assign(this, props);
   }
 }
