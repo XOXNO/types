@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { CollectionInfoDto } from './collection-info.dto';
+import { ShortCollectionInfoDoc } from '../../cosmos-db/documents/short/short-collection-info.doc';
 import { CollectionMintProfileDoc } from '../../cosmos-db/documents/collection/mintProfile';
 import {
   EventProfileDoc,
@@ -9,8 +9,8 @@ import {
 import { CreatorProfileDoc } from '../../cosmos-db/documents/user/user-creator-profile.doc';
 
 class MintingListingDto extends CollectionMintProfileDoc {
-  @ApiProperty({ type: () => CollectionInfoDto })
-  collectionInfo!: CollectionInfoDto;
+  @ApiProperty({ type: () => ShortCollectionInfoDoc })
+  collectionInfo!: ShortCollectionInfoDoc;
 }
 
 export class CreatorDetailsDto extends CreatorProfileDoc {

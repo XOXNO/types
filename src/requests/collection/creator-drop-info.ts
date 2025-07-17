@@ -1,7 +1,7 @@
 // DTO Type
 import { ApiProperty } from '@nestjs/swagger';
 
-import { CollectionInfoDto } from './collection-info.dto';
+import { ShortCollectionInfoDoc } from '../../cosmos-db/documents/short/short-collection-info.doc';
 import { EgldOrEsdtTokenPayment } from '../../common/tokenPayent';
 import { SocialsDto } from '../../common/socials';
 
@@ -141,8 +141,8 @@ export class DropInfoDto {
   @ApiProperty({ type: MintStageDto, isArray: true })
   mintStages!: MintStageDto[];
 
-  @ApiProperty({ type: () => CollectionInfoDto })
-  collectionInfo!: CollectionInfoDto;
+  @ApiProperty({ type: () => ShortCollectionInfoDoc })
+  collectionInfo!: ShortCollectionInfoDoc;
 
   @ApiProperty({ type: CreatorInfoDto })
   creatorInfo!: CreatorInfoDto;
