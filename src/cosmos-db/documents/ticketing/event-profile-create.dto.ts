@@ -120,6 +120,30 @@ export class RegistrationDetailsDto {
   @IsBoolean()
   @IsOptional()
   allowCrypto?: boolean;
+
+  @ApiProperty({
+    type: 'integer',
+    required: false,
+    description: 'Current number of tickets sold',
+  })
+  @IsInt()
+  soldCount?: number;
+
+  @ApiProperty({
+    type: Boolean,
+    required: false,
+    description: 'Whether the event has custom questions',
+  })
+  @IsBoolean()
+  hasCustomQuestions?: boolean;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Email sender for notifications',
+  })
+  @IsString()
+  emailSender?: string;
 }
 
 export class EventLocationDto {

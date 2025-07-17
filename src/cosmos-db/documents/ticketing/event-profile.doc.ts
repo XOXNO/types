@@ -2,7 +2,7 @@ import { randomBytes } from 'crypto';
 
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsEnum, IsInt, IsBoolean, IsString, IsNumber } from 'class-validator';
+import { IsBoolean, IsInt, IsNumber, IsString } from 'class-validator';
 import { v4 } from 'uuid';
 
 import {
@@ -10,154 +10,21 @@ import {
   EventSubCategory,
 } from '../../../enums/event-category.enum';
 import { EventGuestStatus } from '../../../enums/event-guest-status.enum';
-import { EventGuestDoc } from './event-guest.doc';
-import { EventLocationDto, EventSeoDto } from './event-profile-create.dto';
-import { EventUserRoleDoc } from './event-user-role.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
+import { EventTicketQrType } from '../../../enums/ticketing-visibility.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
+import { EventGuestDoc } from './event-guest.doc';
 import {
-  Visibility,
-  EventTicketQrType,
-} from '../../../enums/ticketing-visibility.enum';
-export class RegistrationType {
-  @ApiProperty({
-    enum: Visibility,
-    required: true,
-    description: 'Visibility of the event registration',
-    enumName: 'Visibility',
-  })
-  @IsEnum(Visibility)
-  visibility!: Visibility;
+  EventLocationDto,
+  EventSeoDto,
+  RegistrationDetailsDto,
+} from './event-profile-create.dto';
+import { EventUserRoleDoc } from './event-user-role.doc';
 
-  @ApiProperty({
-    type: 'integer',
-    required: true,
-    description: 'Maximum number of registrations allowed',
-  })
-  @IsInt()
-  maxLimit!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    required: true,
-    description: 'Maximum number of registrations allowed per user',
-  })
-  @IsInt()
-  userLimit!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    required: false,
-    description: 'Current number of tickets sold',
-  })
-  @IsInt()
-  soldCount?: number;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether the event has side events',
-  })
-  @IsBoolean()
-  hasSideEvents!: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: false,
-    description: 'Whether to show the guest count',
-  })
-  @IsBoolean()
-  showGuestCount?: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether KYC is required for registration',
-  })
-  @IsBoolean()
-  requireKYC!: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether the event is refundable',
-  })
-  @IsBoolean()
-  refundable!: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether to show name with number',
-  })
-  @IsBoolean()
-  nameWithNumber!: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether bot protection is enabled',
-  })
-  @IsBoolean()
-  botProtection!: boolean;
-
-  @ApiProperty({
-    type: 'boolean',
-    required: true,
-    description: 'Whether the event is published',
-  })
-  @IsBoolean()
-  isPublished!: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    required: false,
-    description: 'Whether the event has a waitlist',
-  })
-  @IsBoolean()
-  hasWaitlist?: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    required: true,
-    description: 'Whether name is required for registration',
-  })
-  @IsBoolean()
-  requireName!: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    required: true,
-    description: 'Whether email is required for registration',
-  })
-  @IsBoolean()
-  requireEmail!: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    required: true,
-    description: 'Whether phone number is required for registration',
-  })
-  @IsBoolean()
-  requirePhoneNumber!: boolean;
-
-  @ApiProperty({
-    type: Boolean,
-    required: false,
-    description: 'Whether the event has custom questions',
-  })
-  @IsBoolean()
-  hasCustomQuestions?: boolean;
-
-  @ApiProperty({
-    type: String,
-    required: false,
-    description: 'Email sender for notifications',
-  })
-  @IsString()
-  emailSender?: string;
-}
+/* export class RegistrationType {
+  
+} */
 
 export class PremiumType {
   @ApiProperty({
@@ -310,9 +177,9 @@ export class EventProfileDoc {
   @ApiProperty({
     description:
       'Registration details such as visibility, max capacity, and ticket limits.',
-    type: () => RegistrationType,
+    type: () => RegistrationDetailsDto,
   })
-  registration!: RegistrationType;
+  registration!: RegistrationDetailsDto;
 
   @ApiProperty({
     description: 'Event premium features',
