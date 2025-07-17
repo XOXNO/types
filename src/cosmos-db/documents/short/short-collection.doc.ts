@@ -13,4 +13,6 @@ export class ShortCollectionDoc extends PickType(CollectionProfileDoc, [
   'collectionSize',
   'followCount',
   'holdersCount',
+  'socials',
+  'owner',
 ]) {}
