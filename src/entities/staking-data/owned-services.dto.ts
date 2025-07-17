@@ -1,18 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { CollectionMintProfileDoc } from '../../cosmos-db/documents/collection/mintProfile';
+import { CollectionMintProfileDocHydrated } from '../../cosmos-db/documents/collection/mintProfile';
 import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-doc';
-import { EventProfileDoc } from '../../cosmos-db/documents/ticketing/event-profile.doc';
+import { EventProfile } from '../../cosmos-db/documents/ticketing/event-profile.doc';
 import { CreatorProfileDoc } from '../../cosmos-db/documents/user/user-creator-profile.doc';
 
 export class OwnedServicesDto {
-  @ApiProperty({ type: CollectionMintProfileDoc, isArray: true })
-  mintProfiles!: CollectionMintProfileDoc[];
+  @ApiProperty({ type: CollectionMintProfileDocHydrated, isArray: true })
+  mintProfiles!: CollectionMintProfileDocHydrated[];
 
   @ApiProperty({ type: StakingSummary, isArray: true })
   stakingPools!: StakingSummary[];
 
-  @ApiProperty({ type: EventProfileDoc, isArray: true })
-  events!: EventProfileDoc[];
+  @ApiProperty({ type: EventProfile, isArray: true })
+  events!: EventProfile[];
 
   @ApiProperty({ type: CreatorProfileDoc })
   creatorProfile!: CreatorProfileDoc;

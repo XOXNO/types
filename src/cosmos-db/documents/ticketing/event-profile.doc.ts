@@ -166,7 +166,7 @@ export class EventProfileDoc {
     enumName: 'EventSubCategory',
     required: false,
   })
-  subCategory?: string;
+  subCategory?: EventSubCategory;
 
   @ApiProperty({
     description: 'URL to the background image in Azure storage, optional.',

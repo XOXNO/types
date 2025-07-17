@@ -100,5 +100,5 @@ export class EventProfileEditDto {
   @IsString()
   @IsOptional()
   @IsEnum(EventSubCategory)
-  subCategory?: string;
+  subCategory?: EventSubCategory;
 }
