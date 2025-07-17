@@ -115,6 +115,11 @@ export class RegistrationDetailsDto {
   @ApiProperty()
   @IsBoolean()
   botProtection!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  @IsOptional()
+  allowCrypto?: boolean;
 }
 
 export class EventLocationDto {
