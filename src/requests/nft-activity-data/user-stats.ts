@@ -38,6 +38,7 @@ class WalletDto {
   @IsNumber()
   followCount!: number;
 
+  @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain;
 }
 

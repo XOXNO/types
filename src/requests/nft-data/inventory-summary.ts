@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsBoolean, IsEnum, IsNumber, IsString, IsUrl } from 'class-validator';
+import { ActivityChain } from '../../enums/common.enum';
 
 export class InventorySummaryDto {
   @ApiProperty({ description: 'Collection identifier' })
@@ -48,4 +49,7 @@ export class InventorySummaryDtoHydrated extends InventorySummaryDto {
   @ApiProperty({ description: 'Value of the collection' })
   @IsNumber()
   value!: number;
+
+  @ApiProperty({ enum: ActivityChain, required: false })
+  chain?: ActivityChain;
 }
