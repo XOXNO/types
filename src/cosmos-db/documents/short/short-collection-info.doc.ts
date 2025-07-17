@@ -8,10 +8,10 @@ export class ShortCollectionInfoDoc extends PickType(CollectionProfileDoc, [
   'profile',
   'description',
   'chain',
-  'pinnedAtDrops',
   'collectionSize',
   'followCount',
   'holdersCount',
+  //
   'owner',
   'banner',
   'socials',

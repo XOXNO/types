@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 import { CollectionProfileDoc } from '../collection/profile';
 
 export class ShortNftCollectionInfoDoc extends PickType(CollectionProfileDoc, [
@@ -6,12 +6,12 @@ export class ShortNftCollectionInfoDoc extends PickType(CollectionProfileDoc, [
   'isVerified',
   'isVisible',
   'profile',
-  'banner',
-  'collectionSize',
   'description',
-  'holdersCount',
+  'chain',
+  'collectionSize',
   'followCount',
+  'holdersCount',
+  //
   'customConfig',
   'roles',
-  'chain',
 ]) {}
