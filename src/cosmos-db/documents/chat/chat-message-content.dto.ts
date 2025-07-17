@@ -15,7 +15,7 @@ import { ChatMessageReplyDto } from './chat-message-reply.dto';
 export class ChatMessageContentDto {
   @IsEnum(ChatMessageContentType)
   @ApiProperty({ description: 'Message type', type: String })
-  readonly type!: string;
+  readonly type!: ChatMessageContentType;
 
   @IsString()
   @ApiProperty({ description: 'Message value', type: String })
