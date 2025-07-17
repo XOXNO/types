@@ -14,6 +14,7 @@ export class ShortCollectionInfoDoc extends PickType(CollectionProfileDoc, [
   'holdersCount',
   'owner',
   'banner',
+  'socials',
 ]) {
   @ApiProperty({ example: 1230.34 })
   volume!: number;
