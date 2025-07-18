@@ -1,11 +1,14 @@
 // bun-flat-barrel.ts
-import { readdirSync, statSync, rmSync, writeFileSync } from 'fs';
+import { readdirSync, statSync, rmSync, writeFileSync, existsSync } from 'fs';
 import { join, resolve, relative } from 'path';
 
 const rootDir = resolve('src');
-const exportLines = [];
+const enumsDir = join(rootDir, 'enums');
 
-function walk(dir) {
+const exportLinesRoot = [];
+const exportLinesEnums = [];
+
+function walk(dir, collector, baseDir) {
   const entries = readdirSync(dir);
 
   for (const entry of entries) {
@@ -13,28 +16,40 @@ function walk(dir) {
     const stat = statSync(fullPath);
 
     if (stat.isDirectory()) {
-      walk(fullPath);
+      walk(fullPath, collector, baseDir);
     } else if (entry === 'index.ts') {
-      // Delete every index.ts found (except root, handled later)
-      if (fullPath !== join(rootDir, 'index.ts')) {
+      const keep = [join(rootDir, 'index.ts'), join(enumsDir, 'index.ts')];
+      if (!keep.includes(fullPath)) {
         rmSync(fullPath);
         console.log(`🗑️  Deleted: ${fullPath}`);
       }
     } else if (entry.endsWith('.ts') || entry.endsWith('.tsx')) {
       const withoutExt = entry.replace(/\.(ts|tsx)$/, '');
-      const relativePath = relative(rootDir, join(dir, withoutExt)).replace(
+      const relPath = relative(baseDir, join(dir, withoutExt)).replace(
         /\\/g,
         '/',
       );
-      exportLines.push(`export * from "./${relativePath}";`);
+      collector.push(`export * from "./${relPath}";`);
     }
   }
 }
 
-// Run cleanup + collect exports
-walk(rootDir);
+// Build full root exports
+walk(rootDir, exportLinesRoot, rootDir);
 
-// Write flat root-level barrel
+// Build enums-only exports with relative paths from `enums/`
+if (existsSync(enumsDir)) {
+  walk(enumsDir, exportLinesEnums, enumsDir);
+}
+
+// Write `src/index.ts`
 const rootIndexPath = join(rootDir, 'index.ts');
-writeFileSync(rootIndexPath, exportLines.join('\n') + '\n');
-console.log(`✅ Flat root barrel created at ${rootIndexPath}`);
+writeFileSync(rootIndexPath, exportLinesRoot.join('\n') + '\n');
+console.log(`✅ Root barrel created at ${rootIndexPath}`);
+
+// Write `src/enums/index.ts` with correct relative paths
+if (exportLinesEnums.length > 0) {
+  const enumsIndexPath = join(enumsDir, 'index.ts');
+  writeFileSync(enumsIndexPath, exportLinesEnums.join('\n') + '\n');
+  console.log(`✅ Enums barrel created at ${enumsIndexPath}`);
+}

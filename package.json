@@ -2,11 +2,25 @@
   "name": "@xoxno/types",
   "version": "1.0.113",
   "description": "Shared types and utilities for XOXNO API.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+ "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "require": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./enums": {
+      "import": "./dist/enums/index.js",
+      "require": "./dist/enums/index.js",
+      "types": "./dist/enums/index.d.ts"
+    }
+  },
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "files": [
-    "dist"
+    "dist/**/*"
   ],
+  "sideEffects": false,
   "scripts": {
     "build": "node generate-barrel.mjs && eslint 'src/index.ts' --fix && tsc && node strip-types.js",
     "build:watch": "tsc --watch",
