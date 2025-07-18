@@ -19,7 +19,7 @@ export class ChatMessageContentDto {
 
   @IsString()
   @ApiProperty({ description: 'Message value', type: String })
-  readonly value!: string;
+  value!: string;
 
   @IsOptional()
   @ValidateNested()
