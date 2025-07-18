@@ -206,6 +206,75 @@ export class EventLocationDto {
   @Length(3, 100)
   country?: string;
 }
+export class RegistrationDetailsCreateDto {
+  @ApiProperty({
+    enum: Visibility,
+    enumName: 'Visibility',
+  })
+  @IsEnum(Visibility)
+  visibility!: Visibility;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Maximum registrations allowed',
+  })
+  @IsInt()
+  maxLimit!: number;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Maximum registrations per user',
+  })
+  @IsInt()
+  userLimit!: number;
+
+  @ApiProperty()
+  @IsBoolean()
+  requireKYC!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  requireName!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  requireEmail!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  requirePhoneNumber!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  @IsOptional()
+  isPublished!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  hasSideEvents!: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
+  hasWaitlist!: boolean;
+
+  @ApiProperty()
+  @IsOptional()
+  @IsBoolean()
+  showGuestCount!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  refundable!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  nameWithNumber!: boolean;
+
+  @ApiProperty()
+  @IsBoolean()
+  botProtection!: boolean;
+}
 
 export class EventProfileCreateDto {
   @ApiProperty()
@@ -228,11 +297,11 @@ export class EventProfileCreateDto {
   @Type(() => EventLocationDto)
   location!: EventLocationDto;
 
-  @ApiProperty({ type: RegistrationDetailsDto })
+  @ApiProperty({ type: RegistrationDetailsCreateDto })
   @IsObject()
   @ValidateNested()
-  @Type(() => RegistrationDetailsDto)
-  registration!: RegistrationDetailsDto;
+  @Type(() => RegistrationDetailsCreateDto)
+  registration!: RegistrationDetailsCreateDto;
 
   @ApiProperty()
   @IsBoolean()
