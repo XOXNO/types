@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { TokenDataType } from '../../enums';
+import { ActivityChain, TokenDataType } from '../../enums';
 
 class TokenDataDocBase {
   identifier!: string;
@@ -21,6 +21,7 @@ export class TokenDataDoc extends TokenDataDocBase {
   type!: string;
   category: string[] = ['userInventory'];
   _ts!: number;
+  chain: ActivityChain = ActivityChain.MVX;
 
   constructor(props?: Partial<TokenDataDoc>) {
     super(props);
