@@ -8,6 +8,7 @@ class TokenDataDocBase {
   name!: string;
   svgUrl!: string;
   pngUrl!: string;
+  chain: ActivityChain = ActivityChain.MVX;
 
   constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
@@ -21,7 +22,6 @@ export class TokenDataDoc extends TokenDataDocBase {
   type!: string;
   category: string[] = ['userInventory'];
   _ts!: number;
-  chain: ActivityChain = ActivityChain.MVX;
 
   constructor(props?: Partial<TokenDataDoc>) {
     super(props);
