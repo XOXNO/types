@@ -20,7 +20,7 @@ import {
 import {
   EventLocationDto,
   EventSeoDto,
-  RegistrationDetailsDto,
+  RegistrationDetailsCreateDto,
 } from './event-profile-create.dto';
 
 export class EventProfileEditDto {
@@ -60,12 +60,16 @@ export class EventProfileEditDto {
   @IsBoolean()
   isVirtualEvent?: boolean;
 
-  @ApiProperty({ type: RegistrationDetailsDto, example: {}, required: false })
+  @ApiProperty({
+    type: RegistrationDetailsCreateDto,
+    example: {},
+    required: false,
+  })
   @IsObject()
   @IsOptional()
   @ValidateNested()
-  @Type(() => RegistrationDetailsDto)
-  registration?: RegistrationDetailsDto;
+  @Type(() => RegistrationDetailsCreateDto)
+  registration?: RegistrationDetailsCreateDto;
 
   @ApiProperty({ example: 'my-awesome-event', type: String, required: false })
   @IsString()
