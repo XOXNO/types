@@ -1,22 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class TokenDataDoc {
-  id!: string;
+class TokenDataDocBase {
   identifier!: string;
-  collection!: string;
-  dataType!: string;
   decimals!: number;
+  ticker!: string;
   name!: string;
-  type!: string;
-  category: string[] = ['userInventory'];
   svgUrl!: string;
   pngUrl!: string;
-  ticker!: string;
-  _ts!: number;
 
-  constructor(props?: Partial<TokenDataDoc>) {
+  constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
   }
+}
+
+export class TokenDataDoc extends TokenDataDocBase {
+  collection!: string;
+  dataType!: string;
+  type!: string;
+  category: string[] = ['userInventory'];
+  _ts!: number;
 }
 
 export class TokenDataDocHydrated extends TokenDataDoc {
@@ -34,7 +36,13 @@ export class SuiCoinObjectDto {
   version!: string;
 }
 
-export class TokenDataDocWithBalance extends TokenDataDocHydrated {
+export class TokenDataDocWithBalance extends TokenDataDocBase {
+  @ApiProperty({ example: 12.160648172030305 })
+  usdPrice!: number;
+
+  @ApiProperty({ example: false })
+  isAshSupported!: boolean;
+
   @ApiProperty({ example: 0 })
   nonce!: number;
 
