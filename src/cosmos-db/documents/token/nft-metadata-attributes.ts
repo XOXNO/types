@@ -12,3 +12,11 @@ export class NftMetadataAttributes {
     this.value = props?.value?.toString().trim() ?? '';
   }
 }
+
+export class NftMetadataAttributesHydrated extends NftMetadataAttributes {
+  occurance!: number;
+  frequency!: number;
+  floorPrice!: number;
+  onSaleCount!: number;
+  usdValue!: number;
+}

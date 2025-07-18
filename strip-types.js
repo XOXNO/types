@@ -27,12 +27,16 @@ function stripNestjsType(typeString) {
 const dtsFiles = glob.sync(path.join(__dirname, 'dist/**/*.d.ts'));
 
 for (const file of dtsFiles) {
+  const dtsLines = fs.readFileSync(file, 'utf8').split('\n');
+
   if (path.basename(file) === 'index.d.ts') {
-    console.log(`⏩ Skipped index.d.ts: ${file}`);
+    const strippedOfEnums = dtsLines.filter(
+      (line) => !line.includes('./enums/'),
+    );
+    fs.writeFileSync(file, strippedOfEnums.join('\n'));
     continue;
   }
 
-  const dtsLines = fs.readFileSync(file, 'utf8').split('\n');
   const outputLines = [];
 
   for (let i = 0; i < dtsLines.length; i++) {

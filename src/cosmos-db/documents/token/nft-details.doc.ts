@@ -7,7 +7,7 @@ import {
 } from '../../../enums/common.enum';
 import { TokenDataType } from '../../../enums/token-data.enum';
 import { ShortNftCollectionInfoDoc } from '../short/short-nft-collection-info.doc';
-import { NftMetadata } from './nft-metadata';
+import { NftMetadata, NftMetadataHydrated } from './nft-metadata';
 import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
 // Sale: Check Last Owner nfts from GuestDoc [1,2,3] -> 0 -> Delete GuestDoc > 0: Edit GuestDoc nftIds [1,2]
 // New Owner: Get GuestDoc -> YES -> nfts insert new ID [0,3] -> NO -> Empty Guest Doc with nfts insert [3]
@@ -165,12 +165,6 @@ class NftDocBase {
   })
   statistics?: NftStats;
   @ApiProperty({
-    type: NftMetadata,
-    required: false,
-    description: 'The metadata of the NFT',
-  })
-  metadata?: NftMetadata = { attributes: [] };
-  @ApiProperty({
     type: Boolean,
     required: false,
     description: 'Whether the NFT is a ticket',
@@ -262,6 +256,12 @@ export class NftDoc extends NftDocBase {
     description: 'The sale info of the NFT',
   })
   saleInfo?: NftSaleInfo;
+  @ApiProperty({
+    type: NftMetadata,
+    required: false,
+    description: 'The metadata of the NFT',
+  })
+  metadata?: NftMetadata = { attributes: [] };
 }
 
 export class ExtraProperties {
@@ -306,6 +306,13 @@ export class NftDocHydrated extends NftDocBase {
     description: 'The sale info of the NFT',
   })
   saleInfo?: NftSaleInfoHydrated;
+
+  @ApiProperty({
+    type: NftMetadataHydrated,
+    required: false,
+    description: 'The metadata of the NFT',
+  })
+  metadata?: NftMetadataHydrated = { attributes: [] };
 
   @ApiProperty({
     type: ShortNftCollectionInfoDoc,

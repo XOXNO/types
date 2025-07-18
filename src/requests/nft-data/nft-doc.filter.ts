@@ -8,6 +8,7 @@ import {
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { XoxnoAuctionTypeString } from '../../enums/xoxno-auction-type.enum';
 import { NftDocHydrated } from '../../cosmos-db/documents/token/nft-details.doc';
+import { NftMetadata } from '../../cosmos-db/documents/token/nft-metadata';
 
 export class SaleInfoFilterDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -28,10 +29,10 @@ export class SaleInfoFilterDto {
   auctionType?: XoxnoAuctionTypeString[];
 }
 
-export class MetadataAttributesDto {
+/* export class MetadataAttributesDto {
   @ApiProperty({ required: false, type: NftMetadataAttributes, isArray: true })
   attributes?: NftMetadataAttributes[];
-}
+} */
 
 export class NftDocFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -64,8 +65,8 @@ export class NftDocFilterCriteriaDto {
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
   range?: RangeFilter<NftDocHydrated>[];
 
-  @ApiProperty({ required: false, type: MetadataAttributesDto })
-  metadata?: MetadataAttributesDto;
+  @ApiProperty({ required: false, type: NftMetadata })
+  metadata?: NftMetadata;
 
   @ApiProperty({ required: false, type: Boolean, example: true })
   wasProcessed?: boolean;

@@ -1,5 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { NftMetadataAttributes } from './nft-metadata-attributes';
+import {
+  NftMetadataAttributes,
+  NftMetadataAttributesHydrated,
+} from './nft-metadata-attributes';
 
 class Rarity {
   @ApiProperty({
@@ -16,21 +19,13 @@ class Rarity {
   rarityScore?: number;
 }
 
-export class NftMetadata {
+class NftMetadataBase {
   @ApiProperty({
     required: false,
     type: String,
     description: 'Description of an asset',
   })
   description?: string;
-
-  @ApiProperty({
-    required: false,
-    isArray: true,
-    type: NftMetadataAttributes,
-    description: 'The list of attributes for this asset',
-  })
-  attributes?: NftMetadataAttributes[];
 
   @ApiProperty({
     required: false,
@@ -44,4 +39,24 @@ export class NftMetadata {
   constructor(props?: Partial<NftMetadata>) {
     Object.assign(this, props);
   }
+}
+
+export class NftMetadata extends NftMetadataBase {
+  @ApiProperty({
+    required: false,
+    isArray: true,
+    type: NftMetadataAttributes,
+    description: 'The list of attributes for this asset',
+  })
+  attributes?: NftMetadataAttributes[];
+}
+
+export class NftMetadataHydrated extends NftMetadataBase {
+  @ApiProperty({
+    required: false,
+    isArray: true,
+    type: NftMetadataAttributesHydrated,
+    description: 'The list of attributes for this asset',
+  })
+  attributes?: NftMetadataAttributesHydrated[];
 }
