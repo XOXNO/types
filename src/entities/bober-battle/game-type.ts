@@ -1,8 +1,5 @@
 import { ActivityChain } from '../../enums/common.enum';
-import {
-  TokenDataDoc,
-  TokenDataDocHydrated,
-} from '../token-data/token-data.doc';
+import { TokenDataDocHydrated } from '../token-data/token-data.doc';
 
 export interface BoberBattleGame {
   id: string;

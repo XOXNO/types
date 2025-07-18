@@ -20,6 +20,11 @@ export class TokenDataDoc extends TokenDataDocBase {
   type!: string;
   category: string[] = ['userInventory'];
   _ts!: number;
+
+  constructor(props?: Partial<TokenDataDoc>) {
+    super(props);
+    Object.assign(this, props);
+  }
 }
 
 export class TokenDataDocHydrated extends TokenDataDoc {
