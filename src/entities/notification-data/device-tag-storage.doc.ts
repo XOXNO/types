@@ -5,7 +5,7 @@ import { NotificationDataType } from '../../enums/notification-data-type.enum';
 
 export class DeviceTagStorageDoc {
   @ApiProperty()
-  dataType: string = NotificationDataType.DeviceTagStorage;
+  dataType = NotificationDataType.DeviceTagStorage;
 
   @ApiProperty()
   installationId!: string;

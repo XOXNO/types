@@ -1,7 +1,7 @@
 import { ChatDataType } from '../../../enums/chat-data-type.enum';
 
 export class GroupChatProfileDoc {
-  dataType: string = ChatDataType.GROUP_CHAT_PROFILE;
+  dataType = ChatDataType.GROUP_CHAT_PROFILE;
   name!: string;
   chatId!: string;
   description?: string;

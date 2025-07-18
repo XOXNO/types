@@ -48,7 +48,7 @@ class PushNotificationTargetingDto {
 
 export class PushNotificationDoc {
   @ApiProperty()
-  dataType: string = NotificationDataType.PushNotification;
+  dataType = NotificationDataType.PushNotification;
 
   @ApiProperty()
   title!: string;

@@ -16,7 +16,7 @@ export class EventUserRoleDoc {
     enum: TicketingDataType,
     enumName: 'TicketingDataType',
   })
-  dataType: string = TicketingDataType.USER_ROLE;
+  dataType = TicketingDataType.USER_ROLE;
 
   @ApiProperty({
     description: 'Unique identifier for the event.',

@@ -152,7 +152,7 @@ export class CollectionStatsDoc {
     description: 'Data type identifier for collection stats',
     example: CollectionDataType.CollectionStats,
   })
-  dataType: string = CollectionDataType.CollectionStats;
+  dataType = CollectionDataType.CollectionStats;
 
   @ApiProperty({
     description: 'Collection identifier',

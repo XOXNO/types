@@ -11,7 +11,7 @@ export class LendingAccountProfileDoc {
     enumName: 'LendingDataType',
     example: LendingDataType.ACCOUNT_PROFILE,
   })
-  dataType: string = LendingDataType.ACCOUNT_PROFILE;
+  dataType = LendingDataType.ACCOUNT_PROFILE;
 
   @ApiProperty({
     description: 'Unique identifier for the lending account',

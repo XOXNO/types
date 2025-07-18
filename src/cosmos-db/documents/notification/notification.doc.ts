@@ -3,7 +3,7 @@ import { NotificationAssetType } from '../../../enums/notification-asset-type.en
 import { MarketplaceActivity } from '../../../enums/marketplace-activity.enum';
 
 export class NotificationDoc {
-  dataType: string = NotificationDataType.Notification;
+  dataType = NotificationDataType.Notification;
   txHash!: string;
   source!: string;
   activityType!: MarketplaceActivity;

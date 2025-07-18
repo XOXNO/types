@@ -4,7 +4,7 @@ import { NotificationDataType } from '../../enums/notification-data-type.enum';
 
 export class MobileDeviceDoc {
   @ApiProperty({ description: 'Document type identifier' })
-  dataType: string = NotificationDataType.MobileDevice;
+  dataType = NotificationDataType.MobileDevice;
 
   @ApiProperty({ description: 'Unique device identifier' })
   deviceUUID!: string;

@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { TokenDataType } from '../../enums';
 
 class TokenDataDocBase {
   identifier!: string;
@@ -16,7 +17,7 @@ class TokenDataDocBase {
 export class TokenDataDoc extends TokenDataDocBase {
   id!: string;
   collection!: string;
-  dataType!: string;
+  dataType = TokenDataType.FungibleTokenInfo;
   type!: string;
   category: string[] = ['userInventory'];
   _ts!: number;

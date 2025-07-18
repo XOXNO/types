@@ -4,10 +4,11 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ShortCollectionInfoDoc } from '../../cosmos-db/documents/short/short-collection-info.doc';
 import { EgldOrEsdtTokenPayment } from '../../common/tokenPayent';
 import { SocialsDto } from '../../common/socials';
+import { CollectionDataType } from '../../enums';
 
 export class MintStageDto {
   @ApiProperty({ example: 'mintStage' })
-  dataType!: string;
+  dataType = CollectionDataType.MintStage;
 
   @ApiProperty({ example: 'MICE-a0c447' })
   collection!: string;

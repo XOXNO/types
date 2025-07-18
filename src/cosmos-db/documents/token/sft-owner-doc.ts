@@ -2,7 +2,7 @@ import { EsdtTokenType } from '../../../enums/common.enum';
 import { TokenDataType } from '../../../enums/token-data.enum';
 
 export class SftOwnerDoc {
-  dataType: string = TokenDataType.SftOwner;
+  dataType = TokenDataType.SftOwner;
   identifier!: string;
   collection!: string;
   type!: string;

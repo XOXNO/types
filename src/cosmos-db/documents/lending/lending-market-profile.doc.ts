@@ -11,7 +11,7 @@ export class LendingMarketProfileDoc {
     enumName: 'LendingDataType',
     example: LendingDataType.MARKET_PROFILE,
   })
-  dataType!: string;
+  dataType = LendingDataType.MARKET_PROFILE;
 
   @ApiProperty({
     description: 'Token associated with the lending market',
