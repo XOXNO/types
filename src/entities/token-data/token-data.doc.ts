@@ -11,9 +11,13 @@ export class TokenDataDoc {
   pngUrl!: string;
   ticker!: string;
   _ts!: number;
-  usdPrice?: number;
 
   constructor(props?: Partial<TokenDataDoc>) {
     Object.assign(this, props);
   }
+}
+
+export class TokenDataDocHydrated extends TokenDataDoc {
+  isAshSupported!: boolean;
+  usdPrice!: number;
 }

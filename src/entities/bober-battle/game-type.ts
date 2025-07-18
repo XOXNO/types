@@ -1,5 +1,8 @@
 import { ActivityChain } from '../../enums/common.enum';
-import { TokenDataDoc } from '../token-data/token-data.doc';
+import {
+  TokenDataDoc,
+  TokenDataDocHydrated,
+} from '../token-data/token-data.doc';
 
 export interface BoberBattleGame {
   id: string;
@@ -22,7 +25,7 @@ export interface BoberBattleGame {
 
 export interface GameConfigs {
   admins: string[]; // Array of wallet addresses
-  gameToken: TokenDataDoc; // Token identifier
+  gameToken: TokenDataDocHydrated; // Token identifier
   gameFees: number; // Using string for BigUint equivalent
   gameMinBet: string; // Using string for BigUint equivalent
   gameRevenue: string; // Using string for BigUint equivalent
