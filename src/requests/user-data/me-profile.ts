@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { UserProfileDoc } from '../../cosmos-db/documents/user/user-profile.doc';
 import {
   UserEmailNotificationSettings,
@@ -32,9 +32,11 @@ export class UserProfileDto extends UserProfileDoc {
   userSettings!: UserSettingsDto;
 }
 
-export class UserUpdateDTO extends PickType(UserProfileDto, [
-  'socials',
-  'description',
-  'profile',
-  'isBoberBattleUser',
-]) {}
+export class UserUpdateDTO extends PartialType(
+  PickType(UserProfileDoc, [
+    'socials',
+    'description',
+    'profile',
+    'isBoberBattleUser',
+  ]),
+) {}
