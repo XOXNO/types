@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-class UnreadMessageCountByChatIdDto {
+export class UnreadMessageCountByChatIdDto {
   @ApiProperty({ example: 1 })
   unreadCount!: number;
 

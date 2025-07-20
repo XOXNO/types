@@ -138,15 +138,6 @@ class OriginalDto {
 
   @ApiProperty({ example: '3192259346380151572' })
   minReturnAmountWithDecimal!: string;
-
-  @ApiProperty({ example: 'PADAWAN-a17f58' })
-  __from!: string;
-
-  @ApiProperty({ example: 'WEGLD-bd4d79' })
-  __to!: string;
-
-  @ApiProperty({ example: '7551218815102395559910.6223' })
-  __amount!: string;
 }
 
 export class FetchSwapRoutesResponseDto {
