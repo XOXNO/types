@@ -32,11 +32,11 @@ export class UserProfileDto extends UserProfileDoc {
   userSettings!: UserSettingsDto;
 }
 
-export class UserUpdateDTO extends PartialType(
+export class UserProfileEditDto extends PartialType(
   PickType(UserProfileDoc, [
     'socials',
     'description',
     'profile',
     'isBoberBattleUser',
-  ]),
+  ] as const),
 ) {}
