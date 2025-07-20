@@ -37,6 +37,6 @@ export class UserProfileEditDto extends PartialType(
     'socials',
     'description',
     'profile',
-    'isAnalyticsEnabled',
+    'isBoberBattleUser',
   ] as const),
 ) {}
