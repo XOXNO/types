@@ -21,11 +21,15 @@ export class StagePrice {
 
   @ApiProperty({ type: String })
   @IsString()
-  ticketTypeId!: string;
+  ticketId!: string;
 
   @ApiProperty({ type: String })
   @IsString()
-  ticketTypeName!: string;
+  ticketType!: string;
+
+  @ApiProperty({ type: String })
+  @IsString()
+  currency!: string;
 
   @ApiProperty({ type: Number })
   @IsNumber()
