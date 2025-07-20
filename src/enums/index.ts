@@ -25,6 +25,7 @@ export * from './lending-data-type.enum';
 export * from './lending-position-type.enum';
 export * from './lending.enum';
 export * from './linked-account-type.enum';
+export * from './login-request-service.enum';
 export * from './marketplace-activity.enum';
 export * from './mobile-device.enum';
 export * from './nft-activity-type.enum';

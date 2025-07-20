@@ -81,6 +81,11 @@ export class UserProfileDoc {
   })
   id: string = '';
 
+  @ApiProperty({
+    example: true,
+    description: 'Wether analytics are enabled',
+    required: false,
+  })
   isBoberBattleUser?: boolean;
 
   constructor(props?: Partial<UserProfileDoc>) {
