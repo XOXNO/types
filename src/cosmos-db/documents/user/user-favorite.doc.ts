@@ -42,7 +42,7 @@ export class UserFavoriteResponseDto {
     example: true,
     type: Boolean,
   })
-  isFollowed!: boolean;
+  isFavorite!: boolean;
 
   @ApiProperty({
     description: 'The user that is followed or unfollowed',
