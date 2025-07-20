@@ -81,6 +81,8 @@ export class UserProfileDoc {
   })
   id: string = '';
 
+  isBoberBattleUser: boolean = false;
+
   constructor(props?: Partial<UserProfileDoc>) {
     Object.assign(this, props);
     this.id = `${this.address}-${this.dataType}`;

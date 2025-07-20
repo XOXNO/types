@@ -36,4 +36,5 @@ export class UserUpdateDTO extends PickType(UserProfileDto, [
   'socials',
   'description',
   'profile',
+  'isBoberBattleUser',
 ]) {}
