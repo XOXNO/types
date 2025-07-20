@@ -86,7 +86,7 @@ export class UserProfileDoc {
     description: 'Wether analytics are enabled',
     required: false,
   })
-  isBoberBattleUser?: boolean;
+  isAnalyticsEnabled?: boolean;
 
   constructor(props?: Partial<UserProfileDoc>) {
     Object.assign(this, props);
