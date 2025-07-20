@@ -24,6 +24,11 @@ export class WalletDetailDto {
   type!: string;
 }
 
+export class CollectionHoldersExportDto {
+  count!: number;
+  address!: string;
+}
+
 export class CollectionHoldersDto {
   @ApiProperty({ description: 'Total supply of NFTs', example: 5580 })
   totalSupply!: number;
