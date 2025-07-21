@@ -41,6 +41,7 @@ export * from './cosmos-db/documents/lending/lending-account-profile';
 export * from './cosmos-db/documents/lending/lending-emode-category-profile.doc';
 export * from './cosmos-db/documents/lending/lending-market-profile.doc';
 export * from './cosmos-db/documents/lending/lending-nft-attributes';
+export * from './cosmos-db/documents/lending/lending-oracle';
 export * from './cosmos-db/documents/lending/lending-token-emode-profile.doc';
 export * from './cosmos-db/documents/notification/notification.doc';
 export * from './cosmos-db/documents/short/short-collection-info.doc';
