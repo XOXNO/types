@@ -183,8 +183,6 @@ const selectFields = [
   'flashLoanFee',
   'utilizationRate',
   'borrowAmount',
-  'borrowAmountScaled',
-  'supplyAmountScaled',
   'optimalUsageRate',
   'slopeRate1',
   'slopeRate2',
@@ -194,10 +192,8 @@ const selectFields = [
   'maxBorrowRate',
   'reserveFactor',
   'oraclePrice',
-  'ltv',
-  'liquidationBonus',
-  'liquidationFee',
-  'liquidationThreshold',
+  'address',
+  'flashLoan',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
