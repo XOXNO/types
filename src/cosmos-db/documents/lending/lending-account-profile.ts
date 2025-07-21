@@ -193,6 +193,14 @@ const selectFields = [
   'baseRate',
   'maxBorrowRate',
   'reserveFactor',
+  'oraclePrice',
+  'ltv',
+  'liquidationBonus',
+  'address',
+  'liquidationFee',
+  'liquidationThreshold',
+  'eMode',
+  'flashLoan',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
