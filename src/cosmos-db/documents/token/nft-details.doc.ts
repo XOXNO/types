@@ -9,6 +9,7 @@ import { TokenDataType } from '../../../enums/token-data.enum';
 import { ShortNftCollectionInfoDoc } from '../short/short-nft-collection-info.doc';
 import { NftMetadata, NftMetadataHydrated } from './nft-metadata';
 import { NftSaleInfo, NftSaleInfoHydrated } from './nft-sale-info';
+import { GlobalOfferDocHydrated } from '../collection/globalOffer';
 // Sale: Check Last Owner nfts from GuestDoc [1,2,3] -> 0 -> Delete GuestDoc > 0: Edit GuestDoc nftIds [1,2]
 // New Owner: Get GuestDoc -> YES -> nfts insert new ID [0,3] -> NO -> Empty Guest Doc with nfts insert [3]
 
@@ -355,4 +356,8 @@ export class NftDocHydrated extends NftDocBase {
     description: 'Extra props for the specific NFT',
   })
   extraProperties?: ExtraProperties;
+}
+
+export class NftDocFull extends NftDocHydrated {
+  globalOffer?: GlobalOfferDocHydrated;
 }
