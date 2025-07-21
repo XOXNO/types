@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import {
   RangeFilter,
   CosmosDbGenericFilter,
+  IOrderBy,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { TokenDataType } from '../../enums/token-data.enum';
 import { NftOfferDoc } from '../../cosmos-db/documents/token/nft-offer.doc';
@@ -45,12 +46,7 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter<NftOfferDoc> {
     dataType: [TokenDataType.Offer],
   };
 
-  @ApiProperty({
-    type: 'array',
-    items: { type: 'string', enum: ['priceShort desc'] },
-    required: false,
-  })
-  orderBy? = ['priceShort desc' as const];
+  orderBy?: IOrderBy<NftOfferDoc>[] = ['priceShort desc' as const];
 
   constructor(props?: Partial<NftOfferDocFilter>) {
     super(props);

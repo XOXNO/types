@@ -10,7 +10,6 @@ export class FilterQueryDto {
   })
   @IsString()
   name!: string;
-
   @ApiProperty({ required: false, type: 'integer' })
   top?: number = 25;
   @ApiProperty({ required: false, type: 'integer' })

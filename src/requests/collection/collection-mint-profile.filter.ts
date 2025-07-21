@@ -1,6 +1,7 @@
 import { ActivityChain } from '../../enums/common.enum';
 import {
   CosmosDbGenericFilter,
+  IOrderBy,
   RangeFilter,
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { CollectionDataType } from '../../enums/collection.enum';
@@ -22,7 +23,7 @@ export class CollectionMintProfileFilter extends CosmosDbGenericFilter<Collectio
     isSoldOut: false,
     activeMint: true,
   };
-  orderBy = ['startTime desc' as const];
+  orderBy?: IOrderBy<CollectionMintProfileDoc>[] = ['startTime desc' as const];
   strictSelect?: boolean = false;
 
   constructor(props?: Partial<CollectionMintProfileFilter>) {
