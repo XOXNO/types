@@ -60,6 +60,9 @@ export class MintStageDto {
   @ApiProperty({ example: null, nullable: true })
   maxBuyable!: number | null;
 
+  @ApiProperty({ required: false })
+  userMintsPerStage?: number;
+
   constructor(props?: Partial<MintStageDto>) {
     Object.assign(this, props);
   }

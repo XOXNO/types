@@ -4,6 +4,7 @@ import { CollectionDataType } from '../../../enums/collection.enum';
 import { MintStageDto } from '../../../requests/collection/creator-drop-info';
 import { ShortCollectionInfoDoc } from '../short/short-collection-info.doc';
 import { ShortCreatorDoc } from '../short/short-creator.doc';
+import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
 
 export class CollectionMintProfileDoc {
   @ApiProperty({
@@ -218,11 +219,11 @@ export class CollectionMintProfileDocWithStages extends PickType(
     'totalNftMinted',
     'hasAttributes',
     'collectionInfo',
-    'creatorInfo',
   ] as const,
 ) {
   collection!: string;
   isExcludedFromMint!: boolean;
   userMintsGlobal!: number;
   mintStages!: MintStageDto[];
+  creatorInfo!: CreatorProfileDoc;
 }
