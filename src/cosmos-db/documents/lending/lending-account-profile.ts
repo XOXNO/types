@@ -158,6 +158,43 @@ export class LendingAccountProfileDoc {
   }
 }
 
+const selectFields = [
+  'token',
+  'name',
+  'supplyApy',
+  'borrowApy',
+  'decimals',
+  'reserves',
+  'supplyCap',
+  'borrowCap',
+  'supplyAmount',
+  'siloed',
+  'supplyIndex',
+  'borrowIndex',
+  'rewardsReserve',
+  'maxDebtUsd',
+  'debtCeiling',
+  'isolated',
+  'canBeCollateral',
+  'timestamp',
+  'canBeBorrowed',
+  'canBorrowInIsolation',
+  'extraApy',
+  'flashLoanFee',
+  'utilizationRate',
+  'borrowAmount',
+  'borrowAmountScaled',
+  'supplyAmountScaled',
+  'optimalUsageRate',
+  'slopeRate1',
+  'slopeRate2',
+  'slopeRate3',
+  'midUsageRate',
+  'baseRate',
+  'maxBorrowRate',
+  'reserveFactor',
+] as const;
+
 export class LendingAccountProfile extends LendingAccountProfileDoc {
   @ApiProperty({
     description: 'The amount supplied in the lending account',
@@ -179,82 +216,7 @@ export class LendingAccountProfile extends LendingAccountProfileDoc {
 
   @ApiProperty({
     description: 'Lending market partial profile',
-    required: false,
-    type: PickType(LendingMarketProfile, [
-      'token',
-      'name',
-      'supplyApy',
-      'borrowApy',
-      'decimals',
-      'reserves',
-      'supplyCap',
-      'borrowCap',
-      'supplyAmount',
-      'siloed',
-      'supplyIndex',
-      'borrowIndex',
-      'rewardsReserve',
-      'maxDebtUsd',
-      'debtCeiling',
-      'isolated',
-      'canBeCollateral',
-      'timestamp',
-      'canBeBorrowed',
-      'canBorrowInIsolation',
-      'extraApy',
-      'flashLoanFee',
-      'utilizationRate',
-      'borrowAmount',
-      'borrowAmountScaled',
-      'supplyAmountScaled',
-      'optimalUsageRate',
-      'slopeRate1',
-      'slopeRate2',
-      'slopeRate3',
-      'midUsageRate',
-      'baseRate',
-      'maxBorrowRate',
-      'reserveFactor',
-    ]),
+    type: PickType(LendingMarketProfile, selectFields),
   })
-  marketProfile?: Pick<
-    LendingMarketProfile,
-    | 'token'
-    | 'name'
-    | 'supplyApy'
-    | 'borrowApy'
-    | 'decimals'
-    | 'siloed'
-    | 'reserves'
-    | 'supplyCap'
-    | 'borrowCap'
-    | 'supplyAmount'
-    | 'ltv'
-    | 'liquidationBonus'
-    | 'oraclePrice'
-    | 'rewardsReserve'
-    | 'timestamp'
-    | 'maxDebtUsd'
-    | 'debtCeiling'
-    | 'isolated'
-    | 'supplyIndex'
-    | 'borrowIndex'
-    | 'supplyAmountScaled'
-    | 'borrowAmountScaled'
-    | 'canBeCollateral'
-    | 'canBeBorrowed'
-    | 'canBorrowInIsolation'
-    | 'extraApy'
-    | 'flashLoanFee'
-    | 'utilizationRate'
-    | 'borrowAmount'
-    | 'optimalUsageRate'
-    | 'slopeRate1'
-    | 'slopeRate2'
-    | 'slopeRate3'
-    | 'midUsageRate'
-    | 'baseRate'
-    | 'maxBorrowRate'
-    | 'reserveFactor'
-  >;
+  marketProfile!: Pick<LendingMarketProfile, (typeof selectFields)[number]>;
 }
