@@ -4,6 +4,7 @@ import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
+import { LendingOracleUpdateStruct } from './lending-oracle';
 
 export class LendingMarketProfileDoc {
   @ApiProperty({
@@ -205,6 +206,12 @@ export class LendingMarketProfileDoc {
     example: false,
   })
   canBorrowInIsolation!: boolean;
+
+  @ApiProperty({
+    description: 'Oracle provider data',
+    type: LendingOracleUpdateStruct,
+  })
+  oracleProvider!: LendingOracleUpdateStruct;
 
   id!: string;
   pk!: string;
