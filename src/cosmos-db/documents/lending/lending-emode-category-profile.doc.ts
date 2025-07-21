@@ -11,6 +11,9 @@ export class LendingEModeCategoryProfileDoc {
   })
   dataType = LendingDataType.EMODE_CATEGORY_PROFILE;
 
+  @ApiProperty({ description: 'EMode Name', example: 'XOXNO Derivates' })
+  name!: string;
+
   @ApiProperty({ description: 'Loan-to-value ratio', example: 0.75 })
   ltv!: string;
 
