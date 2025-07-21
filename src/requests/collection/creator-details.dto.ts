@@ -5,7 +5,7 @@ import { ShortCollectionInfoDoc } from '../../cosmos-db/documents/short/short-co
 import { EventProfile } from '../../cosmos-db/documents/ticketing/event-profile.doc';
 import { CreatorProfileDoc } from '../../cosmos-db/documents/user/user-creator-profile.doc';
 
-class MintingListingDto extends CollectionMintProfileDoc {
+export class MintingListingDto extends CollectionMintProfileDoc {
   @ApiProperty({ type: () => ShortCollectionInfoDoc })
   collectionInfo!: ShortCollectionInfoDoc;
 }
