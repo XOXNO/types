@@ -9,4 +9,4 @@ export class ShortNftDoc extends PickType(NftDoc, [
   'url',
   'wasProcessed',
   'media',
-]) {}
+] as never) {}

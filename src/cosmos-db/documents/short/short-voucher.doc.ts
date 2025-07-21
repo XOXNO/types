@@ -5,4 +5,4 @@ export class ShortVoucherDoc extends PickType(EventVoucherDoc, [
   'amount',
   'type',
   'maxDiscountAmount',
-]) {}
+] as never) {}

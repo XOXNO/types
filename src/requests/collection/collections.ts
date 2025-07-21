@@ -5,4 +5,4 @@ export class CollectionProfileUpdateDto extends PickType(CollectionProfileDoc, [
   'socials',
   'description',
   'profile',
-]) {}
+] as never) {}

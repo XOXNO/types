@@ -68,7 +68,6 @@ export * from './cosmos-db/documents/ticketing/event-profile.doc';
 export * from './cosmos-db/documents/ticketing/event-question-answer.doc';
 export * from './cosmos-db/documents/ticketing/event-question-create.dto';
 export * from './cosmos-db/documents/ticketing/event-question-edit.dto';
-export * from './cosmos-db/documents/ticketing/event-question-validator';
 export * from './cosmos-db/documents/ticketing/event-question.doc';
 export * from './cosmos-db/documents/ticketing/event-referral-config-create.dto';
 export * from './cosmos-db/documents/ticketing/event-referral-config-edit.dto';

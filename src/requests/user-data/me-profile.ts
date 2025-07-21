@@ -38,5 +38,5 @@ export class UserProfileEditDto extends PartialType(
     'description',
     'profile',
     'isBoberBattleUser',
-  ] as const),
+  ] as never),
 ) {}

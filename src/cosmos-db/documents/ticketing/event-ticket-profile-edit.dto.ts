@@ -6,7 +6,7 @@ import { EventTicketProfileCreateDto } from './event-ticket-profile-create.dto';
 
 export class EventTicketProfileEditDto extends PickType(
   EventTicketProfileCreateDto,
-  ['description', 'badgeColor', 'maxLimit', 'userLimit', 'royalties'],
+  ['description', 'badgeColor', 'maxLimit', 'userLimit', 'royalties'] as never,
 ) {
   @ApiProperty()
   @IsString()

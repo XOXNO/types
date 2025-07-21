@@ -40,4 +40,4 @@ export class TransactionSendResult {
 export class BatchTransactionResponse extends PickType(TransactionSendResult, [
   'txHash',
   'status',
-]) {}
+] as never) {}

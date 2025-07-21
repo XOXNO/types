@@ -40,7 +40,7 @@ export class LendingEModeCategoryProfileDoc {
 
 export class ShortLendingTokenEModeProfileDoc extends PickType(
   LendingTokenEModeProfileDoc,
-  ['token', 'canBeBorrowed', 'canBeCollateral', 'eModeCategory'],
+  ['token', 'canBeBorrowed', 'canBeCollateral', 'eModeCategory'] as never,
 ) {}
 
 export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc {

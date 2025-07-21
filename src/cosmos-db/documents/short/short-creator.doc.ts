@@ -5,4 +5,4 @@ export class ShortCreatorDoc extends PickType(CreatorProfileDoc, [
   'name',
   'contractAddress',
   'profile',
-]) {}
+] as never) {}
