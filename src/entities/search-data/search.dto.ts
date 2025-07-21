@@ -7,7 +7,7 @@ import { NftMedia } from '../../cosmos-db/documents/token/nft-details.doc';
 import { StatisticsDto } from '../../common/statistics';
 import { ActivityChain } from '../../enums/common.enum';
 
-class CollectionDto {
+export class CollectionDto {
   @ApiProperty({ example: 'EAPES-8f3c1f' })
   collection!: string;
 
@@ -39,7 +39,7 @@ class CollectionDto {
   chain?: ActivityChain;
 }
 
-class UserDto {
+export class UserDto {
   @ApiProperty({
     example: 'erd10hsfh2xhn4qzatc0vguxgfdu8aegurnep7zzyg0ht9ddw50g5xfq8ccu4q',
   })
@@ -67,7 +67,7 @@ class UserDto {
   chain?: ActivityChain;
 }
 
-class CreatorDto {
+export class CreatorDto {
   @ApiProperty({
     example: 'erd10hsfh2xhn4qzatc0vguxgfdu8aegurnep7zzyg0ht9ddw50g5xfq8ccu4q',
   })
@@ -105,7 +105,7 @@ class CreatorDto {
   chain?: ActivityChain.MVX;
 }
 
-class NftDto {
+export class NftDto {
   @ApiProperty({ example: 'EAPES-8f3c1f-0209' })
   identifier!: string;
 

@@ -1,7 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain } from '../../../enums/common.enum';
 
-import { v4 } from 'uuid';
 import { NftActivityEventSource } from '../../../enums/event-source.enum';
 import {
   NftActivityData,
@@ -78,7 +77,7 @@ class NftActivityDocBase {
 
   constructor(props?: Partial<NftActivityDoc>) {
     Object.assign(this, props);
-    this.id = v4();
+    this.id = `${this.txHash}-${this.eventIdentifier}-${this.eventOrder ?? 0}`;
     this.chain = this.chain || ActivityChain.MVX;
   }
 }
