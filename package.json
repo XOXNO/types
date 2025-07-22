@@ -1,6 +1,6 @@
 {
   "name": "@xoxno/types",
-  "version": "1.0.153",
+  "version": "1.0.154",
   "description": "Shared types and utilities for XOXNO API.",
   "exports": {
     ".": {
