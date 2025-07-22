@@ -11,4 +11,4 @@ export class ShortCollectionDoc extends PickType(CollectionProfileDoc, [
   'collectionSize',
   'followCount',
   'holdersCount',
-] as never) {}
+] as const) {}

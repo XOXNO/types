@@ -10,4 +10,4 @@ export class CreatorUpdateProfileDTO extends PickType(CreatorProfileDto, [
   'socials',
   'description',
   'profile',
-] as never) {}
+] as const) {}

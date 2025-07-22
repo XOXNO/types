@@ -114,7 +114,7 @@ export class TicketProfileSummary extends PickType(EventTicketProfileDoc, [
   'profile',
   'badgeColor',
   'characteristics',
-] as never) {
+] as const) {
   @ApiProperty({
     description: 'The unique identifier for the ticket type.',
     example: v4(),

@@ -22,7 +22,7 @@ export class EventVoucherCreateDto extends PartialType(
     'usedCount',
     'createdAt',
     'createdBy',
-  ] as never),
+  ] as const),
 ) {
   @ApiProperty({ description: 'Unique voucher code.', required: false })
   @IsOptional()

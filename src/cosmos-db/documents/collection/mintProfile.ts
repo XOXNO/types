@@ -219,7 +219,7 @@ export class CollectionMintProfileDocWithStages extends PickType(
     'totalNftMinted',
     'hasAttributes',
     'collectionInfo',
-  ] as never,
+  ] as const,
 ) {
   collection!: string;
   isExcludedFromMint!: boolean;

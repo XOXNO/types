@@ -5,7 +5,7 @@ import { IsOptional, IsBoolean, IsInt } from 'class-validator';
 import { EventVoucherCreateDto } from './event-voucher-create.dto';
 
 export class EventVoucherEditDto extends PartialType(
-  OmitType(EventVoucherCreateDto, ['code', 'eventId'] as never),
+  OmitType(EventVoucherCreateDto, ['code', 'eventId'] as const),
 ) {
   @ApiProperty({
     description: 'Indicates whether the voucher is currently active.',

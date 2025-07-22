@@ -137,4 +137,4 @@ import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-d
 export class StakingPostDTO extends PickType(StakingSummary, [
   'name',
   'description',
-] as never) {}
+] as const) {}

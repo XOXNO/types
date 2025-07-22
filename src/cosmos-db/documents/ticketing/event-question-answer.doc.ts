@@ -88,7 +88,7 @@ export class EventGuestAnswerDoc {
 export class EventQuestionAnswerDto extends PickType(EventGuestAnswerDoc, [
   'questionId',
   'answer',
-] as never) {}
+] as const) {}
 
 export class AnsweredQuestionWithDetails {
   @ApiProperty({

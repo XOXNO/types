@@ -223,7 +223,7 @@ export class LendingAccountProfile extends LendingAccountProfileDoc {
 
   @ApiProperty({
     description: 'Lending market partial profile',
-    // type: PickType(LendingMarketProfile, selectFields),
+    type: PickType(LendingMarketProfile, selectFields),
   })
   marketProfile!: Pick<LendingMarketProfile, (typeof selectFields)[number]>;
 }

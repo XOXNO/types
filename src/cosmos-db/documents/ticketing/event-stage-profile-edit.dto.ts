@@ -13,7 +13,7 @@ export class EventStageProfileEditDto extends PickType(
     'isWhitelist',
     'requiredApproval',
     'prices',
-  ] as never,
+  ] as const,
 ) {
   @ApiProperty()
   @IsString()
