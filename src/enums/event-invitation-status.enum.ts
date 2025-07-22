@@ -3,4 +3,5 @@ export enum EventInvitationStatus {
   ACCEPTED = 'accepted',
   DECLINED = 'declined',
   CANCELED = 'canceled',
+  CHECKED_IN = 'checkedIn',
 }
