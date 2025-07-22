@@ -8,6 +8,7 @@ import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from '../../../enums/collection.enum';
+import { IsString, Length } from 'class-validator';
 
 export class Rule {
   @ApiProperty({ description: 'Rule type' })
@@ -58,12 +59,16 @@ export class CollectionProfileDoc {
     description: 'Name of the collection',
     example: 'My NFT Collection',
   })
+  @IsString()
+  @Length(3, 30)
   name: string = '';
 
   @ApiProperty({
     description: 'Description of the collection',
     example: 'A unique collection of digital artwork',
   })
+  @IsString()
+  @Length(3, 300)
   description: string = '';
 
   @ApiProperty({
