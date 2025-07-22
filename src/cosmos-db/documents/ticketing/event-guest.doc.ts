@@ -7,6 +7,7 @@ import { EventGuestStatus } from '../../../enums/event-guest-status.enum';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
+import { ShortNftDoc } from '../short/short-nft.doc';
 
 export class EventGuestCheckIn {
   @ApiProperty({
@@ -80,6 +81,10 @@ export class EventGuestCheckIn {
     type: String,
   })
   transactionId?: string;
+}
+
+export class EventGuestCheckInHydrated extends EventGuestCheckIn {
+  nft!: ShortNftDoc;
 }
 
 class EventGuestRegistration {
@@ -199,10 +204,10 @@ export class EventGuestDoc {
     },
     type: 'object',
     additionalProperties: {
-      $ref: getSchemaPath(EventGuestCheckIn),
+      $ref: getSchemaPath(EventGuestCheckInHydrated),
     },
   })
-  ticket: Record<string, EventGuestCheckIn> = {};
+  ticket: Record<string, EventGuestCheckInHydrated> = {};
 
   @ApiProperty({
     description:
