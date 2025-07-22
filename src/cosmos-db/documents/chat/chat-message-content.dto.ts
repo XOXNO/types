@@ -22,7 +22,7 @@ export class ChatMessageContentDto {
   value!: string;
 
   @IsOptional()
-  @ValidateNested({})
+  @ValidateNested()
   @Type(() => ChatMessageReplyDto)
   @IsNotEmptyObject()
   @ApiProperty({
