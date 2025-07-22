@@ -6,20 +6,22 @@ import { v4 } from 'uuid';
 import { ReferralConditionType } from '../../../enums/event-referral-config.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { ShortVoucherDoc } from '../short/short-voucher.doc';
+import { EventReferralEnum } from '../../../enums/event-referral.enum';
 
 export class RewardDetails {
   @ApiProperty({
     description: 'Specifies the type of reward given to the referral owner.',
-    enum: ['voucher', 'invitation', 'other'],
+    enum: EventReferralEnum,
+    enumName: 'EventReferralEnum',
   })
-  rewardType!: 'voucher' | 'invitation' | 'other';
+  rewardType!: EventReferralEnum;
 
   @ApiProperty({
     description: 'Condition type representing the activation of the voucher',
     enum: ReferralConditionType,
     enumName: 'ReferralConditionType',
   })
-  conditionType!: 'ticketsSoldCount' | 'revenueCount';
+  conditionType!: ReferralConditionType;
 
   @ApiProperty({
     description:
