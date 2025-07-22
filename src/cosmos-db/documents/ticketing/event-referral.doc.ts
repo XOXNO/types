@@ -4,6 +4,7 @@ import { IsInt, IsBoolean } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
+import { OwnerDto } from '../../../common/owner.dto';
 
 export class EventReferralDoc {
   @ApiProperty({

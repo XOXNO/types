@@ -43,6 +43,13 @@ export class EventInvitationDoc {
   email?: string;
 
   @ApiProperty({
+    description: 'Phone number of the guest',
+    type: String,
+    required: false,
+  })
+  phone?: string;
+
+  @ApiProperty({
     description: 'List of ticket types with their IDs and quantities.',
     type: TicketProfileSummary,
     isArray: true,

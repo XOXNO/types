@@ -96,14 +96,14 @@ class EventGuestRegistration {
   email?: string;
 
   @ApiProperty({
-    description: 'First name.',
+    description: 'Name of the guest',
     type: String,
     required: false,
   })
   name?: string;
 
   @ApiProperty({
-    description: 'Last name.',
+    description: 'Phone number of the guest',
     type: String,
     required: false,
   })
