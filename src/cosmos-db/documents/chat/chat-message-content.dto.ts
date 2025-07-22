@@ -27,7 +27,7 @@ export class ChatMessageContentDto {
   @IsNotEmptyObject()
   @ApiProperty({
     description: 'Message reply to user',
-    type: ChatMessageReplyDto,
+    type: () => ChatMessageReplyDto,
     required: false,
   })
   readonly replyTo?: ChatMessageReplyDto;

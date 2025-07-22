@@ -117,7 +117,7 @@ export class EventGuestRegistrationDto {
 
   @ApiProperty({
     description: 'Selected tickets',
-    type: [TicketSelectionDto],
+    type: () => [TicketSelectionDto],
     required: false,
   })
   @IsArray()
@@ -160,7 +160,7 @@ export class EventGuestRegistrationDto {
   @ApiProperty({
     description: 'Answers to custom questions',
     required: false,
-    type: EventQuestionAnswerDto,
+    type: () => EventQuestionAnswerDto,
     isArray: true,
   })
   @IsOptional()

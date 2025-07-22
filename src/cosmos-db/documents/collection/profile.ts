@@ -86,7 +86,7 @@ export class CollectionProfileDoc {
 
   @ApiProperty({
     description: 'Social media links for the collection',
-    type: SocialsDto,
+    type: () => SocialsDto,
   })
   @ValidateNested()
   @Type(() => SocialsDto)

@@ -121,7 +121,7 @@ export class EventStageProfileDoc {
     description:
       'Price of the ticket during this stage, can override base price.',
     required: true,
-    type: [EgldOrEsdtTokenPayment],
+    type: () => [EgldOrEsdtTokenPayment],
   })
   @IsArray()
   @ValidateNested({ each: true })

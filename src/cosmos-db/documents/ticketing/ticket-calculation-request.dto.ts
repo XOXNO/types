@@ -16,7 +16,7 @@ export class TicketCalculationRequestDto {
   @IsOptional()
   discountCode?: string | null;
 
-  @ApiProperty({ type: [TicketSelectionDto] })
+  @ApiProperty({ type: () => [TicketSelectionDto] })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => TicketSelectionDto)

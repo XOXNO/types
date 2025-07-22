@@ -18,7 +18,10 @@ export class ChatMessageReplyDto {
   @ValidateNested()
   @Type(() => ChatMessageContentDto)
   @IsNotEmptyObject()
-  @ApiProperty({ description: 'Message value', type: ChatMessageReplyDto })
+  @ApiProperty({
+    description: 'Message value',
+    type: () => ChatMessageReplyDto,
+  })
   readonly content!: ChatMessageContentDto;
 
   @IsNumber()

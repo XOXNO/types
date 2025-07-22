@@ -62,7 +62,7 @@ export class EventInvitationDoc {
 
   @ApiProperty({
     description: 'List of ticket types with their IDs and quantities.',
-    type: TicketProfileSummary,
+    type: () => TicketProfileSummary,
     isArray: true,
     example: [{ ticketId: 'VIP123', quantity: 2 }],
   })

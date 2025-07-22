@@ -109,7 +109,7 @@ export class EventVoucherFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: RangeFilter,
+    type: () => RangeFilter,
     isArray: true,
     description: 'Filter vouchers within a range of dates.',
   })

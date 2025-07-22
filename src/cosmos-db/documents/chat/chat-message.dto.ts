@@ -13,7 +13,7 @@ export class SendChatMessageDto {
   @ValidateNested()
   @Type(() => ChatMessageContentDto)
   @IsNotEmptyObject()
-  @ApiProperty({ required: true, type: ChatMessageContentDto })
+  @ApiProperty({ required: true, type: () => ChatMessageContentDto })
   content!: ChatMessageContentDto;
 
   @IsString()

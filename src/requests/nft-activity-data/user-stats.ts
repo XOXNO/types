@@ -64,7 +64,7 @@ class PriceDataDto {
   usdValue!: number;
 
   @ApiProperty({
-    type: ShortNftDoc,
+    type: () => ShortNftDoc,
     description: 'NFT information',
     required: false,
   })
@@ -74,7 +74,10 @@ class PriceDataDto {
 }
 
 export class UserStatsDto {
-  @ApiProperty({ type: WalletDto, description: 'User wallet information' })
+  @ApiProperty({
+    type: () => WalletDto,
+    description: 'User wallet information',
+  })
   @ValidateNested()
   @Type(() => WalletDto)
   wallet!: WalletDto;
@@ -119,12 +122,18 @@ export class UserStatsDto {
   @IsNumber()
   buyerPartners!: number;
 
-  @ApiProperty({ type: PriceDataDto, description: 'Buyer maximum price data' })
+  @ApiProperty({
+    type: () => PriceDataDto,
+    description: 'Buyer maximum price data',
+  })
   @ValidateNested()
   @Type(() => PriceDataDto)
   buyerMaxPriceData!: PriceDataDto;
 
-  @ApiProperty({ type: PriceDataDto, description: 'Buyer minimum price data' })
+  @ApiProperty({
+    type: () => PriceDataDto,
+    description: 'Buyer minimum price data',
+  })
   @ValidateNested()
   @Type(() => PriceDataDto)
   buyerMinPriceData!: PriceDataDto;
@@ -149,12 +158,18 @@ export class UserStatsDto {
   @IsNumber()
   sellerPartners!: number;
 
-  @ApiProperty({ type: PriceDataDto, description: 'Seller maximum price data' })
+  @ApiProperty({
+    type: () => PriceDataDto,
+    description: 'Seller maximum price data',
+  })
   @ValidateNested()
   @Type(() => PriceDataDto)
   sellerMaxPriceData!: PriceDataDto;
 
-  @ApiProperty({ type: PriceDataDto, description: 'Seller minimum price data' })
+  @ApiProperty({
+    type: () => PriceDataDto,
+    description: 'Seller minimum price data',
+  })
   @ValidateNested()
   @Type(() => PriceDataDto)
   sellerMinPriceData!: PriceDataDto;

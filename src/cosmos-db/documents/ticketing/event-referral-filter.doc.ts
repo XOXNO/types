@@ -99,7 +99,7 @@ export class EventReferralFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: RangeFilter,
+    type: () => RangeFilter,
     isArray: true,
     description: 'Filter referrals within a range of dates.',
   })

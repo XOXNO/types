@@ -14,7 +14,7 @@ export class ManualCheckInDto {
 
   @ApiProperty({
     description: 'Selected tickets for check-in (optional)',
-    type: [TicketsType],
+    type: () => [TicketsType],
     required: false,
   })
   @IsOptional()

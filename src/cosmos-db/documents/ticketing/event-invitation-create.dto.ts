@@ -24,7 +24,7 @@ export class EventInvitationCreateDto extends PickType(EventInvitationDoc, [
   'startTime',
   'endTime',
 ] as const) {
-  @ApiProperty({ type: Ticket, isArray: true })
+  @ApiProperty({ type: () => Ticket, isArray: true })
   @IsArray()
   @ArrayMaxSize(100)
   @ValidateNested({ each: true })

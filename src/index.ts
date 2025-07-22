@@ -231,7 +231,6 @@ export * from './requests/collection/collection-pinned-status.dto';
 export * from './requests/collection/collection-profile.filter';
 export * from './requests/collection/collection-stats.filter';
 export * from './requests/collection/collection-stats';
-export * from './requests/collection/collections';
 export * from './requests/collection/creator-details.dto';
 export * from './requests/collection/creator-drop-info';
 export * from './requests/collection/floor';

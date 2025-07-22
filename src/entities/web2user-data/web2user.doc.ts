@@ -23,7 +23,7 @@ export class Web2UserDoc {
   id!: string;
 
   @ApiProperty({
-    type: [Object],
+    type: () => [Object],
     description: 'Array of linked accounts (Web2UserWallet or Web2UserAccount)',
   })
   @IsArray()

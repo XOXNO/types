@@ -81,7 +81,7 @@ export class EventReferralConfigDoc {
   @ApiProperty({
     description:
       'Indicates if a voucher should be automatically applied as a discount when this referral code is used.',
-    type: ShortVoucherDoc,
+    type: () => ShortVoucherDoc,
     required: false,
   })
   @IsOptional()
@@ -93,7 +93,7 @@ export class EventReferralConfigDoc {
     required: false,
     description:
       'Details about the reward issued to the referral owner after a certain number of successful referrals or revenue thresholds.',
-    type: RewardDetails,
+    type: () => RewardDetails,
   })
   @IsOptional()
   @ValidateNested()

@@ -15,6 +15,7 @@ import {
 } from 'class-validator';
 import { v4 } from 'uuid';
 
+import { Type } from 'class-transformer';
 import {
   EventCategory,
   EventSubCategory,
@@ -28,15 +29,9 @@ import { EventGuestDoc } from './event-guest.doc';
 import {
   EventLocationDto,
   EventSeoDto,
-  RegistrationDetailsCreateDto,
   RegistrationDetailsDto,
 } from './event-profile-create.dto';
 import { EventUserRoleDoc } from './event-user-role.doc';
-import { Type } from 'class-transformer';
-
-/* export class RegistrationType {
-  
-} */
 
 export class PremiumType {
   @ApiProperty({
@@ -145,7 +140,7 @@ export class EventProfileDoc {
   descriptionUrl?: string;
 
   @ApiProperty({
-    type: EventLocationDto,
+    type: () => EventLocationDto,
     description:
       'Location details including geo points, address, and optional instructions.',
   })
@@ -201,7 +196,7 @@ export class EventProfileDoc {
   })
   @IsObject()
   @ValidateNested()
-  @Type(() => RegistrationDetailsCreateDto)
+  @Type(() => RegistrationDetailsDto)
   registration!: RegistrationDetailsDto;
 
   @ApiProperty({
@@ -225,7 +220,7 @@ export class EventProfileDoc {
   collection?: string;
 
   @ApiProperty({
-    type: EventSeoDto,
+    type: () => EventSeoDto,
     example: {},
     required: false,
     description:

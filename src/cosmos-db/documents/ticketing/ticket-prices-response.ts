@@ -49,7 +49,7 @@ export class TicketPricesResponse {
   @IsString()
   currency!: string;
 
-  @ApiProperty({ type: [StagePrice] })
+  @ApiProperty({ type: () => [StagePrice] })
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => StagePrice)
