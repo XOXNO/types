@@ -4,10 +4,9 @@ import { IsBoolean, IsInt } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { EventInvitationStatus } from '../../../enums/event-invitation-status.enum';
-import { TicketProfileSummary } from './event-ticket-profile.doc';
-import { TicketsType } from './event-ticket-qr-type.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
+import { TicketProfileSummary } from './event-ticket-profile.doc';
 
 export class EventInvitationDoc {
   @ApiProperty({
@@ -49,7 +48,7 @@ export class EventInvitationDoc {
     isArray: true,
     example: [{ ticketId: 'VIP123', quantity: 2 }],
   })
-  tickets: TicketsType[] | TicketProfileSummary[] = [];
+  tickets: TicketProfileSummary[] = [];
 
   @ApiProperty({
     description: 'The start timestamp of the invitation.',
