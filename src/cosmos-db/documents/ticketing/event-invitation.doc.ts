@@ -15,6 +15,7 @@ import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
 import { Type } from 'class-transformer';
+import { TicketsType } from './event-ticket-qr-type.enum';
 
 export class EventInvitationDoc {
   @ApiProperty({
@@ -67,7 +68,7 @@ export class EventInvitationDoc {
   })
   @Type(() => TicketProfileSummary)
   @ValidateNested({ each: true })
-  tickets: TicketProfileSummary[] = [];
+  tickets: TicketsType[] | TicketProfileSummary[] = [];
 
   @ApiProperty({
     description: 'The start timestamp of the invitation.',

@@ -84,7 +84,7 @@ export class EventGuestCheckIn {
 }
 
 export class EventGuestCheckInHydrated extends EventGuestCheckIn {
-  nft!: ShortNftEventDoc;
+  nft?: ShortNftEventDoc;
 }
 
 class EventGuestRegistration {
