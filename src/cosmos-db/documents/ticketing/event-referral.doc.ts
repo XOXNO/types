@@ -1,10 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsInt, IsBoolean } from 'class-validator';
+import { IsBoolean, IsInt, IsString } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
-import { OwnerDto } from '../../../common/owner.dto';
 
 export class EventReferralDoc {
   @ApiProperty({
@@ -24,6 +23,7 @@ export class EventReferralDoc {
   pk!: string;
 
   @ApiProperty({ description: 'The code shared by the referral owner.' })
+  @IsString()
   referralCode!: string;
 
   @ApiProperty({
@@ -40,6 +40,7 @@ export class EventReferralDoc {
   @ApiProperty({
     description: 'The ID of the referral configuration this referral follows.',
   })
+  @IsString()
   referralConfigId!: string;
 
   @ApiProperty({

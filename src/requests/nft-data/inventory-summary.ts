@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsEnum, IsNumber, IsString, IsUrl } from 'class-validator';
+import { IsBoolean, IsNumber, IsString, IsUrl } from 'class-validator';
 import { ActivityChain } from '../../enums/common.enum';
 
 export class InventorySummaryDto {

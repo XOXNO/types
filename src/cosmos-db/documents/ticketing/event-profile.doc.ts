@@ -2,7 +2,17 @@ import { randomBytes } from 'crypto';
 
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsInt, IsNumber, IsString } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsInt,
+  IsNumber,
+  IsObject,
+  IsString,
+  Length,
+  Min,
+  ValidateNested,
+} from 'class-validator';
 import { v4 } from 'uuid';
 
 import {
@@ -18,9 +28,11 @@ import { EventGuestDoc } from './event-guest.doc';
 import {
   EventLocationDto,
   EventSeoDto,
+  RegistrationDetailsCreateDto,
   RegistrationDetailsDto,
 } from './event-profile-create.dto';
 import { EventUserRoleDoc } from './event-user-role.doc';
+import { Type } from 'class-transformer';
 
 /* export class RegistrationType {
   
@@ -104,6 +116,8 @@ export class EventProfileDoc {
   creatorAddress!: string;
 
   @ApiProperty({ description: 'Title of the event.' })
+  @IsString()
+  @Length(3, 30)
   title!: string;
 
   @ApiProperty({
@@ -111,6 +125,7 @@ export class EventProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
   startTime!: number;
 
   @ApiProperty({
@@ -134,6 +149,9 @@ export class EventProfileDoc {
     description:
       'Location details including geo points, address, and optional instructions.',
   })
+  @IsObject()
+  @ValidateNested()
+  @Type(() => EventLocationDto)
   location!: EventLocationDto;
 
   @ApiProperty({
@@ -158,6 +176,7 @@ export class EventProfileDoc {
     enum: EventCategory,
     enumName: 'EventCategory',
   })
+  @IsEnum(EventCategory)
   category!: EventCategory;
 
   @ApiProperty({
@@ -166,6 +185,7 @@ export class EventProfileDoc {
     enumName: 'EventSubCategory',
     required: false,
   })
+  @IsEnum(EventSubCategory)
   subCategory?: EventSubCategory;
 
   @ApiProperty({
@@ -179,6 +199,9 @@ export class EventProfileDoc {
       'Registration details such as visibility, max capacity, and ticket limits.',
     type: () => RegistrationDetailsDto,
   })
+  @IsObject()
+  @ValidateNested()
+  @Type(() => RegistrationDetailsCreateDto)
   registration!: RegistrationDetailsDto;
 
   @ApiProperty({
@@ -208,6 +231,9 @@ export class EventProfileDoc {
     description:
       'SEO-related information such as short description, tags, and alternative title.',
   })
+  @IsObject()
+  @ValidateNested()
+  @Type(() => EventSeoDto)
   seo?: EventSeoDto;
 
   @ApiProperty({

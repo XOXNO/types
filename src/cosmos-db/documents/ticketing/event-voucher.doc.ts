@@ -1,10 +1,19 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsInt, IsNumber, IsBoolean } from 'class-validator';
+import {
+  IsBoolean,
+  IsEnum,
+  IsInt,
+  IsNumber,
+  IsString,
+  IsUUID,
+  Max,
+  Min,
+} from 'class-validator';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
-import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { VoucherType } from '../../../enums/voucher-type.enum';
+import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 
 export class EventVoucherDoc {
   @ApiProperty({
@@ -21,6 +30,7 @@ export class EventVoucherDoc {
   id!: string;
 
   @ApiProperty({ description: 'Unique voucher code.' })
+  @IsString()
   code!: string;
 
   @ApiProperty({
@@ -28,6 +38,7 @@ export class EventVoucherDoc {
     enum: VoucherType,
     enumName: 'VoucherType',
   })
+  @IsEnum(VoucherType)
   type!: VoucherType;
 
   @ApiProperty({
@@ -35,6 +46,8 @@ export class EventVoucherDoc {
     type: 'number',
   })
   @IsNumber()
+  @Min(0)
+  @Max(100)
   amount!: number;
 
   @ApiProperty({
@@ -43,6 +56,7 @@ export class EventVoucherDoc {
     required: false,
   })
   @IsNumber()
+  @Min(0)
   maxDiscountAmount?: number;
 
   @ApiProperty({
@@ -50,6 +64,7 @@ export class EventVoucherDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(1)
   maxUses!: number;
 
   @ApiProperty({
@@ -57,6 +72,7 @@ export class EventVoucherDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(1)
   maxUsesPerUser!: number;
 
   @ApiProperty({
@@ -69,6 +85,7 @@ export class EventVoucherDoc {
   @ApiProperty({
     description: 'List of specific event IDs where the voucher can be applied.',
   })
+  @IsUUID(4)
   eventId!: string;
 
   @ApiProperty({
@@ -108,6 +125,7 @@ export class EventVoucherDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
   startDate!: number;
 
   @ApiProperty({
@@ -116,6 +134,7 @@ export class EventVoucherDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
   endDate!: number;
 
   @ApiProperty({

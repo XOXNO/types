@@ -1,6 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsInt, IsBoolean } from 'class-validator';
+import {
+  ArrayUnique,
+  IsArray,
+  IsBoolean,
+  IsEnum,
+  IsInt,
+  IsNotEmpty,
+  IsString,
+} from 'class-validator';
 
 import { EventQuestionAnswerType } from '../../../enums/event-question-answer-type.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
@@ -23,6 +31,8 @@ export class EventQuestionDoc {
   eventId!: string;
 
   @ApiProperty({ description: 'The actual question text.' })
+  @IsNotEmpty()
+  @IsString()
   title!: string;
 
   @ApiProperty({
@@ -38,6 +48,7 @@ export class EventQuestionDoc {
     enum: EventQuestionAnswerType,
     enumName: 'EventQuestionAnswerType',
   })
+  @IsEnum(EventQuestionAnswerType)
   answerType!: EventQuestionAnswerType;
 
   @ApiProperty({
@@ -53,6 +64,9 @@ export class EventQuestionDoc {
       'Optional array of possible answers for select-type questions.',
     required: false,
   })
+  @IsArray()
+  @ArrayUnique()
+  @IsString({ each: true })
   answers?: string[];
 
   @ApiProperty({

@@ -1,6 +1,14 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
-import { IsInt, IsNumber } from 'class-validator';
+import {
+  IsInt,
+  IsNumber,
+  IsString,
+  Length,
+  Matches,
+  Max,
+  Min,
+} from 'class-validator';
 import { v4 } from 'uuid';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
@@ -21,11 +29,13 @@ export class EventTicketProfileDoc {
   @ApiProperty({
     description: 'Name of the ticket type (e.g., General, VIP).',
   })
+  @Length(3, 30)
   name!: string;
 
   @ApiProperty({
     description: 'Description of the ticket type.',
   })
+  @Length(3, 300)
   description!: string;
 
   @ApiProperty({
@@ -42,12 +52,19 @@ export class EventTicketProfileDoc {
     type: 'number',
   })
   @IsNumber()
+  @Min(0)
+  @Max(90)
   royalties = 0;
 
   @ApiProperty({
     required: false,
     description:
       'Optional color code for the badge or wristband to be used during check-in.',
+  })
+  @IsString()
+  @Length(3, 30)
+  @Matches(/^#([0-9A-F]{3}){1,2}$/i, {
+    message: 'badgeColor must be a valid hex color',
   })
   badgeColor?: string; // Example: '#FF5733' (Hex color code)
 
@@ -65,6 +82,7 @@ export class EventTicketProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(0)
   maxLimit = 0; // Maximum tickets that can be sold for this ticket type - 0 means unlimited
 
   @ApiProperty({
@@ -73,6 +91,7 @@ export class EventTicketProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(0)
   userLimit = 0;
 
   @ApiProperty({

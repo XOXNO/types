@@ -1,6 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
-import { Type } from 'class-transformer';
 import {
   ArrayMaxSize,
   IsArray,
@@ -8,21 +7,16 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
-  IsObject,
   IsOptional,
   IsString,
   Length,
   Max,
   MaxLength,
   Min,
-  ValidateNested,
 } from 'class-validator';
 
-import {
-  EventCategory,
-  EventSubCategory,
-} from '../../../enums/event-category.enum';
 import { Visibility } from '../../../enums/ticketing-visibility.enum';
+import { EventProfileDoc } from './event-profile.doc';
 
 export class EventSeoDto {
   @ApiProperty({ example: 'This is a description', required: false })
@@ -60,14 +54,16 @@ export class RegistrationDetailsDto {
     description: 'Maximum registrations allowed',
   })
   @IsInt()
-  maxLimit!: number;
+  @Min(0)
+  maxLimit = 0;
 
   @ApiProperty({
     type: 'integer',
     description: 'Maximum registrations per user',
   })
   @IsInt()
-  userLimit!: number;
+  @Min(0)
+  userLimit = 0;
 
   @ApiProperty()
   @IsBoolean()
@@ -206,128 +202,34 @@ export class EventLocationDto {
   @Length(3, 100)
   country?: string;
 }
-export class RegistrationDetailsCreateDto {
-  @ApiProperty({
-    enum: Visibility,
-    enumName: 'Visibility',
-  })
-  @IsEnum(Visibility)
-  visibility!: Visibility;
+export class RegistrationDetailsCreateDto extends PickType(
+  RegistrationDetailsDto,
+  [
+    'visibility',
+    'maxLimit',
+    'userLimit',
+    'requireKYC',
+    'requireName',
+    'requireEmail',
+    'requirePhoneNumber',
+    'isPublished',
+    'hasSideEvents',
+    'hasWaitlist',
+    'showGuestCount',
+    'refundable',
+    'nameWithNumber',
+    'botProtection',
+  ] as const,
+) {}
 
-  @ApiProperty({
-    type: 'integer',
-    description: 'Maximum registrations allowed',
-  })
-  @IsInt()
-  maxLimit!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Maximum registrations per user',
-  })
-  @IsInt()
-  userLimit!: number;
-
-  @ApiProperty()
-  @IsBoolean()
-  requireKYC!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  requireName!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  requireEmail!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  requirePhoneNumber!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  @IsOptional()
-  isPublished!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  hasSideEvents!: boolean;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  hasWaitlist!: boolean;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsBoolean()
-  showGuestCount!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  refundable!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  nameWithNumber!: boolean;
-
-  @ApiProperty()
-  @IsBoolean()
-  botProtection!: boolean;
-}
-
-export class EventProfileCreateDto {
-  @ApiProperty()
-  @IsString()
-  @Length(3, 30)
-  title!: string;
-
-  @ApiProperty({ minimum: Math.floor(Date.now() / 1000), type: 'integer' })
-  @IsInt()
-  @Min(Math.floor(Date.now() / 1000))
-  startTime!: number;
-
-  @ApiProperty({ type: 'integer' })
-  @IsInt()
-  endTime!: number;
-
-  @ApiProperty({ type: EventLocationDto })
-  @IsObject()
-  @ValidateNested()
-  @Type(() => EventLocationDto)
-  location!: EventLocationDto;
-
-  @ApiProperty({ type: RegistrationDetailsCreateDto })
-  @IsObject()
-  @ValidateNested()
-  @Type(() => RegistrationDetailsCreateDto)
-  registration!: RegistrationDetailsCreateDto;
-
-  @ApiProperty()
-  @IsBoolean()
-  isVirtualEvent!: boolean;
-
-  @ApiProperty({ type: EventSeoDto, required: false })
-  @IsObject()
-  @ValidateNested()
-  @Type(() => EventSeoDto)
-  @IsOptional()
-  seo?: EventSeoDto;
-
-  @ApiProperty({
-    enum: EventCategory,
-    enumName: 'EventCategory',
-  })
-  @IsEnum(EventCategory)
-  category!: EventCategory;
-
-  @ApiProperty({
-    required: false,
-    enum: EventSubCategory,
-    enumName: 'EventSubCategory',
-  })
-  @IsString()
-  @IsOptional()
-  @IsEnum(EventSubCategory)
-  subCategory?: EventSubCategory;
-}
+export class EventProfileCreateDto extends PickType(EventProfileDoc, [
+  'title',
+  'startTime',
+  'endTime',
+  'location',
+  'registration',
+  'isVirtualEvent',
+  'seo',
+  'category',
+  'subCategory',
+] as const) {}

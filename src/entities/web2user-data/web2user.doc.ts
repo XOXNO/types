@@ -7,6 +7,7 @@ import {
   IsNumber,
   IsString,
   IsOptional,
+  ValidateNested,
 } from 'class-validator';
 
 import { Web2UserAccount } from './web2user-account';
@@ -27,6 +28,7 @@ export class Web2UserDoc {
   })
   @IsArray()
   @Type(() => Object)
+  @ValidateNested({ each: true })
   linkedAccounts!: LinkedAccount[];
 
   @ApiProperty({ type: [String], description: 'Array of shard identifiers' })
@@ -47,6 +49,7 @@ export class Web2UserDoc {
   })
   @IsOptional()
   @Type(() => Web2UserWallet)
+  @ValidateNested()
   wallet?: Web2UserWallet;
 
   @ApiProperty({ description: 'Salt for the user, used for SUI ZK Login' })
@@ -59,6 +62,7 @@ export class Web2UserDoc {
     required: false,
   })
   @IsOptional()
+  @ValidateNested()
   @Type(() => Web2UserAccount)
   google?: Web2UserAccount;
 
@@ -68,6 +72,7 @@ export class Web2UserDoc {
     required: false,
   })
   @IsOptional()
+  @ValidateNested()
   @Type(() => Web2UserAccount)
   apple?: Web2UserAccount;
 

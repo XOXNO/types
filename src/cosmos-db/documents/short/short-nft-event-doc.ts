@@ -1,4 +1,4 @@
-import { IntersectionType, PickType } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 import { NftDocHydrated } from '../token/nft-details.doc';
 import { NftSaleInfoHydrated } from '../token/nft-sale-info';
 

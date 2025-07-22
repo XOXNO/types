@@ -2,7 +2,15 @@ import { AddressUtils } from '@multiversx/sdk-nestjs-common';
 
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsInt } from 'class-validator';
+import {
+  ArrayMaxSize,
+  IsArray,
+  IsEmail,
+  IsEnum,
+  IsInt,
+  IsString,
+  Min,
+} from 'class-validator';
 import { RoleStatus } from '../../../enums/event-user-role.doc';
 import {
   EventUserRoles,
@@ -25,12 +33,15 @@ export class EventUserRoleDoc {
   eventId?: string;
 
   @ApiProperty({ description: 'User wallet address', required: false })
+  @IsString()
   wallet?: string;
 
   @ApiProperty({ description: 'User name', required: false })
+  @IsString()
   name!: string;
 
   @ApiProperty({ description: 'User email address', required: false })
+  @IsEmail()
   email?: string;
 
   @ApiProperty({
@@ -39,6 +50,9 @@ export class EventUserRoleDoc {
     enum: EventUserRoles,
     enumName: 'EventUserRoles',
   })
+  @IsArray()
+  @ArrayMaxSize(3)
+  @IsEnum(EventUserRoles, { each: true })
   role!: EventUserRoles[];
 
   @ApiProperty({
@@ -47,6 +61,8 @@ export class EventUserRoleDoc {
     enum: EventUserRolePermission,
     enumName: 'EventUserRolePermission',
   })
+  @IsArray()
+  @IsEnum(EventUserRolePermission, { each: true })
   permissions!: EventUserRolePermission[];
 
   @ApiProperty({
@@ -63,6 +79,7 @@ export class EventUserRoleDoc {
     required: false,
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
   endTime?: number;
 
   @ApiProperty({

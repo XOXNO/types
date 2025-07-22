@@ -1,21 +1,7 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
-
-import { IsObject, IsOptional, IsString, Length } from 'class-validator';
+import { PartialType } from '@nestjs/swagger';
 
 import { EventTicketProfileCreateDto } from './event-ticket-profile-create.dto';
 
-export class EventTicketProfileEditDto extends PickType(
+export class EventTicketProfileEditDto extends PartialType(
   EventTicketProfileCreateDto,
-  ['description', 'badgeColor', 'maxLimit', 'userLimit', 'royalties'] as const,
-) {
-  @ApiProperty()
-  @IsString()
-  @Length(3, 30)
-  @IsOptional()
-  name!: string;
-
-  @ApiProperty()
-  @IsObject()
-  @IsOptional()
-  characteristics!: Record<string, string | number>;
-}
+) {}

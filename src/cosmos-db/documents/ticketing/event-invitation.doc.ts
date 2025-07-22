@@ -1,12 +1,20 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsInt } from 'class-validator';
+import {
+  IsBoolean,
+  IsEmail,
+  IsInt,
+  Length,
+  Min,
+  ValidateNested,
+} from 'class-validator';
 import { v4 } from 'uuid';
 
 import { EventInvitationStatus } from '../../../enums/event-invitation-status.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
+import { Type } from 'class-transformer';
 
 export class EventInvitationDoc {
   @ApiProperty({
@@ -32,6 +40,7 @@ export class EventInvitationDoc {
     type: String,
     required: false,
   })
+  @Length(1, 30)
   name?: string;
 
   @ApiProperty({
@@ -40,6 +49,7 @@ export class EventInvitationDoc {
     type: String,
     required: false,
   })
+  @IsEmail()
   email?: string;
 
   @ApiProperty({
@@ -55,6 +65,8 @@ export class EventInvitationDoc {
     isArray: true,
     example: [{ ticketId: 'VIP123', quantity: 2 }],
   })
+  @Type(() => TicketProfileSummary)
+  @ValidateNested({ each: true })
   tickets: TicketProfileSummary[] = [];
 
   @ApiProperty({
@@ -63,6 +75,7 @@ export class EventInvitationDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(1)
   startTime: number = Math.floor(Date.now() / 1000);
 
   @ApiProperty({
@@ -71,6 +84,7 @@ export class EventInvitationDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000) + 86400)
   endTime: number = Math.floor(Date.now() / 1000) + 86400 * 7;
 
   @ApiProperty({

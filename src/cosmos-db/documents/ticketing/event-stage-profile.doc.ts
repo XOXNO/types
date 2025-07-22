@@ -1,10 +1,17 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsInt } from 'class-validator';
+import {
+  IsArray,
+  IsBoolean,
+  IsInt,
+  Min,
+  ValidateNested,
+} from 'class-validator';
 import { v4 } from 'uuid';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
+import { Type } from 'class-transformer';
 
 export class EventStageProfileDoc {
   @ApiProperty({
@@ -44,6 +51,7 @@ export class EventStageProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
   startTime!: number;
 
   @ApiProperty({
@@ -53,6 +61,7 @@ export class EventStageProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000) + 86400)
   endTime!: number;
 
   @ApiProperty({
@@ -62,6 +71,7 @@ export class EventStageProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(0)
   maxLimit = 0;
 
   @ApiProperty({
@@ -71,6 +81,7 @@ export class EventStageProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(0)
   userLimit = 0;
 
   @ApiProperty({
@@ -112,6 +123,9 @@ export class EventStageProfileDoc {
     required: true,
     type: [EgldOrEsdtTokenPayment],
   })
+  @IsArray()
+  @ValidateNested({ each: true })
+  @Type(() => EgldOrEsdtTokenPayment)
   prices: EgldOrEsdtTokenPayment[] = []; // Assuming this represents a token-based payment structure
 
   @ApiProperty({

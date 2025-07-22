@@ -1,17 +1,8 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { PickType } from '@nestjs/swagger';
 
-import { IsString } from 'class-validator';
+import { EventReferralDoc } from './event-referral.doc';
 
-export class EventReferralCreateDto {
-  @ApiProperty({
-    description: 'The code shared by the referral owner.',
-  })
-  @IsString()
-  referralCode!: string;
-
-  @ApiProperty({
-    description: 'The ID of the referral configuration this referral follows.',
-  })
-  @IsString()
-  referralConfigId!: string;
-}
+export class EventReferralCreateDto extends PickType(EventReferralDoc, [
+  'referralCode',
+  'referralConfigId',
+] as const) {}
