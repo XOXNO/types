@@ -8,7 +8,8 @@ import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from '../../../enums/collection.enum';
-import { IsString, Length } from 'class-validator';
+import { IsString, Length, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class Rule {
   @ApiProperty({ description: 'Rule type' })
@@ -87,6 +88,8 @@ export class CollectionProfileDoc {
     description: 'Social media links for the collection',
     type: SocialsDto,
   })
+  @ValidateNested()
+  @Type(() => SocialsDto)
   socials!: SocialsDto;
 
   @ApiProperty({
@@ -275,5 +278,5 @@ export class CollectionProfileDoc {
 }
 
 export class CollectionProfileEditDto extends PartialType(
-  PickType(CollectionProfileDoc, ['description', 'name'] as const),
+  PickType(CollectionProfileDoc, ['description', 'name', 'socials'] as const),
 ) {}
