@@ -169,6 +169,10 @@ export class CollectionProfileDoc {
   @ApiProperty({
     description: 'Roles associated with the collection',
     type: 'object',
+    additionalProperties: {
+      type: 'array',
+      items: { type: 'string' },
+    },
     example: { ESDTRoleNFTCreate: ['erd1...'] },
   })
   roles: Record<string, string[]> = {};

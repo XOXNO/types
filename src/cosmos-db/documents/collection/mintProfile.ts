@@ -200,7 +200,9 @@ export class CollectionMintProfileDoc {
 }
 
 export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
+  @ApiProperty()
   collectionInfo!: ShortCollectionInfoDoc;
+  @ApiProperty()
   creatorInfo!: ShortCreatorDoc;
 }
 
