@@ -4,10 +4,10 @@ import { IsBoolean, IsInt } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { EventGuestStatus } from '../../../enums/event-guest-status.enum';
-import { TicketProfileSummary } from './event-ticket-profile.doc';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
-import { ShortNftDoc } from '../short/short-nft.doc';
+import { ShortNftEventDoc } from '../short/short-nft-event-doc';
+import { TicketProfileSummary } from './event-ticket-profile.doc';
 
 export class EventGuestCheckIn {
   @ApiProperty({
@@ -84,7 +84,7 @@ export class EventGuestCheckIn {
 }
 
 export class EventGuestCheckInHydrated extends EventGuestCheckIn {
-  nft!: ShortNftDoc;
+  nft!: ShortNftEventDoc;
 }
 
 class EventGuestRegistration {
