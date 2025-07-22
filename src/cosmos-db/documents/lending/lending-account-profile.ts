@@ -200,7 +200,7 @@ const selectFields = [
   'oraclePrice',
   'address',
   'flashLoan',
-] as never;
+] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
   @ApiProperty({
