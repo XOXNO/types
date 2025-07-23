@@ -31,9 +31,8 @@ export class LendingPositionStatus {
   @ApiProperty({
     description: 'The owner of the lending account',
     type: OwnerDto,
-    required: false,
   })
-  wallet?: OwnerDto;
+  wallet!: OwnerDto;
 
   constructor(props?: Partial<LendingPositionStatus>) {
     Object.assign(this, props);
