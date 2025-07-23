@@ -40,4 +40,5 @@ export type NotificationActivity = {
   seller?: string;
   previousBidder?: string; // for xoxno outbid event
   deadline?: number;
+  unreadCount?: number;
 };

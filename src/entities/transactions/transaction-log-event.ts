@@ -3,4 +3,5 @@ export class TransactionLogEvent {
   identifier = '';
   topics: string[] = [];
   data = '';
+  additionalData: string[] = [];
 }
