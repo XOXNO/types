@@ -20,6 +20,15 @@ export class ArdaSwapResultDto {
   amountIn!: string;
 
   @ApiProperty({
+    description:
+      'The amount of input token in human-readable form (without decimals)',
+    example: '1.0',
+  })
+  @IsNotEmpty()
+  @IsString()
+  amountInShort!: string;
+
+  @ApiProperty({
     description: 'The output token identifier',
     example: 'USDC-c76f1f',
   })
@@ -38,11 +47,11 @@ export class ArdaSwapResultDto {
   @ApiProperty({
     description:
       'The amount of output token in human-readable form (without decimals)',
-    example: 1.0,
+    example: '1.0',
   })
   @IsNotEmpty()
-  @IsNumber()
-  amountOutShort!: number;
+  @IsString()
+  amountOutShort!: string;
 
   @ApiProperty({
     description: 'The encoded arguments for the smart contract call',
