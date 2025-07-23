@@ -8,4 +8,5 @@ export enum WalletClientType {
   EXTENSION = 'extension',
   NATIVE = 'native',
   ZK_LOGIN = 'zkLogin',
+  METAMASK = 'metamask',
 }
