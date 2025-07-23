@@ -9,7 +9,7 @@ export class TransactionCreate {
 
   @ApiProperty({ description: 'The chain ID', type: String })
   @IsString()
-  chainId!: string;
+  chainID!: string;
 
   @ApiProperty({
     description: 'The transaction data',
