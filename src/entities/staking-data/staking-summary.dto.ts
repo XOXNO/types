@@ -1,5 +1,5 @@
 // file: dtos/staking-summary.dto.ts
-import { PickType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-doc';
 
 // class Reward {
@@ -134,7 +134,6 @@ import { StakingSummary } from '../../cosmos-db/documents/staking/staking-pool-d
 //   percentageFilled: number;
 // }
 
-export class StakingPostDTO extends PickType(StakingSummary, [
-  'name',
-  'description',
-] as const) {}
+export class StakingEditDto extends PartialType(
+  PickType(StakingSummary, ['name', 'description'] as const),
+) {}

@@ -3,6 +3,7 @@ import { NftDocHydrated } from '../token/nft-details.doc';
 import { StakingDataType } from '../../../enums/staking-data-type.enum';
 import { StakingIssuingTypeString } from '../../../enums/staking-issuing-type-string.enum';
 import { StakingPoolTypeString } from '../../../enums/staking-pool-type-string.enum';
+import { IsOptional, isString, IsString } from 'class-validator';
 
 export class StakingPoolDoc {
   dataType: StakingDataType = StakingDataType.Pool;
@@ -122,6 +123,7 @@ export class StakingSummary {
   poolId!: number;
 
   @ApiProperty({ description: 'Pool name', example: 'SRB - MiceCity' })
+  @IsString()
   name!: string;
 
   @ApiProperty({
@@ -129,6 +131,7 @@ export class StakingSummary {
     example: 'The largest staking pool',
     required: false,
   })
+  @IsString()
   description?: string;
 
   @ApiProperty({ description: 'Staking enabled', example: true })
