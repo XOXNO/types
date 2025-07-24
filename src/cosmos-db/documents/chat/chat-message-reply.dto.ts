@@ -1,13 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
-import {
-  IsNotEmptyObject,
-  IsNumber,
-  IsObject,
-  IsString,
-  ValidateNested,
-} from 'class-validator';
+import { IsNumber, IsObject, IsString, ValidateNested } from 'class-validator';
 
 import { ChatMessageContentDto } from './chat-message-content.dto';
 

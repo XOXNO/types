@@ -3,6 +3,8 @@ import { SocialsDto } from '../../../common/socials';
 import { ActivityChain } from '../../../enums/common.enum';
 import { UserDataType } from '../../../enums/user-data-type.enum';
 import { UserDeposit } from './user-deposit';
+import { Type } from 'class-transformer';
+import { ValidateNested, IsObject, IsOptional } from 'class-validator';
 
 export class UserProfileDoc {
   @ApiProperty({ example: 'userProfile', enum: UserDataType })
@@ -20,7 +22,14 @@ export class UserProfileDoc {
   @ApiProperty({ example: false, description: 'Whether the user is verified' })
   isVerified: boolean = false;
 
-  @ApiProperty({ type: SocialsDto, description: 'User social media links' })
+  @ApiProperty({
+    description: 'Social media links for the user',
+    type: () => SocialsDto,
+  })
+  @ValidateNested()
+  @Type(() => SocialsDto)
+  @IsObject()
+  @IsOptional()
   socials: SocialsDto = new SocialsDto();
 
   @ApiProperty({ example: 0, description: 'Number of followers' })

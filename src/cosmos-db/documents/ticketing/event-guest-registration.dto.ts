@@ -2,23 +2,22 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import {
-  IsEmail,
-  IsOptional,
-  IsNotEmpty,
-  IsString,
-  IsPhoneNumber,
-  IsArray,
-  ValidateNested,
   ArrayMinSize,
-  IsUUID,
+  IsArray,
   IsBoolean,
-  IsObject,
+  IsEmail,
   IsInt,
   IsNumber,
+  IsObject,
+  IsOptional,
+  IsPhoneNumber,
+  IsString,
+  IsUUID,
+  ValidateNested,
 } from 'class-validator';
 
-import { EventQuestionAnswerDto } from './event-question-answer.doc';
 import { CallbackUrl } from '../external-payment/external-payment-request';
+import { EventQuestionAnswerDto } from './event-question-answer.doc';
 
 export class TicketSelectionDto {
   @ApiProperty({
@@ -26,7 +25,6 @@ export class TicketSelectionDto {
     type: String,
   })
   @IsUUID()
-  @IsNotEmpty()
   ticketProfileId!: string;
 
   @ApiProperty({
@@ -34,7 +32,6 @@ export class TicketSelectionDto {
     type: String,
   })
   @IsUUID()
-  @IsNotEmpty()
   ticketStageId!: string;
 
   @ApiProperty({
@@ -42,7 +39,6 @@ export class TicketSelectionDto {
     minimum: 1,
     type: 'integer',
   })
-  @IsNotEmpty()
   @IsInt()
   quantity!: number;
 
@@ -100,7 +96,6 @@ export class EventGuestRegistrationDto {
     type: String,
     required: false,
   })
-  @IsNotEmpty()
   @IsString()
   @IsOptional()
   name?: string;

@@ -6,7 +6,6 @@ import {
   ArrayMinSize,
   IsArray,
   IsBoolean,
-  IsNotEmptyObject,
   IsObject,
   IsString,
   ValidateNested,

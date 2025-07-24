@@ -6,7 +6,6 @@ import {
   IsBoolean,
   IsEnum,
   IsInt,
-  IsNotEmpty,
   IsString,
 } from 'class-validator';
 
@@ -31,7 +30,6 @@ export class EventQuestionDoc {
   eventId!: string;
 
   @ApiProperty({ description: 'The actual question text.' })
-  @IsNotEmpty()
   @IsString()
   title!: string;
 

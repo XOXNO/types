@@ -1,9 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger/dist/decorators';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
 export class SocialsDto {
   @ApiProperty({ example: 'https://twitter.com/example', required: false })
   @IsString()
+  @IsOptional()
   twitter?: string;
 
   @ApiProperty({
@@ -11,14 +12,17 @@ export class SocialsDto {
     required: false,
   })
   @IsString()
+  @IsOptional()
   instagram?: string;
 
   @ApiProperty({ example: 'https://example.com', required: false })
   @IsString()
+  @IsOptional()
   website?: string;
 
   @ApiProperty({ example: 'https://t.me/example', required: false })
   @IsString()
+  @IsOptional()
   telegram?: string;
 
   @ApiProperty({
@@ -26,14 +30,17 @@ export class SocialsDto {
     required: false,
   })
   @IsString()
+  @IsOptional()
   discord?: string;
 
   @ApiProperty({ example: '', required: false })
   @IsString()
+  @IsOptional()
   facebook?: string;
 
   @ApiProperty({ example: '', required: false })
   @IsString()
+  @IsOptional()
   youtube?: string;
 
   constructor(props?: Partial<SocialsDto>) {

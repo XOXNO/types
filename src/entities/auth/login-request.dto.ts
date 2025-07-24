@@ -1,24 +1,16 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import {
-  IsEnum,
-  IsNotEmpty,
-  IsObject,
-  IsOptional,
-  IsString,
-} from 'class-validator';
+import { IsEnum, IsObject, IsOptional, IsString } from 'class-validator';
 import { LoginRequestService } from '../../enums/login-request-service.enum';
 
 export class LoginRequestDto {
   @ApiProperty({ description: 'The address of the user', required: false })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   address?: string;
 
   @ApiProperty({ description: 'The login token' })
   @IsString()
-  @IsNotEmpty()
   loginToken!: string;
 
   @ApiProperty({
@@ -26,7 +18,6 @@ export class LoginRequestDto {
     required: false,
   })
   @IsString()
-  @IsNotEmpty()
   @IsOptional()
   signature?: string;
 
@@ -41,7 +32,6 @@ export class LoginRequestDto {
   data?: { [key: string]: any };
 
   @IsEnum(LoginRequestService)
-  @IsNotEmpty()
   @IsOptional()
   service?: LoginRequestService = LoginRequestService.XOXNO;
 }

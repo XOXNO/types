@@ -100,7 +100,7 @@ export class CollectionProfileDoc {
   @Type(() => SocialsDto)
   @IsObject()
   @IsOptional()
-  socials!: SocialsDto;
+  socials: SocialsDto = new SocialsDto();
 
   @ApiProperty({
     description: 'Token type',
