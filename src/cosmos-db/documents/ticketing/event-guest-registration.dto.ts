@@ -172,9 +172,10 @@ export class EventGuestRegistrationDto {
   @ApiProperty({
     description: 'Callback URL',
     required: false,
-    type: CallbackUrl,
+    type: () => CallbackUrl,
   })
   @IsOptional()
   @IsObject()
+  @Type(() => CallbackUrl)
   callbackUrl?: CallbackUrl;
 }

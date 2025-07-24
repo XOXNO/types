@@ -7,7 +7,6 @@ export class ArdaSwapResultDto {
     description: 'The input token identifier',
     example: 'WEGLD-d7c6b3',
   })
-  @IsNotEmpty()
   @IsString()
   tokenIn!: string;
 
@@ -15,7 +14,6 @@ export class ArdaSwapResultDto {
     description: 'The amount of input token in its raw form (with decimals)',
     example: '1000000000000000000',
   })
-  @IsNotEmpty()
   @IsString()
   amountIn!: string;
 
@@ -24,7 +22,6 @@ export class ArdaSwapResultDto {
       'The amount of input token in human-readable form (without decimals)',
     example: '1.0',
   })
-  @IsNotEmpty()
   @IsString()
   amountInShort!: string;
 
@@ -32,7 +29,6 @@ export class ArdaSwapResultDto {
     description: 'The output token identifier',
     example: 'USDC-c76f1f',
   })
-  @IsNotEmpty()
   @IsString()
   tokenOut!: string;
 
@@ -40,7 +36,6 @@ export class ArdaSwapResultDto {
     description: 'The amount of output token in its raw form (with decimals)',
     example: '1000000000',
   })
-  @IsNotEmpty()
   @IsString()
   amountOut!: string;
 
@@ -49,7 +44,6 @@ export class ArdaSwapResultDto {
       'The amount of output token in human-readable form (without decimals)',
     example: '1.0',
   })
-  @IsNotEmpty()
   @IsString()
   amountOutShort!: string;
 
@@ -57,7 +51,6 @@ export class ArdaSwapResultDto {
     description: 'The encoded arguments for the smart contract call',
     example: '0x1234567890abcdef',
   })
-  @IsNotEmpty()
   @IsString()
   argument!: string;
 
@@ -65,7 +58,6 @@ export class ArdaSwapResultDto {
     description: 'The gas limit required for the transaction',
     example: 10000000,
   })
-  @IsNotEmpty()
   @IsNumber()
   gasLimit!: number;
 }

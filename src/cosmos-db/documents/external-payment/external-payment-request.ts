@@ -5,6 +5,7 @@ import {
   IsArray,
   IsEnum,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   ValidateNested,
@@ -129,6 +130,7 @@ export class ExternalPaymentRequest {
 
   @ApiProperty()
   @ValidateNested()
+  @IsObject()
   @Type(() => CallbackUrl)
   callbackUrl!: CallbackUrl;
 
@@ -141,6 +143,7 @@ export class ExternalPaymentRequest {
   })
   @ValidateNested()
   @Type(() => Object)
+  @IsObject()
   customData!:
     | MarketplaceCustomData
     | LaunchpadCustomData

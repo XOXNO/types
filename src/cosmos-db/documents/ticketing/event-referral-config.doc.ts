@@ -4,6 +4,7 @@ import {
   IsBoolean,
   IsInt,
   IsNumber,
+  IsObject,
   IsOptional,
   ValidateNested,
 } from 'class-validator';
@@ -86,6 +87,7 @@ export class EventReferralConfigDoc {
   })
   @IsOptional()
   @ValidateNested()
+  @IsObject()
   @Type(() => ShortVoucherDoc)
   appliedVoucher?: ShortVoucherDoc; // This voucher can be automatically applied as a discount for users using the referral code
 
@@ -97,6 +99,7 @@ export class EventReferralConfigDoc {
   })
   @IsOptional()
   @ValidateNested()
+  @IsObject()
   @Type(() => RewardDetails)
   rewardDetails?: RewardDetails;
 

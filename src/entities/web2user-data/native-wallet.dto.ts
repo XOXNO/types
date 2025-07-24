@@ -7,6 +7,7 @@ import {
   IsArray,
   IsBoolean,
   IsNotEmptyObject,
+  IsObject,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -33,7 +34,7 @@ export class NativeWalletDto {
   })
   @ValidateNested()
   @Type(() => Web2WalletDto)
-  @IsNotEmptyObject()
+  @IsObject()
   readonly wallet!: Web2WalletDto;
 
   @ApiProperty({

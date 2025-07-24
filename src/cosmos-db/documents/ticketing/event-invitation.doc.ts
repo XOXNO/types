@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import {
+  IsArray,
   IsBoolean,
   IsEmail,
   IsInt,
@@ -69,6 +70,7 @@ export class EventInvitationDoc {
     example: [{ ticketId: 'VIP123', quantity: 2 }],
   })
   @Type(() => TicketProfileSummary)
+  @IsArray()
   @ValidateNested({ each: true })
   tickets: TicketsType[] | TicketProfileSummary[] = [];
 

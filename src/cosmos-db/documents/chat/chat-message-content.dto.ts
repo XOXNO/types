@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 import {
   IsEnum,
   IsNotEmptyObject,
+  IsObject,
   IsOptional,
   IsString,
   ValidateNested,
@@ -24,7 +25,7 @@ export class ChatMessageContentDto {
   @IsOptional()
   @ValidateNested()
   @Type(() => ChatMessageReplyDto)
-  @IsNotEmptyObject()
+  @IsObject()
   @ApiProperty({
     description: 'Message reply to user',
     type: () => ChatMessageReplyDto,

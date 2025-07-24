@@ -8,7 +8,13 @@ import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from '../../../enums/collection.enum';
-import { IsOptional, IsString, Length, ValidateNested } from 'class-validator';
+import {
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  ValidateNested,
+} from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class Rule {
@@ -63,7 +69,7 @@ export class CollectionProfileDoc {
   @IsString()
   @Length(3, 30)
   @IsOptional()
-  name: string = '';
+  name!: string;
 
   @ApiProperty({
     description: 'Description of the collection',
@@ -72,7 +78,7 @@ export class CollectionProfileDoc {
   @IsString()
   @Length(3, 300)
   @IsOptional()
-  description: string = '';
+  description!: string;
 
   @ApiProperty({
     description: 'Whether the collection is visible to the public',
@@ -92,6 +98,7 @@ export class CollectionProfileDoc {
   })
   @ValidateNested()
   @Type(() => SocialsDto)
+  @IsObject()
   @IsOptional()
   socials!: SocialsDto;
 

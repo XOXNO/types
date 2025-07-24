@@ -8,6 +8,7 @@ import {
   IsString,
   IsOptional,
   ValidateNested,
+  IsObject,
 } from 'class-validator';
 
 import { Web2UserAccount } from './web2user-account';
@@ -49,6 +50,7 @@ export class Web2UserDoc {
   })
   @IsOptional()
   @Type(() => Web2UserWallet)
+  @IsObject()
   @ValidateNested()
   wallet?: Web2UserWallet;
 
@@ -63,6 +65,7 @@ export class Web2UserDoc {
   })
   @IsOptional()
   @ValidateNested()
+  @IsObject()
   @Type(() => Web2UserAccount)
   google?: Web2UserAccount;
 
@@ -73,6 +76,7 @@ export class Web2UserDoc {
   })
   @IsOptional()
   @ValidateNested()
+  @IsObject()
   @Type(() => Web2UserAccount)
   apple?: Web2UserAccount;
 

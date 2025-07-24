@@ -1,7 +1,12 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
-import { IsNotEmptyObject, IsString, ValidateNested } from 'class-validator';
+import {
+  IsNotEmptyObject,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 
 import { ChatMessageContentDto } from './chat-message-content.dto';
 
@@ -12,7 +17,7 @@ export class SendChatMessageDto {
 
   @ValidateNested()
   @Type(() => ChatMessageContentDto)
-  @IsNotEmptyObject()
+  @IsObject()
   @ApiProperty({ required: true, type: () => ChatMessageContentDto })
   content!: ChatMessageContentDto;
 

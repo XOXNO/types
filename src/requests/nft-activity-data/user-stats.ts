@@ -1,7 +1,13 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
-import { IsBoolean, IsNumber, IsString, ValidateNested } from 'class-validator';
+import {
+  IsBoolean,
+  IsNumber,
+  IsObject,
+  IsString,
+  ValidateNested,
+} from 'class-validator';
 import { ShortNftDoc } from '../../cosmos-db/documents/short/short-nft.doc';
 import { ActivityChain } from '../../enums/common.enum';
 
@@ -69,6 +75,7 @@ class PriceDataDto {
     required: false,
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => ShortNftDoc)
   nftInfo?: ShortNftDoc;
 }
@@ -79,6 +86,7 @@ export class UserStatsDto {
     description: 'User wallet information',
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => WalletDto)
   wallet!: WalletDto;
 
@@ -127,6 +135,7 @@ export class UserStatsDto {
     description: 'Buyer maximum price data',
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => PriceDataDto)
   buyerMaxPriceData!: PriceDataDto;
 
@@ -135,6 +144,7 @@ export class UserStatsDto {
     description: 'Buyer minimum price data',
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => PriceDataDto)
   buyerMinPriceData!: PriceDataDto;
 
@@ -163,6 +173,7 @@ export class UserStatsDto {
     description: 'Seller maximum price data',
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => PriceDataDto)
   sellerMaxPriceData!: PriceDataDto;
 
@@ -171,6 +182,7 @@ export class UserStatsDto {
     description: 'Seller minimum price data',
   })
   @ValidateNested()
+  @IsObject()
   @Type(() => PriceDataDto)
   sellerMinPriceData!: PriceDataDto;
 }
