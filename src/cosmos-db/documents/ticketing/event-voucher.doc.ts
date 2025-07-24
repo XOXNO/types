@@ -1,11 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
   IsInt,
   IsNumber,
-  IsOptional,
   IsString,
   IsUUID,
   Max,
@@ -49,7 +49,6 @@ export class EventVoucherDoc {
   @IsNumber()
   @Min(0)
   @Max(100)
-  @IsOptional()
   amount!: number;
 
   @ApiProperty({
@@ -59,7 +58,6 @@ export class EventVoucherDoc {
   })
   @IsNumber()
   @Min(0)
-  @IsOptional()
   maxDiscountAmount?: number;
 
   @ApiProperty({
@@ -68,7 +66,6 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(1)
-  @IsOptional()
   maxUses!: number;
 
   @ApiProperty({
@@ -77,7 +74,6 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(1)
-  @IsOptional()
   maxUsesPerUser!: number;
 
   @ApiProperty({
@@ -97,6 +93,7 @@ export class EventVoucherDoc {
     description:
       'List of specific ticket type IDs where the voucher can be applied.',
   })
+  @IsArray()
   ticketTypeIds: string[] = [];
 
   @ApiProperty({
@@ -104,6 +101,7 @@ export class EventVoucherDoc {
       'List of specific stage IDs where the voucher can be applied, optional.',
     required: false,
   })
+  @IsArray()
   stageIds?: string[];
 
   @ApiProperty({
@@ -131,7 +129,6 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   startDate!: number;
 
   @ApiProperty({
@@ -141,7 +138,6 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   endDate!: number;
 
   @ApiProperty({
@@ -156,6 +152,7 @@ export class EventVoucherDoc {
     description: 'Optional ID of the owner who can use this voucher.',
     required: false,
   })
+  @IsString()
   ownerId?: string;
 
   @ApiProperty({
@@ -169,6 +166,7 @@ export class EventVoucherDoc {
   @ApiProperty({
     description: 'Reference to the admin or system that created the voucher.',
   })
+  @IsString()
   createdBy!: string;
 
   pk!: string;

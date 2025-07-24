@@ -20,7 +20,6 @@ export class Web2UserDoc {
   createdOn!: number;
 
   @ApiProperty({ description: 'Unique identifier for the user' })
-  @IsString()
   id!: string;
 
   @ApiProperty({

@@ -6,15 +6,16 @@ import {
   IsNumber,
   IsObject,
   IsOptional,
+  IsString,
   ValidateNested,
 } from 'class-validator';
 import { v4 } from 'uuid';
 
+import { Type } from 'class-transformer';
 import { ReferralConditionType } from '../../../enums/event-referral-config.doc';
+import { EventReferralEnum } from '../../../enums/event-referral.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { ShortVoucherDoc } from '../short/short-voucher.doc';
-import { EventReferralEnum } from '../../../enums/event-referral.enum';
-import { Type } from 'class-transformer';
 
 export class RewardDetails {
   @ApiProperty({
@@ -77,6 +78,7 @@ export class EventReferralConfigDoc {
   @ApiProperty({
     description: 'The event this referral configuration is linked to.',
   })
+  @IsString()
   eventId!: string;
 
   @ApiProperty({
@@ -130,6 +132,7 @@ export class EventReferralConfigDoc {
     description:
       'The address of the user who created this referral configuration.',
   })
+  @IsString()
   createdBy!: string;
 
   pk!: string;

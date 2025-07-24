@@ -9,6 +9,7 @@ import {
   IsEnum,
   IsInt,
   IsString,
+  IsUUID,
   Min,
 } from 'class-validator';
 import { RoleStatus } from '../../../enums/event-user-role.doc';
@@ -30,6 +31,7 @@ export class EventUserRoleDoc {
     description: 'Unique identifier for the event.',
     required: false,
   })
+  @IsUUID()
   eventId?: string;
 
   @ApiProperty({ description: 'User wallet address', required: false })
@@ -94,10 +96,10 @@ export class EventUserRoleDoc {
     enumName: 'RoleStatus',
     required: false,
   })
+  @IsEnum(RoleStatus)
   status?: RoleStatus;
 
   pk?: string;
-  @IsInt()
   _ts?: number;
 
   constructor(props?: Partial<EventUserRoleDoc>) {

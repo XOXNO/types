@@ -5,18 +5,18 @@ import {
   IsBoolean,
   IsEmail,
   IsInt,
-  IsOptional,
+  IsString,
   Length,
   Min,
   ValidateNested,
 } from 'class-validator';
 import { v4 } from 'uuid';
 
+import { Type } from 'class-transformer';
 import { EventInvitationStatus } from '../../../enums/event-invitation-status.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
-import { Type } from 'class-transformer';
 import { TicketsType } from './event-ticket-qr-type.enum';
 
 export class EventInvitationDoc {
@@ -43,8 +43,8 @@ export class EventInvitationDoc {
     type: String,
     required: false,
   })
+  @IsString()
   @Length(1, 30)
-  @IsOptional()
   name?: string;
 
   @ApiProperty({
@@ -81,7 +81,6 @@ export class EventInvitationDoc {
   })
   @IsInt()
   @Min(1)
-  @IsOptional()
   startTime: number = Math.floor(Date.now() / 1000);
 
   @ApiProperty({
@@ -91,7 +90,6 @@ export class EventInvitationDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000) + 86400)
-  @IsOptional()
   endTime: number = Math.floor(Date.now() / 1000) + 86400 * 7;
 
   @ApiProperty({
@@ -166,7 +164,6 @@ export class EventInvitationDoc {
   })
   pk!: string;
 
-  @IsInt()
   _ts!: number;
 
   constructor(props?: Partial<EventInvitationDoc>) {

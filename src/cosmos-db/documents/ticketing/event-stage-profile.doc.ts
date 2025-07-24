@@ -4,15 +4,16 @@ import {
   IsArray,
   IsBoolean,
   IsInt,
-  IsOptional,
+  IsString,
+  IsUUID,
   Min,
   ValidateNested,
 } from 'class-validator';
 import { v4 } from 'uuid';
 
-import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
-import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
 import { Type } from 'class-transformer';
+import { EgldOrEsdtTokenPayment } from '../../../common/tokenPayent';
+import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
 export class EventStageProfileDoc {
   @ApiProperty({
@@ -28,6 +29,7 @@ export class EventStageProfileDoc {
     required: true,
     type: String,
   })
+  @IsUUID()
   eventId!: string;
 
   @ApiProperty({
@@ -36,6 +38,7 @@ export class EventStageProfileDoc {
     required: true,
     type: String,
   })
+  @IsUUID()
   ticketId!: string;
 
   @ApiProperty({
@@ -43,6 +46,7 @@ export class EventStageProfileDoc {
     required: true,
     type: String,
   })
+  @IsString()
   name!: string;
 
   @ApiProperty({
@@ -53,7 +57,6 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   startTime!: number;
 
   @ApiProperty({
@@ -64,7 +67,6 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000) + 86400)
-  @IsOptional()
   endTime!: number;
 
   @ApiProperty({
@@ -75,7 +77,6 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   maxLimit = 0;
 
   @ApiProperty({
@@ -86,7 +87,6 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   userLimit = 0;
 
   @ApiProperty({
@@ -150,7 +150,6 @@ export class EventStageProfileDoc {
   id: string = v4();
 
   pk!: string;
-  @IsInt()
   _ts!: number;
 
   constructor(props?: Partial<EventStageProfileDoc>) {

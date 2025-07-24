@@ -20,7 +20,6 @@ export class EventGuestAnswerDoc {
     description: 'Unique identifier for this guest answer.',
     example: uuidv4(),
   })
-  @IsUUID()
   id: string = uuidv4();
 
   @ApiProperty({

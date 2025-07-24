@@ -3,8 +3,9 @@ import { ApiProperty, PickType } from '@nestjs/swagger';
 import {
   IsInt,
   IsNumber,
-  IsOptional,
+  IsObject,
   IsString,
+  IsUUID,
   Length,
   Matches,
   Max,
@@ -25,26 +26,28 @@ export class EventTicketProfileDoc {
   @ApiProperty({
     description: 'ID of the event this ticket type is associated with.',
   })
+  @IsUUID()
   eventId!: string;
 
   @ApiProperty({
     description: 'Name of the ticket type (e.g., General, VIP).',
   })
   @Length(3, 30)
-  @IsOptional()
+  @IsString()
   name!: string;
 
   @ApiProperty({
     description: 'Description of the ticket type.',
   })
   @Length(3, 300)
-  @IsOptional()
+  @IsString()
   description!: string;
 
   @ApiProperty({
     description:
       'URL of the image that will be used as the NFT representing this ticket type.',
   })
+  @IsString()
   profile!: string;
 
   @ApiProperty({
@@ -57,7 +60,6 @@ export class EventTicketProfileDoc {
   @IsNumber()
   @Min(0)
   @Max(90)
-  @IsOptional()
   royalties = 0;
 
   @ApiProperty({
@@ -67,7 +69,6 @@ export class EventTicketProfileDoc {
   })
   @IsString()
   @Length(3, 30)
-  @IsOptional()
   @Matches(/^#([0-9A-F]{3}){1,2}$/i, {
     message: 'badgeColor must be a valid hex color',
   })
@@ -77,6 +78,7 @@ export class EventTicketProfileDoc {
     required: false,
     description: 'Other characteristics specific to this ticket type.',
   })
+  @IsObject()
   characteristics?: Record<string, string | number>; // Additional properties like seating, access levels, etc.
 
   @ApiProperty({
@@ -88,7 +90,6 @@ export class EventTicketProfileDoc {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   maxLimit = 0; // Maximum tickets that can be sold for this ticket type - 0 means unlimited
 
   @ApiProperty({
@@ -98,7 +99,6 @@ export class EventTicketProfileDoc {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   userLimit = 0;
 
   @ApiProperty({
@@ -125,7 +125,6 @@ export class EventTicketProfileDoc {
   id: string = v4();
 
   pk!: string;
-  @IsInt()
   _ts!: number;
 
   constructor(props?: Partial<EventTicketProfileDoc>) {

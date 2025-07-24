@@ -27,6 +27,7 @@ export class EventQuestionDoc {
   id!: string;
 
   @ApiProperty({ description: 'Reference to the EventDoc.' })
+  @IsString()
   eventId!: string;
 
   @ApiProperty({ description: 'The actual question text.' })

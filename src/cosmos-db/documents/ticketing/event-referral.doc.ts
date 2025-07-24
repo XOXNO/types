@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsInt, IsString } from 'class-validator';
+import { IsBoolean, IsInt, IsString, IsUUID } from 'class-validator';
 import { v4 } from 'uuid';
 
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
@@ -30,11 +30,13 @@ export class EventReferralDoc {
     description: 'The user ID of the referral owner.',
     required: false,
   })
+  @IsString()
   ownerId?: string;
 
   @ApiProperty({
     description: 'The event this referral applies to.',
   })
+  @IsUUID()
   eventId!: string;
 
   @ApiProperty({

@@ -109,12 +109,12 @@ export class EventProfileDoc {
   @ApiProperty({
     description: 'Wallet address of the creator of the event.',
   })
+  @IsString()
   creatorAddress!: string;
 
   @ApiProperty({ description: 'Title of the event.' })
   @IsString()
   @Length(3, 30)
-  @IsOptional()
   title!: string;
 
   @ApiProperty({
@@ -123,7 +123,6 @@ export class EventProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   startTime!: number;
 
   @ApiProperty({
@@ -133,7 +132,6 @@ export class EventProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   endTime!: number;
 
   @ApiProperty({
@@ -142,6 +140,8 @@ export class EventProfileDoc {
     // default: StaticConfig.getDefaultEventDescription(),
     required: false,
   })
+  @IsString()
+  @IsOptional()
   descriptionUrl?: string;
 
   @ApiProperty({
@@ -163,12 +163,14 @@ export class EventProfileDoc {
   isVirtualEvent!: boolean;
 
   @ApiProperty({ description: 'Unique slug for the event URL.' })
+  @IsString()
   slug!: string;
 
   @ApiProperty({
     description: 'URL to the profile image in Azure storage.',
     // default: StaticConfig.getDefaultProfilePicture(),
   })
+  @IsString()
   profile!: string;
 
   @ApiProperty({
@@ -192,6 +194,7 @@ export class EventProfileDoc {
     description: 'URL to the background image in Azure storage, optional.',
     required: false,
   })
+  @IsString()
   background?: string;
 
   @ApiProperty({
@@ -208,6 +211,7 @@ export class EventProfileDoc {
     description: 'Event premium features',
     type: () => PremiumType,
   })
+  @IsEnum(PremiumType)
   premium: PremiumType = {
     searchable: false,
   };
@@ -216,12 +220,14 @@ export class EventProfileDoc {
     description: 'The address of the contract that manages the event.',
     required: false,
   })
+  @IsString()
   contractAddress?: string;
 
   @ApiProperty({
     description: 'The NFT collection the event is associated with.',
     required: false,
   })
+  @IsString()
   collection?: string;
 
   @ApiProperty({
@@ -246,10 +252,11 @@ export class EventProfileDoc {
     required: false,
     type: () => EventUserRoleDoc,
   })
+  @IsObject()
+  @Type(() => EventUserRoleDoc)
   eventPermissions?: Pick<EventUserRoleDoc, 'role' | 'permissions' | 'endTime'>;
 
   pk!: string;
-  @IsInt()
   _ts!: number;
 
   constructor(props?: Partial<EventProfileDoc>) {

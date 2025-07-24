@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsBoolean, IsOptional, IsString, Length } from 'class-validator';
+import { IsBoolean, IsString, Length } from 'class-validator';
 
 export class EventGuestApproveDto {
   @ApiProperty({
@@ -9,7 +9,6 @@ export class EventGuestApproveDto {
   })
   @IsString()
   @Length(62, 62)
-  @IsOptional()
   address?: string;
 
   @ApiProperty({
