@@ -1,21 +1,15 @@
 import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
-import {
-  EsdtTokenType,
-  EsdtTokenSubType,
-  ActivityChain,
-} from '../../../enums/common.enum';
+import { Type } from 'class-transformer';
+import { IsObject, IsString, Length, ValidateNested } from 'class-validator';
 import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
-import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from '../../../enums/collection.enum';
 import {
-  IsObject,
-  IsOptional,
-  IsString,
-  Length,
-  ValidateNested,
-} from 'class-validator';
-import { Type } from 'class-transformer';
+  ActivityChain,
+  EsdtTokenSubType,
+  EsdtTokenType,
+} from '../../../enums/common.enum';
+import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 
 export class Rule {
   @ApiProperty({ description: 'Rule type' })
@@ -68,7 +62,6 @@ export class CollectionProfileDoc {
   })
   @IsString()
   @Length(3, 30)
-  @IsOptional()
   name!: string;
 
   @ApiProperty({
@@ -77,7 +70,6 @@ export class CollectionProfileDoc {
   })
   @IsString()
   @Length(3, 300)
-  @IsOptional()
   description!: string;
 
   @ApiProperty({
@@ -99,7 +91,6 @@ export class CollectionProfileDoc {
   @ValidateNested()
   @Type(() => SocialsDto)
   @IsObject()
-  @IsOptional()
   socials: SocialsDto = new SocialsDto();
 
   @ApiProperty({

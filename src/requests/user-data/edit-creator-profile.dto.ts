@@ -31,6 +31,5 @@ export class EditUserCreatorProfileDto {
   })
   @IsString()
   @Length(1, 300)
-  @IsOptional()
   name?: string;
 }

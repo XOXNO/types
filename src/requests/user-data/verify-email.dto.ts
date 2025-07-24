@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-import { IsNumberString, IsOptional, Length } from 'class-validator';
+import { IsNumberString, Length } from 'class-validator';
 
 export class VerifyEmailDto {
   @ApiProperty({
@@ -11,6 +11,5 @@ export class VerifyEmailDto {
   })
   @IsNumberString()
   @Length(6, 6)
-  @IsOptional()
   readonly verificationCode!: string;
 }

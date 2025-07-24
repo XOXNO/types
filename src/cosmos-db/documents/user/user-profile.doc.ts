@@ -1,10 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { Type } from 'class-transformer';
+import { IsObject, ValidateNested } from 'class-validator';
 import { SocialsDto } from '../../../common/socials';
 import { ActivityChain } from '../../../enums/common.enum';
 import { UserDataType } from '../../../enums/user-data-type.enum';
 import { UserDeposit } from './user-deposit';
-import { Type } from 'class-transformer';
-import { ValidateNested, IsObject, IsOptional } from 'class-validator';
 
 export class UserProfileDoc {
   @ApiProperty({ example: 'userProfile', enum: UserDataType })
@@ -29,7 +29,6 @@ export class UserProfileDoc {
   @ValidateNested()
   @Type(() => SocialsDto)
   @IsObject()
-  @IsOptional()
   socials: SocialsDto = new SocialsDto();
 
   @ApiProperty({ example: 0, description: 'Number of followers' })

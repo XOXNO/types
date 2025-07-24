@@ -8,14 +8,13 @@ import {
   IsEmail,
   IsEnum,
   IsInt,
-  IsOptional,
   IsString,
   Min,
 } from 'class-validator';
 import { RoleStatus } from '../../../enums/event-user-role.doc';
 import {
-  EventUserRoles,
   EventUserRolePermission,
+  EventUserRoles,
 } from '../../../enums/event-user-roles.enum';
 import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 
@@ -81,7 +80,6 @@ export class EventUserRoleDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
-  @IsOptional()
   endTime?: number;
 
   @ApiProperty({

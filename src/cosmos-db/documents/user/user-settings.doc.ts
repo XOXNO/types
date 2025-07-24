@@ -17,7 +17,6 @@ export class UserBillingDetails {
 
   @IsString()
   @Length(5, 50)
-  @IsOptional()
   @ApiProperty({ description: 'Name of the company or user.' })
   name!: string;
 
@@ -35,25 +34,21 @@ export class UserBillingDetails {
 
   @IsEmail()
   @Length(1, 50)
-  @IsOptional()
   @ApiProperty({ description: 'Email address.' })
   email!: string;
 
   @IsString()
   @Length(1, 50)
-  @IsOptional()
   @ApiProperty({ description: 'Country' })
   country!: string;
 
   @IsString()
   @Length(1, 100)
-  @IsOptional()
   @ApiProperty({ description: 'City' })
   city!: string;
 
   @IsString()
   @Length(1, 100)
-  @IsOptional()
   @ApiProperty({
     description: 'Address line 1',
   })
