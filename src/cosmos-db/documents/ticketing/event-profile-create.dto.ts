@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 
 import {
   ArrayMaxSize,
@@ -7,16 +7,19 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsObject,
   IsOptional,
   IsString,
   Length,
   Max,
   MaxLength,
   Min,
+  ValidateNested,
 } from 'class-validator';
 
 import { Visibility } from '../../../enums/ticketing-visibility.enum';
 import { EventProfileDoc } from './event-profile.doc';
+import { Type } from 'class-transformer';
 
 export class EventSeoDto {
   @ApiProperty({ example: 'This is a description', required: false })
@@ -125,6 +128,7 @@ export class RegistrationDetailsDto {
     description: 'Current number of tickets sold',
   })
   @IsInt()
+  @IsOptional()
   soldCount?: number;
 
   @ApiProperty({
@@ -133,6 +137,7 @@ export class RegistrationDetailsDto {
     description: 'Whether the event has custom questions',
   })
   @IsBoolean()
+  @IsOptional()
   hasCustomQuestions?: boolean;
 
   @ApiProperty({
@@ -141,6 +146,7 @@ export class RegistrationDetailsDto {
     description: 'Email sender for notifications',
   })
   @IsString()
+  @IsOptional()
   emailSender?: string;
 }
 
@@ -225,13 +231,18 @@ export class RegistrationDetailsCreateDto extends PickType(
 ) {}
 
 export class EventProfileCreateDto extends PickType(EventProfileDoc, [
+  'slug',
   'title',
   'startTime',
   'endTime',
   'location',
-  'registration',
   'isVirtualEvent',
   'seo',
   'category',
   'subCategory',
-] as const) {}
+] as const) {
+  @IsObject()
+  @ValidateNested()
+  @Type(() => RegistrationDetailsDto)
+  registration!: RegistrationDetailsCreateDto;
+}

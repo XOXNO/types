@@ -11,6 +11,7 @@ import {
   IsOptional,
   IsString,
   Length,
+  Matches,
   Min,
   ValidateNested,
 } from 'class-validator';
@@ -162,9 +163,17 @@ export class EventProfileDoc {
   @IsBoolean()
   isVirtualEvent!: boolean;
 
-  @ApiProperty({ description: 'Unique slug for the event URL.' })
+  @ApiProperty({
+    description: 'Unique slug for the event URL.',
+    required: false,
+  })
   @IsString()
-  slug!: string;
+  @Matches(/^[a-z0-9-]+$/, {
+    message: 'Slug can only contain lowercase letters, numbers, and hyphens',
+  })
+  @Length(3, 20)
+  @IsOptional()
+  slug?: string;
 
   @ApiProperty({
     description: 'URL to the profile image in Azure storage.',

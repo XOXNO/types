@@ -8,6 +8,7 @@ import {
   IsEmail,
   IsEnum,
   IsInt,
+  IsOptional,
   IsString,
   IsUUID,
   Min,
