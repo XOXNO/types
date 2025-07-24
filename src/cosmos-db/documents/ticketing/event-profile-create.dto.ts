@@ -210,25 +210,22 @@ export class EventLocationDto {
   @IsOptional()
   country?: string;
 }
-export class RegistrationDetailsCreateDto extends PickType(
-  RegistrationDetailsDto,
-  [
-    'visibility',
-    'maxLimit',
-    'userLimit',
-    'requireKYC',
-    'requireName',
-    'requireEmail',
-    'requirePhoneNumber',
-    'isPublished',
-    'hasSideEvents',
-    'hasWaitlist',
-    'showGuestCount',
-    'refundable',
-    'nameWithNumber',
-    'botProtection',
-  ] as const,
-) {}
+class RegistrationDetailsCreateDto extends PickType(RegistrationDetailsDto, [
+  'visibility',
+  'maxLimit',
+  'userLimit',
+  'requireKYC',
+  'requireName',
+  'requireEmail',
+  'requirePhoneNumber',
+  'isPublished',
+  'hasSideEvents',
+  'hasWaitlist',
+  'showGuestCount',
+  'refundable',
+  'nameWithNumber',
+  'botProtection',
+] as const) {}
 
 export class EventProfileCreateDto extends PickType(EventProfileDoc, [
   'slug',

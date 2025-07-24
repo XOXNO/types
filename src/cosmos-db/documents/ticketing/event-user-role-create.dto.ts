@@ -1,4 +1,4 @@
-import { PickType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 
 import { EventUserRoleDoc } from './event-user-role.doc';
 
@@ -10,3 +10,5 @@ export class EventUserRoleCreateDto extends PickType(EventUserRoleDoc, [
   'permissions',
   'endTime',
 ] as const) {}
+
+export class EventUserRoleEditDto extends PartialType(EventUserRoleCreateDto) {}
