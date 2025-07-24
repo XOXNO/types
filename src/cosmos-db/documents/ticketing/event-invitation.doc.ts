@@ -4,6 +4,7 @@ import {
   IsBoolean,
   IsEmail,
   IsInt,
+  IsOptional,
   Length,
   Min,
   ValidateNested,
@@ -42,6 +43,7 @@ export class EventInvitationDoc {
     required: false,
   })
   @Length(1, 30)
+  @IsOptional()
   name?: string;
 
   @ApiProperty({
@@ -77,6 +79,7 @@ export class EventInvitationDoc {
   })
   @IsInt()
   @Min(1)
+  @IsOptional()
   startTime: number = Math.floor(Date.now() / 1000);
 
   @ApiProperty({
@@ -86,6 +89,7 @@ export class EventInvitationDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000) + 86400)
+  @IsOptional()
   endTime: number = Math.floor(Date.now() / 1000) + 86400 * 7;
 
   @ApiProperty({

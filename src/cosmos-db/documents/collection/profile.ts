@@ -8,7 +8,7 @@ import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 import { CollectionDataType } from '../../../enums/collection.enum';
-import { IsString, Length, ValidateNested } from 'class-validator';
+import { IsOptional, IsString, Length, ValidateNested } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class Rule {
@@ -62,6 +62,7 @@ export class CollectionProfileDoc {
   })
   @IsString()
   @Length(3, 30)
+  @IsOptional()
   name: string = '';
 
   @ApiProperty({
@@ -70,6 +71,7 @@ export class CollectionProfileDoc {
   })
   @IsString()
   @Length(3, 300)
+  @IsOptional()
   description: string = '';
 
   @ApiProperty({
@@ -90,6 +92,7 @@ export class CollectionProfileDoc {
   })
   @ValidateNested()
   @Type(() => SocialsDto)
+  @IsOptional()
   socials!: SocialsDto;
 
   @ApiProperty({

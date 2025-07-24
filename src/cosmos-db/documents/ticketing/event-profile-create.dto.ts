@@ -55,6 +55,7 @@ export class RegistrationDetailsDto {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   maxLimit = 0;
 
   @ApiProperty({
@@ -63,6 +64,7 @@ export class RegistrationDetailsDto {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   userLimit = 0;
 
   @ApiProperty()
@@ -145,8 +147,8 @@ export class RegistrationDetailsDto {
 export class EventLocationDto {
   @ApiProperty({ required: false })
   @IsString()
-  @IsOptional()
   @Length(3, 300)
+  @IsOptional()
   address?: string;
 
   @ApiProperty({ required: false })
@@ -160,10 +162,10 @@ export class EventLocationDto {
     required: false,
     description: 'Latitude must be between -90 and 90',
   })
-  @IsOptional()
   @IsNumber()
   @Min(-90, { message: 'Latitude must be at least -90' })
   @Max(90, { message: 'Latitude must be at most 90' })
+  @IsOptional()
   lat?: number;
 
   @ApiProperty({
@@ -172,34 +174,34 @@ export class EventLocationDto {
     required: false,
     description: 'Longitude must be between -180 and 180',
   })
-  @IsOptional()
   @IsNumber()
   @Min(-180, { message: 'Longitude must be at least -180' })
   @Max(180, { message: 'Longitude must be at most 180' })
+  @IsOptional()
   long?: number;
 
   @ApiProperty({ required: false })
   @IsString()
-  @IsOptional()
   @Length(3, 100)
+  @IsOptional()
   instructions?: string;
 
   @ApiProperty({ required: false })
   @IsString()
-  @IsOptional()
   @Length(3, 100)
+  @IsOptional()
   onlineLink?: string;
 
   @ApiProperty({ required: false })
   @IsString()
-  @IsOptional()
   @Length(3, 100)
+  @IsOptional()
   city?: string;
 
   @ApiProperty({ required: false })
   @IsString()
-  @IsOptional()
   @Length(3, 100)
+  @IsOptional()
   country?: string;
 }
 export class RegistrationDetailsCreateDto extends PickType(

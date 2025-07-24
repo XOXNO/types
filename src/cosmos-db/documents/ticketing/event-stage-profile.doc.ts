@@ -4,6 +4,7 @@ import {
   IsArray,
   IsBoolean,
   IsInt,
+  IsOptional,
   Min,
   ValidateNested,
 } from 'class-validator';
@@ -52,6 +53,7 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   startTime!: number;
 
   @ApiProperty({
@@ -62,6 +64,7 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000) + 86400)
+  @IsOptional()
   endTime!: number;
 
   @ApiProperty({
@@ -72,6 +75,7 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   maxLimit = 0;
 
   @ApiProperty({
@@ -82,6 +86,7 @@ export class EventStageProfileDoc {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   userLimit = 0;
 
   @ApiProperty({

@@ -8,6 +8,7 @@ import {
   IsEmail,
   IsEnum,
   IsInt,
+  IsOptional,
   IsString,
   Min,
 } from 'class-validator';
@@ -80,6 +81,7 @@ export class EventUserRoleDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   endTime?: number;
 
   @ApiProperty({

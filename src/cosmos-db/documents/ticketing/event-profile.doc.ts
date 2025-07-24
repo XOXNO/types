@@ -8,6 +8,7 @@ import {
   IsInt,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   Length,
   Min,
@@ -113,6 +114,7 @@ export class EventProfileDoc {
   @ApiProperty({ description: 'Title of the event.' })
   @IsString()
   @Length(3, 30)
+  @IsOptional()
   title!: string;
 
   @ApiProperty({
@@ -121,6 +123,7 @@ export class EventProfileDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   startTime!: number;
 
   @ApiProperty({
@@ -129,6 +132,8 @@ export class EventProfileDoc {
     type: 'integer',
   })
   @IsInt()
+  @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   endTime!: number;
 
   @ApiProperty({

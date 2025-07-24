@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   IsUUID,
   Max,
@@ -48,6 +49,7 @@ export class EventVoucherDoc {
   @IsNumber()
   @Min(0)
   @Max(100)
+  @IsOptional()
   amount!: number;
 
   @ApiProperty({
@@ -57,6 +59,7 @@ export class EventVoucherDoc {
   })
   @IsNumber()
   @Min(0)
+  @IsOptional()
   maxDiscountAmount?: number;
 
   @ApiProperty({
@@ -65,6 +68,7 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(1)
+  @IsOptional()
   maxUses!: number;
 
   @ApiProperty({
@@ -73,6 +77,7 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(1)
+  @IsOptional()
   maxUsesPerUser!: number;
 
   @ApiProperty({
@@ -126,6 +131,7 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   startDate!: number;
 
   @ApiProperty({
@@ -135,6 +141,7 @@ export class EventVoucherDoc {
   })
   @IsInt()
   @Min(Math.floor(Date.now() / 1000))
+  @IsOptional()
   endDate!: number;
 
   @ApiProperty({

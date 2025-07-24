@@ -30,7 +30,7 @@ export class EditUserCreatorProfileDto {
     required: false,
   })
   @IsString()
-  @IsOptional()
   @Length(1, 300)
+  @IsOptional()
   name?: string;
 }

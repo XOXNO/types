@@ -3,6 +3,7 @@ import { ApiProperty, PickType } from '@nestjs/swagger';
 import {
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   Length,
   Matches,
@@ -30,12 +31,14 @@ export class EventTicketProfileDoc {
     description: 'Name of the ticket type (e.g., General, VIP).',
   })
   @Length(3, 30)
+  @IsOptional()
   name!: string;
 
   @ApiProperty({
     description: 'Description of the ticket type.',
   })
   @Length(3, 300)
+  @IsOptional()
   description!: string;
 
   @ApiProperty({
@@ -54,6 +57,7 @@ export class EventTicketProfileDoc {
   @IsNumber()
   @Min(0)
   @Max(90)
+  @IsOptional()
   royalties = 0;
 
   @ApiProperty({
@@ -63,6 +67,7 @@ export class EventTicketProfileDoc {
   })
   @IsString()
   @Length(3, 30)
+  @IsOptional()
   @Matches(/^#([0-9A-F]{3}){1,2}$/i, {
     message: 'badgeColor must be a valid hex color',
   })
@@ -83,6 +88,7 @@ export class EventTicketProfileDoc {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   maxLimit = 0; // Maximum tickets that can be sold for this ticket type - 0 means unlimited
 
   @ApiProperty({
@@ -92,6 +98,7 @@ export class EventTicketProfileDoc {
   })
   @IsInt()
   @Min(0)
+  @IsOptional()
   userLimit = 0;
 
   @ApiProperty({
