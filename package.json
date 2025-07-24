@@ -43,9 +43,6 @@
     "url": "https://github.com/XOXNO/types/issues"
   },
   "homepage": "https://github.com/XOXNO/types#readme",
-  "peerDependencies": {
-    "@nestjs/swagger": ">=7.0.0"
-  },
   "devDependencies": {
     "@nestjs/swagger": "^11.2.0",
     "@types/node": "^24.0.15",
@@ -59,9 +56,7 @@
     "rollup": "^4.45.1",
     "rollup-plugin-dts": "^6.2.1",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.38.0"
-  },
-  "dependencies": {
+    "typescript-eslint": "^8.38.0",
     "@azure/cosmos": "^4.5.0",
     "@multiversx/sdk-nestjs-common": "^6.0.0",
     "@nestjs/common": "^11.1.5",
