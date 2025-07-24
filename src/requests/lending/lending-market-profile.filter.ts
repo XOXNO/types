@@ -141,6 +141,7 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
       'supplyAmountScaled',
       'borrowAmountScaled',
       'debtCeiling',
+      'oracleProvider',
     ] as const;
   }
 }

@@ -200,6 +200,7 @@ const selectFields = [
   'oraclePrice',
   'address',
   'flashLoan',
+  'oracleProvider',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
