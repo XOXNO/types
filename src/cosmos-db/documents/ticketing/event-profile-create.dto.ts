@@ -240,6 +240,6 @@ export class EventProfileCreateDto extends PickType(EventProfileDoc, [
 ] as const) {
   @IsObject()
   @ValidateNested()
-  @Type(() => RegistrationDetailsDto)
+  @Type(() => RegistrationDetailsCreateDto)
   registration!: RegistrationDetailsCreateDto;
 }
