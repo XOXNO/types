@@ -197,6 +197,7 @@ export class EventProfileDoc {
     required: false,
   })
   @IsEnum(EventSubCategory)
+  @IsOptional()
   subCategory?: EventSubCategory;
 
   @ApiProperty({
