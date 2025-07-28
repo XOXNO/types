@@ -249,6 +249,7 @@ export class EventProfileDoc {
   })
   @IsObject()
   @ValidateNested()
+  @IsOptional()
   @Type(() => EventSeoDto)
   seo?: EventSeoDto;
 
