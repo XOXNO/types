@@ -2,12 +2,19 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain, TokenDataType } from '../../enums';
 
 class TokenDataDocBase {
+  @ApiProperty()
   identifier!: string;
+  @ApiProperty()
   decimals!: number;
+  @ApiProperty()
   ticker!: string;
+  @ApiProperty()
   name!: string;
+  @ApiProperty()
   svgUrl!: string;
+  @ApiProperty()
   pngUrl!: string;
+  @ApiProperty()
   chain: ActivityChain = ActivityChain.MVX;
 
   constructor(props?: Partial<TokenDataDocBase>) {
@@ -16,11 +23,17 @@ class TokenDataDocBase {
 }
 
 export class TokenDataDoc extends TokenDataDocBase {
+  @ApiProperty()
   id!: string;
+  @ApiProperty()
   collection!: string;
+  @ApiProperty()
   dataType = TokenDataType.FungibleTokenInfo;
+  @ApiProperty()
   type!: string;
+  @ApiProperty()
   category: string[] = ['userInventory'];
+  @ApiProperty()
   _ts!: number;
 
   constructor(props?: Partial<TokenDataDoc>) {
