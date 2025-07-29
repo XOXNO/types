@@ -109,8 +109,11 @@ export class NftActivityDoc extends NftActivityDocBase {
 }
 
 export class NftActivityDocHydrated extends NftActivityDocBase {
+  @ApiProperty()
   from!: OwnerDto;
+  @ApiProperty()
   to!: OwnerDto;
+  @ApiProperty()
   activityData!: NftActivityDataHydrated;
 
   constructor(props?: Partial<NftActivityDoc>) {

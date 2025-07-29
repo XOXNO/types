@@ -3,13 +3,21 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsInt } from 'class-validator';
 
 export class VolumeGraph {
+  @ApiProperty()
   marketplace!: string;
+  @ApiProperty()
   timestamp!: string[];
+  @ApiProperty()
   totalEgldVolume!: number[];
+  @ApiProperty()
   totalUsdVolume!: number[];
+  @ApiProperty()
   totalTrades!: number[];
+  @ApiProperty()
   floorPrice!: number[];
+  @ApiProperty()
   athPrice!: number[];
+  @ApiProperty()
   avgPrice!: number[];
 }
 

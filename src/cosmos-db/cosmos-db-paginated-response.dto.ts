@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 
-export class CosmosPaginatedResponse<T> {
+class CosmosPaginatedResponse<T> {
   @ApiProperty({
     description: 'Total number of documents',
     example: 100,
@@ -61,6 +61,17 @@ export function createCosmosPaginatedResponse<T>(type: new () => T) {
       isArray: true,
     })
     resources: T[] = [];
+  }
+  return PaginatedResponse;
+}
+
+export function createCosmosPaginatedSingleResponse<T>(type: new () => T) {
+  class PaginatedResponse extends CosmosPaginatedSingleResponse<T> {
+    @ApiProperty({
+      description: 'List of documents',
+      type,
+    })
+    resources!: T;
   }
   return PaginatedResponse;
 }

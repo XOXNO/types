@@ -1,38 +1,68 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain } from '../../enums/common.enum';
 
-export interface PriceData {
-  price: number;
-  usdValue: number;
-  timestamp: number;
-  identifier: string;
-  txHash: string;
+export class PriceData {
+  @ApiProperty()
+  price!: number;
+  @ApiProperty()
+  usdValue!: number;
+  @ApiProperty()
+  timestamp!: number;
+  @ApiProperty()
+  identifier!: string;
+  @ApiProperty()
+  txHash!: string;
 }
 
 export class WalletTradingStats {
+  @ApiProperty()
   wallet!: string;
+  @ApiProperty()
   totalVolume!: number;
+  @ApiProperty()
   totalTrades!: number;
+  @ApiProperty()
   totalCollections!: number;
+  @ApiProperty()
   totalNfts!: number;
+  @ApiProperty()
   totalPartners!: number;
+  @ApiProperty()
   buyerVolume!: number;
+  @ApiProperty()
   buyerTrades!: number;
+  @ApiProperty()
   buyerNfts!: number;
+  @ApiProperty()
   buyerCollections!: number;
+  @ApiProperty()
   buyerPartners!: number;
+  @ApiProperty()
   buyerMaxPrice!: number;
+  @ApiProperty()
   buyerMinPrice!: number;
+  @ApiProperty()
   buyerMaxPriceData!: PriceData | null;
+  @ApiProperty()
   buyerMinPriceData!: PriceData | null;
   sellerVolume!: number;
+  @ApiProperty()
   sellerTrades!: number;
+  @ApiProperty()
   sellerNfts!: number;
+  @ApiProperty()
   sellerCollections!: number;
+  @ApiProperty()
   sellerPartners!: number;
+  @ApiProperty()
   sellerMaxPrice!: number;
+  @ApiProperty()
   sellerMinPrice!: number;
+  @ApiProperty()
   sellerMaxPriceData!: PriceData | null;
+  @ApiProperty()
   sellerMinPriceData!: PriceData | null;
+  @ApiProperty()
   chain!: ActivityChain;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

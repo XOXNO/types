@@ -15,18 +15,29 @@ export class MessageDto {
   @ApiProperty({ example: 1720468991 })
   timestamp!: number;
 
+  @ApiProperty()
   sender?: string;
+
+  @ApiProperty()
   isDeletedFor?: string[]; // array of user addresses
 }
 
 class ChatMessageDocBase {
+  @ApiProperty()
   dataType = ChatDataType.MESSAGE;
+  @ApiProperty()
   chatId!: string;
+  @ApiProperty()
   isGroupChat!: boolean;
+  @ApiProperty()
   message!: MessageDto;
+  @ApiProperty()
   pk!: string;
+  @ApiProperty()
   id!: string;
+  @ApiProperty()
   ttl?: number;
+  @ApiProperty()
   _ts?: number;
 
   constructor(props?: Partial<ChatMessageDoc>) {
@@ -40,11 +51,15 @@ class ChatMessageDocBase {
 }
 
 export class ChatMessageDoc extends ChatMessageDocBase {
+  @ApiProperty()
   sender!: string;
+  @ApiProperty()
   receiver!: string;
 }
 
 export class ChatMessageDocHydrated extends ChatMessageDocBase {
+  @ApiProperty()
   sender!: OwnerDto;
+  @ApiProperty()
   receiver!: OwnerDto;
 }

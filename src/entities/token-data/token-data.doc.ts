@@ -51,9 +51,13 @@ export class TokenDataDocHydrated extends TokenDataDoc {
 }
 
 export class SuiCoinObjectDto {
+  @ApiProperty()
   objectId!: string;
+  @ApiProperty()
   balance!: string;
+  @ApiProperty()
   digest!: string;
+  @ApiProperty()
   version!: string;
 }
 
@@ -82,5 +86,6 @@ export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 83.21 })
   weight!: number;
 
+  @ApiProperty()
   objects?: SuiCoinObjectDto[];
 }

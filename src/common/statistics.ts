@@ -10,15 +10,22 @@ export class StatisticsTradeDataDto {
   @ApiProperty({ example: 128123.25 })
   totalEgldVolume!: number;
 
+  @ApiProperty()
   averageEgldPrice!: number;
+  @ApiProperty()
   athEgldPrice!: number;
+  @ApiProperty()
   athTxHash!: string;
+  @ApiProperty()
   totalTrades!: number;
 }
 
 export class StatisticsMintDataDto {
+  @ApiProperty()
   totalMintEgldVolume!: number;
+  @ApiProperty()
   weekMintEgldVolume!: number;
+  @ApiProperty()
   dayMintEgldVolume!: number;
 }
 
