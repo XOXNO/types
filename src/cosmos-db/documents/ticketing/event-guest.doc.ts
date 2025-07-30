@@ -84,6 +84,11 @@ export class EventGuestCheckIn {
 }
 
 export class EventGuestCheckInHydrated extends EventGuestCheckIn {
+  @ApiProperty({
+    description: 'NFT associated with the ticket.',
+    required: false,
+    type: () => ShortNftEventDoc,
+  })
   nft?: ShortNftEventDoc;
 }
 
@@ -285,9 +290,18 @@ export class EventGuestDoc {
   })
   pk?: string;
 
+  @ApiProperty({
+    description: 'Timestamp for document in Cosmos DB.',
+    type: 'integer',
+  })
   _ts!: number;
 
   //TODO: set TTL if status is pending
+  @ApiProperty({
+    description: 'Time to live in seconds for the document.',
+    required: false,
+    type: 'integer',
+  })
   ttl?: number;
 
   constructor(props?: Partial<EventGuestDoc>) {

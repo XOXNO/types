@@ -2,67 +2,188 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain } from '../../enums/common.enum';
 
 export class PriceData {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Price of the NFT in native token',
+    example: 10.5,
+    type: Number,
+  })
   price!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'USD value of the NFT at the time of transaction',
+    example: 525.0,
+    type: Number,
+  })
   usdValue!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Unix timestamp of the transaction',
+    example: 1672531200,
+    type: Number,
+  })
   timestamp!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'NFT identifier',
+    example: 'COOL-1a2b3c-01',
+    type: String,
+  })
   identifier!: string;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Transaction hash',
+    example: '0xabcdef123456789',
+    type: String,
+  })
   txHash!: string;
 }
 
 export class WalletTradingStats {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Wallet address',
+    example: 'erd1qqqqqqqqqqqqqpgqa0fsfshnff4n76jhcye6k7uvd7qacsq42jpsp6shh2',
+    type: String,
+  })
   wallet!: string;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total trading volume in native token',
+    example: 1500.5,
+    type: Number,
+  })
   totalVolume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of trades executed',
+    example: 250,
+    type: Number,
+  })
   totalTrades!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of unique collections traded',
+    example: 45,
+    type: Number,
+  })
   totalCollections!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of unique NFTs traded',
+    example: 125,
+    type: Number,
+  })
   totalNfts!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of unique trading partners',
+    example: 80,
+    type: Number,
+  })
   totalPartners!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total volume spent as buyer in native token',
+    example: 800.25,
+    type: Number,
+  })
   buyerVolume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of buy trades',
+    example: 120,
+    type: Number,
+  })
   buyerTrades!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of NFTs bought',
+    example: 65,
+    type: Number,
+  })
   buyerNfts!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of collections bought from',
+    example: 25,
+    type: Number,
+  })
   buyerCollections!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of unique sellers',
+    example: 40,
+    type: Number,
+  })
   buyerPartners!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Maximum price paid for an NFT',
+    example: 150.0,
+    type: Number,
+  })
   buyerMaxPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Minimum price paid for an NFT',
+    example: 0.5,
+    type: Number,
+  })
   buyerMinPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the highest priced purchase',
+    type: PriceData,
+    nullable: true,
+  })
   buyerMaxPriceData!: PriceData | null;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the lowest priced purchase',
+    type: PriceData,
+    nullable: true,
+  })
   buyerMinPriceData!: PriceData | null;
+  @ApiProperty({
+    description: 'Total volume earned as seller in native token',
+    example: 700.25,
+    type: Number,
+  })
   sellerVolume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of sell trades',
+    example: 130,
+    type: Number,
+  })
   sellerTrades!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of NFTs sold',
+    example: 60,
+    type: Number,
+  })
   sellerNfts!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of collections sold from',
+    example: 20,
+    type: Number,
+  })
   sellerCollections!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of unique buyers',
+    example: 40,
+    type: Number,
+  })
   sellerPartners!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Maximum price received for an NFT sale',
+    example: 200.0,
+    type: Number,
+  })
   sellerMaxPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Minimum price received for an NFT sale',
+    example: 1.0,
+    type: Number,
+  })
   sellerMinPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the highest priced sale',
+    type: PriceData,
+    nullable: true,
+  })
   sellerMaxPriceData!: PriceData | null;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the lowest priced sale',
+    type: PriceData,
+    nullable: true,
+  })
   sellerMinPriceData!: PriceData | null;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Blockchain network for these statistics',
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
   chain!: ActivityChain;
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any

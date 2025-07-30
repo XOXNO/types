@@ -200,9 +200,16 @@ export class CollectionMintProfileDoc {
 }
 
 export class CollectionMintProfileDocHydrated extends CollectionMintProfileDoc {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Short collection information',
+    type: ShortCollectionInfoDoc,
+  })
   collectionInfo!: ShortCollectionInfoDoc;
-  @ApiProperty()
+
+  @ApiProperty({
+    description: 'Short creator information',
+    type: ShortCreatorDoc,
+  })
   creatorInfo!: ShortCreatorDoc;
 }
 
@@ -223,9 +230,33 @@ export class CollectionMintProfileDocWithStages extends PickType(
     'collectionInfo',
   ] as const,
 ) {
+  @ApiProperty({
+    description: 'Collection identifier',
+    example: 'COLLECTION-123456',
+  })
   collection!: string;
+
+  @ApiProperty({
+    description: 'Whether the user is excluded from minting',
+    example: false,
+  })
   isExcludedFromMint!: boolean;
+
+  @ApiProperty({
+    description: 'Number of global mints by the user',
+    example: 5,
+  })
   userMintsGlobal!: number;
+
+  @ApiProperty({
+    description: 'Available mint stages for the collection',
+    type: [MintStageDto],
+  })
   mintStages!: MintStageDto[];
+
+  @ApiProperty({
+    description: 'Creator profile information',
+    type: CreatorProfileDoc,
+  })
   creatorInfo!: CreatorProfileDoc;
 }

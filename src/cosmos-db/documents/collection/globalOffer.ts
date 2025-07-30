@@ -134,9 +134,33 @@ export class GlobalOfferDoc extends GlobalOfferDocBase {
 }
 
 export class GlobalOfferDocHydrated extends GlobalOfferDocBase {
+  @ApiProperty({
+    description: 'USD value of the offer',
+    example: 150.75,
+  })
   usdValue!: number;
+
+  @ApiProperty({
+    description: 'Owner information for the offer',
+    type: OwnerDto,
+  })
   owner!: OwnerDto;
+
+  @ApiProperty({
+    description: 'Floor price of the collection',
+    example: 1.2,
+  })
   floorPrice!: number;
+
+  @ApiProperty({
+    description: 'Floor price margin percentage',
+    example: 10.5,
+  })
   floorPriceMargin!: number;
+
+  @ApiProperty({
+    description: 'Collection information',
+    type: ShortCollectionDoc,
+  })
   collectionInfo!: ShortCollectionDoc;
 }

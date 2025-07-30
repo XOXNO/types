@@ -2,19 +2,48 @@ import { ApiProperty } from '@nestjs/swagger';
 import { ActivityChain, TokenDataType } from '../../enums';
 
 class TokenDataDocBase {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Unique token identifier',
+    example: 'EGLD',
+  })
   identifier!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: Number,
+    description: 'Number of decimal places for the token',
+    example: 18,
+  })
   decimals!: number;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Token ticker symbol',
+    example: 'EGLD',
+  })
   ticker!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Full name of the token',
+    example: 'Elrond Gold',
+  })
   name!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'URL to the SVG icon of the token',
+    example: 'https://media.xoxno.com/tokens/EGLD.svg',
+  })
   svgUrl!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'URL to the PNG icon of the token',
+    example: 'https://media.xoxno.com/tokens/EGLD.png',
+  })
   pngUrl!: string;
-  @ApiProperty()
+  @ApiProperty({
+    enum: ActivityChain,
+    enumName: 'ActivityChain',
+    description: 'Blockchain network of the token',
+    default: ActivityChain.MVX,
+  })
   chain: ActivityChain = ActivityChain.MVX;
 
   constructor(props?: Partial<TokenDataDocBase>) {
@@ -23,17 +52,38 @@ class TokenDataDocBase {
 }
 
 export class TokenDataDoc extends TokenDataDocBase {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Unique document identifier',
+  })
   id!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Collection identifier for grouping',
+  })
   collection!: string;
-  @ApiProperty()
+  @ApiProperty({
+    enum: TokenDataType,
+    enumName: 'TokenDataType',
+    description: 'Type of token data document',
+    default: TokenDataType.FungibleTokenInfo,
+  })
   dataType = TokenDataType.FungibleTokenInfo;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Token type classification',
+  })
   type!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: [String],
+    description: 'Categories this token belongs to',
+    default: ['userInventory'],
+  })
   category: string[] = ['userInventory'];
-  @ApiProperty()
+  @ApiProperty({
+    type: Number,
+    description: 'Cosmos DB timestamp for document versioning',
+  })
   _ts!: number;
 
   constructor(props?: Partial<TokenDataDoc>) {
@@ -51,13 +101,25 @@ export class TokenDataDocHydrated extends TokenDataDoc {
 }
 
 export class SuiCoinObjectDto {
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Unique object identifier on SUI blockchain',
+  })
   objectId!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Balance amount as string',
+  })
   balance!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Transaction digest hash',
+  })
   digest!: string;
-  @ApiProperty()
+  @ApiProperty({
+    type: String,
+    description: 'Object version on SUI blockchain',
+  })
   version!: string;
 }
 
@@ -86,6 +148,10 @@ export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 83.21 })
   weight!: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    type: [SuiCoinObjectDto],
+    description: 'Array of SUI coin objects',
+    required: false,
+  })
   objects?: SuiCoinObjectDto[];
 }

@@ -28,7 +28,18 @@ export class UserStakingSummaryDto {
   })
   banner!: string;
 
+  @ApiProperty({
+    description: 'List of pool IDs where the user has staked NFTs',
+    example: [1, 3, 7],
+    type: Number,
+    isArray: true,
+  })
   poolIds!: number[];
 
+  @ApiProperty({
+    description: 'User reward details across all pools',
+    type: () => XoxnoStakingReward,
+    isArray: true,
+  })
   userReward!: XoxnoStakingReward[];
 }

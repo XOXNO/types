@@ -20,6 +20,10 @@ export class EventReferralDoc {
   })
   id!: string;
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+  })
   pk!: string;
 
   @ApiProperty({ description: 'The code shared by the referral owner.' })

@@ -6,28 +6,182 @@ import { StakingPoolTypeString } from '../../../enums/staking-pool-type-string.e
 import { NftDocHydrated } from '../token/nft-details.doc';
 
 export class StakingPoolDoc {
+  @ApiProperty({
+    description: 'Type of staking data document',
+    enum: StakingDataType,
+    enumName: 'StakingDataType',
+    example: StakingDataType.Pool,
+  })
   dataType: StakingDataType = StakingDataType.Pool;
+
+  @ApiProperty({
+    description: 'Unique identifier for the staking pool',
+    example: 3,
+    type: Number,
+  })
   poolId!: number;
+
+  @ApiProperty({
+    description: 'Type of staking pool',
+    enum: StakingPoolTypeString,
+    enumName: 'StakingPoolTypeString',
+    example: 'Duo',
+  })
   poolType!: StakingPoolTypeString;
+
+  @ApiProperty({
+    description: 'Whether staking is currently enabled for this pool',
+    example: true,
+    type: Boolean,
+  })
   stakingEnabled!: boolean;
+
+  @ApiProperty({
+    description: 'Whether whitelist is enabled for this pool',
+    example: false,
+    type: Boolean,
+  })
   whitelistEnabled!: boolean;
+
+  @ApiProperty({
+    description: 'Whether match pair staking is enabled',
+    example: false,
+    type: Boolean,
+  })
   matchPairEnabled!: boolean;
+
+  @ApiProperty({
+    description: 'Maximum number of NFTs a wallet can stake',
+    example: 8000,
+    type: Number,
+    minimum: 0,
+  })
   maxStakePerWallet!: number;
+
+  @ApiProperty({
+    description: 'Maximum total number of NFTs that can be staked in the pool',
+    example: 16000,
+    type: Number,
+    minimum: 0,
+  })
   maxStakePerPool!: number;
+
+  @ApiProperty({
+    description: 'Type of reward issuing mechanism',
+    enum: StakingIssuingTypeString,
+    enumName: 'StakingIssuingTypeString',
+    example: 'Fixed',
+  })
   issuingType!: StakingIssuingTypeString;
+
+  @ApiProperty({
+    description: 'Epoch deadline for reward issuing',
+    example: 1444,
+    type: Number,
+  })
   issuingDeadline!: number;
+
+  @ApiProperty({
+    description: 'Epoch when reward issuing starts',
+    example: 1381,
+    type: Number,
+  })
   issuingStart!: number;
+
+  @ApiProperty({
+    description: 'Number of days for the unbounding period',
+    example: 0,
+    type: Number,
+    minimum: 0,
+  })
   unboundPeriod!: number;
+
+  @ApiProperty({
+    description: 'List of collection identifiers eligible for staking',
+    example: ['MICE-a0c447', 'SRB-61daf7'],
+    type: String,
+    isArray: true,
+  })
   collection!: string[];
+
+  @ApiProperty({
+    description: 'List of reward configurations for the pool',
+    type: () => XoxnoStakingReward,
+    isArray: true,
+  })
   reward!: XoxnoStakingReward[];
+
+  @ApiProperty({
+    description: 'Fee percentage cut taken by the pool owner',
+    example: 5,
+    type: Number,
+    minimum: 0,
+    maximum: 100,
+  })
   cutFee!: number;
+
+  @ApiProperty({
+    description: 'Wallet address of the pool owner',
+    example: 'erd13sj3r6xuh708nhv6t5tqquznwcve4nhaghwdz9lac0zpmw0qe0hqysg4w6',
+    type: String,
+  })
   owner!: string;
+
+  @ApiProperty({
+    description: 'Name of the staking pool',
+    example: 'SRB - MiceCity',
+    type: String,
+    required: false,
+  })
   name?: string;
+
+  @ApiProperty({
+    description: 'Profile picture URL for the staking pool',
+    example:
+      'https://media.xoxno.com/stakingpools/3/stakingPoolPicture_3.webp?_ts=1716838395',
+    type: String,
+    required: false,
+  })
   profile?: string;
+
+  @ApiProperty({
+    description: 'Total number of whitelisted addresses',
+    example: 100,
+    type: Number,
+    required: false,
+  })
   totalWhitelisted?: number;
+
+  @ApiProperty({
+    description: 'Number of delegators in the pool',
+    example: 267,
+    type: Number,
+    required: false,
+  })
   delegatorCount?: number = 0;
+
+  @ApiProperty({
+    description: 'Total number of NFTs staked in the pool',
+    example: 5895,
+    type: Number,
+    required: false,
+  })
   poolStakedCount?: number = 0;
+
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB storage',
+    example: '3',
+    type: String,
+    required: false,
+  })
   pk?: string;
+
+  @ApiProperty({
+    description: 'Document ID in Cosmos DB',
+    example: '3',
+    type: String,
+    required: false,
+  })
   id?: string;
 
   constructor(props?: Partial<StakingPoolDoc>) {
@@ -100,8 +254,25 @@ export class XoxnoStakingRewardClaim {
     Object.assign(this, props);
   }
 
+  @ApiProperty({
+    description: 'Token identifier for the reward claim',
+    example: 'RARE-99e8b0',
+    type: String,
+  })
   tokenIdentifier!: string;
+
+  @ApiProperty({
+    description: 'Token nonce for the reward claim',
+    example: 0,
+    type: Number,
+  })
   tokenNonce!: number;
+
+  @ApiProperty({
+    description: 'Amount of tokens to claim',
+    example: '1000000000000000000',
+    type: String,
+  })
   amount!: string;
 }
 
@@ -110,11 +281,46 @@ export class XoxnoStakingIssuingReward {
     Object.assign(this, props);
   }
 
+  @ApiProperty({
+    description: 'Token identifier for issuing reward',
+    example: 'RARE-99e8b0',
+    type: String,
+  })
   tokenIdentifier!: string;
+
+  @ApiProperty({
+    description: 'Token nonce for issuing reward',
+    example: 0,
+    type: Number,
+  })
   tokenNonce!: number;
+
+  @ApiProperty({
+    description: 'Amount of tokens to issue',
+    example: '1000000000000000000',
+    type: String,
+  })
   amount!: string;
+
+  @ApiProperty({
+    description: 'Total reward balance available',
+    example: '322605500000000000000000',
+    type: String,
+  })
   rewardBalance!: string;
+
+  @ApiProperty({
+    description: 'Share reward balance for distribution',
+    example: '322605500000000000000000',
+    type: String,
+  })
   shareRewardBalance!: string;
+
+  @ApiProperty({
+    description: 'Reward amount distributed per epoch',
+    example: '5000000000000000000000',
+    type: String,
+  })
   rewardPerEpoch!: string;
 }
 

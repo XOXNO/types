@@ -15,6 +15,8 @@ export class LendingOverallStats {
     description: 'Total supplied amount',
     example: 10000000,
   })
+  supplied!: number;
+
   @ApiProperty({
     description: 'Total number of participants',
     example: 100,
@@ -26,8 +28,6 @@ export class LendingOverallStats {
     example: 0.04,
   })
   bestApy!: number;
-
-  supplied!: number;
   @ApiProperty({
     description: 'Total borrowed amount',
     example: 5000000,

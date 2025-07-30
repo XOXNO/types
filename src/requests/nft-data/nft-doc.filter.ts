@@ -87,6 +87,8 @@ export class NftDocFilterCriteriaDto {
 export class NftDocFilter extends CosmosDbGenericFilter<NftDocHydrated> {
   @ApiProperty({
     type: NftDocFilterCriteriaDto,
+    description: 'Filter criteria for NFT documents',
+    required: false,
   })
   filters: {
     dataType?: string[];

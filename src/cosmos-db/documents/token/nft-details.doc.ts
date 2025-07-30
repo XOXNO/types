@@ -60,6 +60,12 @@ class NftStats {
 }
 
 class NftDocBase {
+  @ApiProperty({
+    enum: TokenDataType,
+    enumName: 'TokenDataType',
+    default: TokenDataType.Nft,
+    description: 'The type of data this document represents',
+  })
   dataType: TokenDataType = TokenDataType.Nft;
   @ApiProperty({
     type: String,
@@ -123,11 +129,6 @@ class NftDocBase {
     description: 'The name of the NFT',
   })
   name!: string;
-  @ApiProperty({
-    type: Number,
-    required: true,
-    description: 'The royalties of the NFT',
-  })
   @ApiProperty({
     type: Number,
     required: true,
@@ -359,5 +360,10 @@ export class NftDocHydrated extends NftDocBase {
 }
 
 export class NftDocFull extends NftDocHydrated {
+  @ApiProperty({
+    type: () => GlobalOfferDocHydrated,
+    required: false,
+    description: 'Global offer associated with this NFT, if any',
+  })
   globalOffer?: GlobalOfferDocHydrated;
 }

@@ -29,8 +29,23 @@ export class LendingTokenEModeProfileDoc {
     example: '1',
   })
   eModeCategory!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB document identifier',
+    example: 'EGLD_1_TOKEN_EMODE_PROFILE',
+  })
   id!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB partition key',
+    example: 'TOKEN_EMODE_PROFILE',
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB timestamp',
+    example: 1732650682,
+  })
   _ts!: number;
 
   constructor(props?: Partial<LendingTokenEModeProfileDoc>) {

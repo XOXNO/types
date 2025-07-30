@@ -213,8 +213,22 @@ export class LendingMarketProfileDoc {
   })
   oracleProvider!: LendingOracleUpdateStruct;
 
+  @ApiProperty({
+    description: 'Cosmos DB document identifier',
+    example: 'EGLD_MARKET_PROFILE',
+  })
   id!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB partition key',
+    example: 'MARKET_PROFILE',
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB timestamp',
+    example: 1732650682,
+  })
   _ts!: number;
 
   constructor(props?: Partial<LendingMarketProfileDoc>) {

@@ -149,7 +149,16 @@ export class EventStageProfileDoc {
   })
   id: string = v4();
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Timestamp for document in Cosmos DB.',
+    type: 'integer',
+  })
   _ts!: number;
 
   constructor(props?: Partial<EventStageProfileDoc>) {

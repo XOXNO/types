@@ -1,8 +1,25 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class EventCountByLocation {
+  @ApiProperty({
+    description: 'City name.',
+    example: 'New York',
+    type: String,
+  })
   city!: string;
+
+  @ApiProperty({
+    description: 'Country name.',
+    example: 'United States',
+    type: String,
+  })
   country!: string;
+
+  @ApiProperty({
+    description: 'Number of events in this location.',
+    example: 100,
+    type: 'integer',
+  })
   eventCount!: number;
 }
 

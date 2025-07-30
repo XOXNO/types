@@ -164,6 +164,10 @@ export class EventInvitationDoc {
   })
   pk!: string;
 
+  @ApiProperty({
+    description: 'Timestamp for document in Cosmos DB.',
+    type: 'integer',
+  })
   _ts!: number;
 
   constructor(props?: Partial<EventInvitationDoc>) {

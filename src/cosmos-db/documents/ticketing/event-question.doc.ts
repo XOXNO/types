@@ -76,6 +76,10 @@ export class EventQuestionDoc {
   @IsInt()
   createdAt: number = Math.floor(Date.now() / 1000);
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+  })
   pk!: string;
 
   constructor(props?: Partial<EventQuestionDoc>) {

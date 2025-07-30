@@ -1,31 +1,68 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 class UserTradingSummaryMin {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Price of the NFT transaction',
+    example: 5.5,
+    type: Number,
+  })
   price!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Transaction hash',
+    example: '0xabcdef123456789',
+    type: String,
+  })
   txHash!: string;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Unix timestamp of the transaction',
+    example: 1672531200,
+    type: Number,
+  })
   timestamp!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'NFT identifier',
+    example: 'COOL-1a2b3c-01',
+    type: String,
+  })
   identifier!: string;
 }
 
 class UserTradingSummaryPrice {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Average price value',
+    example: 25.75,
+    type: Number,
+  })
   price!: number;
 }
 
 export class UserTradingSummary {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of trades',
+    example: 150,
+    type: Number,
+  })
   count!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total trading volume',
+    example: 3862.5,
+    type: Number,
+  })
   volume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the minimum priced trade',
+    type: UserTradingSummaryMin,
+  })
   min!: UserTradingSummaryMin;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Details of the maximum priced trade',
+    type: UserTradingSummaryMin,
+  })
   max!: UserTradingSummaryMin;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Average price information',
+    type: UserTradingSummaryPrice,
+  })
   avg!: UserTradingSummaryPrice;
 }
 

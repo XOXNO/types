@@ -31,6 +31,13 @@ export class LoginRequestDto {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: { [key: string]: any };
 
+  @ApiProperty({
+    description: 'The service to authenticate with',
+    enum: LoginRequestService,
+    example: LoginRequestService.XOXNO,
+    default: LoginRequestService.XOXNO,
+    required: false,
+  })
   @IsEnum(LoginRequestService)
   @IsOptional()
   service?: LoginRequestService = LoginRequestService.XOXNO;

@@ -3,21 +3,61 @@ import { ApiProperty } from '@nestjs/swagger';
 import { IsDateString, IsInt } from 'class-validator';
 
 export class VolumeGraph {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Marketplace identifier',
+    example: 'xoxno',
+    type: String,
+  })
   marketplace!: string;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of timestamps for the data points',
+    example: ['2024-01-01T00:00:00Z', '2024-01-02T00:00:00Z'],
+    type: [String],
+    isArray: true,
+  })
   timestamp!: string[];
-  @ApiProperty()
+  @ApiProperty({
+    description:
+      'Array of total EGLD volume values corresponding to timestamps',
+    example: [100.5, 125.75, 150.0],
+    type: [Number],
+    isArray: true,
+  })
   totalEgldVolume!: number[];
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of total USD volume values corresponding to timestamps',
+    example: [5025.0, 6287.5, 7500.0],
+    type: [Number],
+    isArray: true,
+  })
   totalUsdVolume!: number[];
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of total trades count corresponding to timestamps',
+    example: [50, 65, 80],
+    type: [Number],
+    isArray: true,
+  })
   totalTrades!: number[];
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of floor prices corresponding to timestamps',
+    example: [1.5, 1.75, 2.0],
+    type: [Number],
+    isArray: true,
+  })
   floorPrice!: number[];
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of all-time high prices corresponding to timestamps',
+    example: [50.0, 55.0, 60.0],
+    type: [Number],
+    isArray: true,
+  })
   athPrice!: number[];
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Array of average prices corresponding to timestamps',
+    example: [10.5, 12.0, 15.5],
+    type: [Number],
+    isArray: true,
+  })
   avgPrice!: number[];
 }
 

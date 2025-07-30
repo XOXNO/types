@@ -267,7 +267,16 @@ export class EventProfileDoc {
   @Type(() => EventUserRoleDoc)
   eventPermissions?: Pick<EventUserRoleDoc, 'role' | 'permissions' | 'endTime'>;
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Timestamp for document in Cosmos DB.',
+    type: 'integer',
+  })
   _ts!: number;
 
   constructor(props?: Partial<EventProfileDoc>) {

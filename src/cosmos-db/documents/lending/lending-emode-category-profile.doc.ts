@@ -29,7 +29,17 @@ export class LendingEModeCategoryProfileDoc {
   @ApiProperty({ description: 'EMode category', example: '1' })
   id!: string;
 
+  @ApiProperty({
+    description: 'Cosmos DB partition key',
+    example: 'EMODE_CATEGORY_PROFILE',
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB timestamp',
+    example: 1732650682,
+    required: false,
+  })
   _ts?: number;
 
   constructor(props?: Partial<LendingEModeCategoryProfileDoc>) {

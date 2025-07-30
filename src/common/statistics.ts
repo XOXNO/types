@@ -1,31 +1,71 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 export class StatisticsTradeDataDto {
-  @ApiProperty({ example: 0 })
+  @ApiProperty({
+    description: 'Daily trading volume in EGLD for this collection',
+    example: 0,
+    type: Number,
+  })
   dayEgldVolume!: number;
 
-  @ApiProperty({ example: 116.67 })
+  @ApiProperty({
+    description: 'Weekly trading volume in EGLD for this collection',
+    example: 116.67,
+    type: Number,
+  })
   weekEgldVolume!: number;
 
-  @ApiProperty({ example: 128123.25 })
+  @ApiProperty({
+    description: 'Total all-time trading volume in EGLD for this collection',
+    example: 128123.25,
+    type: Number,
+  })
   totalEgldVolume!: number;
 
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Average price in EGLD for trades in this collection',
+    example: 25.5,
+    type: Number,
+  })
   averageEgldPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'All-time high price in EGLD for this collection',
+    example: 150.0,
+    type: Number,
+  })
   athEgldPrice!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Transaction hash of the all-time high price sale',
+    example: '0x1234567890abcdef',
+    type: String,
+  })
   athTxHash!: string;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total number of trades for this collection',
+    example: 1500,
+    type: Number,
+  })
   totalTrades!: number;
 }
 
 export class StatisticsMintDataDto {
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Total mint volume in EGLD for this collection',
+    example: 5000.0,
+    type: Number,
+  })
   totalMintEgldVolume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Weekly mint volume in EGLD for this collection',
+    example: 250.0,
+    type: Number,
+  })
   weekMintEgldVolume!: number;
-  @ApiProperty()
+  @ApiProperty({
+    description: 'Daily mint volume in EGLD for this collection',
+    example: 50.0,
+    type: Number,
+  })
   dayMintEgldVolume!: number;
 }
 
@@ -56,7 +96,11 @@ export class StatisticsDto {
   })
   other!: StatisticsOtherDto;
 
-  @ApiProperty({ type: StatisticsTradeDataDto })
+  @ApiProperty({
+    type: StatisticsTradeDataDto,
+    description:
+      'Trading statistics for the collection including volume and price data',
+  })
   tradeData!: StatisticsTradeDataDto;
 
   @ApiProperty({ type: StatisticsMintDataDto, required: false })

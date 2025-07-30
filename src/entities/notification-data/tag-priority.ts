@@ -1,11 +1,44 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { TagPriority, TagCategory } from '../../enums/tag-priority.enum';
 
-export interface PrioritizedTag {
-  tag: string;
-  priority: TagPriority;
+export class PrioritizedTag {
+  @ApiProperty({
+    description: 'Tag string for Azure Notification Hub targeting',
+    example: 'event:event-123-456',
+    type: String,
+  })
+  tag!: string;
+
+  @ApiProperty({
+    description: 'Priority level determining tag retention during optimization',
+    example: TagPriority.HIGH,
+    enum: TagPriority,
+    enumName: 'TagPriority',
+  })
+  priority!: TagPriority;
+
+  @ApiProperty({
+    description: 'Unix timestamp of last tag usage in a notification',
+    example: 1704067500,
+    type: Number,
+    required: false,
+  })
   lastUsed?: number; // Unix timestamp
-  createdAt: number; // Unix timestamp
-  category: TagCategory;
+
+  @ApiProperty({
+    description: 'Unix timestamp when the tag was first created',
+    example: 1704067200,
+    type: Number,
+  })
+  createdAt!: number; // Unix timestamp
+
+  @ApiProperty({
+    description: 'Category of the tag for priority management',
+    example: TagCategory.ACTIVE_EVENT,
+    enum: TagCategory,
+    enumName: 'TagCategory',
+  })
+  category!: TagCategory;
 }
 
 export class TagManager {

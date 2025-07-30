@@ -1,14 +1,68 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { Wallet } from '../../utils/types';
 
 export class BoberBattleLeaderboardDto {
+  @ApiProperty({
+    description: 'Total number of games created by the user',
+    example: 25,
+    type: Number,
+  })
   GamesCreated!: number;
+
+  @ApiProperty({
+    description: 'Number of games created where user chose heads',
+    example: 15,
+    type: Number,
+  })
   GamesCreatedHead!: number;
+
+  @ApiProperty({
+    description: 'Number of games created where user chose tails',
+    example: 10,
+    type: Number,
+  })
   GamesCreatedTail!: number;
+
+  @ApiProperty({
+    description: 'Total number of games joined by the user',
+    example: 30,
+    type: Number,
+  })
   GamesJoined!: number;
+
+  @ApiProperty({
+    description: 'Number of games joined where user chose heads',
+    example: 18,
+    type: Number,
+  })
   GamesJoinedHead!: number;
+
+  @ApiProperty({
+    description: 'Number of games joined where user chose tails',
+    example: 12,
+    type: Number,
+  })
   GamesJoinedTail!: number;
+
+  @ApiProperty({
+    description: 'Total number of games participated in',
+    example: 55,
+    type: Number,
+  })
   TotalGames!: number;
+
+  @ApiProperty({
+    description: 'Total volume of tokens wagered',
+    example: 125.5,
+    type: Number,
+  })
   TotalVolume!: number;
+
+  @ApiProperty({
+    description: 'Total volume in USD equivalent',
+    example: 2510.75,
+    type: Number,
+  })
   TotalVolumeUSD!: number;
 
   constructor(props?: Partial<BoberBattleLeaderboardDto>) {
@@ -17,17 +71,90 @@ export class BoberBattleLeaderboardDto {
 }
 
 export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
+  @ApiProperty({
+    description: 'User wallet address',
+    example: 'erd1qqqqqqqqqqqqqpgq5za2j0xkucera8epyusgvm7xvvpgksdm3y4sk3me3j',
+    type: String,
+  })
   Address!: string;
+
+  @ApiProperty({
+    description: 'Total profit and loss',
+    example: 15.25,
+    type: Number,
+  })
   TotalPNL!: number;
+
+  @ApiProperty({
+    description: 'Total profit and loss in USD',
+    example: 305.5,
+    type: Number,
+  })
   TotalPNLUSD!: number;
+
+  @ApiProperty({
+    description: 'Number of created games that were won',
+    example: 12,
+    type: Number,
+  })
   GamesCreatedWon!: number;
+
+  @ApiProperty({
+    description: 'Number of joined games that were won',
+    example: 18,
+    type: Number,
+  })
   GamesJoinedWon!: number;
+
+  @ApiProperty({
+    description: 'Games won when choosing heads',
+    example: 15,
+    type: Number,
+  })
   GamesWonAsHead!: number;
+
+  @ApiProperty({
+    description: 'Games lost when choosing heads',
+    example: 8,
+    type: Number,
+  })
   GamesLostAsHead!: number;
+
+  @ApiProperty({
+    description: 'Games won when choosing tails',
+    example: 13,
+    type: Number,
+  })
   GamesWonAsTail!: number;
+
+  @ApiProperty({
+    description: 'Games lost when choosing tails',
+    example: 7,
+    type: Number,
+  })
   GamesLostAsTail!: number;
+
+  @ApiProperty({
+    description: 'Total games won',
+    example: 30,
+    type: Number,
+  })
   GamesWon!: number;
+
+  @ApiProperty({
+    description: 'Total games lost',
+    example: 25,
+    type: Number,
+  })
   GamesLost!: number;
+
+  @ApiProperty({
+    description: 'Win rate percentage',
+    example: 54.55,
+    type: Number,
+    minimum: 0,
+    maximum: 100,
+  })
   WinRate!: number;
 
   constructor(props?: Partial<BoberBattleUserDto>) {
@@ -37,5 +164,9 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
 }
 
 export class BoberBattleUserDtoHydrated extends BoberBattleUserDto {
+  @ApiProperty({
+    description: 'Wallet object containing address and shard information',
+    type: Object,
+  })
   wallet!: Wallet;
 }

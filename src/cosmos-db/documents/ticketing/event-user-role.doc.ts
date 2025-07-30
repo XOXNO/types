@@ -8,7 +8,6 @@ import {
   IsEmail,
   IsEnum,
   IsInt,
-  IsOptional,
   IsString,
   IsUUID,
   Min,
@@ -100,7 +99,18 @@ export class EventUserRoleDoc {
   @IsEnum(RoleStatus)
   status?: RoleStatus;
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+    required: false,
+  })
   pk?: string;
+
+  @ApiProperty({
+    description: 'Timestamp for document in Cosmos DB.',
+    type: 'integer',
+    required: false,
+  })
   _ts?: number;
 
   constructor(props?: Partial<EventUserRoleDoc>) {

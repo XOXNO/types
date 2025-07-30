@@ -49,5 +49,11 @@ export class UserTokenInventoryResponseDto {
   @ApiProperty({ type: TokenDataDocWithBalance, isArray: true })
   tokens!: TokenDataDocWithBalance[];
 
+  @ApiProperty({
+    description: 'The blockchain chain identifier',
+    enum: ActivityChain,
+    enumName: 'ActivityChain',
+    example: ActivityChain.MVX,
+  })
   chain!: ActivityChain;
 }

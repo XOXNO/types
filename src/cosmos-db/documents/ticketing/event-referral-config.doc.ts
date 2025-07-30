@@ -135,6 +135,10 @@ export class EventReferralConfigDoc {
   @IsString()
   createdBy!: string;
 
+  @ApiProperty({
+    description: 'Partition key for Cosmos DB document.',
+    type: String,
+  })
   pk!: string;
 
   constructor(props?: Partial<EventReferralConfigDoc>) {

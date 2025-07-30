@@ -34,6 +34,13 @@ class NftMetadataBase {
   })
   rarity?: Rarity;
 
+  @ApiProperty({
+    required: false,
+    type: [Object],
+    description:
+      'Additional custom attributes not covered by standard properties',
+    example: [{ display_type: 'number', trait_type: 'Level', value: 5 }],
+  })
   extraAttributes?: Record<string, unknown>[];
 
   constructor(props?: Partial<NftMetadata>) {

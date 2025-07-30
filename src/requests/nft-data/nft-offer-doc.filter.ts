@@ -33,6 +33,8 @@ export class NftOfferDocFilterCriteria {
 export class NftOfferDocFilter extends CosmosDbGenericFilter<NftOfferDoc> {
   @ApiProperty({
     type: NftOfferDocFilterCriteria,
+    description: 'Filter criteria for NFT offer documents',
+    required: false,
   })
   filters: {
     dataType?: string[];
@@ -46,6 +48,12 @@ export class NftOfferDocFilter extends CosmosDbGenericFilter<NftOfferDoc> {
     dataType: [TokenDataType.Offer],
   };
 
+  @ApiProperty({
+    type: [String],
+    description: 'Order by criteria for sorting results',
+    required: false,
+    example: ['priceShort desc'],
+  })
   orderBy?: IOrderBy<NftOfferDoc>[] = ['priceShort desc' as const];
 
   constructor(props?: Partial<NftOfferDocFilter>) {

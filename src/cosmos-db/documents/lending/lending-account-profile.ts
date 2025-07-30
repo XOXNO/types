@@ -147,8 +147,22 @@ export class LendingAccountProfileDoc {
   })
   leverageInitialBorrowPrice?: number;
 
+  @ApiProperty({
+    description: 'Cosmos DB document identifier',
+    example: 'account123_EGLD',
+  })
   id!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB partition key',
+    example: 'ACCOUNT_PROFILE',
+  })
   pk!: string;
+
+  @ApiProperty({
+    description: 'Cosmos DB timestamp',
+    example: 1732650682,
+  })
   _ts!: number;
 
   constructor(props?: Partial<LendingAccountProfileDoc>) {
