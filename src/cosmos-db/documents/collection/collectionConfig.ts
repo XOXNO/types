@@ -1,4 +1,18 @@
 import { ApiProperty } from '@nestjs/swagger';
+export class CollectionExtraFeesConfig {
+  @ApiProperty({
+    description: 'Extra fee amount percentage',
+    example: 2.5,
+    minimum: 0,
+  })
+  amount!: number;
+
+  @ApiProperty({
+    description: 'Address to receive extra fees',
+    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
+  })
+  address!: string;
+}
 
 export class XoxnoMarketplaceScCollectionConfig {
   @ApiProperty({
@@ -39,6 +53,7 @@ export class XoxnoMarketplaceScCollectionConfig {
     example: { amount: 2.5, address: 'erd1...' },
   })
   extraFees?: CollectionExtraFeesConfig;
+
   @ApiProperty({
     description: 'Admin address for the collection',
     example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
@@ -46,7 +61,7 @@ export class XoxnoMarketplaceScCollectionConfig {
   })
   adminAddress?: string;
 
-  constructor(props?: Partial<CollectionExtraFeesConfig>) {
+  constructor(props?: Partial<XoxnoMarketplaceScCollectionConfig>) {
     Object.assign(this, props);
     this.maxRoyalties = parseInt(this.maxRoyalties.toString()) / 100;
     this.minRoyalties = parseInt(this.minRoyalties.toString()) / 100;
@@ -54,19 +69,4 @@ export class XoxnoMarketplaceScCollectionConfig {
       this.extraFees.amount = parseInt(this.extraFees.amount.toString()) / 100;
     }
   }
-}
-
-export class CollectionExtraFeesConfig {
-  @ApiProperty({
-    description: 'Extra fee amount percentage',
-    example: 2.5,
-    minimum: 0,
-  })
-  amount!: number;
-
-  @ApiProperty({
-    description: 'Address to receive extra fees',
-    example: 'erd1qqqqqqqqqqqqqpgqw0t0ef0jdpeva2v7qy7q7qjjfq6yq0wq0w0qjjfq6yq',
-  })
-  address!: string;
 }
