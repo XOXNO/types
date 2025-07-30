@@ -255,6 +255,7 @@ export class EventProfileDoc {
 
   @ApiProperty({
     description: 'Automatically generated unique identifier for the event.',
+    required: true,
   })
   id: string = v4();
 
@@ -270,14 +271,16 @@ export class EventProfileDoc {
   @ApiProperty({
     description: 'Partition key for Cosmos DB document.',
     type: String,
+    required: false,
   })
-  pk!: string;
+  pk?: string;
 
   @ApiProperty({
     description: 'Timestamp for document in Cosmos DB.',
     type: 'integer',
+    required: false,
   })
-  _ts!: number;
+  _ts?: number;
 
   constructor(props?: Partial<EventProfileDoc>) {
     Object.assign(this, props);
