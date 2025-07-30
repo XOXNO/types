@@ -293,8 +293,9 @@ export class EventGuestDoc {
   @ApiProperty({
     description: 'Timestamp for document in Cosmos DB.',
     type: 'integer',
+    required: false,
   })
-  _ts!: number;
+  _ts?: number;
 
   //TODO: set TTL if status is pending
   @ApiProperty({
