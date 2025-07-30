@@ -1,33 +1,20 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
-import {
-  ArrayMaxSize,
-  IsArray,
-  IsNumber,
-  IsUUID,
-  ValidateNested,
-} from 'class-validator';
+import { ArrayMaxSize, IsArray, ValidateNested } from 'class-validator';
 import { EventInvitationDoc } from './event-invitation.doc';
-class Ticket {
-  @ApiProperty({ type: 'string' })
-  @IsUUID()
-  ticketId!: string;
+import { TicketsType } from './event-ticket-qr-type.enum';
 
-  @ApiProperty({ type: 'integer' })
-  @IsNumber()
-  quantity!: number;
-}
 export class EventInvitationCreateDto extends PickType(EventInvitationDoc, [
   'name',
   'email',
   'startTime',
   'endTime',
 ] as const) {
-  @ApiProperty({ type: () => Ticket, isArray: true })
+  @ApiProperty({ type: () => TicketsType, isArray: true })
   @IsArray()
   @ArrayMaxSize(100)
   @ValidateNested({ each: true })
-  @Type(() => Ticket)
-  tickets: Ticket[] = [];
+  @Type(() => TicketsType)
+  tickets: TicketsType[] = [];
 }
