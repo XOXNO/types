@@ -238,6 +238,10 @@ export class EventProfileCreateDto extends PickType(EventProfileDoc, [
   'category',
   'subCategory',
 ] as const) {
+  @ApiProperty({
+    type: () => RegistrationDetailsCreateDto,
+    description: 'Registration details for the event',
+  })
   @IsObject()
   @ValidateNested()
   @Type(() => RegistrationDetailsCreateDto)
