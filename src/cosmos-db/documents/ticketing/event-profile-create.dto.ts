@@ -117,7 +117,10 @@ export class RegistrationDetailsDto {
   @IsBoolean()
   botProtection!: boolean;
 
-  @ApiProperty()
+  @ApiProperty({
+    required: false,
+    description: 'Whether the event accepts crypto',
+  })
   @IsBoolean()
   @IsOptional()
   acceptCrypto?: boolean;
