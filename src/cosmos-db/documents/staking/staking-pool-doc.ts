@@ -17,7 +17,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Unique identifier for the staking pool',
     example: 3,
-    type: Number,
+    type: 'integer',
   })
   poolId!: number;
 
@@ -53,7 +53,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Maximum number of NFTs a wallet can stake',
     example: 8000,
-    type: Number,
+    type: 'integer',
     minimum: 0,
   })
   maxStakePerWallet!: number;
@@ -61,7 +61,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Maximum total number of NFTs that can be staked in the pool',
     example: 16000,
-    type: Number,
+    type: 'integer',
     minimum: 0,
   })
   maxStakePerPool!: number;
@@ -77,21 +77,21 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Epoch deadline for reward issuing',
     example: 1444,
-    type: Number,
+    type: 'integer',
   })
   issuingDeadline!: number;
 
   @ApiProperty({
     description: 'Epoch when reward issuing starts',
     example: 1381,
-    type: Number,
+    type: 'integer',
   })
   issuingStart!: number;
 
   @ApiProperty({
     description: 'Number of days for the unbounding period',
     example: 0,
-    type: Number,
+    type: 'integer',
     minimum: 0,
   })
   unboundPeriod!: number;
@@ -147,7 +147,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Total number of whitelisted addresses',
     example: 100,
-    type: Number,
+    type: 'integer',
     required: false,
   })
   totalWhitelisted?: number;
@@ -155,7 +155,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Number of delegators in the pool',
     example: 267,
-    type: Number,
+    type: 'integer',
     required: false,
   })
   delegatorCount?: number = 0;
@@ -163,7 +163,7 @@ export class StakingPoolDoc {
   @ApiProperty({
     description: 'Total number of NFTs staked in the pool',
     example: 5895,
-    type: Number,
+    type: 'integer',
     required: false,
   })
   poolStakedCount?: number = 0;
@@ -447,6 +447,6 @@ export class StakingUserPoolNfts {
   @ApiProperty({ type: NftDocHydrated, isArray: true })
   nftDocs: NftDocHydrated[] = [];
 
-  @ApiProperty({ example: 12, type: Number })
+  @ApiProperty({ example: 12, type: 'integer' })
   count: number = 0;
 }

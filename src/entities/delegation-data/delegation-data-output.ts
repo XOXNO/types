@@ -18,7 +18,7 @@ export class UndelegateInfo {
   @ApiProperty({
     description: 'Unix timestamp when the undelegation was initiated',
     example: 1704067200,
-    type: Number,
+    type: 'integer',
   })
   timestamp!: number;
 

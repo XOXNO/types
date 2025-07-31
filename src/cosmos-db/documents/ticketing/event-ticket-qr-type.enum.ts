@@ -35,7 +35,7 @@ export class TicketSelection {
   ticketId!: string;
   @ApiProperty({
     description: 'Ticket Profile quantity',
-    type: Number,
+    type: 'integer',
   })
   @IsNumber()
   quantity!: number;
@@ -117,7 +117,7 @@ export class TicketsType {
 
   @ApiProperty({
     description: 'Ticket Profile quantity',
-    type: Number,
+    type: 'integer',
   })
   @IsNumber()
   quantity!: number;
@@ -149,14 +149,14 @@ export class BadgeDecryptedData {
 
   @ApiProperty({
     description: 'Created timestamp',
-    type: Number,
+    type: 'integer',
   })
   @IsString()
   createdAt!: number;
 
   @ApiProperty({
     description: 'Expires at timestamp',
-    type: Number,
+    type: 'integer',
   })
   @IsString()
   expiresAt!: number;

@@ -33,7 +33,7 @@ export class EventLocationCities {
   @ApiProperty({
     description: 'Event count',
     example: 100,
-    type: Number,
+    type: 'integer',
   })
   eventCount!: number;
 }
@@ -48,7 +48,7 @@ export class EventCountGroupedByCountry {
   @ApiProperty({
     description: 'Event count',
     example: 100,
-    type: Number,
+    type: 'integer',
   })
   eventCount!: number;
   @ApiProperty({

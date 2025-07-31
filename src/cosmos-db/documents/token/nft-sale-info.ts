@@ -42,14 +42,14 @@ class NftSaleInfoBase {
   currentBid?: string;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Unix timestamp when the auction started',
     example: 1640995200,
   })
   startTime!: number;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Unix timestamp when the auction ends',
     example: 1641081600,
   })
@@ -63,7 +63,7 @@ class NftSaleInfoBase {
   paymentToken!: string;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Nonce of the payment token (0 for EGLD)',
     example: 0,
   })
@@ -77,7 +77,7 @@ class NftSaleInfoBase {
   auctionType!: XoxnoAuctionTypeString;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Unix timestamp when the listing was created',
     example: 1640995200,
   })

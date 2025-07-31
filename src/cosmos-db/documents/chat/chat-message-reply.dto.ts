@@ -20,7 +20,7 @@ export class ChatMessageReplyDto {
   readonly content!: ChatMessageContentDto;
 
   @IsNumber()
-  @ApiProperty({ description: 'Message timestamp', type: Number })
+  @ApiProperty({ description: 'Message timestamp', type: 'integer' })
   readonly timestamp!: number;
 
   @IsString()

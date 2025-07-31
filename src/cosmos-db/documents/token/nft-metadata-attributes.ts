@@ -15,7 +15,7 @@ export class NftMetadataAttributes {
 
 export class NftMetadataAttributesHydrated extends NftMetadataAttributes {
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Number of NFTs with this attribute combination',
     example: 42,
   })
@@ -36,7 +36,7 @@ export class NftMetadataAttributesHydrated extends NftMetadataAttributes {
   floorPrice!: number;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Number of NFTs with this attribute currently on sale',
     example: 5,
   })

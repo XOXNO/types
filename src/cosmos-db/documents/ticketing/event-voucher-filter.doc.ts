@@ -73,7 +73,7 @@ export class EventVoucherFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: 'integer',
     description: 'Filter vouchers by maximum allowed uses.',
   })
   @IsOptional()
@@ -82,7 +82,7 @@ export class EventVoucherFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: 'integer',
     description: 'Filter vouchers by maximum uses per user.',
   })
   @IsOptional()

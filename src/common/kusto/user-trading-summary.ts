@@ -16,7 +16,7 @@ class UserTradingSummaryMin {
   @ApiProperty({
     description: 'Unix timestamp of the transaction',
     example: 1672531200,
-    type: Number,
+    type: 'integer',
   })
   timestamp!: number;
   @ApiProperty({
@@ -40,7 +40,7 @@ export class UserTradingSummary {
   @ApiProperty({
     description: 'Total number of trades',
     example: 150,
-    type: Number,
+    type: 'integer',
   })
   count!: number;
   @ApiProperty({

@@ -17,7 +17,7 @@ export class PriceData {
   @ApiProperty({
     description: 'Unix timestamp of the transaction',
     example: 1672531200,
-    type: Number,
+    type: 'integer',
   })
   timestamp!: number;
   @ApiProperty({
@@ -50,25 +50,25 @@ export class WalletTradingStats {
   @ApiProperty({
     description: 'Total number of trades executed',
     example: 250,
-    type: Number,
+    type: 'integer',
   })
   totalTrades!: number;
   @ApiProperty({
     description: 'Total number of unique collections traded',
     example: 45,
-    type: Number,
+    type: 'integer',
   })
   totalCollections!: number;
   @ApiProperty({
     description: 'Total number of unique NFTs traded',
     example: 125,
-    type: Number,
+    type: 'integer',
   })
   totalNfts!: number;
   @ApiProperty({
     description: 'Total number of unique trading partners',
     example: 80,
-    type: Number,
+    type: 'integer',
   })
   totalPartners!: number;
   @ApiProperty({
@@ -80,25 +80,25 @@ export class WalletTradingStats {
   @ApiProperty({
     description: 'Total number of buy trades',
     example: 120,
-    type: Number,
+    type: 'integer',
   })
   buyerTrades!: number;
   @ApiProperty({
     description: 'Total number of NFTs bought',
     example: 65,
-    type: Number,
+    type: 'integer',
   })
   buyerNfts!: number;
   @ApiProperty({
     description: 'Total number of collections bought from',
     example: 25,
-    type: Number,
+    type: 'integer',
   })
   buyerCollections!: number;
   @ApiProperty({
     description: 'Total number of unique sellers',
     example: 40,
-    type: Number,
+    type: 'integer',
   })
   buyerPartners!: number;
   @ApiProperty({
@@ -134,25 +134,25 @@ export class WalletTradingStats {
   @ApiProperty({
     description: 'Total number of sell trades',
     example: 130,
-    type: Number,
+    type: 'integer',
   })
   sellerTrades!: number;
   @ApiProperty({
     description: 'Total number of NFTs sold',
     example: 60,
-    type: Number,
+    type: 'integer',
   })
   sellerNfts!: number;
   @ApiProperty({
     description: 'Total number of collections sold from',
     example: 20,
-    type: Number,
+    type: 'integer',
   })
   sellerCollections!: number;
   @ApiProperty({
     description: 'Total number of unique buyers',
     example: 40,
-    type: Number,
+    type: 'integer',
   })
   sellerPartners!: number;
   @ApiProperty({

@@ -6,7 +6,7 @@ import {
 
 class Rarity {
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description:
       'The rarity rank of an asset, the smaller represents the rarest',
   })

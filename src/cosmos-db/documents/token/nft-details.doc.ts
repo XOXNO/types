@@ -55,7 +55,7 @@ export class NftMedia {
 }
 
 class NftStats {
-  @ApiProperty({ type: Number, required: false })
+  @ApiProperty({ type: 'integer', required: false })
   likedCount?: number;
 }
 
@@ -91,7 +91,7 @@ class NftDocBase {
   })
   attributes!: string;
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     required: true,
     description: 'The nonce of the NFT',
   })
@@ -111,7 +111,7 @@ class NftDocBase {
   })
   subType?: EsdtTokenSubType;
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     required: true,
     description: 'The supply of the NFT',
   })
@@ -214,7 +214,7 @@ class NftDocBase {
   })
   id?: string;
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     required: false,
     description: 'The timestamp of the NFT last DB change',
   })
@@ -338,14 +338,14 @@ export class NftDocHydrated extends NftDocBase {
   balanceLong?: string;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     required: false,
     description: 'Left days until the staked NFT can be claimed back',
   })
   unboundDaysLeft?: number;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     required: false,
     description: 'The epoch day when the NFT will be available for claiming',
   })

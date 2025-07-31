@@ -68,7 +68,7 @@ export class EventReferralFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: 'integer',
     description: 'Filter referrals by minimum successful referrals count.',
   })
   @IsOptional()
@@ -77,7 +77,7 @@ export class EventReferralFilterCriteriaDto {
 
   @ApiProperty({
     required: false,
-    type: Number,
+    type: 'integer',
     description: 'Filter referrals by maximum successful referrals count.',
   })
   @IsOptional()

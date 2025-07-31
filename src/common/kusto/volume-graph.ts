@@ -74,7 +74,7 @@ export class AnalyticsMarketplaceUniqueUsers {
   @ApiProperty({
     description: 'Number of unique users',
     example: 1016,
-    type: Number,
+    type: 'integer',
   })
   @IsInt()
   UniqueUsers!: number;
@@ -82,7 +82,7 @@ export class AnalyticsMarketplaceUniqueUsers {
   @ApiProperty({
     description: 'Number of unique buyers',
     example: 505,
-    type: Number,
+    type: 'integer',
   })
   @IsInt()
   UniqueBuyers!: number;
@@ -90,7 +90,7 @@ export class AnalyticsMarketplaceUniqueUsers {
   @ApiProperty({
     description: 'Number of unique sellers',
     example: 656,
-    type: Number,
+    type: 'integer',
   })
   @IsInt()
   UniqueSellers!: number;

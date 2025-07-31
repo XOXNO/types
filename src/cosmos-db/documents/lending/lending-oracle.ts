@@ -82,19 +82,19 @@ export class LendingOracleUpdateStruct {
   exchangeSource!: ExchangeSource;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Number of decimals for the asset',
   })
   assetDecimals!: number;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'OneDex pair identifier',
   })
   onedexPairId!: number;
 
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Maximum seconds before price is considered stale',
   })
   maxPriceStaleSeconds!: number;
