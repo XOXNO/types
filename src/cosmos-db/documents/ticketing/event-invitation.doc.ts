@@ -167,6 +167,7 @@ export class EventInvitationDoc {
   @ApiProperty({
     description: 'Timestamp for document in Cosmos DB.',
     type: 'integer',
+    required: false,
   })
   _ts!: number;
 
