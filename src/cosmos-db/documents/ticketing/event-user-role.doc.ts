@@ -8,6 +8,7 @@ import {
   IsEmail,
   IsEnum,
   IsInt,
+  IsOptional,
   IsString,
   IsUUID,
   Min,
@@ -31,11 +32,13 @@ export class EventUserRoleDoc {
     description: 'Unique identifier for the event.',
     required: false,
   })
+  @IsOptional()
   @IsUUID()
   eventId?: string;
 
   @ApiProperty({ description: 'User wallet address', required: false })
   @IsString()
+  @IsOptional()
   wallet?: string;
 
   @ApiProperty({ description: 'User name', required: false })
@@ -44,6 +47,7 @@ export class EventUserRoleDoc {
 
   @ApiProperty({ description: 'User email address', required: false })
   @IsEmail()
+  @IsOptional()
   email?: string;
 
   @ApiProperty({
