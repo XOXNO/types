@@ -5,6 +5,27 @@ import { OwnerDto } from '../../../common/owner.dto';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { LendingOracleUpdateStruct } from './lending-oracle';
+import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
+
+export class InitialPaymentMultiplier {
+  @ApiProperty({
+    description: 'Initial payment amount',
+    example: 1.0,
+  })
+  initialPaymentAmount!: string;
+
+  @ApiProperty({
+    description: 'Initial payment token',
+    example: 1.0,
+  })
+  initialPaymentToken!: number;
+
+  @ApiProperty({
+    description: 'USD value',
+    example: 1.0,
+  })
+  usdValue!: string;
+}
 
 export class LendingMarketProfileDoc {
   @ApiProperty({
@@ -214,6 +235,13 @@ export class LendingMarketProfileDoc {
   oracleProvider!: LendingOracleUpdateStruct;
 
   @ApiProperty({
+    description: 'Initial payment multiplier',
+    type: InitialPaymentMultiplier,
+    required: false,
+  })
+  initialPaymentMultiplier?: InitialPaymentMultiplier;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'EGLD_MARKET_PROFILE',
   })
@@ -296,6 +324,12 @@ export class LendingMarketProfile extends LendingMarketProfileDoc {
     required: false,
   })
   extraApy?: MarketExtraApy;
+
+  @ApiProperty({
+    description: 'Indexes',
+    type: LendingIndexesDto,
+  })
+  indexes!: LendingIndexesDto;
 }
 
 export class LendingMarketProfileQuery extends createCosmosPaginatedResponse(
