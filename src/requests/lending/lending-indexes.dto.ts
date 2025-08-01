@@ -49,4 +49,58 @@ export class LendingIndexesDto {
     type: Number,
   })
   usdPriceShort!: number;
+  @ApiProperty({
+    description: 'Safe price in EGLD as a string to preserve precision',
+    example: '1000000000000000000',
+    type: String,
+  })
+  safePriceEgld!: string;
+  @ApiProperty({
+    description: 'Safe price in EGLD as a number (may lose precision)',
+    example: 1,
+    type: Number,
+  })
+  safePriceEgldShort!: number;
+  @ApiProperty({
+    description: 'Safe price in USD as a string to preserve precision',
+    example: '16124645832563882000',
+    type: String,
+  })
+  safePriceUsd!: string;
+  @ApiProperty({
+    description: 'Safe price in USD as a number (may lose precision)',
+    example: 16.124645832563882,
+    type: Number,
+  })
+  safePriceUsdShort!: number;
+  @ApiProperty({
+    description: 'Aggregator price in EGLD as a string to preserve precision',
+    example: '1000000000000000000',
+    type: String,
+  })
+  aggregatorPriceEgld!: string;
+  @ApiProperty({
+    description: 'Aggregator price in EGLD as a number (may lose precision)',
+    example: 1,
+    type: Number,
+  })
+  aggregatorPriceEgldShort!: number;
+  @ApiProperty({
+    description: 'Aggregator price in USD as a string to preserve precision',
+    example: '16124645832563882000',
+    type: String,
+  })
+  aggregatorPriceUsd!: string;
+  @ApiProperty({
+    description: 'Within first tolerance',
+    example: true,
+    type: Boolean,
+  })
+  withinFirstTolerance!: boolean;
+  @ApiProperty({
+    description: 'Within second tolerance',
+    example: true,
+    type: Boolean,
+  })
+  withinSecondTolerance!: boolean;
 }
