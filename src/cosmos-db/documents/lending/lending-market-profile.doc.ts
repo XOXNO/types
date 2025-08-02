@@ -7,26 +7,6 @@ import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-respons
 import { LendingOracleUpdateStruct } from './lending-oracle';
 import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
 
-export class InitialPaymentMultiplier {
-  @ApiProperty({
-    description: 'Initial payment amount',
-    example: 1.0,
-  })
-  initialPaymentAmount!: string;
-
-  @ApiProperty({
-    description: 'Initial payment token',
-    example: 1.0,
-  })
-  initialPaymentToken!: number;
-
-  @ApiProperty({
-    description: 'USD value',
-    example: 1.0,
-  })
-  usdValue!: string;
-}
-
 export class LendingMarketProfileDoc {
   @ApiProperty({
     enum: LendingDataType,
@@ -233,13 +213,6 @@ export class LendingMarketProfileDoc {
     type: LendingOracleUpdateStruct,
   })
   oracleProvider!: LendingOracleUpdateStruct;
-
-  @ApiProperty({
-    description: 'Initial payment multiplier',
-    type: InitialPaymentMultiplier,
-    required: false,
-  })
-  initialPaymentMultiplier?: InitialPaymentMultiplier;
 
   @ApiProperty({
     description: 'Cosmos DB document identifier',

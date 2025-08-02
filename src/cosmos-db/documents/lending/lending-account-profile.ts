@@ -5,6 +5,26 @@ import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile
 import { LendingMarketProfile } from './lending-market-profile.doc';
 import { PositionMode } from '../../../enums/lending.enum';
 
+export class InitialPaymentMultiplier {
+  @ApiProperty({
+    description: 'Initial payment amount',
+    example: 1.0,
+  })
+  initialPaymentAmount!: string;
+
+  @ApiProperty({
+    description: 'Initial payment token',
+    example: 1.0,
+  })
+  initialPaymentToken!: string;
+
+  @ApiProperty({
+    description: 'USD value',
+    example: 1.0,
+  })
+  usdValue!: string;
+}
+
 export class LendingAccountProfileDoc {
   @ApiProperty({
     enum: LendingDataType,
@@ -148,6 +168,13 @@ export class LendingAccountProfileDoc {
   leverageInitialBorrowPrice?: number;
 
   @ApiProperty({
+    description: 'Initial payment multiplier',
+    type: InitialPaymentMultiplier,
+    required: false,
+  })
+  initialPaymentMultiplier?: InitialPaymentMultiplier;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'account123_EGLD',
   })
@@ -215,7 +242,6 @@ const selectFields = [
   'address',
   'flashLoan',
   'oracleProvider',
-  'initialPaymentMultiplier',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
