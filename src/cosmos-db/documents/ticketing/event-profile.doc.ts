@@ -27,7 +27,7 @@ import { TicketingDataType } from '../../../enums/ticketing-data-type.enum';
 import { EventTicketQrType } from '../../../enums/ticketing-visibility.enum';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { CreatorProfileDoc } from '../user/user-creator-profile.doc';
-import { EventGuestDoc } from './event-guest.doc';
+import { EventGuestProfile } from './event-guest.doc';
 import {
   EventLocationDto,
   EventSeoDto,
@@ -348,9 +348,9 @@ export class EventProfile extends EventProfileDoc {
   @ApiProperty({
     description: 'The guest profile of the user.',
     required: false,
-    type: () => EventGuestDoc,
+    type: () => EventGuestProfile,
   })
-  guestProfile?: EventGuestDoc;
+  guestProfile?: EventGuestProfile;
 }
 
 export class EventProfileQuery extends createCosmosPaginatedResponse(
