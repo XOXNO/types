@@ -125,8 +125,6 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
       'eMode',
       'isolated',
       'siloed',
-      'supplyIndex',
-      'borrowIndex',
       'canBorrowInIsolation',
       'eModeCategories',
       'ltv',

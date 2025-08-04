@@ -117,12 +117,6 @@ export class LendingMarketProfileDoc {
   @ApiProperty({ description: 'Short borrow cap', example: 1250000 })
   borrowCapShort = 0;
 
-  @ApiProperty({ description: 'Supply index', example: '1.02' })
-  supplyIndex = '0';
-
-  @ApiProperty({ description: 'Borrow index', example: '1.05' })
-  borrowIndex = '0';
-
   @ApiProperty({
     description: 'Timestamp of last market activity',
     example: 1732650682,

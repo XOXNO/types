@@ -4,6 +4,7 @@ import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { LendingMarketProfile } from './lending-market-profile.doc';
 import { PositionMode } from '../../../enums/lending.enum';
+import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
 
 export class InitialPaymentMultiplier {
   @ApiProperty({
@@ -64,18 +65,6 @@ export class LendingAccountProfileDoc {
   borrowAmountScaled = '0';
 
   @ApiProperty({
-    description: 'Supply index',
-    example: 0,
-  })
-  supplyIndex = 0;
-
-  @ApiProperty({
-    description: 'Borrow index',
-    example: 0,
-  })
-  borrowIndex = 0;
-
-  @ApiProperty({
     description: 'Entry liquidation threshold',
     example: '780000000000000000000',
   })
@@ -128,46 +117,6 @@ export class LendingAccountProfileDoc {
   address!: string;
 
   @ApiProperty({
-    description: 'Initial strategy values',
-    example: {
-      leverageInitialSupply: '1000',
-      leverageInitialSupplyPrice: '1000',
-    },
-    required: false,
-  })
-  leverageInitialSupply?: number;
-
-  @ApiProperty({
-    description: 'Initial strategy values',
-    example: {
-      leverageInitialSupply: '1000',
-      leverageInitialSupplyPrice: '1000',
-    },
-    required: false,
-  })
-  leverageInitialSupplyPrice?: number;
-
-  @ApiProperty({
-    description: 'Initial strategy values',
-    example: {
-      leverageInitialBorrow: '1000',
-      leverageInitialBorrowPrice: '1000',
-    },
-    required: false,
-  })
-  leverageInitialBorrow?: number;
-
-  @ApiProperty({
-    description: 'Initial strategy values',
-    example: {
-      leverageInitialBorrow: '1000',
-      leverageInitialBorrowPrice: '1000',
-    },
-    required: false,
-  })
-  leverageInitialBorrowPrice?: number;
-
-  @ApiProperty({
     description: 'Initial payment multiplier',
     type: InitialPaymentMultiplier,
     required: false,
@@ -216,8 +165,6 @@ const selectFields = [
   'liquidationBonus',
   'liquidationFee',
   'siloed',
-  'supplyIndex',
-  'borrowIndex',
   'rewardsReserve',
   'maxDebtUsd',
   'debtCeiling',
@@ -242,6 +189,7 @@ const selectFields = [
   'address',
   'flashLoan',
   'oracleProvider',
+  'indexes',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
