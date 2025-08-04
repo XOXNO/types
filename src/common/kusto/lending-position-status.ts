@@ -33,6 +33,11 @@ export class LendingPositionStatus {
     type: OwnerDto,
   })
   wallet!: OwnerDto;
+  @ApiProperty({
+    description: 'Wether the position is E-Mode or not',
+    example: false,
+  })
+  isEMode!: boolean;
 
   constructor(props?: Partial<LendingPositionStatus>) {
     Object.assign(this, props);
