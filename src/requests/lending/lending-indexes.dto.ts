@@ -92,6 +92,12 @@ export class LendingIndexesDto {
   })
   aggregatorPriceUsd!: string;
   @ApiProperty({
+    description: 'Aggregator price in USD as a number (may lose precision)',
+    example: 16.124645832563882,
+    type: Number,
+  })
+  aggregatorPriceUsdShort!: number;
+  @ApiProperty({
     description: 'Within first tolerance',
     example: true,
     type: Boolean,
