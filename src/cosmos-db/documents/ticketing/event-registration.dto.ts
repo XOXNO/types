@@ -3,7 +3,7 @@ import {
   ApiProperty,
   ApiPropertyOptional,
 } from '@nestjs/swagger';
-import { EventGuestDoc } from './event-guest.doc';
+import { EventGuestProfile } from './event-guest.doc';
 import { PaymentProvider } from '../../../enums/payment-provider.enum';
 
 class TwispayPaymentFormData {
@@ -48,8 +48,8 @@ class CryptoPaymentResult {
 }
 
 export class EventRegistrationResponseDto {
-  @ApiProperty({ type: () => EventGuestDoc })
-  guestDoc!: EventGuestDoc;
+  @ApiProperty({ type: () => EventGuestProfile })
+  guestDoc!: EventGuestProfile;
 
   @ApiPropertyOptional({ type: () => FiatPaymentForm })
   fiatPaymentForm?: FiatPaymentForm;
