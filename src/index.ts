@@ -54,6 +54,7 @@ export * from './cosmos-db/documents/short/short-voucher.doc';
 export * from './cosmos-db/documents/staking/staking-delegator-doc';
 export * from './cosmos-db/documents/staking/staking-pool-doc';
 export * from './cosmos-db/documents/ticketing/discount-code-validation-response';
+export * from './cosmos-db/documents/ticketing/event-accept-invitation';
 export * from './cosmos-db/documents/ticketing/event-guest-approve.dto';
 export * from './cosmos-db/documents/ticketing/event-guest-doc.filter';
 export * from './cosmos-db/documents/ticketing/event-guest-registration.dto';
