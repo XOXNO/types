@@ -276,9 +276,6 @@ export class LendingMarketProfile extends LendingMarketProfileDoc {
   })
   eModeCategoryProfiles!: LendingEModeCategoryProfileDoc[];
 
-  @ApiProperty({ description: 'Oracle price', example: '100' })
-  oraclePrice!: string;
-
   @ApiProperty({
     description: 'Participants in the lending market',
     type: LendingMarketParticipants,

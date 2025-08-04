@@ -185,7 +185,6 @@ const selectFields = [
   'baseRate',
   'maxBorrowRate',
   'reserveFactor',
-  'oraclePrice',
   'address',
   'flashLoan',
   'oracleProvider',
