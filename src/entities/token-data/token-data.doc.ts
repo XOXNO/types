@@ -95,9 +95,6 @@ export class TokenDataDoc extends TokenDataDocBase {
 export class TokenDataDocHydrated extends TokenDataDoc {
   @ApiProperty({ example: 12.160648172030305 })
   usdPrice!: number;
-
-  @ApiProperty({ example: false })
-  isAshSupported!: boolean;
 }
 
 export class SuiCoinObjectDto {
@@ -126,9 +123,6 @@ export class SuiCoinObjectDto {
 export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 12.160648172030305 })
   usdPrice!: number;
-
-  @ApiProperty({ example: false })
-  isAshSupported!: boolean;
 
   @ApiProperty({ example: 0 })
   nonce!: number;
