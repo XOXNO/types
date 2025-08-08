@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import {
@@ -174,3 +174,8 @@ export class EventGuestRegistrationDto {
   @Type(() => CallbackUrl)
   callbackUrl?: CallbackUrl;
 }
+
+export class EventClaimInvitationDto extends PickType(
+  EventGuestRegistrationDto,
+  ['email', 'name', 'phone', 'questionAnswers'] as const,
+) {}
