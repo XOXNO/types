@@ -123,7 +123,6 @@ export class EventProfileDoc {
     type: 'integer',
   })
   @IsInt()
-  @Min(Math.floor(Date.now() / 1000))
   startTime!: number;
 
   @ApiProperty({
