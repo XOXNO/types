@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import { IsString, IsOptional, IsArray, ValidateNested } from 'class-validator';
 
-import { TicketProfileSummary } from './event-ticket-profile.doc';
+import { TicketsType } from './event-invitation-create.dto';
 
 export class ManualCheckInDto {
   @ApiProperty({
@@ -14,12 +14,12 @@ export class ManualCheckInDto {
 
   @ApiProperty({
     description: 'Selected tickets for check-in (optional)',
-    type: () => [TicketProfileSummary],
+    type: () => [TicketsType],
     required: false,
   })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => TicketProfileSummary)
-  selectedTickets?: TicketProfileSummary[];
+  @Type(() => TicketsType)
+  selectedTickets?: TicketsType[];
 }

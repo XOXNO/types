@@ -18,6 +18,7 @@ import { NftDocHydrated } from '../token/nft-details.doc';
 import { EventGuestProfile } from './event-guest.doc';
 import { EventInvitation } from './event-invitation.doc';
 import { TicketProfileSummary } from './event-ticket-profile.doc';
+import { TicketsType } from './event-invitation-create.dto';
 
 export class TicketSelection {
   @ApiProperty({
@@ -114,13 +115,13 @@ export class EventCheckInQR {
 
   @ApiProperty({
     description: 'Selected Tickets',
-    type: TicketProfileSummary,
+    type: TicketsType,
     isArray: true,
     required: false,
   })
   @IsArray()
   @IsOptional()
-  tickets?: TicketProfileSummary[];
+  tickets?: TicketsType[];
 }
 
 export class BadgeDecryptedData {
