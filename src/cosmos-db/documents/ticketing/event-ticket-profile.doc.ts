@@ -51,7 +51,7 @@ export class EventTicketProfileDoc {
     required: false,
   })
   @IsString()
-  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
+  profile?: string;
 
   @ApiProperty({
     required: false,
@@ -143,6 +143,8 @@ export class EventTicketProfileDoc {
 
   constructor(props?: Partial<EventTicketProfileDoc>) {
     Object.assign(this, props);
+    this.profile =
+      this.profile || 'https://media.xoxno.com/utils/defaultProfilePic.webp';
     this.pk = this.eventId;
   }
 }
