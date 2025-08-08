@@ -112,13 +112,13 @@ export class CollectionProfileDoc {
     description: 'Profile image URL',
     example: 'https://example.com/profile.jpg',
   })
-  profile!: string;
+  profile: string = '';
 
   @ApiProperty({
     description: 'Banner image URL',
     example: 'https://example.com/banner.jpg',
   })
-  banner!: string;
+  banner: string = '';
 
   @ApiProperty({
     description: 'Collection statistics',
