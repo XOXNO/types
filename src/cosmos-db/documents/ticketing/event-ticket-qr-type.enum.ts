@@ -107,22 +107,6 @@ export class QRBody {
   data!: string;
 }
 
-export class TicketsType {
-  @ApiProperty({
-    description: 'Ticket Profile ID',
-    type: String,
-  })
-  @IsString()
-  ticketId!: string;
-
-  @ApiProperty({
-    description: 'Ticket Profile quantity',
-    type: 'integer',
-  })
-  @IsNumber()
-  quantity!: number;
-}
-
 export class EventCheckInQR {
   @IsDefined()
   @ApiProperty({ description: 'User wallet address', type: QRBody })
@@ -130,13 +114,13 @@ export class EventCheckInQR {
 
   @ApiProperty({
     description: 'Selected Tickets',
-    type: TicketsType,
+    type: TicketProfileSummary,
     isArray: true,
     required: false,
   })
   @IsArray()
   @IsOptional()
-  tickets?: TicketsType[];
+  tickets?: TicketProfileSummary[];
 }
 
 export class BadgeDecryptedData {

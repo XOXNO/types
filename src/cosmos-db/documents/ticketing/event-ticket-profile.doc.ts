@@ -31,21 +31,24 @@ export class EventTicketProfileDoc {
 
   @ApiProperty({
     description: 'Name of the ticket type (e.g., General, VIP).',
+    required: false,
   })
   @Length(3, 30)
   @IsString()
-  name!: string;
+  name?: string;
 
   @ApiProperty({
     description: 'Description of the ticket type.',
+    required: false,
   })
   @Length(3, 300)
   @IsString()
-  description!: string;
+  description?: string;
 
   @ApiProperty({
     description:
       'URL of the image that will be used as the NFT representing this ticket type.',
+    required: false,
   })
   @IsString()
   profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
