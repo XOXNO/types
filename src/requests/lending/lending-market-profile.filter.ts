@@ -43,9 +43,6 @@ export class LendingMarketProfileExtraProperties {
   eModeCategoryProfile?: boolean;
 
   @ApiProperty({ required: false, type: 'boolean' })
-  oraclePrice?: boolean;
-
-  @ApiProperty({ required: false, type: 'boolean' })
   participants?: boolean;
 }
 
@@ -80,11 +77,9 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
   })
   extraProperties?: {
     eModeCategoryProfile: boolean;
-    oraclePrice: boolean;
     participants: boolean;
   } = {
     eModeCategoryProfile: false,
-    oraclePrice: true,
     participants: false,
   };
 
@@ -140,6 +135,14 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
       'borrowAmountScaled',
       'debtCeiling',
       'oracleProvider',
+      'baseRate',
+      'maxBorrowRate',
+      'slopeRate1',
+      'slopeRate2',
+      'slopeRate3',
+      'midUsageRate',
+      'optimalUsageRate',
+      'reserveFactor',
     ] as const;
   }
 }
