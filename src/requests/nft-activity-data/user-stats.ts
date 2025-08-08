@@ -18,7 +18,7 @@ class WalletDto {
 
   @ApiProperty({ description: 'User profile picture URL' })
   @IsString()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ description: 'Username' })
   @IsString()

@@ -16,5 +16,5 @@ export class OwnerDto {
 
   @ApiProperty({ description: "URL to the owner's profile picture" })
   @IsUrl()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 }

@@ -57,14 +57,14 @@ export class UserProfileDoc {
     description: 'Profile picture URL',
   })
   @IsString()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     example: 'https://media.xoxno.com/userprofile/erd1.../profileBanner.webp',
     description: 'Profile banner URL',
   })
   @IsString()
-  banner!: string;
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({
     example: 'NFT collector and trader',

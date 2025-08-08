@@ -40,11 +40,11 @@ export class InventorySummaryDtoHydrated extends InventorySummaryDto {
 
   @ApiProperty({ description: 'Profile picture URL of the collection' })
   @IsUrl()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ description: 'Banner URL of the collection' })
   @IsUrl()
-  banner!: string;
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({ description: 'Value of the collection' })
   @IsNumber()

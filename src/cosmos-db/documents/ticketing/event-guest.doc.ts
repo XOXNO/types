@@ -317,7 +317,7 @@ export class EventGuestProfile extends EventGuestDoc {
     description: 'Guest profile picture.',
     type: String,
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'Guest wallet herotag.',

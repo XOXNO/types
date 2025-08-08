@@ -130,7 +130,7 @@ export class EventUserRole extends EventUserRoleDoc {
   @ApiProperty({
     description: 'User profile picture.',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'User wallet herotag.',

@@ -56,7 +56,7 @@ export class EventGuestProfileSummary {
     description: 'The profile URL of the guest.',
     example: 'https://example.com/profile.png',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'The name of the guest.',
@@ -177,10 +177,9 @@ export class EventProfileDoc {
 
   @ApiProperty({
     description: 'URL to the profile image in Azure storage.',
-    // default: StaticConfig.getDefaultProfilePicture(),
   })
   @IsString()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'Category of the event.',

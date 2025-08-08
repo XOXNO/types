@@ -29,7 +29,7 @@ export class GroupChatProfileDoc {
     description: 'Profile picture URL for the group chat',
     example: 'https://example.com/profile.jpg',
   })
-  profile!: string; // TODO: Add defalt StaticConfig.getDefaultProfilePicture();
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
   @ApiProperty({
     description: 'Address of the group chat owner',
     example: 'erd1...',

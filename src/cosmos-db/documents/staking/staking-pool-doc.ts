@@ -348,7 +348,7 @@ export class StakingSummary {
     example:
       'https://media.xoxno.com/stakingpools/3/stakingPoolPicture_3.webp?_ts=1716838395',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'Collection identifiers',

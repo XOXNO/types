@@ -48,7 +48,7 @@ export class EventTicketProfileDoc {
       'URL of the image that will be used as the NFT representing this ticket type.',
   })
   @IsString()
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     required: false,

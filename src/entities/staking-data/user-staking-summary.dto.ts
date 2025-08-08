@@ -19,14 +19,14 @@ export class UserStakingSummaryDto {
     example:
       'https://media.xoxno.com/collectionprofile/MICE-a0c447/profilePicture.webp?ts=1679309756',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'Banner image URL',
     example:
       'https://media.xoxno.com/collectionprofile/MICE-a0c447/profilebanner.webp',
   })
-  banner!: string;
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({
     description: 'List of pool IDs where the user has staked NFTs',

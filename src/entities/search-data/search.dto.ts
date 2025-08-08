@@ -24,7 +24,7 @@ export class CollectionDto {
     example:
       'https://media.xoxno.com/collectionprofile/EAPES-8f3c1f/profilePicture.webp?ts=1691359925',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ example: 'NonFungibleESDT' })
   type!: string;
@@ -54,7 +54,7 @@ export class UserDto {
   @ApiProperty({
     example: 'https://media.xoxno.com/utils/defaultProfilePic.webp',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ example: true, required: false })
   @IsOptional()
@@ -99,7 +99,7 @@ export class CreatorDto {
   @ApiProperty({
     example: 'https://media.xoxno.com/utils/defaultProfilePic.webp',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ enum: ActivityChain, required: false })
   chain?: ActivityChain.MVX;

@@ -43,14 +43,14 @@ export class CreatorProfileDoc {
       'https://media.xoxno.com/creatorprofile/erd1.../profilePicture.webp',
     description: 'Creator profile picture URL',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     example:
       'https://media.xoxno.com/creatorprofile/erd1.../profileBanner.webp',
     description: 'Creator profile banner URL',
   })
-  banner!: string;
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({
     example: 1640995200,

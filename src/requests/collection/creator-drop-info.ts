@@ -88,10 +88,10 @@ export class CreatorInfoDto {
   @ApiProperty({
     example: 'https://media.xoxno.com/utils/defaultProfilePic.webp',
   })
-  profile!: string;
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({ example: 'https://media.xoxno.com/utils/defaultBanner.webp' })
-  banner!: string;
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({ example: 1645192020 })
   joinedDate!: number;
