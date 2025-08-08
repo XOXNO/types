@@ -15,4 +15,5 @@ export class ShortNftCollectionInfoDoc extends PickType(CollectionProfileDoc, [
   'customConfig',
   'roles',
   'banner',
+  'features',
 ] as const) {}
