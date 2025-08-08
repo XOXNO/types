@@ -1,6 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { UserDataType } from '../../../enums/user-data-type.enum';
 import { SocialsDto } from '../../../common/socials';
+import {
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  ValidateNested,
+} from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreatorProfileDoc {
   @ApiProperty({ example: 'creatorProfile', enum: UserDataType })
@@ -16,6 +24,8 @@ export class CreatorProfileDoc {
     example: 'Awesome Creator',
     description: 'Creator name (editable by creator)',
   })
+  @IsString()
+  @Length(1, 300)
   name!: string; // editable by creator
 
   @ApiProperty({
@@ -63,10 +73,19 @@ export class CreatorProfileDoc {
     description: 'Creator description',
     required: false,
   })
+  @IsString()
+  @Length(1, 300)
+  @IsOptional()
   description?: string;
 
-  @ApiProperty({ description: 'Creator social media links', required: false })
-  socials?: SocialsDto;
+  @ApiProperty({
+    description: 'Social media links for the creator',
+    type: () => SocialsDto,
+  })
+  @ValidateNested()
+  @Type(() => SocialsDto)
+  @IsObject()
+  socials: SocialsDto = new SocialsDto();
 
   @ApiProperty({
     example:

@@ -1,6 +1,13 @@
 import { ApiProperty, PartialType, PickType } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
-import { IsObject, IsString, Length, ValidateNested } from 'class-validator';
+import {
+  IsBoolean,
+  IsObject,
+  IsOptional,
+  IsString,
+  Length,
+  ValidateNested,
+} from 'class-validator';
 import { SocialsDto } from '../../../common/socials';
 import { StatisticsDto, StatisticsOtherDto } from '../../../common/statistics';
 import { CollectionDataType } from '../../../enums/collection.enum';
@@ -34,6 +41,18 @@ export class TransferPolicy {
 
   @ApiProperty({ description: 'Transfer policy is origin byte' })
   is_origin_byte!: boolean;
+}
+
+export class CollectionFeatures {
+  @ApiProperty({ required: false })
+  @IsBoolean()
+  @IsOptional()
+  isCustomOffersDisabled?: boolean;
+
+  @ApiProperty({ required: false })
+  @IsBoolean()
+  @IsOptional()
+  isGlobalOffersDisabled?: boolean;
 }
 
 export class CollectionProfileDoc {
@@ -215,6 +234,13 @@ export class CollectionProfileDoc {
   customConfig?: XoxnoMarketplaceScCollectionConfig;
 
   @ApiProperty({
+    description: 'Custom features for the collection',
+    required: false,
+    type: CollectionFeatures,
+  })
+  features?: CollectionFeatures;
+
+  @ApiProperty({
     description: 'Royalty of the collection',
     required: false,
   })
@@ -280,4 +306,8 @@ export class CollectionProfileDoc {
 
 export class CollectionProfileEditDto extends PartialType(
   PickType(CollectionProfileDoc, ['description', 'name', 'socials'] as const),
+) {}
+
+export class CollectionFeaturesEditDto extends PartialType(
+  CollectionFeatures,
 ) {}

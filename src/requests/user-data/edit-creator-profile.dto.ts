@@ -1,35 +1,7 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 
-import { SocialsDto } from '../../common/socials';
-import { IsObject, IsOptional, IsString, Length } from 'class-validator';
+import { CreatorProfileDoc } from '../../cosmos-db/documents/user/user-creator-profile.doc';
 
-export class EditUserCreatorProfileDto {
-  @ApiProperty({
-    description: 'User description',
-    maxLength: 300,
-    example: 'I am a creator',
-    required: false,
-  })
-  @IsString()
-  @Length(1, 300)
-  @IsOptional()
-  description?: string;
-
-  @ApiProperty({
-    description: 'Social media profiles',
-    required: false,
-  })
-  @IsObject({ each: true })
-  @IsOptional()
-  socials?: SocialsDto;
-
-  @ApiProperty({
-    description: 'Creator name',
-    maxLength: 30,
-    example: 'Creator Name',
-    required: false,
-  })
-  @IsString()
-  @Length(1, 300)
-  name?: string;
-}
+export class CreatorProfileEditDto extends PartialType(
+  PickType(CreatorProfileDoc, ['name', 'description', 'socials'] as const),
+) {}
