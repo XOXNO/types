@@ -14,7 +14,7 @@ export class TicketsType {
   @IsString()
   ticketId!: string;
 
-  @ApiProperty({ type: Number })
+  @ApiProperty({ type: 'integer' })
   @IsNumber()
   quantity!: number;
 }
