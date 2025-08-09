@@ -13,11 +13,6 @@ export class LendingNftAttributes {
   })
   eModeCategory!: string;
   @ApiProperty({
-    description: 'Whether this is a vault position',
-    example: false,
-  })
-  isVault!: boolean;
-  @ApiProperty({
     description: 'Position mode for the lending NFT',
     enum: PositionMode,
     enumName: 'PositionMode',
