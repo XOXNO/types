@@ -5,6 +5,7 @@ import {
   IsEnum,
   IsInt,
   IsObject,
+  IsOptional,
   IsString,
   ValidateNested,
 } from 'class-validator';
@@ -69,9 +70,11 @@ export class UserProfileDoc {
   @ApiProperty({
     example: 'NFT collector and trader',
     description: 'User description',
+    required: false,
   })
   @IsString()
-  description: string = '';
+  @IsOptional()
+  description?: string;
 
   @ApiProperty({ example: '@username', description: 'User herotag/username' })
   @IsString()

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 import { StakingDataType } from '../../../enums/staking-data-type.enum';
 import { StakingIssuingTypeString } from '../../../enums/staking-issuing-type-string.enum';
 import { StakingPoolTypeString } from '../../../enums/staking-pool-type-string.enum';
@@ -338,6 +338,7 @@ export class StakingSummary {
     required: false,
   })
   @IsString()
+  @IsOptional()
   description?: string;
 
   @ApiProperty({ description: 'Staking enabled', example: true })

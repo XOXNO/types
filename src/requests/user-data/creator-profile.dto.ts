@@ -6,8 +6,7 @@ export class CreatorProfileDto extends CreatorProfileDoc {
   followCount!: number;
 }
 
-export class CreatorUpdateProfileDTO extends PickType(CreatorProfileDto, [
+export class CreatorProfileEditDto extends PickType(CreatorProfileDoc, [
   'socials',
   'description',
-  'profile',
 ] as const) {}

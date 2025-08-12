@@ -36,7 +36,6 @@ export class UserProfileEditDto extends PartialType(
   PickType(UserProfileDoc, [
     'socials',
     'description',
-    'profile',
     'isBoberBattleUser',
   ] as const),
 ) {}
