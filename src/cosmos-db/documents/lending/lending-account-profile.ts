@@ -1,10 +1,9 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
 
 import { LendingDataType } from '../../../enums/lending-data-type.enum';
+import { PositionMode } from '../../../enums/lending.enum';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { LendingMarketProfile } from './lending-market-profile.doc';
-import { PositionMode } from '../../../enums/lending.enum';
-import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
 
 export class InitialPaymentMultiplier {
   @ApiProperty({

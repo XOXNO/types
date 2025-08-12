@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty } from '@nestjs/swagger';
 import { CreatorProfileDoc } from '../../cosmos-db/documents/user/user-creator-profile.doc';
 
 export class CreatorProfileDto extends CreatorProfileDoc {
