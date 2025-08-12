@@ -131,13 +131,13 @@ export class CollectionProfileDoc {
     description: 'Profile image URL',
     example: 'https://example.com/profile.jpg',
   })
-  profile: string = '';
+  profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
     description: 'Banner image URL',
     example: 'https://example.com/banner.jpg',
   })
-  banner: string = '';
+  banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
   @ApiProperty({
     description: 'Collection statistics',
