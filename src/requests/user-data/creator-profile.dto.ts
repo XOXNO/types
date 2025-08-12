@@ -5,8 +5,3 @@ export class CreatorProfileDto extends CreatorProfileDoc {
   @ApiProperty({ example: 0 })
   followCount!: number;
 }
-
-export class CreatorProfileEditDto extends PickType(CreatorProfileDoc, [
-  'socials',
-  'description',
-] as const) {}
