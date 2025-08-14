@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { OwnerDto } from '../owner.dto';
+import { PositionMode } from '../../enums';
 
 export class LendingPositionStatus {
   @ApiProperty({
@@ -38,6 +39,11 @@ export class LendingPositionStatus {
     example: false,
   })
   isEMode!: boolean;
+  @ApiProperty({
+    description: 'The position mode of the lending account',
+    enum: PositionMode,
+  })
+  positionMode!: PositionMode;
 
   constructor(props?: Partial<LendingPositionStatus>) {
     Object.assign(this, props);
