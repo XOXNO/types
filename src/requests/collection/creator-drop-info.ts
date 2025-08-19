@@ -65,6 +65,7 @@ export class MintStageDto {
 
   constructor(props?: Partial<MintStageDto>) {
     Object.assign(this, props);
+    this.id = `${this.collection}-${this.name}-${this.dataType}`;
   }
 }
 
