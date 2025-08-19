@@ -56,11 +56,11 @@ export class NftMedia {
 
 class NftStats {
   @ApiProperty({ type: 'integer', required: false })
-  likedCount?: number;
+  likeCount?: number;
 
   constructor(props?: Partial<NftStats>) {
     Object.assign(this, props);
-    this.likedCount = props?.likedCount ?? 0;
+    this.likeCount = props?.likeCount ?? 0;
   }
 }
 
