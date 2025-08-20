@@ -16,7 +16,14 @@ export enum ContractTypes {
 const profile =
   'https://tools.multiversx.com/assets-cdn/accounts/erd1qqqqqqqqqqqqqpgq6wegs2xkypfpync8mn2sa5cmpqjlvrhwz5nqgepyg8/icon.svg';
 
-export const KNOWN_CONTRACTS_MAP = new Map([
+export const KNOWN_CONTRACTS_MAP: Map<
+  string,
+  {
+    name: string;
+    type: ContractTypes;
+    profile: string;
+  }
+> = new Map([
   [
     'erd1qqqqqqqqqqqqqpgqrq6gv0ljf4y9md42pe4m6mh96hcpqnpuusls97tf33',
     {
@@ -584,6 +591,7 @@ export const KNOWN_CONTRACTS_MAP = new Map([
     {
       name: 'XOXNO Liquid Staking',
       type: ContractTypes.LIQUID_STAKING,
+      profile,
     },
   ],
   [
@@ -591,6 +599,7 @@ export const KNOWN_CONTRACTS_MAP = new Map([
     {
       name: 'XOXNO Liquid Staking',
       type: ContractTypes.LIQUID_STAKING,
+      profile,
     },
   ],
   [
