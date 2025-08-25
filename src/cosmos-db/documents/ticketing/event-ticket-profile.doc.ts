@@ -4,6 +4,7 @@ import {
   IsInt,
   IsNumber,
   IsObject,
+  IsOptional,
   IsString,
   IsUUID,
   Length,
@@ -82,6 +83,7 @@ export class EventTicketProfileDoc {
     description: 'Other characteristics specific to this ticket type.',
   })
   @IsObject()
+  @IsOptional()
   characteristics?: Record<string, string | number>; // Additional properties like seating, access levels, etc.
 
   @ApiProperty({

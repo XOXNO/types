@@ -11,6 +11,5 @@ export class EventTicketProfileCreateDto extends PickType(
     'badgeColor',
     'maxLimit',
     'userLimit',
-    'characteristics',
   ] as const,
 ) {}
