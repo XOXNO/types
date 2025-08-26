@@ -1,4 +1,4 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 import { Wallet } from '../../utils/types';
 
 export class BoberBattleLeaderboardDto {
@@ -164,6 +164,35 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
 }
 
 export class BoberBattleUserDtoHydrated extends BoberBattleUserDto {
+  @ApiProperty({
+    description: 'Wallet object containing address and shard information',
+    type: Object,
+  })
+  wallet!: Wallet;
+}
+
+export class BoberWheelLeaderboardDto extends OmitType(
+  BoberBattleLeaderboardDto,
+  [
+    'GamesCreatedHead',
+    'GamesCreatedTail',
+    'GamesJoinedHead',
+    'GamesJoinedTail',
+  ] as const,
+) {}
+
+export class BoberWheelUserDto extends OmitType(BoberBattleUserDto, [
+  'GamesCreatedHead',
+  'GamesCreatedTail',
+  'GamesJoinedHead',
+  'GamesJoinedTail',
+  'GamesWonAsHead',
+  'GamesLostAsHead',
+  'GamesWonAsTail',
+  'GamesLostAsTail',
+] as const) {}
+
+export class BoberWheelUserDtoHydrated extends BoberWheelUserDto {
   @ApiProperty({
     description: 'Wallet object containing address and shard information',
     type: Object,
