@@ -192,7 +192,7 @@ export class BoberWheelUserDto extends OmitType(BoberBattleUserDto, [
   'GamesLostAsTail',
 ] as const) {}
 
-export class BoberWheelUserDtoHydrated extends BoberWheelUserDto {
+export class BoberWheelUserDtoHydrated extends OmitType(BoberWheelUserDto, []) {
   @ApiProperty({
     description: 'Wallet object containing address and shard information',
     type: Object,
