@@ -29,4 +29,7 @@ export enum NftActivityType {
   JOIN_GAME = 'joinGame',
   CANCEL_GAME = 'cancelGame',
   END_GAME = 'endGame',
+  // Wheel Games
+  SPIN = 'spin',
+  JOIN_WHEEL = 'joinWheel',
 }
