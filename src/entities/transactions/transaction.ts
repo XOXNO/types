@@ -14,19 +14,19 @@ export class Transaction {
     description:
       'The maximum amount of gas units allocated for the transaction',
     example: 50000,
-    type: Number,
+    type: 'integer',
   })
   gasLimit: number | undefined = undefined;
   @ApiPropertyOptional({
     description: 'The price per gas unit for the transaction',
     example: 1000000000,
-    type: Number,
+    type: 'integer',
   })
   gasPrice: number | undefined = undefined;
   @ApiPropertyOptional({
     description: 'The actual amount of gas units consumed by the transaction',
     example: 25000,
-    type: Number,
+    type: 'integer',
   })
   gasUsed: number | undefined = undefined;
   @ApiPropertyOptional({
@@ -39,7 +39,7 @@ export class Transaction {
   @ApiPropertyOptional({
     description: 'The sequence number of the transaction for the sender',
     example: 42,
-    type: Number,
+    type: 'integer',
   })
   nonce: number | undefined = undefined;
   @ApiProperty({
@@ -51,13 +51,13 @@ export class Transaction {
   @ApiProperty({
     description: 'The shard ID of the receiver address',
     example: 1,
-    type: Number,
+    type: 'integer',
   })
   receiverShard = 0;
   @ApiPropertyOptional({
     description: 'The blockchain round when the transaction was processed',
     example: 1234567,
-    type: Number,
+    type: 'integer',
   })
   round: number | undefined = undefined;
   @ApiProperty({
@@ -69,7 +69,7 @@ export class Transaction {
   @ApiProperty({
     description: 'The shard ID of the sender address',
     example: 0,
-    type: Number,
+    type: 'integer',
   })
   senderShard = 0;
   @ApiPropertyOptional({
@@ -101,7 +101,7 @@ export class Transaction {
   @ApiProperty({
     description: 'The Unix timestamp when the transaction was processed',
     example: 1672531200,
-    type: Number,
+    type: 'integer',
   })
   timestamp = 0;
   @ApiPropertyOptional({

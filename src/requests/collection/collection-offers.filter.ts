@@ -24,7 +24,12 @@ export class CollectionOffersFilterCriteriaDto {
   })
   collection?: string[];
 
-  @ApiProperty({ required: false, type: Number, isArray: true, example: [123] })
+  @ApiProperty({
+    required: false,
+    type: 'integer',
+    isArray: true,
+    example: [123],
+  })
   offerId?: number[];
 
   @ApiProperty({

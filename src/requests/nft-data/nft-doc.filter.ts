@@ -44,7 +44,7 @@ export class NftDocFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
   collection?: string[];
 
-  @ApiProperty({ required: false, type: Number, isArray: true })
+  @ApiProperty({ required: false, type: 'integer', isArray: true })
   nonce?: number[];
 
   @ApiProperty({ required: false, type: String, isArray: true })

@@ -9,7 +9,7 @@ class TokenDataDocBase {
   })
   identifier!: string;
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Number of decimal places for the token',
     example: 18,
   })
@@ -81,7 +81,7 @@ export class TokenDataDoc extends TokenDataDocBase {
   })
   category: string[] = ['userInventory'];
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'Cosmos DB timestamp for document versioning',
   })
   _ts!: number;

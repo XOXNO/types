@@ -12,7 +12,7 @@ export class TransactionSendResult {
   @IsString()
   receiver = '';
 
-  @ApiProperty({ description: 'The shard of the receiver', type: Number })
+  @ApiProperty({ description: 'The shard of the receiver', type: 'integer' })
   @IsNumber()
   receiverShard = 0;
 
@@ -20,7 +20,7 @@ export class TransactionSendResult {
   @IsString()
   sender = '';
 
-  @ApiProperty({ description: 'The shard of the sender', type: Number })
+  @ApiProperty({ description: 'The shard of the sender', type: 'integer' })
   @IsNumber()
   senderShard = 0;
 

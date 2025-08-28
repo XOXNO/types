@@ -5,49 +5,49 @@ export class BoberBattleLeaderboardDto {
   @ApiProperty({
     description: 'Total number of games created by the user',
     example: 25,
-    type: Number,
+    type: 'integer',
   })
   GamesCreated!: number;
 
   @ApiProperty({
     description: 'Number of games created where user chose heads',
     example: 15,
-    type: Number,
+    type: 'integer',
   })
   GamesCreatedHead!: number;
 
   @ApiProperty({
     description: 'Number of games created where user chose tails',
     example: 10,
-    type: Number,
+    type: 'integer',
   })
   GamesCreatedTail!: number;
 
   @ApiProperty({
     description: 'Total number of games joined by the user',
     example: 30,
-    type: Number,
+    type: 'integer',
   })
   GamesJoined!: number;
 
   @ApiProperty({
     description: 'Number of games joined where user chose heads',
     example: 18,
-    type: Number,
+    type: 'integer',
   })
   GamesJoinedHead!: number;
 
   @ApiProperty({
     description: 'Number of games joined where user chose tails',
     example: 12,
-    type: Number,
+    type: 'integer',
   })
   GamesJoinedTail!: number;
 
   @ApiProperty({
     description: 'Total number of games participated in',
     example: 55,
-    type: Number,
+    type: 'integer',
   })
   TotalGames!: number;
 
@@ -95,63 +95,63 @@ export class BoberBattleUserDto extends BoberBattleLeaderboardDto {
   @ApiProperty({
     description: 'Number of created games that were won',
     example: 12,
-    type: Number,
+    type: 'integer',
   })
   GamesCreatedWon!: number;
 
   @ApiProperty({
     description: 'Number of joined games that were won',
     example: 18,
-    type: Number,
+    type: 'integer',
   })
   GamesJoinedWon!: number;
 
   @ApiProperty({
     description: 'Games won when choosing heads',
     example: 15,
-    type: Number,
+    type: 'integer',
   })
   GamesWonAsHead!: number;
 
   @ApiProperty({
     description: 'Games lost when choosing heads',
     example: 8,
-    type: Number,
+    type: 'integer',
   })
   GamesLostAsHead!: number;
 
   @ApiProperty({
     description: 'Games won when choosing tails',
     example: 13,
-    type: Number,
+    type: 'integer',
   })
   GamesWonAsTail!: number;
 
   @ApiProperty({
     description: 'Games lost when choosing tails',
     example: 7,
-    type: Number,
+    type: 'integer',
   })
   GamesLostAsTail!: number;
 
   @ApiProperty({
     description: 'Total games won',
     example: 30,
-    type: Number,
+    type: 'integer',
   })
   GamesWon!: number;
 
   @ApiProperty({
     description: 'Total games lost',
     example: 25,
-    type: Number,
+    type: 'integer',
   })
   GamesLost!: number;
 
   @ApiProperty({
     description: 'Win rate percentage',
     example: 54.55,
-    type: Number,
+    type: 'integer',
     minimum: 0,
     maximum: 100,
   })

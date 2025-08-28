@@ -38,7 +38,7 @@ export class NftActivityData {
   @ApiProperty({
     description: 'The quantity of NFTs involved in this activity',
     example: 1,
-    type: Number,
+    type: 'integer',
     required: true,
     minimum: 1,
   })
@@ -47,7 +47,7 @@ export class NftActivityData {
   @ApiProperty({
     description: 'The smart contract ID',
     example: 3,
-    type: Number,
+    type: 'integer',
     required: true,
   })
   scId!: number;
@@ -79,7 +79,7 @@ export class NftActivityData {
     description:
       'The deadline timestamp (available for offerCreate & auctions)',
     example: 1709218759,
-    type: Number,
+    type: 'integer',
   })
   deadline?: number;
 

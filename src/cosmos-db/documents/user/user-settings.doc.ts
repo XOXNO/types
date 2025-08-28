@@ -150,22 +150,22 @@ export class UserNotificationPreferences {
 }
 
 export class UserEmailNotificationSettings {
-  @ApiProperty({ description: 'Email notifications enabled' })
+  @ApiProperty({ description: 'Email notifications enabled', type: Boolean })
   enabled = false;
 
-  @ApiProperty({ description: 'Email address' })
+  @ApiProperty({ description: 'Email address', type: String })
   emailAddress = '';
 
-  @ApiProperty({ description: 'Email verification pending' })
+  @ApiProperty({ description: 'Email verification pending', type: Boolean })
   isEmailVerificationPending = false;
 
-  @ApiProperty({ description: 'Email verified' })
+  @ApiProperty({ description: 'Email verified', type: Boolean })
   isEmailVerified = false;
 
-  @ApiProperty({ description: 'Web2 user' })
+  @ApiProperty({ description: 'Web2 user', type: Boolean })
   isWeb2User = false;
 
-  @ApiProperty({ description: 'Timestamp', required: false })
+  @ApiProperty({ description: 'Timestamp', required: false, type: 'integer' })
   timestamp?: number;
 
   constructor(props?: Partial<UserEmailNotificationSettings>) {
@@ -174,19 +174,19 @@ export class UserEmailNotificationSettings {
 }
 
 export class UserPhoneNotificationSettings {
-  @ApiProperty({ description: 'Phone notifications enabled' })
+  @ApiProperty({ description: 'Phone notifications enabled', type: Boolean })
   enabled = false;
 
-  @ApiProperty({ description: 'Phone number' })
+  @ApiProperty({ description: 'Phone number', type: String })
   phoneNumber = '';
 
-  @ApiProperty({ description: 'Phone verification pending' })
+  @ApiProperty({ description: 'Phone verification pending', type: Boolean })
   isPhoneVerificationPending = false;
 
-  @ApiProperty({ description: 'Phone verified' })
+  @ApiProperty({ description: 'Phone verified', type: Boolean })
   isPhoneVerified = false;
 
-  @ApiProperty({ description: 'Timestamp', required: false })
+  @ApiProperty({ description: 'Timestamp', required: false, type: 'integer' })
   timestamp?: number;
 
   constructor(props?: Partial<UserPhoneNotificationSettings>) {
@@ -198,16 +198,23 @@ export class UserSettingsDoc {
   @ApiProperty({ description: 'Type of user data' })
   dataType: UserDataType = UserDataType.UserSettings;
 
-  @ApiProperty({ description: 'User address' })
+  @ApiProperty({ description: 'User address', type: String })
   address!: string;
 
-  @ApiProperty({ description: 'User name', required: false })
+  @ApiProperty({ description: 'User name', required: false, type: String })
   name?: string;
 
-  @ApiProperty({ description: 'User billing details', required: false })
+  @ApiProperty({
+    description: 'User billing details',
+    required: false,
+    type: UserBillingDetails,
+  })
   billingDetails?: UserBillingDetails;
 
-  @ApiProperty({ description: 'Email notification settings' })
+  @ApiProperty({
+    description: 'Email notification settings',
+    type: UserEmailNotificationSettings,
+  })
   emailNotifications: UserEmailNotificationSettings =
     new UserEmailNotificationSettings();
 

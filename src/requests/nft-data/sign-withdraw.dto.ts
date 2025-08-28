@@ -5,7 +5,7 @@ import { ArrayNotEmpty, IsArray, IsNumber } from 'class-validator';
 export class SignWithdrawDto {
   @ApiProperty({
     isArray: true,
-    type: Number,
+    type: 'integer',
     description: 'Array of auction IDs that have to be signed',
     example: [123123, 15555],
   })

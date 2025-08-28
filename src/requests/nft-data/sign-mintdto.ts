@@ -4,7 +4,7 @@ import { IsNumber, IsString } from 'class-validator';
 
 export class SignMintDto {
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     description: 'The quantity of the requested mint amount',
   })
   @IsNumber()

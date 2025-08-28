@@ -4,7 +4,7 @@ import { ArrayNotEmpty, IsArray, IsNumber, IsString } from 'class-validator';
 
 export class SignAcceptGlobalOfferDto {
   @ApiProperty({
-    type: Number,
+    type: 'integer',
     example: 1233,
     description: 'The offer ID that has to be removed',
   })

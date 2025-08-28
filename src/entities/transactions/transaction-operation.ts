@@ -69,7 +69,7 @@ export class TransactionOperation {
   @ApiPropertyOptional({
     description: 'The number of decimals for the token',
     example: 18,
-    type: Number,
+    type: 'integer',
   })
   decimals?: number;
   @ApiPropertyOptional({

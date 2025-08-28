@@ -11,7 +11,7 @@ export class TraitInfo {
   @ApiPropertyOptional({
     description: 'Number of items with this trait currently on sale',
     example: 12,
-    type: Number,
+    type: 'integer',
   })
   onSaleCount?: number;
 
@@ -51,7 +51,7 @@ export class TraitInfo {
     description:
       'Number of times this specific trait value appears (legacy spelling)',
     example: 50,
-    type: Number,
+    type: 'integer',
     required: true,
   })
   traitOccurance!: number;
@@ -94,7 +94,7 @@ export class ValueFp {
   @ApiPropertyOptional({
     description: 'Number of items in this category currently on sale',
     example: 25,
-    type: Number,
+    type: 'integer',
   })
   onSaleCount?: number;
 

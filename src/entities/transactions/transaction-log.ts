@@ -26,7 +26,7 @@ export class TransactionLog {
   @ApiProperty({
     description: 'The Unix timestamp when the log was created',
     example: 1672531200,
-    type: Number,
+    type: 'integer',
   })
   timestamp = 0;
 

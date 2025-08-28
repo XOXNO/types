@@ -42,7 +42,7 @@ export class Web2WalletDto {
 
   @ApiProperty({
     description: 'Index of the wallet',
-    type: Number,
+    type: 'integer',
     required: false,
   })
   @IsOptional()
