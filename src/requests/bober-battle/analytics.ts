@@ -179,7 +179,12 @@ export class BoberWheelLeaderboardDto extends OmitType(
     'GamesJoinedHead',
     'GamesJoinedTail',
   ] as const,
-) {}
+) {
+  constructor(props?: Partial<BoberWheelLeaderboardDto>) {
+    super(props);
+    Object.assign(this, props);
+  }
+}
 
 export class BoberWheelUserDto extends OmitType(BoberBattleUserDto, [
   'GamesCreatedHead',
@@ -190,7 +195,12 @@ export class BoberWheelUserDto extends OmitType(BoberBattleUserDto, [
   'GamesLostAsHead',
   'GamesWonAsTail',
   'GamesLostAsTail',
-] as const) {}
+] as const) {
+  constructor(props?: Partial<BoberWheelUserDto>) {
+    super(props);
+    Object.assign(this, props);
+  }
+}
 
 export class BoberWheelUserDtoHydrated extends OmitType(BoberWheelUserDto, []) {
   @ApiProperty({
