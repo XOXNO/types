@@ -1,4 +1,4 @@
-import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
+import { ApiProperty, OmitType } from '@nestjs/swagger';
 import { Wallet } from '../../utils/types';
 
 export class BoberBattleLeaderboardDto {
