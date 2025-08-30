@@ -138,4 +138,34 @@ export class LendingMarketAnalyticsGraph {
     items: { type: 'number' },
   })
   avgBorrowAmount!: number[];
+
+  @ApiProperty({
+    description: 'TWAP supply APY for each the time range',
+    example: 1.2,
+  })
+  twapSupplyApy!: number;
+
+  @ApiProperty({
+    description: 'TWAP borrow APY for each the time range',
+    example: 1.2,
+  })
+  twapBorrowApy!: number;
+
+  @ApiProperty({
+    description: 'TWAP utilization rate for each the time range',
+    example: 1.2,
+  })
+  twapUtilizationRate!: number;
+
+  @ApiProperty({
+    description: 'TWAP supply amount for each the time range',
+    example: 1.2,
+  })
+  twapSupplyAmount!: number;
+
+  @ApiProperty({
+    description: 'TWAP borrow amount for each the time range',
+    example: 1.2,
+  })
+  twapBorrowAmount!: number;
 }
