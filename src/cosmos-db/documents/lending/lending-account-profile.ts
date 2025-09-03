@@ -122,6 +122,9 @@ export class LendingAccountProfileDoc {
   })
   initialPaymentMultiplier?: InitialPaymentMultiplier;
 
+  @ApiProperty()
+  isClassic?: boolean;
+
   @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'account123_EGLD',
