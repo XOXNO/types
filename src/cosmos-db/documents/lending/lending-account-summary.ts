@@ -43,6 +43,12 @@ export class LendingAccountSummary {
   borrowedInDollars!: string;
 
   @ApiProperty()
+  collateralInEgld!: string;
+
+  @ApiProperty()
+  borrowedInEgld!: string;
+
+  @ApiProperty()
   totalApy!: string;
 
   @ApiProperty()
