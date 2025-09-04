@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsInt, IsString } from 'class-validator';
+import { IsInt, IsOptional, IsString } from 'class-validator';
 
 export class EgldOrEsdtTokenPayment {
   @ApiProperty({ example: 'EGLD' })
@@ -15,14 +15,17 @@ export class EgldOrEsdtTokenPayment {
   amount!: string;
 
   @ApiProperty({ example: 0, required: false, description: 'Short amount' })
+  @IsOptional()
   @IsInt()
   amountShort?: number; // Applied after
 
   @ApiProperty({ example: 0, required: false, description: 'USD value' })
+  @IsOptional()
   @IsInt()
   usdValue?: number; // Applied after
 
   @ApiProperty({ example: 0, required: false, description: 'Decimals' })
+  @IsOptional()
   @IsInt()
   decimals?: number; // Applied after
 
