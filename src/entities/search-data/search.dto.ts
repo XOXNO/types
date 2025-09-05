@@ -93,8 +93,8 @@ export class CreatorDto {
   @ApiProperty({ example: 'Ep1xStudio' })
   creatorTag!: string;
 
-  @ApiProperty({ example: 1643145426 })
-  joinedDate!: number;
+  @ApiProperty({ example: 1643145426, required: false })
+  joinedDate?: number;
 
   @ApiProperty({
     example: 'https://media.xoxno.com/utils/defaultProfilePic.webp',

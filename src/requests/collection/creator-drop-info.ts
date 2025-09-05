@@ -94,8 +94,8 @@ export class CreatorInfoDto {
   @ApiProperty({ example: 'https://media.xoxno.com/utils/defaultBanner.webp' })
   banner: string = 'https://media.xoxno.com/utils/defaultBanner.webp';
 
-  @ApiProperty({ example: 1645192020 })
-  joinedDate!: number;
+  @ApiProperty({ example: 1645192020, required: false })
+  joinedDate?: number;
 
   @ApiProperty({ example: 'MiceCityClub' })
   creatorTag!: string;

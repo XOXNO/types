@@ -65,6 +65,7 @@ export class CreatorProfileDoc {
   @ApiProperty({
     example: 1640995200,
     description: 'Unix timestamp when creator joined',
+    required: false,
   })
   joinedDate: number = Math.floor(Date.now() / 1000);
 
