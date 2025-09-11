@@ -1,8 +1,8 @@
 export enum EventUserRoles {
-  EVENT_COHOST = 'event-cohost',
-  EVENT_READER = 'event-reader',
   EVENT_MANAGER = 'event-manager',
+  EVENT_COHOST = 'event-cohost',
   CHECK_IN_MANAGER = 'check-in-manager',
+  EVENT_READER = 'event-reader',
 }
 
 export enum EventUserRolePermission {
