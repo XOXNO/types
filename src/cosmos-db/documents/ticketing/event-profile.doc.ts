@@ -34,6 +34,7 @@ import {
   RegistrationDetailsDto,
 } from './event-profile-create.dto';
 import { EventUserRoleDoc } from './event-user-role.doc';
+import { OwnerDto } from '../../../common/owner.dto';
 
 export class PremiumType {
   @ApiProperty({
@@ -349,6 +350,14 @@ export class EventProfile extends EventProfileDoc {
     type: () => EventGuestProfile,
   })
   guestProfile?: EventGuestProfile;
+
+  @ApiProperty({
+    description: 'The co-hosts of the event.',
+    required: false,
+    isArray: true,
+    type: () => OwnerDto,
+  })
+  coHosts?: OwnerDto[];
 }
 
 export class EventProfileQuery extends createCosmosPaginatedResponse(
