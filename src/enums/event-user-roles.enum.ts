@@ -1,4 +1,5 @@
 export enum EventUserRoles {
+  EVENT_COHOST = 'event-cohost',
   EVENT_READER = 'event-reader',
   EVENT_MANAGER = 'event-manager',
   CHECK_IN_MANAGER = 'check-in-manager',
