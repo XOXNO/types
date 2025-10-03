@@ -24,4 +24,8 @@ export class LendingAccountPnl {
 
   @ApiProperty()
   InterestUSD!: number;
+
+  constructor(props?: Partial<LendingAccountPnl>) {
+    Object.assign(this, props);
+  }
 }
