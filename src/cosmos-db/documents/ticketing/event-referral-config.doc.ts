@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 
 import {
   IsBoolean,
+  IsEnum,
   IsInt,
   IsNumber,
   IsObject,
@@ -23,6 +24,7 @@ export class RewardDetails {
     enum: EventReferralEnum,
     enumName: 'EventReferralEnum',
   })
+  @IsEnum(EventReferralEnum)
   rewardType!: EventReferralEnum;
 
   @ApiProperty({
@@ -30,6 +32,7 @@ export class RewardDetails {
     enum: ReferralConditionType,
     enumName: 'ReferralConditionType',
   })
+  @IsEnum(ReferralConditionType)
   conditionType!: ReferralConditionType;
 
   @ApiProperty({
@@ -45,6 +48,8 @@ export class RewardDetails {
     description: 'Currency type in case of conditionType = revenueCount',
     required: false,
   })
+  @IsOptional()
+  @IsString()
   currency?: string;
 
   @ApiProperty({
@@ -53,6 +58,9 @@ export class RewardDetails {
       'Voucher details that will be issued when the condition is met.',
     type: ShortVoucherDoc,
   })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => ShortVoucherDoc)
   voucherInfo?: ShortVoucherDoc;
 
   constructor(props?: Partial<RewardDetails>) {

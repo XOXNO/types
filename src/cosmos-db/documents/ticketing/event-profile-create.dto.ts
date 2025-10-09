@@ -58,7 +58,6 @@ export class RegistrationDetailsDto {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   maxLimit = 0;
 
   @ApiProperty({
@@ -67,7 +66,6 @@ export class RegistrationDetailsDto {
   })
   @IsInt()
   @Min(0)
-  @IsOptional()
   userLimit = 0;
 
   @ApiProperty()

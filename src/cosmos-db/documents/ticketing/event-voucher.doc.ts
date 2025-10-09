@@ -6,6 +6,7 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   IsUUID,
   Max,
@@ -58,7 +59,7 @@ export class EventVoucherDoc {
   })
   @IsNumber()
   @Min(0)
-  maxDiscountAmount?: number;
+  maxDiscountAmount = 0;
 
   @ApiProperty({
     description: 'Total number of uses allowed for this voucher.',

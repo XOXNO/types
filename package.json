@@ -47,6 +47,7 @@
     "@azure/cosmos": "^4.5.0",
     "@multiversx/sdk-nestjs-common": "^6.0.0",
     "@nestjs/common": "^11.1.5",
+    "@nestjs/core": "^11.1.6",
     "@nestjs/swagger": "^11.2.0",
     "@types/node": "^24.0.15",
     "@typescript-eslint/eslint-plugin": "^8.38.0",
@@ -58,8 +59,10 @@
     "eslint-plugin-prettier": "^5.5.3",
     "glob": "^11.0.3",
     "prettier": "^3.6.2",
+    "reflect-metadata": "^0.2.2",
     "rollup": "^4.45.1",
     "rollup-plugin-dts": "^6.2.1",
+    "rxjs": "^7.8.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
     "uuid": "^11.1.0"
