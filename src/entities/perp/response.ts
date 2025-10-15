@@ -1,0 +1,56 @@
+import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { PerpTradesSide } from '../../enums/perp.enum';
+import { L2BookPerpEvent, TradesPerpEvent } from './request';
+
+class L2BookPerpResponseSingle {
+  @ApiProperty()
+  px!: number;
+
+  @ApiProperty()
+  sz!: number;
+
+  @ApiProperty()
+  n!: number;
+}
+
+export class L2BookPerpResponse extends L2BookPerpEvent {
+  @ApiProperty()
+  time!: number;
+
+  @ApiProperty()
+  bid!: L2BookPerpResponseSingle[];
+
+  @ApiProperty()
+  ask!: L2BookPerpResponseSingle[];
+}
+
+export class TradesPerpResponse extends TradesPerpEvent {
+  @ApiProperty()
+  side!: PerpTradesSide;
+
+  @ApiProperty()
+  px!: number;
+
+  @ApiProperty()
+  sz!: number;
+
+  @ApiProperty()
+  time!: number;
+
+  @ApiProperty()
+  hash!: string;
+
+  @ApiProperty()
+  users!: string[];
+}
+
+@ApiExtraModels(L2BookPerpResponse, TradesPerpResponse)
+export class PerpResponse {
+  @ApiProperty({
+    oneOf: [
+      { $ref: getSchemaPath(L2BookPerpResponse) },
+      { $ref: getSchemaPath(TradesPerpResponse) },
+    ],
+  })
+  event!: L2BookPerpResponse | TradesPerpResponse;
+}
