@@ -4,10 +4,10 @@ import { L2BookPerpEvent, TradesPerpEvent } from './request';
 
 class L2BookPerpResponseSingle {
   @ApiProperty()
-  px!: number;
+  px!: string;
 
   @ApiProperty()
-  sz!: number;
+  sz!: string;
 
   @ApiProperty()
   n!: number;
@@ -29,10 +29,10 @@ export class TradesPerpResponse extends TradesPerpEvent {
   side!: PerpTradesSide;
 
   @ApiProperty()
-  px!: number;
+  px!: string;
 
   @ApiProperty()
-  sz!: number;
+  sz!: string;
 
   @ApiProperty()
   time!: number;
