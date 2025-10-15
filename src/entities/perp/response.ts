@@ -2,7 +2,7 @@ import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { PerpTradesSide } from '../../enums/perp.enum';
 import { L2BookPerpEvent, TradesPerpEvent } from './request';
 
-class L2BookPerpResponseSingle {
+export class L2BookPerpResponseSingle {
   @ApiProperty()
   px!: string;
 
