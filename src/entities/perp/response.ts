@@ -24,7 +24,7 @@ export class L2BookPerpResponse extends L2BookPerpEvent {
   ask!: L2BookPerpResponseSingle[];
 }
 
-export class TradesPerpResponse extends TradesPerpEvent {
+export class TradesPerpResponseSingle {
   @ApiProperty()
   side!: PerpTradesSide;
 
@@ -42,6 +42,11 @@ export class TradesPerpResponse extends TradesPerpEvent {
 
   @ApiProperty()
   users!: string[];
+}
+
+export class TradesPerpResponse extends TradesPerpEvent {
+  @ApiProperty()
+  trades!: TradesPerpResponseSingle[];
 }
 
 @ApiExtraModels(L2BookPerpResponse, TradesPerpResponse)
