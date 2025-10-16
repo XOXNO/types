@@ -3,7 +3,7 @@ import { PerpEnum } from '../../enums/perp.enum';
 
 export class L2BookPerpEvent {
   @ApiProperty()
-  type = PerpEnum.L2BOOK;
+  type!: PerpEnum.L2BOOK;
 
   @ApiProperty()
   coin!: string;
@@ -17,7 +17,7 @@ export class L2BookPerpEvent {
 
 export class TradesPerpEvent {
   @ApiProperty()
-  type = PerpEnum.TRADES;
+  type!: PerpEnum.TRADES;
 
   @ApiProperty()
   coin!: string;
