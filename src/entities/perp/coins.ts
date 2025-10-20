@@ -13,7 +13,10 @@ export class PerpCoin {
   coin!: string;
 
   @ApiProperty()
-  usdPrice!: number;
+  againstCoin!: string;
+
+  @ApiProperty()
+  price!: number;
 
   @ApiProperty()
   config!: PerpConfig[];
