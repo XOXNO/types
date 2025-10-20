@@ -14,6 +14,9 @@ export class PerpSingleCoin {
 
   @ApiProperty()
   decimals!: number;
+
+  @ApiProperty()
+  symbol!: string;
 }
 
 export class PerpBalance extends PerpSingleCoin {
