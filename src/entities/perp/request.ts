@@ -24,6 +24,9 @@ export class TradesPerpEvent {
 
   @ApiProperty()
   coin!: string;
+
+  @ApiProperty()
+  againstCoin!: string;
 }
 
 @ApiExtraModels(L2BookPerpEvent, TradesPerpEvent)
