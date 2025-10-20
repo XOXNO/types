@@ -9,6 +9,9 @@ export class L2BookPerpEvent {
   coin!: string;
 
   @ApiProperty()
+  againstCoin!: string;
+
+  @ApiProperty()
   sigFigs!: number;
 
   @ApiProperty()
