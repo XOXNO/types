@@ -8,12 +8,25 @@ export class PerpConfig {
   mantissa!: number;
 }
 
-export class PerpCoin {
+export class PerpSingleCoin {
   @ApiProperty()
-  coin!: string;
+  identifier!: string;
 
   @ApiProperty()
-  againstCoin!: string;
+  decimals!: number;
+}
+
+export class PerpBalance extends PerpSingleCoin {
+  @ApiProperty()
+  balance!: string;
+}
+
+export class PerpCoin {
+  @ApiProperty()
+  coin!: PerpSingleCoin;
+
+  @ApiProperty()
+  againstCoin!: PerpSingleCoin;
 
   @ApiProperty()
   price!: number;
