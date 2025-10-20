@@ -2,6 +2,7 @@ import {
   ApiExtraModels,
   ApiProperty,
   ApiPropertyOptional,
+  getSchemaPath,
 } from '@nestjs/swagger';
 import { EventGuestProfile } from './event-guest.doc';
 import { PaymentProvider } from '../../../enums/payment-provider.enum';
@@ -32,8 +33,8 @@ class FiatPaymentForm {
 
   @ApiProperty({
     oneOf: [
-      { $ref: '#/components/schemas/TwispayPaymentFormData' },
-      { $ref: '#/components/schemas/StripePaymentFormData' },
+      { $ref: getSchemaPath(TwispayPaymentFormData) },
+      { $ref: getSchemaPath(StripePaymentFormData) },
     ],
   })
   data!: TwispayPaymentFormData | StripePaymentFormData;

@@ -1,4 +1,8 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import {
+  ApiProperty,
+  ApiPropertyOptional,
+  getSchemaPath,
+} from '@nestjs/swagger';
 import {
   LaunchpadCustomData,
   MarketplaceCustomData,
@@ -96,9 +100,9 @@ export class ExternalPayment {
   @ApiProperty({
     description: 'Custom data specific to the purchase type',
     oneOf: [
-      { $ref: '#/components/schemas/MarketplaceCustomData' },
-      { $ref: '#/components/schemas/LaunchpadCustomData' },
-      { $ref: '#/components/schemas/TwispayEventTicketCustomData' },
+      { $ref: getSchemaPath(MarketplaceCustomData) },
+      { $ref: getSchemaPath(LaunchpadCustomData) },
+      { $ref: getSchemaPath(TwispayEventTicketCustomData) },
     ],
   })
   requestData!:
