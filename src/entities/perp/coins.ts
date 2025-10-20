@@ -23,6 +23,9 @@ export class PerpBalance extends PerpSingleCoin {
 
 export class PerpCoin {
   @ApiProperty()
+  symbol!: string;
+
+  @ApiProperty()
   coin!: PerpSingleCoin;
 
   @ApiProperty()

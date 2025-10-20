@@ -6,10 +6,7 @@ export class L2BookPerpEvent {
   type!: PerpEnum.L2BOOK;
 
   @ApiProperty()
-  coin!: string;
-
-  @ApiProperty()
-  againstCoin!: string;
+  symbol!: string;
 
   @ApiProperty()
   sigFigs!: number;
@@ -23,10 +20,7 @@ export class TradesPerpEvent {
   type!: PerpEnum.TRADES;
 
   @ApiProperty()
-  coin!: string;
-
-  @ApiProperty()
-  againstCoin!: string;
+  symbol!: string;
 }
 
 @ApiExtraModels(L2BookPerpEvent, TradesPerpEvent)
