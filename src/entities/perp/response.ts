@@ -54,7 +54,7 @@ export class TradesPerpResponse extends TradesPerpEvent {
   trades!: TradesPerpResponseSingle[];
 }
 
-class AssetCtxCommon {
+export class AssetCtxCommon {
   @ApiProperty()
   prevDayPx!: string;
 
