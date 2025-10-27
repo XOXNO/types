@@ -23,13 +23,40 @@ export class TradesPerpEvent {
   symbol!: string;
 }
 
-@ApiExtraModels(L2BookPerpEvent, TradesPerpEvent)
+export class ActiveSpotAssetPerpEvent {
+  @ApiProperty()
+  type!: PerpEnum.SPOT_ASSET_CTX;
+
+  @ApiProperty()
+  symbol!: string;
+}
+
+export class ActiveAssetPerpEvent {
+  @ApiProperty()
+  type!: PerpEnum.ASSET_CTX;
+
+  @ApiProperty()
+  symbol!: string;
+}
+
+@ApiExtraModels(
+  L2BookPerpEvent,
+  TradesPerpEvent,
+  ActiveSpotAssetPerpEvent,
+  ActiveAssetPerpEvent,
+)
 export class PerpEvent {
   @ApiProperty({
     oneOf: [
       { $ref: getSchemaPath(L2BookPerpEvent) },
       { $ref: getSchemaPath(TradesPerpEvent) },
+      { $ref: getSchemaPath(ActiveSpotAssetPerpEvent) },
+      { $ref: getSchemaPath(ActiveAssetPerpEvent) },
     ],
   })
-  event!: L2BookPerpEvent | TradesPerpEvent;
+  event!:
+    | L2BookPerpEvent
+    | TradesPerpEvent
+    | ActiveSpotAssetPerpEvent
+    | ActiveAssetPerpEvent;
 }

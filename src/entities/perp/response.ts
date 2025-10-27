@@ -1,6 +1,11 @@
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import { PerpTradesSide } from '../../enums/perp.enum';
-import { L2BookPerpEvent, TradesPerpEvent } from './request';
+import {
+  ActiveAssetPerpEvent,
+  ActiveSpotAssetPerpEvent,
+  L2BookPerpEvent,
+  TradesPerpEvent,
+} from './request';
 
 export class L2BookPerpResponseSingle {
   @ApiProperty()
@@ -49,13 +54,75 @@ export class TradesPerpResponse extends TradesPerpEvent {
   trades!: TradesPerpResponseSingle[];
 }
 
-@ApiExtraModels(L2BookPerpResponse, TradesPerpResponse)
+class AssetCtxCommon {
+  @ApiProperty()
+  prevDayPx!: string;
+
+  @ApiProperty()
+  dayNtlVlm!: string;
+
+  @ApiProperty()
+  markPx!: string;
+
+  @ApiProperty()
+  midPx!: string;
+
+  @ApiProperty()
+  dayBaseVlm!: string;
+}
+
+export class ActiveSpotAssetCtx extends AssetCtxCommon {
+  @ApiProperty()
+  circulatingSupply!: string;
+
+  @ApiProperty()
+  totalSupply!: string;
+}
+
+export class ActivePerpAssetCtx extends AssetCtxCommon {
+  @ApiProperty()
+  funding!: string;
+
+  @ApiProperty()
+  openInterest!: string;
+
+  @ApiProperty()
+  premium!: string;
+
+  @ApiProperty()
+  oraclePx!: string;
+
+  @ApiProperty()
+  impactTxs!: string[];
+}
+
+export class ActiveSpotAssetPerpResponse extends ActiveSpotAssetPerpEvent {
+  @ApiProperty()
+  ctx!: ActiveSpotAssetCtx;
+}
+export class ActiveAssetPerpResponse extends ActiveAssetPerpEvent {
+  @ApiProperty()
+  ctx!: ActivePerpAssetCtx;
+}
+
+@ApiExtraModels(
+  L2BookPerpResponse,
+  TradesPerpResponse,
+  ActiveSpotAssetPerpResponse,
+  ActiveAssetPerpResponse,
+)
 export class PerpResponse {
   @ApiProperty({
     oneOf: [
       { $ref: getSchemaPath(L2BookPerpResponse) },
       { $ref: getSchemaPath(TradesPerpResponse) },
+      { $ref: getSchemaPath(ActiveSpotAssetPerpResponse) },
+      { $ref: getSchemaPath(ActiveAssetPerpResponse) },
     ],
   })
-  event!: L2BookPerpResponse | TradesPerpResponse;
+  event!:
+    | L2BookPerpResponse
+    | TradesPerpResponse
+    | ActiveSpotAssetPerpResponse
+    | ActiveAssetPerpResponse;
 }
