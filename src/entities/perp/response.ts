@@ -5,6 +5,8 @@ import {
   OmitType,
 } from '@nestjs/swagger';
 import { PerpCoinTypes, PerpTradesSide } from '../../enums/perp.enum';
+import { PerpCoinExtendedSlimWs, PerpSpotCoinExtendedSlimWs } from './coins';
+import { MarginTable } from './margin-table';
 import {
   ActiveAssetPerpEvent,
   ActiveAssetsPerpEvent,
@@ -13,8 +15,6 @@ import {
   L2BookPerpEvent,
   TradesPerpEvent,
 } from './request';
-import { PerpCoinExtendedSlim, PerpSpotCoinExtendedSlim } from './coins';
-import { MarginTable } from './margin-table';
 
 export class L2BookPerpResponseSingle {
   @ApiProperty()
@@ -141,12 +141,12 @@ export class ActiveAssetPerpResponse extends ActiveAssetPerpEvent {
 
 export class ActiveSpotAssetsPerpResponse extends ActiveSpotAssetsPerpEvent {
   @ApiProperty()
-  tokens!: PerpSpotCoinExtendedSlim[];
+  tokens!: PerpSpotCoinExtendedSlimWs[];
 }
 
 export class ActiveAssetsPerpResponse extends ActiveAssetsPerpEvent {
   @ApiProperty()
-  tokens!: PerpCoinExtendedSlim[];
+  tokens!: PerpCoinExtendedSlimWs[];
 }
 
 @ApiExtraModels(

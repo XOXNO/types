@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 import { ActivePerpAssetCtxHydrated, ActiveSpotAssetCtxFull } from './response';
 
 export class PerpConfig {
@@ -42,27 +42,37 @@ export class PerpSpotCoinExtended extends PerpCoin {
   ctx!: ActiveSpotAssetCtxFull;
 }
 
-type CommonSlimSlice =
-  | 'midPx'
-  | 'markPx'
-  | 'prevDayPx'
-  | 'dayNtlVlm'
-  | 'categories';
+type CommonSlimSlice = 'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm';
 
-export class PerpCoinExtendedSlim extends PickType(PerpCoin, [
-  'symbol',
-] as const) {
-  ctx!: Pick<
-    PerpCoinExtended['ctx'],
-    CommonSlimSlice | 'funding' | 'openInterest' | 'maxLeverage'
-  >;
-}
-
-export class PerpSpotCoinExtendedSlim extends PickType(PerpCoin, [
+export class PerpSpotCoinExtendedSlimWs extends PickType(PerpCoin, [
   'symbol',
 ] as const) {
   ctx!: Pick<
     PerpSpotCoinExtended['ctx'],
     CommonSlimSlice | 'circulatingSupply'
   >;
+}
+
+export class PerpCoinExtendedSlimWs extends PickType(PerpCoin, [
+  'symbol',
+] as const) {
+  ctx!: Pick<
+    PerpCoinExtended['ctx'],
+    CommonSlimSlice | 'funding' | 'openInterest'
+  >;
+}
+
+export class PerpSpotCoinExtendedSlim extends OmitType(
+  PerpSpotCoinExtendedSlimWs,
+  ['ctx'] as const,
+) {
+  ctx!: PerpCoinExtendedSlimWs['ctx'] &
+    Pick<PerpSpotCoinExtended['ctx'], 'categories'>;
+}
+
+export class PerpCoinExtendedSlim extends OmitType(PerpCoinExtendedSlimWs, [
+  'ctx',
+] as const) {
+  ctx!: PerpCoinExtendedSlimWs['ctx'] &
+    Pick<PerpCoinExtended['ctx'], 'maxLeverage' | 'categories'>;
 }
