@@ -66,7 +66,7 @@ export class PerpSpotCoinExtendedSlim extends OmitType(
   PerpSpotCoinExtendedSlimWs,
   ['ctx'] as const,
 ) {
-  ctx!: PerpCoinExtendedSlimWs['ctx'] &
+  ctx!: PerpSpotCoinExtendedSlimWs['ctx'] &
     Pick<PerpSpotCoinExtended['ctx'], 'categories'>;
 }
 
