@@ -42,12 +42,16 @@ export class PerpSpotCoinExtended extends PerpCoin {
   ctx!: ActiveSpotAssetCtxFull;
 }
 
-type CommonSlimSlice = 'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm';
+type CommonSlimSlice =
+  | 'midPx'
+  | 'markPx'
+  | 'prevDayPx'
+  | 'dayNtlVlm'
+  | 'categories';
 
 export class PerpCoinExtendedSlim extends PickType(PerpCoin, [
   'symbol',
 ] as const) {
-  fragments!: string[];
   ctx!: Pick<
     PerpCoinExtended['ctx'],
     CommonSlimSlice | 'funding' | 'openInterest' | 'maxLeverage'
@@ -57,7 +61,6 @@ export class PerpCoinExtendedSlim extends PickType(PerpCoin, [
 export class PerpSpotCoinExtendedSlim extends PickType(PerpCoin, [
   'symbol',
 ] as const) {
-  fragments!: string[];
   ctx!: Pick<
     PerpSpotCoinExtended['ctx'],
     CommonSlimSlice | 'circulatingSupply'
