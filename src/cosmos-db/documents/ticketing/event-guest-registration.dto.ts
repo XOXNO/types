@@ -1,4 +1,4 @@
-import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ApiProperty, ApiPropertyOptional, PickType } from '@nestjs/swagger';
 
 import { Type } from 'class-transformer';
 import {
@@ -6,6 +6,7 @@ import {
   IsArray,
   IsBoolean,
   IsEmail,
+  IsIn,
   IsInt,
   IsNumber,
   IsObject,
@@ -77,6 +78,23 @@ export class TicketSelectionDto {
   @IsOptional()
   @IsString()
   currency?: string;
+}
+
+export class DigitalWalletDto {
+  @ApiProperty({
+    description: 'Digital wallet provider',
+    enum: ['googlePay', 'applePay'],
+  })
+  @IsIn(['googlePay', 'applePay'])
+  walletType!: 'googlePay' | 'applePay';
+
+  @ApiPropertyOptional({
+    description:
+      'Raw payload returned by the digital wallet (stringified JSON, Base64 string, or structured object)',
+    oneOf: [{ type: 'string' }, { type: 'object' }],
+  })
+  @IsOptional()
+  data?: unknown;
 }
 
 export class EventGuestRegistrationDto {
@@ -173,6 +191,16 @@ export class EventGuestRegistrationDto {
   @IsObject()
   @Type(() => CallbackUrl)
   callbackUrl?: CallbackUrl;
+
+  @ApiPropertyOptional({
+    description:
+      'Digital wallet payload used when completing fiat payments via Apple Pay / Google Pay',
+    type: () => DigitalWalletDto,
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => DigitalWalletDto)
+  digitalWallet?: DigitalWalletDto;
 }
 
 export class EventClaimInvitationDto extends PickType(
