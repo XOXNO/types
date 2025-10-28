@@ -11,3 +11,18 @@ export enum PerpTradesSide {
   A = 'A',
   B = 'B',
 }
+
+export enum PerpCoinTypes {
+  ALL = 'all',
+  FAVORITES = 'favorites',
+  SPOT = 'spot',
+  PERP = 'perp',
+  TRENDING = 'trending',
+  PRE_LAUNCH = 'prelaunch',
+  AI = 'ai',
+  DEFI = 'defi',
+  GAMING = 'gaming',
+  L1 = 'l1',
+  L2 = 'l2',
+  MEME = 'meme',
+}

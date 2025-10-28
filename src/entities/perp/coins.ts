@@ -1,5 +1,5 @@
 import { ApiProperty, PickType } from '@nestjs/swagger';
-import { ActivePerpAssetCtxHydrated, ActiveSpotAssetCtx } from './response';
+import { ActivePerpAssetCtxHydrated, ActiveSpotAssetCtxFull } from './response';
 
 export class PerpConfig {
   @ApiProperty()
@@ -39,21 +39,17 @@ export class PerpCoinExtended extends PerpCoin {
 }
 
 export class PerpSpotCoinExtended extends PerpCoin {
-  ctx!: ActiveSpotAssetCtx;
+  ctx!: ActiveSpotAssetCtxFull;
 }
+
+type CommonSlimSlice = 'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm';
 
 export class PerpCoinExtendedSlim extends PickType(PerpCoin, [
   'symbol',
 ] as const) {
   ctx!: Pick<
-    ActivePerpAssetCtxHydrated,
-    | 'maxLeverage'
-    | 'midPx'
-    | 'markPx'
-    | 'prevDayPx'
-    | 'funding'
-    | 'dayNtlVlm'
-    | 'openInterest'
+    PerpCoinExtended['ctx'],
+    CommonSlimSlice | 'funding' | 'openInterest' | 'maxLeverage'
   >;
 }
 
@@ -61,7 +57,7 @@ export class PerpSpotCoinExtendedSlim extends PickType(PerpCoin, [
   'symbol',
 ] as const) {
   ctx!: Pick<
-    ActiveSpotAssetCtx,
-    'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm' | 'circulatingSupply'
+    PerpSpotCoinExtended['ctx'],
+    CommonSlimSlice | 'circulatingSupply'
   >;
 }

@@ -4,7 +4,7 @@ import {
   getSchemaPath,
   OmitType,
 } from '@nestjs/swagger';
-import { PerpTradesSide } from '../../enums/perp.enum';
+import { PerpCoinTypes, PerpTradesSide } from '../../enums/perp.enum';
 import {
   ActiveAssetPerpEvent,
   ActiveAssetsPerpEvent,
@@ -105,12 +105,20 @@ export class ActivePerpAssetCtx extends AssetCtxCommon {
   impactTxs!: string[];
 }
 
+export class ActiveSpotAssetCtxFull extends ActiveSpotAssetCtx {
+  @ApiProperty()
+  categories!: PerpCoinTypes[];
+}
+
 export class ActivePerpAssetCtxFull extends ActivePerpAssetCtx {
   @ApiProperty()
   maxLeverage!: number;
 
   @ApiProperty()
   marginTableId!: number;
+
+  @ApiProperty()
+  categories!: PerpCoinTypes[];
 }
 
 export class ActivePerpAssetCtxHydrated extends OmitType(
