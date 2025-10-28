@@ -1,7 +1,12 @@
-import { PartialType } from '@nestjs/swagger';
+import { PartialType, PickType } from '@nestjs/swagger';
 
-import { EventReferralConfigCreateDto } from './event-referral-config-create.dto';
+import { EventReferralConfigDoc } from './event-referral-config.doc';
 
 export class EventReferralConfigEditDto extends PartialType(
-  EventReferralConfigCreateDto,
+  PickType(EventReferralConfigDoc, [
+    'name',
+    'isActive',
+    'appliedVoucher',
+    'rewardDetails',
+  ] as const),
 ) {}

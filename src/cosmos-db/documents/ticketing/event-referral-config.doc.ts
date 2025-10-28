@@ -4,6 +4,7 @@ import {
   IsBoolean,
   IsEnum,
   IsInt,
+  IsNotEmpty,
   IsNumber,
   IsObject,
   IsOptional,
@@ -94,6 +95,7 @@ export class EventReferralConfigDoc {
     type: String,
   })
   @IsString()
+  @IsNotEmpty()
   name!: string;
 
   @ApiProperty({
