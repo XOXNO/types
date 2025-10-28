@@ -112,9 +112,6 @@ export class ActiveSpotAssetCtxFull extends ActiveSpotAssetCtx {
 
 export class ActivePerpAssetCtxFull extends ActivePerpAssetCtx {
   @ApiProperty()
-  maxLeverage!: number;
-
-  @ApiProperty()
   marginTableId!: number;
 
   @ApiProperty()
@@ -125,7 +122,11 @@ export class ActivePerpAssetCtxHydrated extends OmitType(
   ActivePerpAssetCtxFull,
   ['marginTableId'] as const,
 ) {
+  @ApiProperty()
   marginTable!: MarginTable;
+
+  @ApiProperty()
+  maxLeverage!: number;
 }
 
 export class ActiveSpotAssetPerpResponse extends ActiveSpotAssetPerpEvent {
