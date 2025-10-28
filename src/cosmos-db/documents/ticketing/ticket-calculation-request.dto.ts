@@ -9,12 +9,7 @@ export class TicketCalculationRequestDto {
   @ApiProperty({ type: String, nullable: true, required: false })
   @IsString()
   @IsOptional()
-  referralCode?: string | null;
-
-  @ApiProperty({ type: String, nullable: true, required: false })
-  @IsString()
-  @IsOptional()
-  discountCode?: string | null;
+  code?: string | null;
 
   @ApiProperty({ type: () => [TicketSelectionDto] })
   @IsArray()

@@ -90,6 +90,13 @@ export class EventReferralConfigDoc {
   eventId!: string;
 
   @ApiProperty({
+    description: 'Human-friendly name for this referral program.',
+    type: String,
+  })
+  @IsString()
+  name!: string;
+
+  @ApiProperty({
     description:
       'Indicates if a voucher should be automatically applied as a discount when this referral code is used.',
     type: () => ShortVoucherDoc,

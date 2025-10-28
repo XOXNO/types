@@ -12,6 +12,19 @@ export class EventProfileFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
   area?: string[];
 
+  @ApiProperty({ required: false, type: Number })
+  latitude?: number;
+
+  @ApiProperty({ required: false, type: Number })
+  longitude?: number;
+
+  @ApiProperty({
+    required: false,
+    type: Number,
+    description: 'Radius in kilometers used to build a proximity polygon.',
+  })
+  rangeKm?: number;
+
   @ApiProperty({ required: false, type: RangeFilter, isArray: true })
   range?: RangeFilter<EventProfileDoc>[];
 
@@ -40,6 +53,9 @@ export class EventProfileFilter extends CosmosDbGenericFilter<EventProfileDoc> {
   filters: {
     searchText?: string;
     area?: string[];
+    latitude?: number;
+    longitude?: number;
+    rangeKm?: number;
     id?: string[];
     category?: string[];
     subCategory?: string[];

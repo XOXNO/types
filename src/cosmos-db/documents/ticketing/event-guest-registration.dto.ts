@@ -140,15 +140,14 @@ export class EventGuestRegistrationDto {
   @Type(() => TicketSelectionDto)
   ticketSelections!: TicketSelectionDto[];
 
-  @ApiProperty({ description: 'Voucher code', required: false, type: String })
+  @ApiProperty({
+    description: 'Voucher or referral code',
+    required: false,
+    type: String,
+  })
   @IsString()
   @IsOptional()
-  voucherCode?: string;
-
-  @ApiProperty({ description: 'Referral code', required: false, type: String })
-  @IsString()
-  @IsOptional()
-  referralCode?: string;
+  code?: string;
 
   @ApiProperty({
     description: 'Indicates if the user wants to pay with cryptocurrency',
