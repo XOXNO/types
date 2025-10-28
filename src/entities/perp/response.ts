@@ -103,6 +103,9 @@ export class ActivePerpAssetCtx extends AssetCtxCommon {
 
   @ApiProperty()
   impactTxs!: string[];
+
+  @ApiProperty()
+  maxLeverage!: number;
 }
 
 export class ActiveSpotAssetCtxFull extends ActiveSpotAssetCtx {
@@ -124,9 +127,6 @@ export class ActivePerpAssetCtxHydrated extends OmitType(
 ) {
   @ApiProperty()
   marginTable!: MarginTable;
-
-  @ApiProperty()
-  maxLeverage!: number;
 }
 
 export class ActiveSpotAssetPerpResponse extends ActiveSpotAssetPerpEvent {
