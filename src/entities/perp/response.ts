@@ -1,11 +1,20 @@
-import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import {
+  ApiExtraModels,
+  ApiProperty,
+  getSchemaPath,
+  OmitType,
+} from '@nestjs/swagger';
 import { PerpTradesSide } from '../../enums/perp.enum';
 import {
   ActiveAssetPerpEvent,
+  ActiveAssetsPerpEvent,
   ActiveSpotAssetPerpEvent,
+  ActiveSpotAssetsPerpEvent,
   L2BookPerpEvent,
   TradesPerpEvent,
 } from './request';
+import { PerpCoinExtendedSlim, PerpSpotCoinExtendedSlim } from './coins';
+import { MarginTable } from './margin-table';
 
 export class L2BookPerpResponseSingle {
   @ApiProperty()
@@ -96,13 +105,39 @@ export class ActivePerpAssetCtx extends AssetCtxCommon {
   impactTxs!: string[];
 }
 
+export class ActivePerpAssetCtxFull extends ActivePerpAssetCtx {
+  @ApiProperty()
+  maxLeverage!: number;
+
+  @ApiProperty()
+  marginTableId!: number;
+}
+
+export class ActivePerpAssetCtxHydrated extends OmitType(
+  ActivePerpAssetCtxFull,
+  ['marginTableId'] as const,
+) {
+  marginTable!: MarginTable;
+}
+
 export class ActiveSpotAssetPerpResponse extends ActiveSpotAssetPerpEvent {
   @ApiProperty()
   ctx!: ActiveSpotAssetCtx;
 }
+
 export class ActiveAssetPerpResponse extends ActiveAssetPerpEvent {
   @ApiProperty()
   ctx!: ActivePerpAssetCtx;
+}
+
+export class ActiveSpotAssetsPerpResponse extends ActiveSpotAssetsPerpEvent {
+  @ApiProperty()
+  tokens!: PerpSpotCoinExtendedSlim[];
+}
+
+export class ActiveAssetsPerpResponse extends ActiveAssetsPerpEvent {
+  @ApiProperty()
+  tokens!: PerpCoinExtendedSlim[];
 }
 
 @ApiExtraModels(

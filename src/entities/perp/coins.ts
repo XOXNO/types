@@ -1,4 +1,5 @@
-import { ApiProperty } from '@nestjs/swagger';
+import { ApiProperty, PickType } from '@nestjs/swagger';
+import { ActivePerpAssetCtxHydrated, ActiveSpotAssetCtx } from './response';
 
 export class PerpConfig {
   @ApiProperty()
@@ -19,11 +20,6 @@ export class PerpSingleCoin {
   symbol!: string;
 }
 
-export class PerpBalance extends PerpSingleCoin {
-  @ApiProperty()
-  balance!: string;
-}
-
 export class PerpCoin {
   @ApiProperty()
   symbol!: string;
@@ -35,8 +31,37 @@ export class PerpCoin {
   againstCoin!: PerpSingleCoin;
 
   @ApiProperty()
-  price!: number;
-
-  @ApiProperty()
   config!: PerpConfig[];
+}
+
+export class PerpCoinExtended extends PerpCoin {
+  ctx!: ActivePerpAssetCtxHydrated;
+}
+
+export class PerpSpotCoinExtended extends PerpCoin {
+  ctx!: ActiveSpotAssetCtx;
+}
+
+export class PerpCoinExtendedSlim extends PickType(PerpCoin, [
+  'symbol',
+] as const) {
+  ctx!: Pick<
+    ActivePerpAssetCtxHydrated,
+    | 'maxLeverage'
+    | 'midPx'
+    | 'markPx'
+    | 'prevDayPx'
+    | 'funding'
+    | 'dayNtlVlm'
+    | 'openInterest'
+  >;
+}
+
+export class PerpSpotCoinExtendedSlim extends PickType(PerpCoin, [
+  'symbol',
+] as const) {
+  ctx!: Pick<
+    ActiveSpotAssetCtx,
+    'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm' | 'circulatingSupply'
+  >;
 }

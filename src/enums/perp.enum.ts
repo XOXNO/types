@@ -3,6 +3,8 @@ export enum PerpEnum {
   TRADES = 'trades',
   SPOT_ASSET_CTX = 'activeSpotAssetCtx',
   ASSET_CTX = 'activeAssetCtx',
+  SPOT_ASSET_CTXS = 'activeSpotAssetCtxs',
+  ASSET_CTXS = 'activeAssetCtxs',
 }
 
 export enum PerpTradesSide {
