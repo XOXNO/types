@@ -154,6 +154,8 @@ export class ActiveAssetsPerpResponse extends ActiveAssetsPerpEvent {
   TradesPerpResponse,
   ActiveSpotAssetPerpResponse,
   ActiveAssetPerpResponse,
+  ActiveSpotAssetsPerpResponse,
+  ActiveAssetsPerpResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -162,11 +164,15 @@ export class PerpResponse {
       { $ref: getSchemaPath(TradesPerpResponse) },
       { $ref: getSchemaPath(ActiveSpotAssetPerpResponse) },
       { $ref: getSchemaPath(ActiveAssetPerpResponse) },
+      { $ref: getSchemaPath(ActiveSpotAssetsPerpResponse) },
+      { $ref: getSchemaPath(ActiveAssetsPerpResponse) },
     ],
   })
   event!:
     | L2BookPerpResponse
     | TradesPerpResponse
     | ActiveSpotAssetPerpResponse
-    | ActiveAssetPerpResponse;
+    | ActiveAssetPerpResponse
+    | ActiveSpotAssetsPerpResponse
+    | ActiveAssetsPerpResponse;
 }
