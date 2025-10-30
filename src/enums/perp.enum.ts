@@ -26,3 +26,19 @@ export enum PerpCoinTypes {
   L2 = 'l2',
   MEME = 'meme',
 }
+
+export enum PerpChartIntervals {
+  ONE_MINUTE = '1',
+  THREE_MINUTES = '3',
+  FIVE_MINUTES = '5',
+  FIFTEEN_MINUTES = '15',
+  THIRTY_MINUTES = '30',
+  ONE_HOUR = '60',
+  TWO_HOURS = '120',
+  FOUR_HOURS = '240',
+  EIGHT_HOURS = '480',
+  TWELVE_HOURS = '720',
+  ONE_DAY = '1D',
+  THREE_DAYS = '3D',
+  ONE_MONTH = '1M',
+}

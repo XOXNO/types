@@ -1,5 +1,7 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
-import { ActivePerpAssetCtxHydrated, ActiveSpotAssetCtxFull } from './response';
+import { PerpCoinTypes } from '../../enums/perp.enum';
+import { MarginTable } from './margin-table';
+import { ActiveSpotAssetCtx, ActivePerpAssetCtx } from './response';
 
 export class PerpConfig {
   @ApiProperty()
@@ -34,12 +36,36 @@ export class PerpCoin {
   config!: PerpConfig[];
 }
 
+export class ActiveSpotAssetCtxDoc extends ActiveSpotAssetCtx {
+  @ApiProperty()
+  categories!: PerpCoinTypes[];
+}
+
+export class ActivePerpAssetCtxDoc extends ActivePerpAssetCtx {
+  @ApiProperty()
+  marginTableId!: number;
+
+  @ApiProperty()
+  categories!: PerpCoinTypes[];
+}
+
+export class ActivePerpAssetCtxDocHydrated extends OmitType(
+  ActivePerpAssetCtxDoc,
+  ['marginTableId'] as const,
+) {
+  @ApiProperty()
+  marginTable!: MarginTable;
+
+  @ApiProperty()
+  maxLeverage!: number;
+}
+
 export class PerpCoinExtended extends PerpCoin {
-  ctx!: ActivePerpAssetCtxHydrated;
+  ctx!: ActivePerpAssetCtxDocHydrated;
 }
 
 export class PerpSpotCoinExtended extends PerpCoin {
-  ctx!: ActiveSpotAssetCtxFull;
+  ctx!: ActiveSpotAssetCtxDoc;
 }
 
 type CommonSlimSlice = 'midPx' | 'markPx' | 'prevDayPx' | 'dayNtlVlm';

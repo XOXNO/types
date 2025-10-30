@@ -1,12 +1,6 @@
-import {
-  ApiExtraModels,
-  ApiProperty,
-  getSchemaPath,
-  OmitType,
-} from '@nestjs/swagger';
-import { PerpCoinTypes, PerpTradesSide } from '../../enums/perp.enum';
+import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { PerpTradesSide } from '../../enums/perp.enum';
 import { PerpCoinExtendedSlimWs, PerpSpotCoinExtendedSlimWs } from './coins';
-import { MarginTable } from './margin-table';
 import {
   ActiveAssetPerpEvent,
   ActiveAssetsPerpEvent,
@@ -103,30 +97,6 @@ export class ActivePerpAssetCtx extends AssetCtxCommon {
 
   @ApiProperty()
   impactTxs!: string[];
-}
-
-export class ActiveSpotAssetCtxFull extends ActiveSpotAssetCtx {
-  @ApiProperty()
-  categories!: PerpCoinTypes[];
-}
-
-export class ActivePerpAssetCtxFull extends ActivePerpAssetCtx {
-  @ApiProperty()
-  marginTableId!: number;
-
-  @ApiProperty()
-  categories!: PerpCoinTypes[];
-}
-
-export class ActivePerpAssetCtxHydrated extends OmitType(
-  ActivePerpAssetCtxFull,
-  ['marginTableId'] as const,
-) {
-  @ApiProperty()
-  marginTable!: MarginTable;
-
-  @ApiProperty()
-  maxLeverage!: number;
 }
 
 export class ActiveSpotAssetPerpResponse extends ActiveSpotAssetPerpEvent {
