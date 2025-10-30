@@ -40,5 +40,6 @@ export enum PerpChartIntervals {
   TWELVE_HOURS = '720',
   ONE_DAY = '1D',
   THREE_DAYS = '3D',
+  ONE_WEEK = '1W',
   ONE_MONTH = '1M',
 }
