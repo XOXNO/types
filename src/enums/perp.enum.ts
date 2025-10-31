@@ -43,3 +43,19 @@ export enum PerpChartIntervals {
   ONE_WEEK = '1W',
   ONE_MONTH = '1M',
 }
+
+export enum PerpAssetTimezone {
+  UTC = 'UTC',
+}
+
+export enum PerpAssetType {
+  CRYPTO = 'crypto',
+}
+
+export enum PerpAssetSession {
+  ALWAYS = '24x7',
+}
+
+export enum PerpAssetExchange {
+  DEFAULT = 'Default',
+}
