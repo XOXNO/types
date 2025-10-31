@@ -27,7 +27,7 @@ export enum PerpCoinTypes {
   MEME = 'meme',
 }
 
-export enum PerpChartIntervals {
+export enum PerpAssetIntervals {
   ONE_MINUTE = '1',
   THREE_MINUTES = '3',
   FIVE_MINUTES = '5',

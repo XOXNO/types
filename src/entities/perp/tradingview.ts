@@ -1,4 +1,10 @@
 import { ApiProperty } from '@nestjs/swagger';
+import {
+  PerpAssetExchange,
+  PerpAssetIntervals,
+  PerpAssetSession,
+  PerpAssetTimezone,
+} from '../../enums';
 
 export class ExchangeDto {
   @ApiProperty({ example: 'BINANCE', description: 'Exchange code identifier' })
@@ -62,7 +68,7 @@ export class DatafeedConfigurationDto {
     description: 'List of supported resolutions',
     isArray: true,
   })
-  supported_resolutions!: string[];
+  supported_resolutions!: PerpAssetIntervals[];
 
   @ApiProperty({
     type: [ExchangeDto],
@@ -97,13 +103,13 @@ export class SymbolInfoDto {
   type!: string;
 
   @ApiProperty({ example: '24x7', description: 'Trading session hours' })
-  session!: string;
+  session!: PerpAssetSession;
 
   @ApiProperty({ example: 'Etc/UTC', description: 'Timezone for this symbol' })
-  timezone!: string;
+  timezone!: PerpAssetTimezone;
 
   @ApiProperty({ example: 'BINANCE', description: 'Exchange name or code' })
-  exchange!: string;
+  exchange!: PerpAssetExchange;
 
   @ApiProperty({
     example: 1,
@@ -128,7 +134,7 @@ export class SymbolInfoDto {
     description: 'Resolutions supported for this symbol',
     isArray: true,
   })
-  supported_resolutions!: string[];
+  supported_resolutions!: PerpAssetIntervals[];
 
   @ApiProperty({ example: 2, description: 'Precision of volume values' })
   volume_precision!: number;
