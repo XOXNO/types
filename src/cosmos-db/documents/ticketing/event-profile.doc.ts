@@ -182,6 +182,14 @@ export class EventProfileDoc {
   profile: string = 'https://media.xoxno.com/utils/defaultProfilePic.webp';
 
   @ApiProperty({
+    description: 'Blurhash-encoded placeholder for the profile image.',
+    required: false,
+  })
+  @IsString()
+  @IsOptional()
+  profileBlurhash?: string;
+
+  @ApiProperty({
     description: 'Category of the event.',
     enum: EventCategory,
     enumName: 'EventCategory',
