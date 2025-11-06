@@ -5,6 +5,7 @@ export enum PerpEnum {
   ASSET_CTX = 'activeAssetCtx',
   SPOT_ASSET_CTXS = 'activeSpotAssetCtxs',
   ASSET_CTXS = 'activeAssetCtxs',
+  TRADINGVIEW = 'tradingView',
 }
 
 export enum PerpTradesSide {
