@@ -2,6 +2,7 @@ export enum ActivityChain {
   MVX = 'MVX',
   SUI = 'SUI',
   EVM = 'EVM',
+  SOL = 'SOL',
 }
 
 export enum EsdtTokenSubType {
