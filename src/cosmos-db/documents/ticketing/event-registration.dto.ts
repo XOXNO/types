@@ -11,7 +11,7 @@ class TwispayPaymentFormData {
   base64JsonRequest!: string;
 
   @ApiProperty()
-  base64Checksum!: PromiseLike<ArrayBuffer>;
+  base64Checksum!: string;
 }
 
 class TwispayDigitalWalletPaymentData {
