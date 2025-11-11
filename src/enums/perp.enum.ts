@@ -70,4 +70,16 @@ export enum PerpPositionLeverageType {
 
 export enum PerpPositionLeverageDirection {
   ONE_WAY = 'oneWay',
+  HEDGE = 'hedge',
+}
+
+export enum SpotDepositAsset {
+  SOL = 'SOL',
+  ETH = 'ETH',
+  BNB = 'BNB',
+}
+
+export enum PerpDepositAsset {
+  USDC = 'USDC',
+  USDT = 'USDT',
 }
