@@ -4,7 +4,11 @@ import {
   PerpPositionLeverageType,
   PerpTradesSide,
 } from '../../enums/perp.enum';
-import { PerpCoinExtendedSlimWs, PerpSpotCoinExtendedSlimWs } from './coins';
+import {
+  PerpCoinExtendedSlimWs,
+  PerpSingleCoin,
+  PerpSpotCoinExtendedSlimWs,
+} from './coins';
 import {
   ActiveAssetPerpEvent,
   ActiveAssetsPerpEvent,
@@ -163,7 +167,7 @@ export class Web3DataAssetPositionLeverage {
 
 export class Web3DataAssetPositionPosition {
   @ApiProperty()
-  symbol!: string;
+  coin!: PerpSingleCoin;
 
   @ApiProperty()
   entryPx!: string;
@@ -236,7 +240,7 @@ export class WebData3PerpResponse extends WebData3PerpEvent {
 
 export class SpotStateBalance {
   @ApiProperty()
-  symbol!: string;
+  coin!: PerpSingleCoin;
 
   @ApiProperty()
   token!: string;
