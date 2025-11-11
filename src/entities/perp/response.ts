@@ -1,5 +1,9 @@
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
-import { PerpTradesSide } from '../../enums/perp.enum';
+import {
+  PerpPositionLeverageDirection,
+  PerpPositionLeverageType,
+  PerpTradesSide,
+} from '../../enums/perp.enum';
 import { PerpCoinExtendedSlimWs, PerpSpotCoinExtendedSlimWs } from './coins';
 import {
   ActiveAssetPerpEvent,
@@ -7,7 +11,9 @@ import {
   ActiveSpotAssetPerpEvent,
   ActiveSpotAssetsPerpEvent,
   L2BookPerpEvent,
+  SpotStatePerpEvent,
   TradesPerpEvent,
+  WebData3PerpEvent,
 } from './request';
 
 export class L2BookPerpResponseSingle {
@@ -119,6 +125,137 @@ export class ActiveAssetsPerpResponse extends ActiveAssetsPerpEvent {
   tokens!: PerpCoinExtendedSlimWs[];
 }
 
+export class Web3DataMarginSummary {
+  @ApiProperty()
+  accountValue!: string;
+
+  @ApiProperty()
+  totalNtlPos!: string;
+
+  @ApiProperty()
+  totalRawUsd!: string;
+
+  @ApiProperty()
+  totalMarginUsed!: string;
+}
+
+export class Web3DataAssetPositionCumFunding {
+  @ApiProperty()
+  allTime!: string;
+
+  @ApiProperty()
+  sinceChange!: string;
+
+  @ApiProperty()
+  sinceOpen!: string;
+}
+
+export class Web3DataAssetPositionLeverage {
+  @ApiProperty()
+  rawUsd!: string;
+
+  @ApiProperty()
+  type!: PerpPositionLeverageType;
+
+  @ApiProperty()
+  value!: number;
+}
+
+export class Web3DataAssetPositionPosition {
+  @ApiProperty()
+  coin!: string;
+
+  @ApiProperty()
+  entryPx!: string;
+
+  @ApiProperty()
+  liquidationPx!: string;
+
+  @ApiProperty()
+  marginUsed!: string;
+
+  @ApiProperty()
+  maxLeverage!: number;
+
+  @ApiProperty()
+  positionValue!: string;
+
+  @ApiProperty()
+  returnOnEquity!: string;
+
+  @ApiProperty()
+  szi!: string;
+
+  @ApiProperty()
+  unrealizedPnl!: string;
+
+  @ApiProperty()
+  cumFunding!: Web3DataAssetPositionCumFunding;
+}
+
+export class Web3DataAssetPosition {
+  @ApiProperty()
+  position!: Web3DataAssetPositionPosition;
+
+  @ApiProperty()
+  type!: PerpPositionLeverageDirection;
+}
+
+export class Web3DataClearingHouseState {
+  @ApiProperty()
+  crossMaintenanceMarginUsed!: string;
+
+  @ApiProperty()
+  withdrawable!: string;
+
+  @ApiProperty()
+  time!: number;
+
+  @ApiProperty()
+  marginSummary!: Web3DataMarginSummary;
+
+  @ApiProperty()
+  crossMarginSummary!: Web3DataMarginSummary;
+
+  @ApiProperty()
+  assetPositions!: Web3DataAssetPosition[];
+}
+
+export class Web3DataPerpDexStates {
+  @ApiProperty()
+  totalVaultEquity!: string;
+
+  @ApiProperty()
+  clearingHouseState!: Web3DataClearingHouseState;
+}
+
+export class WebData3PerpResponse extends WebData3PerpEvent {
+  @ApiProperty()
+  perpDexStates!: Web3DataPerpDexStates[];
+}
+
+export class SpotStateBalance {
+  @ApiProperty()
+  coin!: string;
+
+  @ApiProperty()
+  token!: number;
+
+  @ApiProperty()
+  total!: string;
+
+  @ApiProperty()
+  hold!: string;
+
+  @ApiProperty()
+  entryNtl!: string;
+}
+
+export class SpotStatePerpResponse extends SpotStatePerpEvent {
+  @ApiProperty()
+  balances!: SpotStateBalance[];
+}
+
 @ApiExtraModels(
   L2BookPerpResponse,
   TradesPerpResponse,
@@ -126,6 +263,8 @@ export class ActiveAssetsPerpResponse extends ActiveAssetsPerpEvent {
   ActiveAssetPerpResponse,
   ActiveSpotAssetsPerpResponse,
   ActiveAssetsPerpResponse,
+  WebData3PerpResponse,
+  SpotStatePerpResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -136,6 +275,8 @@ export class PerpResponse {
       { $ref: getSchemaPath(ActiveAssetPerpResponse) },
       { $ref: getSchemaPath(ActiveSpotAssetsPerpResponse) },
       { $ref: getSchemaPath(ActiveAssetsPerpResponse) },
+      { $ref: getSchemaPath(WebData3PerpResponse) },
+      { $ref: getSchemaPath(SpotStatePerpResponse) },
     ],
   })
   event!:
@@ -144,5 +285,7 @@ export class PerpResponse {
     | ActiveSpotAssetPerpResponse
     | ActiveAssetPerpResponse
     | ActiveSpotAssetsPerpResponse
-    | ActiveAssetsPerpResponse;
+    | ActiveAssetsPerpResponse
+    | WebData3PerpResponse
+    | SpotStatePerpResponse;
 }

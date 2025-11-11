@@ -49,6 +49,22 @@ export class ActiveAssetsPerpEvent {
   type!: PerpEnum.ASSET_CTXS;
 }
 
+export class WebData3PerpEvent {
+  @ApiProperty()
+  type!: PerpEnum.WEBDATA3;
+
+  @ApiProperty()
+  user!: string;
+}
+
+export class SpotStatePerpEvent {
+  @ApiProperty()
+  type!: PerpEnum.SPOT_STATE;
+
+  @ApiProperty()
+  user!: string;
+}
+
 @ApiExtraModels(
   L2BookPerpEvent,
   TradesPerpEvent,
@@ -56,6 +72,8 @@ export class ActiveAssetsPerpEvent {
   ActiveAssetPerpEvent,
   ActiveSpotAssetsPerpEvent,
   ActiveAssetsPerpEvent,
+  WebData3PerpEvent,
+  SpotStatePerpEvent,
 )
 export class PerpEvent {
   @ApiProperty({
@@ -66,6 +84,8 @@ export class PerpEvent {
       { $ref: getSchemaPath(ActiveAssetPerpEvent) },
       { $ref: getSchemaPath(ActiveSpotAssetsPerpEvent) },
       { $ref: getSchemaPath(ActiveAssetsPerpEvent) },
+      { $ref: getSchemaPath(WebData3PerpEvent) },
+      { $ref: getSchemaPath(SpotStatePerpEvent) },
     ],
   })
   event!:
@@ -74,5 +94,7 @@ export class PerpEvent {
     | ActiveSpotAssetPerpEvent
     | ActiveAssetPerpEvent
     | ActiveSpotAssetsPerpEvent
-    | ActiveAssetsPerpEvent;
+    | ActiveAssetsPerpEvent
+    | WebData3PerpEvent
+    | SpotStatePerpEvent;
 }

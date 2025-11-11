@@ -6,6 +6,8 @@ export enum PerpEnum {
   SPOT_ASSET_CTXS = 'activeSpotAssetCtxs',
   ASSET_CTXS = 'activeAssetCtxs',
   TRADINGVIEW = 'tradingView',
+  WEBDATA3 = 'webData3',
+  SPOT_STATE = 'spotState',
 }
 
 export enum PerpTradesSide {
@@ -59,4 +61,13 @@ export enum PerpAssetSession {
 
 export enum PerpAssetExchange {
   DEFAULT = 'Default',
+}
+
+export enum PerpPositionLeverageType {
+  ISOLATED = 'isolated',
+  CROSS = 'cross',
+}
+
+export enum PerpPositionLeverageDirection {
+  ONE_WAY = 'oneWay',
 }
