@@ -163,7 +163,7 @@ export class Web3DataAssetPositionLeverage {
 
 export class Web3DataAssetPositionPosition {
   @ApiProperty()
-  coin!: string;
+  symbol!: string;
 
   @ApiProperty()
   entryPx!: string;
@@ -236,10 +236,10 @@ export class WebData3PerpResponse extends WebData3PerpEvent {
 
 export class SpotStateBalance {
   @ApiProperty()
-  coin!: string;
+  symbol!: string;
 
   @ApiProperty()
-  token!: number;
+  token!: string;
 
   @ApiProperty()
   total!: string;
