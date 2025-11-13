@@ -1,5 +1,5 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
-import { PerpCoinTypes } from '../../enums/perp.enum';
+import { PerpCoinTypes, PerpDepositAsset } from '../../enums/perp.enum';
 import { MarginTable } from './margin-table';
 import { ActiveSpotAssetCtx, ActivePerpAssetCtx } from './response';
 
@@ -22,6 +22,17 @@ export class PerpSingleCoin {
   symbol!: string;
 }
 
+export class PerpSingleAgainstCoin {
+  @ApiProperty()
+  identifier!: string;
+
+  @ApiProperty()
+  decimals!: number;
+
+  @ApiProperty()
+  symbol!: PerpDepositAsset;
+}
+
 export class PerpCoin {
   @ApiProperty()
   symbol!: string;
@@ -30,7 +41,7 @@ export class PerpCoin {
   coin!: PerpSingleCoin;
 
   @ApiProperty()
-  againstCoin!: PerpSingleCoin;
+  againstCoin!: PerpSingleAgainstCoin;
 
   @ApiProperty()
   config!: PerpConfig[];
