@@ -74,9 +74,11 @@ export enum PerpPositionLeverageDirection {
 }
 
 export enum SpotDepositAsset {
+  EGLD = 'EGLD',
   SOL = 'SOL',
   ETH = 'ETH',
   BNB = 'BNB',
+  ARB = 'ARB',
 }
 
 export enum PerpDepositAsset {
