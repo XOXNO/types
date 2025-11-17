@@ -30,7 +30,7 @@ export class PerpSingleAgainstCoin {
   decimals!: number;
 
   @ApiProperty()
-  symbol!: PerpDepositAsset;
+  symbol!: PerpDepositAsset | 'USD';
 }
 
 export class PerpCoin {
