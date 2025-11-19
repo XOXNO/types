@@ -20,7 +20,7 @@ import {
   L2BookPerpEvent,
   SpotStatePerpEvent,
   TradesPerpEvent,
-  UserFillEvent,
+  UserFilledOrderEvent,
   UserOpenOrderEvent,
   WebData3PerpEvent,
 } from './request';
@@ -315,7 +315,7 @@ export class UserOpenOrderResponse extends UserOpenOrderEvent {
   orders!: UserOpenOrder[];
 }
 
-export class UserFill extends PerpCommonTrade {
+export class UserFilledOrder extends PerpCommonTrade {
   @ApiProperty()
   symbol!: string;
 
@@ -344,9 +344,9 @@ export class UserFill extends PerpCommonTrade {
   tid!: number;
 }
 
-export class UserFillResponse extends UserFillEvent {
+export class UserFilledOrderResponse extends UserFilledOrderEvent {
   @ApiProperty()
-  fills!: UserFill[];
+  fills!: UserFilledOrder[];
 }
 
 @ApiExtraModels(
@@ -359,7 +359,7 @@ export class UserFillResponse extends UserFillEvent {
   WebData3PerpResponse,
   SpotStatePerpResponse,
   UserOpenOrderResponse,
-  UserFillResponse,
+  UserFilledOrderResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -373,7 +373,7 @@ export class PerpResponse {
       { $ref: getSchemaPath(WebData3PerpResponse) },
       { $ref: getSchemaPath(SpotStatePerpResponse) },
       { $ref: getSchemaPath(UserOpenOrderResponse) },
-      { $ref: getSchemaPath(UserFillResponse) },
+      { $ref: getSchemaPath(UserFilledOrderResponse) },
     ],
   })
   event!:
@@ -386,5 +386,5 @@ export class PerpResponse {
     | WebData3PerpResponse
     | SpotStatePerpResponse
     | UserOpenOrderResponse
-    | UserFillResponse;
+    | UserFilledOrderResponse;
 }

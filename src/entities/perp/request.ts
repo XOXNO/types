@@ -73,7 +73,7 @@ export class UserOpenOrderEvent {
   user!: string;
 }
 
-export class UserFillEvent {
+export class UserFilledOrderEvent {
   @ApiProperty()
   type!: PerpEnum.USER_FILLS;
 
@@ -91,7 +91,7 @@ export class UserFillEvent {
   WebData3PerpEvent,
   SpotStatePerpEvent,
   UserOpenOrderEvent,
-  UserFillEvent,
+  UserFilledOrderEvent,
 )
 export class PerpEvent {
   @ApiProperty({
@@ -105,7 +105,7 @@ export class PerpEvent {
       { $ref: getSchemaPath(WebData3PerpEvent) },
       { $ref: getSchemaPath(SpotStatePerpEvent) },
       { $ref: getSchemaPath(UserOpenOrderEvent) },
-      { $ref: getSchemaPath(UserFillEvent) },
+      { $ref: getSchemaPath(UserFilledOrderEvent) },
     ],
   })
   event!:
@@ -118,5 +118,5 @@ export class PerpEvent {
     | WebData3PerpEvent
     | SpotStatePerpEvent
     | UserOpenOrderEvent
-    | UserFillEvent;
+    | UserFilledOrderEvent;
 }
