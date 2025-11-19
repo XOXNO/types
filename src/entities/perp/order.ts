@@ -58,3 +58,30 @@ export class PerpOrder {
   @ApiProperty()
   expiresAfter!: number;
 }
+
+export class PerpOrderResponseStatusResting {
+  @ApiProperty()
+  resting!: { oid: number };
+}
+
+export class PerpOrderResponseStatusError {
+  @ApiProperty()
+  error!: string;
+}
+
+export class PerpOrderResponseStatusFilled {
+  @ApiProperty()
+  filled!: { oid: number; totalSz: string; avgPx: string };
+}
+
+export class PerpOrderResponse {
+  @ApiProperty()
+  type!: PerpOrderType.ORDER;
+
+  @ApiProperty()
+  statuses!: (
+    | PerpOrderResponseStatusResting
+    | PerpOrderResponseStatusError
+    | PerpOrderResponseStatusFilled
+  )[];
+}
