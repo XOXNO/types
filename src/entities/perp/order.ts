@@ -74,14 +74,15 @@ export class PerpOrderResponseStatusFilled {
   filled!: { oid: number; totalSz: string; avgPx: string };
 }
 
+export type PerpOrderResponseStatus =
+  | PerpOrderResponseStatusResting
+  | PerpOrderResponseStatusError
+  | PerpOrderResponseStatusFilled;
+
 export class PerpOrderResponse {
   @ApiProperty()
   type!: PerpOrderType.ORDER;
 
   @ApiProperty()
-  statuses!: (
-    | PerpOrderResponseStatusResting
-    | PerpOrderResponseStatusError
-    | PerpOrderResponseStatusFilled
-  )[];
+  statuses!: PerpOrderResponseStatus[];
 }
