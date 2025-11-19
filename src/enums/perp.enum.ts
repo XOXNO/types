@@ -85,3 +85,34 @@ export enum PerpDepositAsset {
   USDC = 'USDC',
   USDT = 'USDT',
 }
+
+export enum PerpOrderGrouping {
+  NA = 'na',
+  NORMAL_TPSL = 'normalTpsl',
+  POSITION_TPSL = 'positionTpsl',
+}
+
+export enum PerpOrderTimeInForce {
+  // Must be maker; rejects if it would immediately fill
+  ALO = 'Alo',
+  // Takes what is instantly available; cancels rest
+  IOC = 'Ioc',
+  // Stays open until fully filled or cancelled
+  GTC = 'Gtc',
+}
+
+export enum PerpOrderTpsl {
+  TP = 'tp',
+  SL = 'sl',
+}
+
+export enum PerpOrderType {
+  ORDER = 'order',
+  CANCEL = 'cancel',
+  CANCEL_BY_CLOID = 'cancelByCloid',
+  SCHEDULE_CANCEL = 'scheduleCancel',
+  MODIFY = 'modify',
+  BATCH_MODIFY = 'batchModify',
+  UPDATE_LEVERAGE = 'updateLeverage',
+  UPDATE_ISOLATED_MARGIN = 'updateIsolatedMargin',
+}
