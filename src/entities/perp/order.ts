@@ -61,7 +61,7 @@ export class PerpOrder {
 
 export class PerpOrderResponseStatusResting {
   @ApiProperty()
-  resting!: { oid: number };
+  resting!: { oid: string };
 }
 
 export class PerpOrderResponseStatusError {
@@ -71,7 +71,7 @@ export class PerpOrderResponseStatusError {
 
 export class PerpOrderResponseStatusFilled {
   @ApiProperty()
-  filled!: { oid: number; totalSz: string; avgPx: string };
+  filled!: { oid: string; totalSz: string; avgPx: string };
 }
 
 export type PerpOrderResponseStatus =
