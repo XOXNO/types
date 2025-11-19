@@ -329,7 +329,7 @@ export class UserFilledOrder extends PerpCommonTrade {
   dir!: PerpOrderDirection;
 
   @ApiProperty()
-  oid!: number;
+  oid!: string;
 
   @ApiProperty()
   startPosition!: string;
