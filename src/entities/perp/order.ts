@@ -1,9 +1,14 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PerpOrderGrouping, PerpOrderTpsl, PerpOrderType } from '../../enums';
+import {
+  PerpOrderGrouping,
+  PerpOrderTimeInForce,
+  PerpOrderTpsl,
+  PerpOrderType,
+} from '../../enums';
 
 export class PerpOrderLimitType {
   @ApiProperty()
-  tif!: PerpOrderLimitType;
+  tif!: PerpOrderTimeInForce;
 }
 
 export class PerpOrderTriggerType {
