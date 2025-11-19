@@ -65,6 +65,22 @@ export class SpotStatePerpEvent {
   user!: string;
 }
 
+export class UserOpenOrderEvent {
+  @ApiProperty()
+  type!: PerpEnum.USER_ORDERS;
+
+  @ApiProperty()
+  user!: string;
+}
+
+export class UserFillEvent {
+  @ApiProperty()
+  type!: PerpEnum.USER_FILLS;
+
+  @ApiProperty()
+  user!: string;
+}
+
 @ApiExtraModels(
   L2BookPerpEvent,
   TradesPerpEvent,
@@ -74,6 +90,8 @@ export class SpotStatePerpEvent {
   ActiveAssetsPerpEvent,
   WebData3PerpEvent,
   SpotStatePerpEvent,
+  UserOpenOrderEvent,
+  UserFillEvent,
 )
 export class PerpEvent {
   @ApiProperty({
@@ -86,6 +104,8 @@ export class PerpEvent {
       { $ref: getSchemaPath(ActiveAssetsPerpEvent) },
       { $ref: getSchemaPath(WebData3PerpEvent) },
       { $ref: getSchemaPath(SpotStatePerpEvent) },
+      { $ref: getSchemaPath(UserOpenOrderEvent) },
+      { $ref: getSchemaPath(UserFillEvent) },
     ],
   })
   event!:
@@ -96,5 +116,7 @@ export class PerpEvent {
     | ActiveSpotAssetsPerpEvent
     | ActiveAssetsPerpEvent
     | WebData3PerpEvent
-    | SpotStatePerpEvent;
+    | SpotStatePerpEvent
+    | UserOpenOrderEvent
+    | UserFillEvent;
 }

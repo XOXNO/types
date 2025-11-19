@@ -8,6 +8,8 @@ export enum PerpEnum {
   TRADINGVIEW = 'tradingView',
   WEBDATA3 = 'webData3',
   SPOT_STATE = 'spotState',
+  USER_ORDERS = 'userOrders',
+  USER_FILLS = 'userFills',
 }
 
 export enum PerpTradesSide {
@@ -121,4 +123,20 @@ export enum PerpOrderStatus {
   RESTING = 'resting',
   FILLED = 'filled',
   ERROR = 'error',
+}
+
+export enum PerpOrderTriggerCondition {
+  NA = 'N/A',
+}
+
+export enum PerpOrderOrderType {
+  LIMIT = 'Limit',
+  MARKET = 'Market',
+}
+
+export enum PerpOrderDirection {
+  OPEN_LONG = 'Open Long',
+  CLOSE_SHORT = 'Close Short',
+  BUY = 'Buy',
+  SELL = 'Sell',
 }

@@ -1,5 +1,8 @@
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import {
+  PerpOrderDirection,
+  PerpOrderOrderType,
+  PerpOrderTriggerCondition,
   PerpPositionLeverageDirection,
   PerpPositionLeverageType,
   PerpTradesSide,
@@ -17,6 +20,8 @@ import {
   L2BookPerpEvent,
   SpotStatePerpEvent,
   TradesPerpEvent,
+  UserFillEvent,
+  UserOpenOrderEvent,
   WebData3PerpEvent,
 } from './request';
 
@@ -42,7 +47,7 @@ export class L2BookPerpResponse extends L2BookPerpEvent {
   ask!: L2BookPerpResponseSingle[];
 }
 
-export class TradesPerpResponseSingle {
+export class PerpCommonTrade {
   @ApiProperty()
   side!: PerpTradesSide;
 
@@ -57,7 +62,9 @@ export class TradesPerpResponseSingle {
 
   @ApiProperty()
   hash!: string;
+}
 
+export class TradesPerpResponseSingle extends PerpCommonTrade {
   @ApiProperty()
   users!: string[];
 }
@@ -260,6 +267,88 @@ export class SpotStatePerpResponse extends SpotStatePerpEvent {
   balances!: SpotStateBalance[];
 }
 
+export class UserOpenOrder {
+  @ApiProperty()
+  symbol!: string;
+
+  @ApiProperty()
+  limitPx!: string;
+
+  @ApiProperty()
+  oid!: string;
+
+  @ApiProperty()
+  side!: PerpTradesSide;
+
+  @ApiProperty()
+  sz!: string;
+
+  @ApiProperty()
+  timestamp!: number;
+}
+
+export class UserOpenOrderExtended extends UserOpenOrder {
+  @ApiProperty()
+  isPositionTpsl!: boolean;
+
+  @ApiProperty()
+  isTrigger!: boolean;
+
+  @ApiProperty()
+  origSz!: string;
+
+  @ApiProperty()
+  reduceOnly!: boolean;
+
+  @ApiProperty()
+  orderType!: PerpOrderOrderType;
+
+  @ApiProperty()
+  triggerCondition!: PerpOrderTriggerCondition;
+
+  @ApiProperty()
+  triggerPx!: string;
+}
+
+export class UserOpenOrderResponse extends UserOpenOrderEvent {
+  @ApiProperty()
+  orders!: UserOpenOrder[];
+}
+
+export class UserFill extends PerpCommonTrade {
+  @ApiProperty()
+  symbol!: string;
+
+  @ApiProperty()
+  closedPnl!: string;
+
+  @ApiProperty()
+  crossed!: boolean;
+
+  @ApiProperty()
+  dir!: PerpOrderDirection;
+
+  @ApiProperty()
+  oid!: number;
+
+  @ApiProperty()
+  startPosition!: string;
+
+  @ApiProperty()
+  fee!: string;
+
+  @ApiProperty()
+  feeToken!: string;
+
+  @ApiProperty()
+  tid!: number;
+}
+
+export class UserFillResponse extends UserFillEvent {
+  @ApiProperty()
+  fills!: UserFill[];
+}
+
 @ApiExtraModels(
   L2BookPerpResponse,
   TradesPerpResponse,
@@ -269,6 +358,8 @@ export class SpotStatePerpResponse extends SpotStatePerpEvent {
   ActiveAssetsPerpResponse,
   WebData3PerpResponse,
   SpotStatePerpResponse,
+  UserOpenOrderResponse,
+  UserFillResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -281,6 +372,8 @@ export class PerpResponse {
       { $ref: getSchemaPath(ActiveAssetsPerpResponse) },
       { $ref: getSchemaPath(WebData3PerpResponse) },
       { $ref: getSchemaPath(SpotStatePerpResponse) },
+      { $ref: getSchemaPath(UserOpenOrderResponse) },
+      { $ref: getSchemaPath(UserFillResponse) },
     ],
   })
   event!:
@@ -291,5 +384,7 @@ export class PerpResponse {
     | ActiveSpotAssetsPerpResponse
     | ActiveAssetsPerpResponse
     | WebData3PerpResponse
-    | SpotStatePerpResponse;
+    | SpotStatePerpResponse
+    | UserOpenOrderResponse
+    | UserFillResponse;
 }
