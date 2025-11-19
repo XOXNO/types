@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import {
   PerpOrderGrouping,
+  PerpOrderStatus,
   PerpOrderTimeInForce,
   PerpOrderTpsl,
   PerpOrderType,
@@ -66,15 +67,24 @@ export class PerpOrder {
 
 export class PerpOrderResponseStatusResting {
   @ApiProperty()
+  status!: PerpOrderStatus.RESTING;
+
+  @ApiProperty()
   resting!: { oid: string };
 }
 
 export class PerpOrderResponseStatusError {
   @ApiProperty()
+  status!: PerpOrderStatus.ERROR;
+
+  @ApiProperty()
   error!: string;
 }
 
 export class PerpOrderResponseStatusFilled {
+  @ApiProperty()
+  status!: PerpOrderStatus.FILLED;
+
   @ApiProperty()
   filled!: { oid: string; totalSz: string; avgPx: string };
 }

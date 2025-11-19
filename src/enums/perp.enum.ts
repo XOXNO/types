@@ -116,3 +116,9 @@ export enum PerpOrderType {
   UPDATE_LEVERAGE = 'updateLeverage',
   UPDATE_ISOLATED_MARGIN = 'updateIsolatedMargin',
 }
+
+export enum PerpOrderStatus {
+  RESTING = 'resting',
+  FILLED = 'filled',
+  ERROR = 'error',
+}
