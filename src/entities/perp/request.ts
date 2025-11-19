@@ -79,6 +79,9 @@ export class UserFilledOrderEvent {
 
   @ApiProperty()
   user!: string;
+
+  @ApiProperty()
+  aggregateByTime!: boolean;
 }
 
 @ApiExtraModels(
