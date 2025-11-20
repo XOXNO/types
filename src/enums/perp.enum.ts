@@ -10,6 +10,7 @@ export enum PerpEnum {
   SPOT_STATE = 'spotState',
   USER_ORDERS = 'userOrders',
   USER_FILLS = 'userFills',
+  USER_HISTORY = 'userHistoricalOrders',
 }
 
 export enum PerpTradesSide {
@@ -101,6 +102,8 @@ export enum PerpOrderTimeInForce {
   IOC = 'Ioc',
   // Stays open until fully filled or cancelled
   GTC = 'Gtc',
+  // FrontendMarket
+  FRONTEND = 'FrontendMarket',
 }
 
 export enum PerpOrderTpsl {
@@ -125,11 +128,7 @@ export enum PerpOrderStatus {
   ERROR = 'error',
 }
 
-export enum PerpOrderTriggerCondition {
-  NA = 'N/A',
-}
-
-export enum PerpOrderOrderType {
+export enum PerpOrderDetailedType {
   LIMIT = 'Limit',
   MARKET = 'Market',
 }
@@ -139,4 +138,36 @@ export enum PerpOrderDirection {
   CLOSE_SHORT = 'Close Short',
   BUY = 'Buy',
   SELL = 'Sell',
+}
+
+export enum PerpOrderDetailedStatus {
+  OPEN = 'open', // Order placed successfully and waiting for execution
+  TRIGGERED = 'triggered', // Trigger order has been triggered and converted to a regular order
+  FILLED = 'filled', // Order has been completely executed
+  CANCELED = 'canceled', // Order canceled by user
+  MARGIN_CANCELED = 'marginCanceled', // Insufficient margin to fill
+  VAULT_WITHDRAWAL_CANCELED = 'vaultWithdrawalCanceled', // Vault only. User withdrawal from vault
+  OPEN_INTEREST_CAP_CANCELED = 'openInterestCapCanceled', // Too aggressive when open interest was at cap
+  SELF_TRADE_CANCELED = 'selfTradeCanceled', // Self-trade prevention
+  REDUCE_ONLY_CANCELED = 'reduceOnlyCanceled', // Reduce-only order that does not reduce position
+  SIBLING_FILLED_CANCELED = 'siblingFilledCanceled', // TP/SL only. Sibling order being filled
+  DELISTED_CANCELED = 'delistedCanceled', // Asset delisting
+  LIQUIDATED_CANCELED = 'liquidatedCanceled', // Liquidation
+  SCHEDULED_CANCEL = 'scheduledCancel', // API only. Dead man’s switch
+  REJECTED = 'rejected', // Rejected at placement
+  TICK_REJECTED = 'tickRejected', // Invalid tick price
+  MIN_TRADE_NTL_REJECTED = 'minTradeNtlRejected', // Order notional below minimum
+  PERP_MARGIN_REJECTED = 'perpMarginRejected', // Insufficient margin
+  REDUCE_ONLY_REJECTED = 'reduceOnlyRejected', // Reduce-only constraints
+  BAD_ALO_PX_REJECTED = 'badAloPxRejected', // Post-only immediate match
+  IOC_CANCEL_REJECTED = 'iocCancelRejected', // IOC unable to match
+  BAD_TRIGGER_PX_REJECTED = 'badTriggerPxRejected', // Invalid TP/SL price
+  MARKET_ORDER_NO_LIQUIDITY_REJECTED = 'marketOrderNoLiquidityRejected', // No liquidity for market order
+  POSITION_INCREASE_AT_OI_CAP_REJECTED = 'positionIncreaseAtOpenInterestCapRejected', // Open interest cap
+  POSITION_FLIP_AT_OI_CAP_REJECTED = 'positionFlipAtOpenInterestCapRejected', // Open interest cap
+  TOO_AGGRESSIVE_AT_OI_CAP_REJECTED = 'tooAggressiveAtOpenInterestCapRejected', // Price too aggressive at open interest cap
+  OPEN_INTEREST_INCREASE_REJECTED = 'openInterestIncreaseRejected', // Open interest cap
+  INSUFFICIENT_SPOT_BALANCE_REJECTED = 'insufficientSpotBalanceRejected', // Insufficient spot balance
+  ORACLE_REJECTED = 'oracleRejected', // Price too far from oracle
+  PERP_MAX_POSITION_REJECTED = 'perpMaxPositionRejected', // Exceeding margin tier limit at current leverage
 }

@@ -1,8 +1,9 @@
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import {
+  PerpOrderDetailedStatus,
   PerpOrderDirection,
-  PerpOrderOrderType,
-  PerpOrderTriggerCondition,
+  PerpOrderDetailedType,
+  PerpOrderTimeInForce,
   PerpPositionLeverageDirection,
   PerpPositionLeverageType,
   PerpTradesSide,
@@ -21,6 +22,7 @@ import {
   SpotStatePerpEvent,
   TradesPerpEvent,
   UserFilledOrderEvent,
+  UserHistoricalOrderEvent,
   UserOpenOrderEvent,
   WebData3PerpEvent,
 } from './request';
@@ -301,13 +303,16 @@ export class UserOpenOrderExtended extends UserOpenOrder {
   reduceOnly!: boolean;
 
   @ApiProperty()
-  orderType!: PerpOrderOrderType;
-
-  @ApiProperty()
-  triggerCondition!: PerpOrderTriggerCondition;
+  orderType!: PerpOrderDetailedType;
 
   @ApiProperty()
   triggerPx!: string;
+
+  @ApiProperty()
+  children!: UserOpenOrder[];
+
+  @ApiProperty()
+  tif!: PerpOrderTimeInForce;
 }
 
 export class UserOpenOrderResponse extends UserOpenOrderEvent {
@@ -349,6 +354,19 @@ export class UserFilledOrderResponse extends UserFilledOrderEvent {
   fills!: UserFilledOrder[];
 }
 
+export class UserHistoricalOrder {
+  @ApiProperty()
+  order!: UserOpenOrderExtended;
+
+  @ApiProperty()
+  status!: PerpOrderDetailedStatus;
+}
+
+export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
+  @ApiProperty()
+  orderHistory!: UserHistoricalOrder[];
+}
+
 @ApiExtraModels(
   L2BookPerpResponse,
   TradesPerpResponse,
@@ -360,6 +378,7 @@ export class UserFilledOrderResponse extends UserFilledOrderEvent {
   SpotStatePerpResponse,
   UserOpenOrderResponse,
   UserFilledOrderResponse,
+  UserHistoricalOrderResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -374,6 +393,7 @@ export class PerpResponse {
       { $ref: getSchemaPath(SpotStatePerpResponse) },
       { $ref: getSchemaPath(UserOpenOrderResponse) },
       { $ref: getSchemaPath(UserFilledOrderResponse) },
+      { $ref: getSchemaPath(UserHistoricalOrderResponse) },
     ],
   })
   event!:
@@ -386,5 +406,6 @@ export class PerpResponse {
     | WebData3PerpResponse
     | SpotStatePerpResponse
     | UserOpenOrderResponse
-    | UserFilledOrderResponse;
+    | UserFilledOrderResponse
+    | UserHistoricalOrderResponse;
 }

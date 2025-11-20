@@ -84,6 +84,14 @@ export class UserFilledOrderEvent {
   aggregateByTime!: boolean;
 }
 
+export class UserHistoricalOrderEvent {
+  @ApiProperty()
+  type!: PerpEnum.USER_HISTORY;
+
+  @ApiProperty()
+  user!: string;
+}
+
 @ApiExtraModels(
   L2BookPerpEvent,
   TradesPerpEvent,
@@ -95,6 +103,7 @@ export class UserFilledOrderEvent {
   SpotStatePerpEvent,
   UserOpenOrderEvent,
   UserFilledOrderEvent,
+  UserHistoricalOrderEvent,
 )
 export class PerpEvent {
   @ApiProperty({
@@ -109,6 +118,7 @@ export class PerpEvent {
       { $ref: getSchemaPath(SpotStatePerpEvent) },
       { $ref: getSchemaPath(UserOpenOrderEvent) },
       { $ref: getSchemaPath(UserFilledOrderEvent) },
+      { $ref: getSchemaPath(UserHistoricalOrderEvent) },
     ],
   })
   event!:
@@ -121,5 +131,6 @@ export class PerpEvent {
     | WebData3PerpEvent
     | SpotStatePerpEvent
     | UserOpenOrderEvent
-    | UserFilledOrderEvent;
+    | UserFilledOrderEvent
+    | UserHistoricalOrderEvent;
 }
