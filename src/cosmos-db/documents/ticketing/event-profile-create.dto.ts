@@ -188,6 +188,13 @@ export class EventLocationDto {
   long?: number;
 
   @ApiProperty({ required: false })
+  @IsObject()
+  @ValidateNested()
+  @IsOptional()
+  @Type(() => GeoPointDto)
+  geo?: GeoPointDto;
+
+  @ApiProperty({ required: false })
   @IsString()
   @Length(3, 100)
   @IsOptional()
@@ -211,6 +218,21 @@ export class EventLocationDto {
   @IsOptional()
   country?: string;
 }
+
+export class GeoPointDto {
+  @ApiProperty({ required: false })
+  @IsString()
+  @IsOptional()
+  type?: string;
+
+  @ApiProperty({ required: false })
+  @IsArray()
+  @IsNumber({}, { each: true })
+  @IsOptional()
+  @ArrayMaxSize(2)
+  coordinates?: number[];
+}
+
 class RegistrationDetailsCreateDto extends PickType(RegistrationDetailsDto, [
   'visibility',
   'maxLimit',
