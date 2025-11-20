@@ -166,9 +166,6 @@ export class Web3DataAssetPositionCumFunding {
 
 export class Web3DataAssetPositionLeverage {
   @ApiProperty()
-  rawUsd!: string;
-
-  @ApiProperty()
   type!: PerpPositionLeverageType;
 
   @ApiProperty()
@@ -205,6 +202,9 @@ export class Web3DataAssetPositionPosition {
 
   @ApiProperty()
   cumFunding!: Web3DataAssetPositionCumFunding;
+
+  @ApiProperty()
+  leverage!: Web3DataAssetPositionLeverage;
 }
 
 export class Web3DataAssetPosition {
