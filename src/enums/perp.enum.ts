@@ -87,7 +87,7 @@ export enum SpotDepositAsset {
 
 export enum PerpDepositAsset {
   USDC = 'USDC',
-  USDT = 'USDT',
+  // USDT = 'USDT',
 }
 
 export enum PerpOrderGrouping {
