@@ -367,7 +367,7 @@ export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
 
 export class AllMidsResponse extends AllMidsEvent {
   @ApiProperty()
-  allMids!: Record<string, string>;
+  allMids!: Record<string, number>;
 }
 
 @ApiExtraModels(
