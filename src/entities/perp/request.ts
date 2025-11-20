@@ -92,7 +92,7 @@ export class UserHistoricalOrderEvent {
   user!: string;
 }
 
-export class AllMidsEvent {
+export class AllMidsPerpEvent {
   @ApiProperty()
   type!: PerpEnum.ALL_MIDS;
 }
@@ -109,7 +109,7 @@ export class AllMidsEvent {
   UserOpenOrderEvent,
   UserFilledOrderEvent,
   UserHistoricalOrderEvent,
-  AllMidsEvent,
+  AllMidsPerpEvent,
 )
 export class PerpEvent {
   @ApiProperty({
@@ -125,7 +125,7 @@ export class PerpEvent {
       { $ref: getSchemaPath(UserOpenOrderEvent) },
       { $ref: getSchemaPath(UserFilledOrderEvent) },
       { $ref: getSchemaPath(UserHistoricalOrderEvent) },
-      { $ref: getSchemaPath(AllMidsEvent) },
+      { $ref: getSchemaPath(AllMidsPerpEvent) },
     ],
   })
   event!:
@@ -140,5 +140,5 @@ export class PerpEvent {
     | UserOpenOrderEvent
     | UserFilledOrderEvent
     | UserHistoricalOrderEvent
-    | AllMidsEvent;
+    | AllMidsPerpEvent;
 }

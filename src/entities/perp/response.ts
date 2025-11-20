@@ -18,7 +18,7 @@ import {
   ActiveAssetsPerpEvent,
   ActiveSpotAssetPerpEvent,
   ActiveSpotAssetsPerpEvent,
-  AllMidsEvent,
+  AllMidsPerpEvent,
   L2BookPerpEvent,
   SpotStatePerpEvent,
   TradesPerpEvent,
@@ -365,7 +365,7 @@ export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
   orderHistory!: UserHistoricalOrder[];
 }
 
-export class AllMidsResponse extends AllMidsEvent {
+export class AllMidsPerpResponse extends AllMidsPerpEvent {
   @ApiProperty()
   allMids!: Record<string, number>;
 }
@@ -382,7 +382,7 @@ export class AllMidsResponse extends AllMidsEvent {
   UserOpenOrderResponse,
   UserFilledOrderResponse,
   UserHistoricalOrderResponse,
-  AllMidsResponse,
+  AllMidsPerpResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -398,7 +398,7 @@ export class PerpResponse {
       { $ref: getSchemaPath(UserOpenOrderResponse) },
       { $ref: getSchemaPath(UserFilledOrderResponse) },
       { $ref: getSchemaPath(UserHistoricalOrderResponse) },
-      { $ref: getSchemaPath(AllMidsResponse) },
+      { $ref: getSchemaPath(AllMidsPerpResponse) },
     ],
   })
   event!:
@@ -413,5 +413,5 @@ export class PerpResponse {
     | UserOpenOrderResponse
     | UserFilledOrderResponse
     | UserHistoricalOrderResponse
-    | AllMidsResponse;
+    | AllMidsPerpResponse;
 }
