@@ -157,9 +157,9 @@ export class GeoPointDto {
   @IsOptional()
   type?: string;
 
-  @ApiProperty({ required: false })
+  @ApiProperty({ required: false, type: [Number] })
   @IsArray()
-  @IsNumber({}, { each: true })
+  @IsNumber(undefined, { each: true })
   @IsOptional()
   @ArrayMaxSize(2)
   coordinates?: number[];
