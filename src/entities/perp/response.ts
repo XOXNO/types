@@ -18,6 +18,7 @@ import {
   ActiveAssetsPerpEvent,
   ActiveSpotAssetPerpEvent,
   ActiveSpotAssetsPerpEvent,
+  AllMidsEvent,
   L2BookPerpEvent,
   SpotStatePerpEvent,
   TradesPerpEvent,
@@ -252,9 +253,6 @@ export class SpotStateBalance {
   coin!: PerpSingleCoin;
 
   @ApiProperty()
-  token!: string;
-
-  @ApiProperty()
   total!: string;
 
   @ApiProperty()
@@ -367,6 +365,11 @@ export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
   orderHistory!: UserHistoricalOrder[];
 }
 
+export class AllMidsResponse extends AllMidsEvent {
+  @ApiProperty()
+  allMids!: Record<string, string>;
+}
+
 @ApiExtraModels(
   L2BookPerpResponse,
   TradesPerpResponse,
@@ -379,6 +382,7 @@ export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
   UserOpenOrderResponse,
   UserFilledOrderResponse,
   UserHistoricalOrderResponse,
+  AllMidsResponse,
 )
 export class PerpResponse {
   @ApiProperty({
@@ -394,6 +398,7 @@ export class PerpResponse {
       { $ref: getSchemaPath(UserOpenOrderResponse) },
       { $ref: getSchemaPath(UserFilledOrderResponse) },
       { $ref: getSchemaPath(UserHistoricalOrderResponse) },
+      { $ref: getSchemaPath(AllMidsResponse) },
     ],
   })
   event!:
@@ -407,5 +412,6 @@ export class PerpResponse {
     | SpotStatePerpResponse
     | UserOpenOrderResponse
     | UserFilledOrderResponse
-    | UserHistoricalOrderResponse;
+    | UserHistoricalOrderResponse
+    | AllMidsResponse;
 }
