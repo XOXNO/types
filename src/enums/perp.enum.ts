@@ -83,6 +83,7 @@ export enum SpotDepositAsset {
   ETH = 'ETH',
   BNB = 'BNB',
   ARB = 'ARB',
+  USDT = 'USDT',
 }
 
 export enum PerpDepositAsset {
