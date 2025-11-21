@@ -1,5 +1,9 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
-import { PerpCoinTypes, PerpDepositAsset } from '../../enums/perp.enum';
+import {
+  PerpCoinTypes,
+  PerpDepositAsset,
+  SpotDepositAsset,
+} from '../../enums/perp.enum';
 import { MarginTable } from './margin-table';
 import { ActiveSpotAssetCtx, ActivePerpAssetCtx } from './response';
 
@@ -30,7 +34,7 @@ export class PerpSingleAgainstCoin {
   decimals!: number;
 
   @ApiProperty()
-  symbol!: PerpDepositAsset;
+  symbol!: PerpDepositAsset | SpotDepositAsset;
 }
 
 export class PerpCoin {
