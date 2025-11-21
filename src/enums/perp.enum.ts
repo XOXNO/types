@@ -173,3 +173,8 @@ export enum PerpOrderDetailedStatus {
   ORACLE_REJECTED = 'oracleRejected', // Price too far from oracle
   PERP_MAX_POSITION_REJECTED = 'perpMaxPositionRejected', // Exceeding margin tier limit at current leverage
 }
+
+export enum PerpTransferType {
+  SPOT = 'Spot',
+  PERP = 'Perps',
+}
