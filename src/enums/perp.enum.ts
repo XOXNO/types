@@ -77,6 +77,10 @@ export enum PerpPositionLeverageDirection {
   HEDGE = 'hedge',
 }
 
+export enum PerpAgainstAsset {
+  USD = 'USD',
+}
+
 export enum SpotDepositAsset {
   EGLD = 'EGLD',
   SOL = 'SOL',

@@ -1,5 +1,6 @@
 import { ApiProperty, OmitType, PickType } from '@nestjs/swagger';
 import {
+  PerpAgainstAsset,
   PerpCoinTypes,
   PerpDepositAsset,
   SpotDepositAsset,
@@ -34,7 +35,7 @@ export class PerpSingleAgainstCoin {
   decimals!: number;
 
   @ApiProperty()
-  symbol!: PerpDepositAsset | SpotDepositAsset;
+  symbol!: PerpDepositAsset | SpotDepositAsset | PerpAgainstAsset;
 }
 
 export class PerpCoin {
