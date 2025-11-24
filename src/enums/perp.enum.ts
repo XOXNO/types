@@ -126,6 +126,9 @@ export enum PerpOrderType {
   BATCH_MODIFY = 'batchModify',
   UPDATE_LEVERAGE = 'updateLeverage',
   UPDATE_ISOLATED_MARGIN = 'updateIsolatedMargin',
+  WITHDRAW_ASSET = 'withdrawAsset',
+  SEND_ASSET = 'sendAsset',
+  ACCEPT_TERMS = 'acceptTerms',
 }
 
 export enum PerpOrderStatus {
