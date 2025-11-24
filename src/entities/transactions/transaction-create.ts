@@ -95,4 +95,20 @@ export class TransactionCreate {
   @IsOptional()
   @IsString()
   guardianSignature?: string = undefined;
+
+  @ApiPropertyOptional({
+    description: 'Optional relayer address',
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  relayer?: string = undefined;
+
+  @ApiPropertyOptional({
+    description: 'Optional relayer signature',
+    type: String,
+  })
+  @IsOptional()
+  @IsString()
+  relayerSignature?: string = undefined;
 }
