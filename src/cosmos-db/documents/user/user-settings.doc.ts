@@ -228,6 +228,13 @@ export class UserSettingsDoc {
   notificationPreferences: UserNotificationPreferences =
     new UserNotificationPreferences();
 
+  @ApiProperty({
+    description: 'xMoney customer ID for payment processing',
+    required: false,
+    type: 'integer',
+  })
+  xMoneyCustomerId?: number;
+
   @ApiProperty({ description: 'User ID' })
   id!: string;
 

@@ -38,6 +38,7 @@ export * from './cosmos-db/documents/external-payment/twispay-cart';
 export * from './cosmos-db/documents/external-payment/twispay-customer';
 export * from './cosmos-db/documents/external-payment/twispay-payment-form';
 export * from './cosmos-db/documents/external-payment/twispay-transaction';
+export * from './cosmos-db/documents/external-payment/xmoney-customer';
 export * from './cosmos-db/documents/external-payment/xmoney-order';
 export * from './cosmos-db/documents/lending/lending-account-pnl';
 export * from './cosmos-db/documents/lending/lending-account-profile';

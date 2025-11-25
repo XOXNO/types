@@ -26,6 +26,7 @@ export {
 
 // xMoney Order API Types based on xMoney API documentation
 // https://docs.xmoney.com/
+// Note: xMoney API expects application/x-www-form-urlencoded content type
 
 /**
  * Digital wallet configuration for transaction options
@@ -127,6 +128,7 @@ export class XMoneyTransactionOption {
 
 /**
  * xMoney Order Request - for creating orders
+ * Note: xMoney API expects application/x-www-form-urlencoded content type
  */
 export class XMoneyOrderRequest {
   // Required fields
