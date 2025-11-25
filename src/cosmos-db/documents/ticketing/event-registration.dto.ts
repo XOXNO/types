@@ -67,10 +67,53 @@ class StripePaymentFormData {
   publicKey!: string;
 }
 
+export class XMoneyRedirectParams {
+  @ApiProperty({ description: 'URL to redirect to for 3D Secure' })
+  url!: string;
+
+  @ApiProperty({
+    description: 'Parameters to send with the redirect',
+    type: 'object',
+    additionalProperties: true,
+  })
+  params!: Record<string, string>;
+
+  @ApiPropertyOptional({
+    description: 'HTTP method for the redirect (POST or GET)',
+  })
+  formMethod?: string;
+}
+
+export class XMoneyPaymentFormData {
+  @ApiProperty({ description: 'Order ID from xMoney' })
+  orderId!: number;
+
+  @ApiProperty({ description: 'Transaction ID from xMoney' })
+  transactionId!: number;
+
+  @ApiPropertyOptional({ description: 'Card ID if the card was saved' })
+  cardId?: number;
+
+  @ApiPropertyOptional({
+    description: 'Whether 3D Secure is required (0 or 1)',
+  })
+  is3d?: 0 | 1;
+
+  @ApiPropertyOptional({ description: 'Whether a redirect is required' })
+  isRedirect?: boolean;
+
+  @ApiPropertyOptional({
+    description: 'Redirect data for 3D Secure',
+    type: () => XMoneyRedirectParams,
+  })
+  redirect?: XMoneyRedirectParams;
+}
+
 @ApiExtraModels(
   TwispayPaymentFormData,
   StripePaymentFormData,
   TwispayDigitalWalletPaymentData,
+  XMoneyPaymentFormData,
 )
 class FiatPaymentForm {
   @ApiProperty({
@@ -84,12 +127,14 @@ class FiatPaymentForm {
       { $ref: '#/components/schemas/TwispayPaymentFormData' },
       { $ref: '#/components/schemas/StripePaymentFormData' },
       { $ref: '#/components/schemas/TwispayDigitalWalletPaymentData' },
+      { $ref: '#/components/schemas/XMoneyPaymentFormData' },
     ],
   })
   data!:
     | TwispayPaymentFormData
     | StripePaymentFormData
-    | TwispayDigitalWalletPaymentData;
+    | TwispayDigitalWalletPaymentData
+    | XMoneyPaymentFormData;
 }
 
 class CryptoPaymentResult {
