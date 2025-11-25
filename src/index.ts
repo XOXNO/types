@@ -237,6 +237,7 @@ export * from './enums/transaction-status.enum';
 export * from './enums/transaction-type.enum';
 export * from './enums/transaction.operation.action';
 export * from './enums/twispay.enum';
+export * from './enums/xmoney.enum';
 export * from './enums/user-data-type.enum';
 export * from './enums/user-favorite-type.enum';
 export * from './enums/user-settings.enum';
