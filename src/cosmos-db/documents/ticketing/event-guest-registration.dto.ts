@@ -97,6 +97,62 @@ export class DigitalWalletDto {
   data?: unknown;
 }
 
+export class CreditCardDto {
+  @ApiProperty({
+    description: 'Credit card number',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  cardNumber?: string;
+
+  @ApiProperty({
+    description: 'Credit card expiry date',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  cardExpiryDate?: string;
+
+  @ApiProperty({
+    description: 'Credit card CVV',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  cardCvv?: string;
+
+  @ApiProperty({
+    description: 'Credit card name',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  cardHolderName?: string;
+
+  @ApiProperty({
+    description: 'Credit card country',
+    type: String,
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  cardHolderCountry?: string;
+
+  @ApiProperty({
+    description: 'Save card ID',
+    type: Number,
+    required: false,
+  })
+  @IsNumber()
+  @IsOptional()
+  saveCardId?: number;
+}
+
 export class EventGuestRegistrationDto {
   @ApiProperty({
     description: 'Email address of the guest',
@@ -200,6 +256,17 @@ export class EventGuestRegistrationDto {
   @ValidateNested()
   @Type(() => DigitalWalletDto)
   digitalWallet?: DigitalWalletDto;
+
+  @ApiPropertyOptional({
+    description:
+      'Credit card payload used when completing fiat payments via credit card',
+    type: () => CreditCardDto,
+    required: false,
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => CreditCardDto)
+  creditCard?: CreditCardDto;
 }
 
 export class EventClaimInvitationDto extends PickType(
