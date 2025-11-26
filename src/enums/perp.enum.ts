@@ -81,18 +81,8 @@ export enum PerpAgainstAsset {
   USD = 'USD',
 }
 
-export enum SpotDepositAsset {
-  EGLD = 'EGLD',
-  SOL = 'SOL',
-  ETH = 'ETH',
-  BNB = 'BNB',
-  ARB = 'ARB',
-  USDT = 'USDT',
-}
-
 export enum PerpDepositAsset {
   USDC = 'USDC',
-  // USDT = 'USDT',
 }
 
 export enum PerpOrderGrouping {
