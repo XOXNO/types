@@ -3,7 +3,6 @@ import {
   PerpAgainstAsset,
   PerpCoinTypes,
   PerpDepositAsset,
-  SpotDepositAsset,
 } from '../../enums/perp.enum';
 import { MarginTable } from './margin-table';
 import { ActiveSpotAssetCtx, ActivePerpAssetCtx } from './response';
@@ -35,7 +34,7 @@ export class PerpSingleAgainstCoin {
   decimals!: number;
 
   @ApiProperty()
-  symbol!: PerpDepositAsset | SpotDepositAsset | PerpAgainstAsset;
+  symbol!: string;
 }
 
 export class PerpCoin {
