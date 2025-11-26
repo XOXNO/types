@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { PerpOrderType } from '../../enums';
+import { PerpOrderType, PerpTransferType } from '../../enums';
 
 export class PerpWithdrawWithdraw {
   @ApiProperty()
@@ -13,6 +13,9 @@ export class PerpWithdrawWithdraw {
 
   @ApiProperty()
   amount!: string;
+
+  @ApiProperty()
+  sourceDex!: PerpTransferType;
 }
 
 export class PerpWithdraw {

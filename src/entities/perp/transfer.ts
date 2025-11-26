@@ -9,9 +9,6 @@ export class PerpTransferTransfer extends OmitType(PerpWithdrawWithdraw, [
   type!: PerpOrderType.SEND_ASSET;
 
   @ApiProperty()
-  sourceDex!: PerpTransferType;
-
-  @ApiProperty()
   destinationDex!: PerpTransferType;
 }
 
