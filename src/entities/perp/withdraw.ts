@@ -9,6 +9,9 @@ export class PerpWithdrawWithdraw {
   destination!: string;
 
   @ApiProperty()
+  destinationChainId!: string;
+
+  @ApiProperty()
   symbol!: string;
 
   @ApiProperty()
