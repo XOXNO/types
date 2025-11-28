@@ -13,6 +13,7 @@ import { SocialsDto } from '../../../common/socials';
 import { ActivityChain } from '../../../enums/common.enum';
 import { UserDataType } from '../../../enums/user-data-type.enum';
 import { UserDeposit } from './user-deposit';
+import { Passkey } from '../../../entities/passkey';
 
 export class UserProfileDoc {
   @ApiProperty({ example: 'userProfile', enum: UserDataType })
@@ -124,6 +125,15 @@ export class UserProfileDoc {
   })
   @IsBoolean()
   isBoberBattleUser?: boolean;
+
+  @ApiProperty({
+    type: () => [Passkey],
+    description: 'User passkeys',
+    required: false,
+  })
+  @IsObject()
+  @Type(() => Passkey)
+  passkeys?: Passkey[] = [];
 
   constructor(props?: Partial<UserProfileDoc>) {
     Object.assign(this, props);
