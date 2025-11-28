@@ -3,6 +3,9 @@ import { ApiProperty } from '@nestjs/swagger';
 export class SignMessageFailureDto {
   @ApiProperty({ example: false })
   success!: false;
+
+  @ApiProperty()
+  reason!: string;
 }
 
 export class SignMessageSuccessDto {
