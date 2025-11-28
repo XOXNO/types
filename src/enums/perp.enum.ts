@@ -174,9 +174,6 @@ export enum PerpOrderDetailedStatus {
 export enum PerpTransferType {
   SPOT = 'Spot',
   PERP = 'Perps',
-}
-
-export enum PerpWithdrawalChain {
   MVX = 'MVX',
   ETH = 'ETH',
   BSC = 'BSC',
