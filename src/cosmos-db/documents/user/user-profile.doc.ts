@@ -13,7 +13,7 @@ import { SocialsDto } from '../../../common/socials';
 import { ActivityChain } from '../../../enums/common.enum';
 import { UserDataType } from '../../../enums/user-data-type.enum';
 import { UserDeposit } from './user-deposit';
-import { Passkey } from '../../../entities/passkey';
+import { Passkey } from '../../../entities/passkey/passkey';
 
 export class UserProfileDoc {
   @ApiProperty({ example: 'userProfile', enum: UserDataType })
