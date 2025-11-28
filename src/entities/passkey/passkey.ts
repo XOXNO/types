@@ -6,4 +6,7 @@ export class Passkey {
 
   @ApiProperty()
   publicKey!: string;
+
+  @ApiProperty()
+  counter!: number;
 }
