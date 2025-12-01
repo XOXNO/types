@@ -9,4 +9,7 @@ export class Passkey {
 
   @ApiProperty()
   counter!: number;
+
+  @ApiProperty()
+  rpId!: string;
 }
