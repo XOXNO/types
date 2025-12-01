@@ -10,5 +10,5 @@ export enum WalletClientType {
   METAMASK = 'metamask',
   EVM = 'evm',
   SOLANA = 'solana',
-  /* XBOARD = 'xBoard', */
+  PASSKEY = 'passkey',
 }
