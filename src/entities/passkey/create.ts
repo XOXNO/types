@@ -1,7 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { ContractSignatureType } from '../../enums/passkey.enum';
 
-export class PasskeyCreateRequest {
+export class SignatureRequest {
   @ApiProperty()
   type!: ContractSignatureType;
 
@@ -9,5 +9,5 @@ export class PasskeyCreateRequest {
   signature!: string;
 
   @ApiProperty()
-  publicKey!: string;
+  message!: string;
 }
