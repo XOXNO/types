@@ -96,6 +96,10 @@ export class UserProfileDoc {
   @IsInt()
   shard: number = 0;
 
+  @ApiProperty({ example: 0, description: 'Perp Nonce' })
+  @IsInt()
+  nonce: number = 0;
+
   @ApiProperty({
     type: () => [UserDeposit],
     description: 'User deposit information',
