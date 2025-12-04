@@ -6,6 +6,8 @@ export type ContractSignatureRequestPasskey = {
   signature: string;
 
   authenticatorData: string;
+
+  id: string;
 };
 
 export type ContractSignatureRequestWallet = {
