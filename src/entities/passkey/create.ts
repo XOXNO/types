@@ -17,10 +17,10 @@ export type ContractSignatureRequestWallet = {
     | ContractSignatureType.SOL;
 
   signature: string;
-
-  message: string;
 };
 
 export type ContractSignatureRequest =
   | ContractSignatureRequestPasskey
   | ContractSignatureRequestWallet;
+
+export type SignatureRequest = ContractSignatureRequest & { message: string };
