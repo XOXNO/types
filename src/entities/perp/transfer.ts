@@ -4,6 +4,7 @@ import {
   PerpTransferType,
   PerpWithdrawalChain,
 } from '../../enums';
+import { ContractSignatureRequest } from '../passkey/create';
 
 export class PerpTransferTransfer {
   @ApiProperty()
@@ -28,4 +29,7 @@ export class PerpTransferTransfer {
 export class PerpTransfer {
   @ApiProperty()
   action!: PerpTransferTransfer;
+
+  @ApiProperty()
+  signature!: ContractSignatureRequest;
 }
