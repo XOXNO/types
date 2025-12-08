@@ -1,8 +1,8 @@
 import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 import {
   PerpOrderDetailedStatus,
-  PerpOrderDirection,
   PerpOrderDetailedType,
+  PerpOrderDirection,
   PerpOrderTimeInForce,
   PerpPositionLeverageDirection,
   PerpPositionLeverageType,
@@ -13,6 +13,7 @@ import {
   PerpSingleCoin,
   PerpSpotCoinExtendedSlimWs,
 } from './coins';
+import { PerpCompleted } from './completed';
 import {
   ActiveAssetPerpEvent,
   ActiveAssetsPerpEvent,
@@ -23,7 +24,9 @@ import {
   SpotStatePerpEvent,
   TradesPerpEvent,
   UserFilledOrderEvent,
+  UserFundingEvent,
   UserHistoricalOrderEvent,
+  UserLedgerUpdateEvent,
   UserOpenOrderEvent,
   WebData3PerpEvent,
 } from './request';
@@ -347,6 +350,37 @@ export class UserFilledOrder extends PerpCommonTrade {
   tid!: number;
 }
 
+export class UserFunding {
+  @ApiProperty()
+  symbol!: string;
+
+  @ApiProperty()
+  fundingRate!: string;
+
+  @ApiProperty()
+  nSamples!: null;
+
+  @ApiProperty()
+  szi!: string;
+
+  @ApiProperty()
+  time!: number;
+
+  @ApiProperty()
+  ntl!: string;
+}
+
+export class UserLedgerUpdate {
+  @ApiProperty()
+  delta!: PerpCompleted;
+
+  @ApiProperty()
+  hash!: string;
+
+  @ApiProperty()
+  time!: number;
+}
+
 export class UserFilledOrderResponse extends UserFilledOrderEvent {
   @ApiProperty()
   fills!: UserFilledOrder[];
@@ -363,6 +397,16 @@ export class UserHistoricalOrder {
 export class UserHistoricalOrderResponse extends UserHistoricalOrderEvent {
   @ApiProperty()
   orderHistory!: UserHistoricalOrder[];
+}
+
+export class UserFundingResponse extends UserFundingEvent {
+  @ApiProperty()
+  fundings!: UserFunding[];
+}
+
+export class UserLedgerUpdateResponse extends UserLedgerUpdateEvent {
+  @ApiProperty()
+  nonFundingLedgerUpdates!: UserLedgerUpdate[];
 }
 
 export class AllMidsPerpResponse extends AllMidsPerpEvent {
@@ -382,6 +426,8 @@ export class AllMidsPerpResponse extends AllMidsPerpEvent {
   UserOpenOrderResponse,
   UserFilledOrderResponse,
   UserHistoricalOrderResponse,
+  UserFundingResponse,
+  UserLedgerUpdateResponse,
   AllMidsPerpResponse,
 )
 export class PerpResponse {
@@ -398,6 +444,8 @@ export class PerpResponse {
       { $ref: getSchemaPath(UserOpenOrderResponse) },
       { $ref: getSchemaPath(UserFilledOrderResponse) },
       { $ref: getSchemaPath(UserHistoricalOrderResponse) },
+      { $ref: getSchemaPath(UserFundingResponse) },
+      { $ref: getSchemaPath(UserLedgerUpdateResponse) },
       { $ref: getSchemaPath(AllMidsPerpResponse) },
     ],
   })
@@ -413,5 +461,7 @@ export class PerpResponse {
     | UserOpenOrderResponse
     | UserFilledOrderResponse
     | UserHistoricalOrderResponse
+    | UserFundingResponse
+    | UserLedgerUpdateResponse
     | AllMidsPerpResponse;
 }

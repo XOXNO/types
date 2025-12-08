@@ -12,6 +12,8 @@ export enum PerpEnum {
   USER_ORDERS = 'userOrders',
   USER_FILLS = 'userFills',
   USER_HISTORY = 'userHistoricalOrders',
+  USER_FUNDINGS = 'userFundings',
+  USER_LEDGER_UPDATE = 'userNonFundingLedgerUpdates',
 }
 
 export enum PerpTradesSide {
@@ -116,9 +118,12 @@ export enum PerpOrderType {
   BATCH_MODIFY = 'batchModify',
   UPDATE_LEVERAGE = 'updateLeverage',
   UPDATE_ISOLATED_MARGIN = 'updateIsolatedMargin',
+  DEPOSIT_ASSET = 'depositAsset',
   WITHDRAW_ASSET = 'withdrawAsset',
-  SEND_ASSET = 'sendAsset',
+  TRANSFER_ASSET = 'accountClassTransfer',
+  SEND_ASSET = 'spotTransfer',
   ACCEPT_TERMS = 'acceptTerms',
+  LIQUIDATION = 'liquidation',
 }
 
 export enum PerpOrderStatus {

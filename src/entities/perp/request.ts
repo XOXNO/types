@@ -92,6 +92,22 @@ export class UserHistoricalOrderEvent {
   user!: string;
 }
 
+export class UserFundingEvent {
+  @ApiProperty()
+  type!: PerpEnum.USER_FUNDINGS;
+
+  @ApiProperty()
+  user!: string;
+}
+
+export class UserLedgerUpdateEvent {
+  @ApiProperty()
+  type!: PerpEnum.USER_LEDGER_UPDATE;
+
+  @ApiProperty()
+  user!: string;
+}
+
 export class AllMidsPerpEvent {
   @ApiProperty()
   type!: PerpEnum.ALL_MIDS;
@@ -109,6 +125,8 @@ export class AllMidsPerpEvent {
   UserOpenOrderEvent,
   UserFilledOrderEvent,
   UserHistoricalOrderEvent,
+  UserFundingEvent,
+  UserLedgerUpdateEvent,
   AllMidsPerpEvent,
 )
 export class PerpEvent {
@@ -125,6 +143,8 @@ export class PerpEvent {
       { $ref: getSchemaPath(UserOpenOrderEvent) },
       { $ref: getSchemaPath(UserFilledOrderEvent) },
       { $ref: getSchemaPath(UserHistoricalOrderEvent) },
+      { $ref: getSchemaPath(UserFundingEvent) },
+      { $ref: getSchemaPath(UserLedgerUpdateEvent) },
       { $ref: getSchemaPath(AllMidsPerpEvent) },
     ],
   })
@@ -140,5 +160,7 @@ export class PerpEvent {
     | UserOpenOrderEvent
     | UserFilledOrderEvent
     | UserHistoricalOrderEvent
+    | UserFundingEvent
+    | UserLedgerUpdateEvent
     | AllMidsPerpEvent;
 }
