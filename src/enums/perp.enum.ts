@@ -139,6 +139,8 @@ export enum PerpOrderDetailedType {
 
 export enum PerpOrderDirection {
   OPEN_LONG = 'Open Long',
+  CLOSE_LONG = 'Close Long',
+  OPEN_SHORT = 'Open Short',
   CLOSE_SHORT = 'Close Short',
   BUY = 'Buy',
   SELL = 'Sell',
