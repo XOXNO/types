@@ -100,8 +100,6 @@ export enum PerpOrderTimeInForce {
   IOC = 'Ioc',
   // Stays open until fully filled or cancelled
   GTC = 'Gtc',
-  // FrontendMarket
-  FRONTEND = 'FrontendMarket',
 }
 
 export enum PerpOrderTpsl {
