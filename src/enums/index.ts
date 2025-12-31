@@ -40,6 +40,7 @@ export * from "./notification-data-type.enum";
 export * from "./notification-template.enum";
 export * from "./offers.enum";
 export * from "./order-by-column.enum";
+export * from "./passkey.enum";
 export * from "./payment-provider.enum";
 export * from "./perp.enum";
 export * from "./purchase-type.enum";

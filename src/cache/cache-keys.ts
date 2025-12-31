@@ -652,6 +652,12 @@ export const CacheKeys = {
     ttl: TTLS.ONE_HOUR * 2,
   }),
 
+  AllTokensMapHydrated: (): CacheKeyConfig => ({
+    key: 'token:map:all:hydrated',
+    ttl: TTLS.ONE_MINUTE * 5, // Shorter TTL since it includes prices
+  }),
+
+
   AshTokenUsdValue: (token: string): CacheKeyConfig => ({
     key: `ash:token:${token}:usd:value`,
     ttl: TTLS.ONE_MINUTE * 10,
