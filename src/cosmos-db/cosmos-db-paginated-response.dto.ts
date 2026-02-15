@@ -20,10 +20,23 @@ class CosmosPaginatedResponse<T> {
   })
   resources: T[] = [];
 
-  constructor(resources: T[], count: number | null, hasMoreResults: boolean) {
+  @ApiProperty({
+    description: 'Continuation token for fetching the next page',
+    required: false,
+    nullable: true,
+  })
+  continuationToken?: string;
+
+  constructor(
+    resources: T[],
+    count: number | null,
+    hasMoreResults: boolean,
+    continuationToken?: string,
+  ) {
     this.resources = resources;
     this.count = count;
     this.hasMoreResults = hasMoreResults;
+    this.continuationToken = continuationToken;
   }
 }
 
@@ -46,10 +59,23 @@ export class CosmosPaginatedSingleResponse<T> {
   })
   resources!: T;
 
-  constructor(resources: T, count: number | null, hasMoreResults: boolean) {
+  @ApiProperty({
+    description: 'Continuation token for fetching the next page',
+    required: false,
+    nullable: true,
+  })
+  continuationToken?: string;
+
+  constructor(
+    resources: T,
+    count: number | null,
+    hasMoreResults: boolean,
+    continuationToken?: string,
+  ) {
     this.resources = resources;
     this.count = count;
     this.hasMoreResults = hasMoreResults;
+    this.continuationToken = continuationToken;
   }
 }
 
