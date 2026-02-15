@@ -44,6 +44,9 @@ export class LendingMarketProfileExtraProperties {
 
   @ApiProperty({ required: false, type: 'boolean' })
   participants?: boolean;
+
+  @ApiProperty({ required: false, type: 'boolean' })
+  oraclePrice?: boolean;
 }
 
 export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMarketProfileDoc> {
@@ -78,9 +81,11 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
   extraProperties?: {
     eModeCategoryProfile: boolean;
     participants: boolean;
+    oraclePrice: boolean;
   } = {
     eModeCategoryProfile: false,
     participants: false,
+    oraclePrice: false,
   };
 
   constructor(props?: Partial<LendingMarketProfileFilter>) {
