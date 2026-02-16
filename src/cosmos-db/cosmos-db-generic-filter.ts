@@ -68,7 +68,8 @@ export class CosmosDbGenericFilter<T> {
 
   @ApiProperty({ required: false, type: 'integer' })
   top?: number = 25;
-  @ApiProperty({ required: false, type: 'integer' })
+  /** @deprecated Use continuation token pagination via X-Continuation-Token header instead. Will be removed in next major version. */
+  @ApiProperty({ required: false, type: 'integer', deprecated: true })
   skip?: number = 0;
   @ApiProperty({
     required: false,
