@@ -70,6 +70,12 @@ export class CosmosDbGenericFilter<T> {
   top?: number = 25;
   @ApiProperty({ required: false, type: 'integer' })
   skip?: number = 0;
+  @ApiProperty({
+    required: false,
+    type: 'string',
+    nullable: true,
+  })
+  continuationToken?: string;
 
   constructor(props?: Partial<CosmosDbGenericFilter<T>>) {
     Object.assign(this, props);
