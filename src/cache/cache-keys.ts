@@ -45,7 +45,7 @@ export const CacheKeys = {
     activeAuction: boolean,
   ): CacheKeyConfig => ({
     key: `user:${address}:inventory:summary:${activeAuction}`,
-    ttl: TTLS.ONE_MINUTE * 10,
+    ttl: TTLS.ONE_HOUR, // Invalidated by clearUserCaches on every trade/transfer
   }),
 
   UserHerotag: (address: string): CacheKeyConfig => ({
@@ -140,7 +140,7 @@ export const CacheKeys = {
 
   CollectionStats: (collection: string): CacheKeyConfig => ({
     key: `collection:${collection}:stats`,
-    ttl: TTLS.ONE_MINUTE * 30,
+    ttl: TTLS.ONE_HOUR * 3, // Invalidated by clearCollectionCaches on every trade/listing
   }),
 
   CollectionFloorPrice: (
@@ -219,12 +219,12 @@ export const CacheKeys = {
 
   CollectionStatsDocs: (query: string): CacheKeyConfig => ({
     key: `query:collection:stats:${query}`,
-    ttl: TTLS.ONE_MINUTE * 10,
+    ttl: TTLS.ONE_DAY * 7, // Long TTL - invalidated by collection index sets
   }),
 
   CollectionOfferDocs: (hash: string): CacheKeyConfig => ({
     key: `query:collection:offers:${hash}`,
-    ttl: TTLS.ONE_SECOND * 30,
+    ttl: TTLS.ONE_DAY * 7, // Long TTL - invalidated by offer index sets
   }),
 
   CollectionSearch: (filter: string): CacheKeyConfig => ({
@@ -316,7 +316,7 @@ export const CacheKeys = {
 
   StakingDataDocs: (query: string): CacheKeyConfig => ({
     key: `query:staking:data:${query}`,
-    ttl: TTLS.ONE_SECOND * 30,
+    ttl: TTLS.ONE_MINUTE * 30, // Invalidated on pool create/update events
   }),
 
   StakingPoolsByCollection: (
@@ -656,7 +656,6 @@ export const CacheKeys = {
     key: 'token:map:all:hydrated',
     ttl: TTLS.ONE_MINUTE * 5, // Shorter TTL since it includes prices
   }),
-
 
   AshTokenUsdValue: (token: string): CacheKeyConfig => ({
     key: `ash:token:${token}:usd:value`,
