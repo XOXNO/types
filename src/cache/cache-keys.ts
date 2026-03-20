@@ -514,6 +514,26 @@ export const CacheKeys = {
     ttl: TTLS.ONE_HOUR * 4,
   }),
 
+  LendingMarketQuery: (filterHash: string): CacheKeyConfig => ({
+    key: `lending:market:query:${filterHash}`,
+    ttl: TTLS.ONE_MINUTE,
+  }),
+
+  UserLendingPositions: (address: string, token?: string): CacheKeyConfig => ({
+    key: `user:${address}:lending:positions${token ? `:${token}` : ''}`,
+    ttl: TTLS.ONE_MINUTE / 2, // 30 seconds
+  }),
+
+  HatomUserInfo: (address: string): CacheKeyConfig => ({
+    key: `hatom:user:${address}:info`,
+    ttl: TTLS.ONE_MINUTE / 2, // 30 seconds
+  }),
+
+  UserUnreadNotificationCount: (address: string): CacheKeyConfig => ({
+    key: `user:${address}:notifications:unread-count`,
+    ttl: TTLS.ONE_MINUTE / 4, // 15 seconds
+  }),
+
   // ==========================================
   // Event/Ticketing-related cache keys
   // ==========================================
