@@ -3,6 +3,7 @@ export enum ActivityChain {
   SUI = 'SUI',
   EVM = 'EVM',
   SOL = 'SOL',
+  STELLAR = 'STELLAR',
 }
 
 export enum EsdtTokenSubType {

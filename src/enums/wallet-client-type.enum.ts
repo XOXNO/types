@@ -11,4 +11,7 @@ export enum WalletClientType {
   EVM = 'evm',
   SOLANA = 'solana',
   PASSKEY = 'passkey',
+  FREIGHTER = 'freighter',
+  XBULL = 'xbull',
+  HANA = 'hana',
 }
