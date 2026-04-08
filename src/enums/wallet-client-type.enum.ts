@@ -14,4 +14,6 @@ export enum WalletClientType {
   FREIGHTER = 'freighter',
   XBULL = 'xbull',
   HANA = 'hana',
+  LOBSTR = 'lobstr',
+  STELLAR_WALLET_CONNECT = 'wallet_connect',
 }

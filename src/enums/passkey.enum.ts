@@ -3,4 +3,5 @@ export enum ContractSignatureType {
   MVX = 'MVX',
   EVM = 'EVM',
   SOL = 'SOL',
+  STELLAR = 'STELLAR',
 }

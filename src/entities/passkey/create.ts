@@ -14,7 +14,8 @@ export type ContractSignatureRequestWallet = {
   type:
     | ContractSignatureType.EVM
     | ContractSignatureType.MVX
-    | ContractSignatureType.SOL;
+    | ContractSignatureType.SOL
+    | ContractSignatureType.STELLAR;
 
   signature: string;
 };
