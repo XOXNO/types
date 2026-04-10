@@ -1,6 +1,8 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 import { LendingDataType } from '../../../enums/lending-data-type.enum';
+import { ActivityChain } from '../../../enums/common.enum';
+import { normalizeLendingChain } from './lending-chain';
 
 export class LendingTokenEModeProfileDoc {
   @ApiProperty({
@@ -48,9 +50,18 @@ export class LendingTokenEModeProfileDoc {
   })
   _ts!: number;
 
+  @ApiProperty({
+    description: 'Blockchain network the token eMode profile belongs to',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
+
   constructor(props?: Partial<LendingTokenEModeProfileDoc>) {
     Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.token}_${this.eModeCategory}_${this.dataType}`;
+    this.chain = normalizeLendingChain(this.chain);
   }
 }

@@ -1,4 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ActivityChain } from '../../../enums/common.enum';
+import { normalizeLendingChain } from './lending-chain';
 
 export class LendingAccountPnl {
   @ApiProperty()
@@ -25,7 +27,16 @@ export class LendingAccountPnl {
   @ApiProperty()
   InterestUSD!: number;
 
+  @ApiProperty({
+    description: 'Blockchain network this PnL entry belongs to',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
+
   constructor(props?: Partial<LendingAccountPnl>) {
     Object.assign(this, props);
+    this.chain = normalizeLendingChain(this.chain);
   }
 }

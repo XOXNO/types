@@ -1,5 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { PositionMode } from '../../../enums/lending.enum';
+import { ActivityChain } from '../../../enums/common.enum';
+import { normalizeLendingChain } from './lending-chain';
 
 export class LendingNftAttributes {
   @ApiProperty({
@@ -26,7 +28,16 @@ export class LendingNftAttributes {
   })
   isolatedToken?: string;
 
+  @ApiProperty({
+    description: 'Blockchain network the NFT attributes belong to',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
+
   constructor(props?: Partial<LendingNftAttributes>) {
     Object.assign(this, props);
+    this.chain = normalizeLendingChain(this.chain);
   }
 }

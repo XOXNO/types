@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ActivityChain } from '../../enums/common.enum';
 
 export class LendingIndexesDto {
   @ApiProperty({
@@ -109,4 +110,13 @@ export class LendingIndexesDto {
     type: Boolean,
   })
   withinSecondTolerance!: boolean;
+
+  @ApiProperty({
+    description:
+      'Blockchain network the indexes belong to (optional, defaults downstream to MVX when absent)',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain?: ActivityChain;
 }

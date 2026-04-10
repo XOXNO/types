@@ -6,6 +6,8 @@ import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 import { LendingOracleUpdateStruct } from './lending-oracle';
 import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
+import { ActivityChain } from '../../../enums/common.enum';
+import { normalizeLendingChain } from './lending-chain';
 
 export class LendingMarketProfileDoc {
   @ApiProperty({
@@ -209,6 +211,14 @@ export class LendingMarketProfileDoc {
   oracleProvider!: LendingOracleUpdateStruct;
 
   @ApiProperty({
+    description: 'Blockchain network the market lives on',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'EGLD_MARKET_PROFILE',
   })
@@ -230,6 +240,7 @@ export class LendingMarketProfileDoc {
     Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.token}_${this.dataType}`;
+    this.chain = normalizeLendingChain(this.chain);
   }
 }
 

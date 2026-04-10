@@ -4,6 +4,8 @@ import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { PositionMode } from '../../../enums/lending.enum';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { LendingMarketProfile } from './lending-market-profile.doc';
+import { ActivityChain } from '../../../enums/common.enum';
+import { normalizeLendingChain } from './lending-chain';
 
 export class InitialPaymentMultiplier {
   @ApiProperty({
@@ -126,6 +128,14 @@ export class LendingAccountProfileDoc {
   isClassic?: boolean;
 
   @ApiProperty({
+    description: 'Blockchain network the account lives on',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'account123_EGLD',
   })
@@ -147,6 +157,7 @@ export class LendingAccountProfileDoc {
     Object.assign(this, props);
     this.pk = this.dataType;
     this.id = `${this.identifier}_${this.token}`;
+    this.chain = normalizeLendingChain(this.chain);
   }
 }
 

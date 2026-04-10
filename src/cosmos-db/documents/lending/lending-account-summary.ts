@@ -1,4 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
+import { ActivityChain } from '../../../enums/common.enum';
 
 export class SingleLendingAccountToken {
   @ApiProperty()
@@ -53,4 +54,12 @@ export class LendingAccountSummary {
 
   @ApiProperty()
   healthFactor!: string;
+
+  @ApiProperty({
+    description: 'Blockchain network the account summary belongs to',
+    required: false,
+    enum: ActivityChain,
+    example: ActivityChain.MVX,
+  })
+  chain: ActivityChain = ActivityChain.MVX;
 }

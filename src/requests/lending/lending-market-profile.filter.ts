@@ -5,6 +5,7 @@ import {
 } from '../../cosmos-db/cosmos-db-generic-filter';
 import { LendingDataType } from '../../enums/lending-data-type.enum';
 import { LendingMarketProfileDoc } from '../../cosmos-db/documents/lending/lending-market-profile.doc';
+import { ActivityChain } from '../../enums/common.enum';
 
 export class LendingMarketProfileFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -36,6 +37,15 @@ export class LendingMarketProfileFilterCriteriaDto {
 
   @ApiProperty({ required: false, type: Boolean })
   isDebtCeilingReached?: boolean;
+
+  @ApiProperty({
+    required: false,
+    isArray: true,
+    enum: ActivityChain,
+    description:
+      'Optional chain discriminator — when omitted, no chain clause is added and all chains are returned',
+  })
+  chain?: ActivityChain[];
 }
 
 export class LendingMarketProfileExtraProperties {
@@ -65,6 +75,7 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
     canBorrowInIsolation?: boolean;
     isDebtCeilingReached?: boolean;
     pk?: string;
+    chain?: ActivityChain[];
   } = {
     pk: LendingDataType.MARKET_PROFILE,
   };
