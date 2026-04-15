@@ -61,7 +61,7 @@ export class LendingEModeCategoryProfileDoc {
 
 export class ShortLendingTokenEModeProfileDoc extends PickType(
   LendingTokenEModeProfileDoc,
-  ['token', 'canBeBorrowed', 'canBeCollateral', 'eModeCategory'] as const,
+  ['token', 'name', 'canBeBorrowed', 'canBeCollateral', 'eModeCategory'] as const,
 ) {}
 
 export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc {
@@ -73,6 +73,6 @@ export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc 
   })
   eModeTokenProfiles!: Pick<
     LendingTokenEModeProfileDoc,
-    'token' | 'canBeBorrowed' | 'canBeCollateral' | 'eModeCategory'
+    'token' | 'name' | 'canBeBorrowed' | 'canBeCollateral' | 'eModeCategory'
   >[];
 }

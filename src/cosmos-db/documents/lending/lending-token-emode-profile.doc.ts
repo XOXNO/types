@@ -17,6 +17,12 @@ export class LendingTokenEModeProfileDoc {
   })
   token!: string;
   @ApiProperty({
+    description:
+      'Human-readable ticker of the token (e.g. "USDC", "EURC", "XLM", "EGLD"). Derived from the market profile name (MVX identifier symbol, Stellar hydrated ticker, Sui coin symbol). Falls back to the raw token identifier when no hydrated name is available.',
+    example: 'EGLD',
+  })
+  name!: string;
+  @ApiProperty({
     description: 'Indicates if the token can be used as collateral',
     example: true,
   })
