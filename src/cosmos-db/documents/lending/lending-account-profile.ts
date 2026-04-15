@@ -202,6 +202,13 @@ const selectFields = [
   'flashLoan',
   'oracleProvider',
   'indexes',
+  // `chain` must be in the projection so manage-flow chain resolution
+  // (resolveLendingManageChain in xoxno-ui) can tell a Stellar position
+  // from an MVX one. Without it, every position's marketProfile.chain is
+  // stripped by PickType serialization, normalizeLendingChain defaults
+  // to MVX, and Stellar users get the "Switch your Wallet" modal on
+  // Remove / Withdraw / Repay / Borrow / Swap / Liquidate.
+  'chain',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {
