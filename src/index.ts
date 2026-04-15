@@ -119,6 +119,7 @@ export * from './cosmos-db/documents/user/user-settings.doc';
 export * from './cosmos-db/paginated-responses';
 export * from './entities/airdrop/airdrop.dto';
 export * from './entities/auth/login-request.dto';
+export * from './entities/auth/stellar-challenge.dto';
 export * from './entities/bober-battle/game-type';
 export * from './entities/delegation-data/delegation-data-output';
 export * from './entities/delegation-data/provider-data';
