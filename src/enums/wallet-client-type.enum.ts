@@ -16,4 +16,8 @@ export enum WalletClientType {
   HANA = 'hana',
   LOBSTR = 'lobstr',
   STELLAR_WALLET_CONNECT = 'wallet_connect',
+  ALBEDO = 'albedo',
+  HOT_WALLET = 'hot_wallet',
+  RABET = 'rabet',
+  KLEVER = 'klever',
 }
