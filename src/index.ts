@@ -258,6 +258,7 @@ export * from './enums/xoxno-egld-ls-activity.enum';
 export * from './enums/xoxno-ls-activity.enum';
 export * from './requests/aggregator/arda-swap-result.dto';
 export * from './requests/aggregator/soroswap-quote.dto';
+export * from './requests/aggregator/stellar-aggregator.dto';
 export * from './requests/aggregator/swap';
 export * from './requests/bober-battle/analytics';
 export * from './requests/chat/chat-token';
