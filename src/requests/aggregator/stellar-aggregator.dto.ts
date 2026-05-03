@@ -160,6 +160,17 @@ export class BatchSwapDto {
 
   @ApiProperty({
     description:
+      'Referral identifier. `0` (or omitted) means no referral and no fee — matches rs-aggregator MVX semantics. Non-zero IDs MUST be registered on-chain via `add_referral`; the router rejects unknown IDs at execution.',
+    example: 0,
+    required: false,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  referralId?: number;
+
+  @ApiProperty({
+    description:
       'Account whose SAC balances fund the swap and receive the output. G-strkey for user-direct swaps, C-strkey when called by another contract.',
     example: 'GDBBOILYIJBSUQKC3Z3USAW3DGPFHIGVKYA5T4ZUZBO56HBUPHJEN3FV',
   })
@@ -305,6 +316,17 @@ export class StellarAggregatorQuoteRequestDto {
   @IsOptional()
   @IsString()
   router?: string;
+
+  @ApiProperty({
+    description:
+      'Referral identifier embedded into the envelope. `0` (default) means no referral / no fee. Non-zero IDs must be registered on-chain via `add_referral` or the contract reverts.',
+    required: false,
+    example: 0,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  referralId?: number;
 
   @ApiProperty({
     description: 'Execution-plane filter.',
