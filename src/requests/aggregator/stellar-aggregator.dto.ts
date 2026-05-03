@@ -377,10 +377,10 @@ export class StellarQuoteSwapHopDto {
 
   @ApiProperty({
     description:
-      'Canonical pool identifier. C-strkey for Soroban pools, L-strkey for native AMM pools.',
+      'Canonical pool identifier. C-strkey for Soroban pools, L-strkey for native AMM pools. Field name `address` mirrors MVX QuoteSwapResponse exactly so chain-agnostic clients can iterate hops without branching on chain.',
   })
   @IsString()
-  poolAddress!: string;
+  address!: string;
 
   @ApiProperty({ description: 'Pool fee in basis points.', example: 30 })
   @IsInt()
@@ -672,4 +672,68 @@ export class StellarAggregatorQuoteResponseDto {
   @ValidateNested({ each: true })
   @Type(() => StellarQuoteAlternativeDto)
   alternatives?: StellarQuoteAlternativeDto[];
+
+  @ApiProperty({
+    description:
+      'Combined static + referral fee in basis points (1 bps = 0.01%) the router will charge for this swap. Absent when `referralId == 0` (no fee — matches rs-aggregator MVX semantics).',
+    required: false,
+    example: 30,
+  })
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  feeBps?: number;
+
+  @ApiProperty({
+    description:
+      'Fee amount the router will deduct (i128 string). Charged on the input token when `feeOnInput=true`, otherwise on the output token. The `amountOut` / `amountOutMin` fields already reflect this deduction.',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  feeAmount?: string;
+
+  @ApiProperty({
+    description:
+      'Display value of `feeAmount` (decimals applied; loses precision above 2^53).',
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  feeAmountShort?: number;
+
+  @ApiProperty({
+    description:
+      '`true` if the fee is charged on the input token, `false` if charged on the output. Mirrors the contract\'s `fee_on_input = !out_whitelisted || in_whitelisted` rule.',
+    required: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  feeOnInput?: boolean;
+
+  @ApiProperty({
+    description:
+      'USD value of `amountIn`. Absent when the input token has no Reflector oracle price on the active network.',
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  amountInUsd?: number;
+
+  @ApiProperty({
+    description: 'USD value of `amountOut`.',
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  amountOutUsd?: number;
+
+  @ApiProperty({
+    description:
+      'USD value of `amountOutMin` (only set when `slippage` was requested and the output token has a price).',
+    required: false,
+  })
+  @IsOptional()
+  @IsNumber()
+  amountOutMinUsd?: number;
 }
