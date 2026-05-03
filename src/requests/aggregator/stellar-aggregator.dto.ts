@@ -76,23 +76,20 @@ export class SwapHopDto {
 }
 
 /**
- * One allocated path in a (possibly multi-path) aggregator swap.
+ * One path in a (possibly multi-path) aggregator swap.
  *
- * `amountIn` is the slice of the user's total input routed through this
- * path. `minAmountOut` is the per-path slippage guard on the last hop's
- * output token — it lets the contract reject one branch being executed
- * at a worse rate even if the aggregate `totalMinOut` is still satisfied.
+ * `splitPpm` is parts-per-million of the batch's total input allocated
+ * to this path. The router computes `path_input = totalIn * splitPpm /
+ * 1_000_000`; the LAST path absorbs PPM rounding so the entire `totalIn`
+ * is consumed and no dust is left on the sender. Within a path, output
+ * of hop N feeds hop N+1 directly — there are no per-hop or per-path
+ * amount fields. The single `totalMinOut` guard at the batch level is
+ * the only slippage gate.
  */
 export class SwapPathDto {
   @ApiProperty({
-    description: 'Input amount for this path as an i128 decimal string.',
-    example: '1000000000',
-  })
-  @IsString()
-  amountIn!: string;
-
-  @ApiProperty({
-    description: 'Sequential hops executed within this path.',
+    description:
+      'Sequential hops executed within this path. Output of hop N flows directly into hop N+1.',
     type: () => SwapHopDto,
     isArray: true,
   })
@@ -104,19 +101,22 @@ export class SwapPathDto {
 
   @ApiProperty({
     description:
-      "Minimum acceptable output for THIS path on the final hop's output token (i128 decimal string). Enforced per-path on-chain.",
-    example: '6679778663',
+      'Parts per million (ppm) of the batch total input to route through this path. Must be > 0; sum of all paths must equal 1_000_000.',
+    example: 1_000_000,
   })
-  @IsString()
-  minAmountOut!: string;
+  @IsInt()
+  @Min(1)
+  @Max(1_000_000)
+  splitPpm!: number;
 }
 
 /**
  * User-facing aggregator swap request as accepted by the Soroban
  * lending controller's strategy methods (`multiply`, `swap_debt`,
  * `swap_collateral`, `repay_debt_with_collateral`). The controller
- * wraps this in `BatchSwap` (filling `sender = current_contract_address`)
- * before forwarding to the aggregator router.
+ * wraps this in `BatchSwap` (filling `sender = current_contract_address`
+ * and `totalIn = actual_withdrawn`) before forwarding to the aggregator
+ * router.
  */
 export class AggregatorSwapDto {
   @ApiProperty({
@@ -132,7 +132,7 @@ export class AggregatorSwapDto {
 
   @ApiProperty({
     description:
-      "Aggregate slippage guard across all paths' final output token (i128 decimal string).",
+      "Aggregate slippage guard across all paths' final output token (i128 decimal string). Must be > 0.",
     example: '6679778663',
   })
   @IsString()
@@ -140,13 +140,15 @@ export class AggregatorSwapDto {
 }
 
 /**
- * Full payload for the aggregator router\'s `batch_execute` entry point.
+ * Full payload for the aggregator router's `batch_execute` entry point.
  * Identical to `AggregatorSwapDto` plus an explicit `sender` (G or
- * C strkey) whose SAC balances fund the swap and receive the output.
+ * C strkey) whose SAC balance funds the swap (the router pulls
+ * `totalIn` once at the start) and receives the output.
  *
  * Lending callers never construct `BatchSwap` directly — the controller
- * fills `sender` with `current_contract_address` so user funds remain
- * under the controller\'s custody for the duration of the strategy.
+ * fills `sender` with `current_contract_address` and `totalIn` with the
+ * authoritative withdrawal delta so user funds remain under the
+ * controller's custody for the duration of the strategy.
  */
 export class BatchSwapDto {
   @ApiProperty({ type: () => SwapPathDto, isArray: true })
@@ -163,6 +165,14 @@ export class BatchSwapDto {
   })
   @IsString()
   sender!: string;
+
+  @ApiProperty({
+    description:
+      "Total input amount the router will pull from `sender` once at the start of `batch_execute` (i128 decimal string). Per-path allocations come from the router's vault using each path's `splitPpm`.",
+    example: '1000000000',
+  })
+  @IsString()
+  totalIn!: string;
 
   @ApiProperty({
     description: 'Aggregate slippage guard across all paths.',
