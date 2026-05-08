@@ -1,14 +1,19 @@
-import { ApiProperty, getSchemaPath } from '@nestjs/swagger';
+import { ApiExtraModels, ApiProperty, getSchemaPath } from '@nestjs/swagger';
 
 import { LendingDataType } from '../../../enums/lending-data-type.enum';
 import { OwnerDto } from '../../../common/owner.dto';
 import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile.doc';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
-import { LendingOracleUpdateStruct } from './lending-oracle';
+import {
+  LendingOracleProvider,
+  LendingOracleUpdateStruct,
+  StellarLendingOracleUpdateStruct,
+} from './lending-oracle';
 import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
 import { ActivityChain } from '../../../enums/common.enum';
 import { normalizeLendingChain } from './lending-chain';
 
+@ApiExtraModels(LendingOracleUpdateStruct, StellarLendingOracleUpdateStruct)
 export class LendingMarketProfileDoc {
   @ApiProperty({
     enum: LendingDataType,
@@ -206,9 +211,12 @@ export class LendingMarketProfileDoc {
 
   @ApiProperty({
     description: 'Oracle provider data',
-    type: LendingOracleUpdateStruct,
+    oneOf: [
+      { $ref: getSchemaPath(LendingOracleUpdateStruct) },
+      { $ref: getSchemaPath(StellarLendingOracleUpdateStruct) },
+    ],
   })
-  oracleProvider!: LendingOracleUpdateStruct;
+  oracleProvider!: LendingOracleProvider;
 
   @ApiProperty({
     description: 'Blockchain network the market lives on',

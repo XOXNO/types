@@ -29,3 +29,24 @@ export enum ExchangeSource {
   LEGLD = 'LEGLD',
   Onedex = 'Onedex',
 }
+
+export enum LendingOracleProviderKind {
+  ReflectorSep40 = 'ReflectorSep40',
+  RedStonePriceFeed = 'RedStonePriceFeed',
+}
+
+export enum LendingOracleAssetRefKind {
+  Stellar = 'Stellar',
+  Symbol = 'Symbol',
+  String = 'String',
+}
+
+export enum LendingOracleReadMode {
+  Spot = 'Spot',
+  Twap = 'Twap',
+}
+
+export enum LendingOracleStrategy {
+  Single = 'Single',
+  PrimaryWithAnchor = 'PrimaryWithAnchor',
+}
