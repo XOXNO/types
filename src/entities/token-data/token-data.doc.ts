@@ -46,6 +46,23 @@ class TokenDataDocBase {
   })
   chain: ActivityChain = ActivityChain.MVX;
 
+  @ApiProperty({
+    type: String,
+    required: false,
+    description:
+      'Chain-specific network discriminator. For Stellar this is mainnet or testnet.',
+    example: 'mainnet',
+  })
+  network?: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Stellar network for Soroban token profiles.',
+    example: 'mainnet',
+  })
+  stellarNetwork?: 'mainnet' | 'testnet';
+
   constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
   }
