@@ -525,7 +525,7 @@ export class StellarQuoteAlternativeDto {
   })
   @ValidateNested()
   @Type(() => StellarAggregatorQuoteResponseDto)
-  quote!: StellarAggregatorQuoteResponseDto;
+  quote!: Omit<StellarAggregatorQuoteResponseDto, 'alternatives'>;
 }
 
 /**
