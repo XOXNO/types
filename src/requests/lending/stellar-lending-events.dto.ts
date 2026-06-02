@@ -1,6 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AccountPositionType, PositionMode } from '../../enums/lending.enum';
-import { StellarLendingTopic } from '../../enums/stellar-lending-topic.enum';
 import { AssetConfigRawDto } from './stellar-lending-admin-args.dto';
 import { StellarLendingOracleUpdateStruct } from '../../cosmos-db/documents/lending/lending-oracle';
 
@@ -92,7 +91,7 @@ export class StellarEventAccountAttributes {
     enumName: 'PositionMode',
     description: 'Strategy mode (Normal collapses to None in events)',
   })
-  mode!: PositionMode;
+  mode!: 'None' | 'Multiply' | 'Long' | 'Short';
 
   @ApiProperty({
     type: String,
@@ -115,7 +114,7 @@ export class StellarEventPositionDelta {
     enumName: 'AccountPositionType',
     description: 'Deposit (collateral) or Borrow (debt) side',
   })
-  positionType!: AccountPositionType;
+  positionType!: 'Deposit' | 'Borrow';
 
   @ApiProperty({ type: String, description: 'Asset address for this position' })
   asset!: string;
@@ -533,81 +532,33 @@ export class StellarOracleTwapDegradedEvent {
  * `"<domain>:<action>"` topic. Narrow on `topic` to access the typed `data`.
  */
 export type StellarLendingDecodedEvent =
-  | { topic: StellarLendingTopic.MarketCreate; data: StellarCreateMarketEvent }
+  | { topic: 'market:create'; data: StellarCreateMarketEvent }
+  | { topic: 'market:params_update'; data: StellarUpdateMarketParamsEvent }
   | {
-      topic: StellarLendingTopic.MarketParamsUpdate;
-      data: StellarUpdateMarketParamsEvent;
-    }
-  | {
-      topic: StellarLendingTopic.MarketStateBatchUpdate;
+      topic: 'market:batch_state_update';
       data: StellarUpdateMarketStateBatchEvent;
     }
+  | { topic: 'position:batch_update'; data: StellarUpdatePositionBatchEvent }
+  | { topic: 'position:flash_loan'; data: StellarFlashLoanEvent }
+  | { topic: 'config:asset'; data: StellarUpdateAssetConfigEvent }
+  | { topic: 'config:oracle'; data: StellarUpdateAssetOracleEvent }
+  | { topic: 'config:emode_category'; data: StellarUpdateEModeCategoryEvent }
+  | { topic: 'config:emode_asset'; data: StellarUpdateEModeAssetEvent }
+  | { topic: 'config:remove_emode_asset'; data: StellarRemoveEModeAssetEvent }
+  | { topic: 'debt:ceiling_update'; data: StellarUpdateDebtCeilingEvent }
   | {
-      topic: StellarLendingTopic.PositionBatchUpdate;
-      data: StellarUpdatePositionBatchEvent;
-    }
-  | {
-      topic: StellarLendingTopic.PositionFlashLoan;
-      data: StellarFlashLoanEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigAsset;
-      data: StellarUpdateAssetConfigEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigOracle;
-      data: StellarUpdateAssetOracleEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigEModeCategory;
-      data: StellarUpdateEModeCategoryEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigEModeAsset;
-      data: StellarUpdateEModeAssetEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigRemoveEModeAsset;
-      data: StellarRemoveEModeAssetEvent;
-    }
-  | {
-      topic: StellarLendingTopic.DebtCeilingUpdate;
-      data: StellarUpdateDebtCeilingEvent;
-    }
-  | {
-      topic: StellarLendingTopic.DebtCeilingBatchUpdate;
+      topic: 'debt:ceiling_batch_update';
       data: StellarUpdateDebtCeilingBatchEvent;
     }
-  | { topic: StellarLendingTopic.DebtBadDebt; data: StellarCleanBadDebtEvent }
+  | { topic: 'debt:bad_debt'; data: StellarCleanBadDebtEvent }
   | {
-      topic: StellarLendingTopic.StrategyInitialPayment;
+      topic: 'strategy:initial_payment';
       data: StellarInitialMultiplyPaymentEvent;
     }
-  | {
-      topic: StellarLendingTopic.ConfigApproveToken;
-      data: StellarApproveTokenEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigAggregator;
-      data: StellarUpdateAggregatorEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigAccumulator;
-      data: StellarUpdateAccumulatorEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigPoolTemplate;
-      data: StellarUpdatePoolTemplateEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigPositionLimits;
-      data: StellarUpdatePositionLimitsEvent;
-    }
-  | {
-      topic: StellarLendingTopic.ConfigOracleDisabled;
-      data: StellarOracleDisabledEvent;
-    }
-  | {
-      topic: StellarLendingTopic.OracleTwapDegraded;
-      data: StellarOracleTwapDegradedEvent;
-    };
+  | { topic: 'config:approve_token'; data: StellarApproveTokenEvent }
+  | { topic: 'config:aggregator'; data: StellarUpdateAggregatorEvent }
+  | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }
+  | { topic: 'config:pool_template'; data: StellarUpdatePoolTemplateEvent }
+  | { topic: 'config:position_limits'; data: StellarUpdatePositionLimitsEvent }
+  | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent }
+  | { topic: 'oracle:twap_degraded'; data: StellarOracleTwapDegradedEvent };
