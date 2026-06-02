@@ -173,6 +173,20 @@ export class MultiplyArgs {
     example: 42,
   })
   accountNonce?: number;
+
+  @ApiProperty({
+    description:
+      'Optional initial collateral payment seeding the leverage entry (maps to the controller `initial_payment: Option<(Address, i128)>`)',
+    required: false,
+  })
+  initialPayment?: { token: string; amount: string };
+
+  @ApiProperty({
+    description:
+      'Optional secondary swap converting the initial payment into the collateral token (maps to `convert_swap: Option<AggregatorSwap>`); chain-specific shape encoded by the SDK builder',
+    required: false,
+  })
+  convertSwap?: unknown;
 }
 
 export class SwapDebtArgs {

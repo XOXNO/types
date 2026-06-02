@@ -51,6 +51,7 @@ export * from "./staking-data-type.enum";
 export * from "./staking-issuing-type-string.enum";
 export * from "./staking-pool-type-string.enum";
 export * from "./staking-status-string.enum";
+export * from "./stellar-lending-topic.enum";
 export * from "./tag-priority.enum";
 export * from "./ticketing-data-type.enum";
 export * from "./ticketing-visibility.enum";

@@ -50,3 +50,15 @@ export enum LendingOracleStrategy {
   Single = 'Single',
   PrimaryWithAnchor = 'PrimaryWithAnchor',
 }
+
+export enum AccountPositionType {
+  None = 'None',
+  Deposit = 'Deposit',
+  Borrow = 'Borrow',
+}
+
+export enum MarketStatus {
+  PendingOracle = 'PendingOracle',
+  Active = 'Active',
+  Disabled = 'Disabled',
+}
