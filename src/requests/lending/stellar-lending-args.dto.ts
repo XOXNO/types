@@ -154,7 +154,7 @@ export class MultiplyArgs {
 
   @ApiProperty({
     description:
-      'Chain-specific swap path encoded by the SDK transaction builder',
+      'Chain-specific opaque swap bytes encoded by the SDK transaction builder',
   })
   steps!: unknown;
 
@@ -175,7 +175,7 @@ export class MultiplyArgs {
 
   @ApiProperty({
     description:
-      'Optional secondary swap converting the initial payment into the collateral token',
+      'Optional opaque secondary swap bytes converting the initial payment into the collateral token',
     required: false,
   })
   convertSwap?: unknown;
@@ -205,7 +205,7 @@ export class SwapDebtArgs {
 
   @ApiProperty({
     description:
-      'Chain-specific swap path encoded by the SDK transaction builder',
+      'Chain-specific opaque swap bytes encoded by the SDK transaction builder',
   })
   steps!: unknown;
 }
@@ -234,7 +234,7 @@ export class SwapCollateralArgs {
 
   @ApiProperty({
     description:
-      'Chain-specific swap path encoded by the SDK transaction builder',
+      'Chain-specific opaque swap bytes encoded by the SDK transaction builder',
   })
   steps!: unknown;
 }
@@ -263,7 +263,7 @@ export class RepayDebtWithCollateralArgs {
 
   @ApiProperty({
     description:
-      'Chain-specific swap path encoded by the SDK transaction builder',
+      'Chain-specific opaque swap bytes encoded by the SDK transaction builder',
   })
   steps!: unknown;
 

@@ -23,30 +23,29 @@ export const SWAP_VENUES = [
   'Soroswap',
   'Aquarius',
   'Phoenix',
-  'NativeAmm',
-  'StaticBridge',
+  'Sushi',
+  'CometDex',
 ] as const;
 export type SwapVenue = (typeof SWAP_VENUES)[number];
 
 /**
  * Single hop in an aggregator path. Field names use camelCase on the
- * wire; the SDK encoder rewrites them to snake_case (`fee_bps`, `pool`,
+ * wire; the SDK encoder rewrites them to snake_case (`amount_out`, `pool`,
  * `token_in`, `token_out`, `venue`) when building the Soroban XDR so
  * the bytes match the on-chain `SwapHop` struct exactly.
  */
 export class SwapHopDto {
   @ApiProperty({
     description:
-      'Pool fee in basis points (1 bps = 0.01%). Informational; the pool has authority over the fee actually applied.',
-    example: 30,
+      'Expected output of this hop in raw token units (i128 decimal string). The router uses it as the venue-specific swap limit/hint.',
+    example: '6679778663',
   })
-  @IsInt()
-  @Min(0)
-  feeBps!: number;
+  @IsString()
+  amountOut!: string;
 
   @ApiProperty({
     description:
-      'Pool contract address (Soroswap/Aquarius/Phoenix), LP account (NativeAmm), or zero bytes (StaticBridge).',
+      'Soroban pool contract address for the venue executing this hop.',
     example: 'CATK7WRKPAMZKSTNZJ5J6MT7Q7I3DLYEBIAB4CA6Z6SY6LAD2ASQOHNN',
   })
   @IsString()
@@ -79,12 +78,10 @@ export class SwapHopDto {
  * One path in a (possibly multi-path) aggregator swap.
  *
  * `splitPpm` is parts-per-million of the batch's total input allocated
- * to this path. The router computes `path_input = totalIn * splitPpm /
- * 1_000_000`; the LAST path absorbs PPM rounding so the entire `totalIn`
- * is consumed and no dust is left on the sender. Within a path, output
- * of hop N feeds hop N+1 directly — there are no per-hop or per-path
- * amount fields. The single `totalMinOut` guard at the batch level is
- * the only slippage gate.
+ * to this path. The router computes the input for each path from
+ * `totalIn` and the ppm split; the last path absorbs PPM rounding. Within
+ * a path, output of hop N feeds hop N+1 directly. The single
+ * `totalMinOut` guard at the payload level is the final slippage gate.
  */
 export class SwapPathDto {
   @ApiProperty({
@@ -111,14 +108,13 @@ export class SwapPathDto {
 }
 
 /**
- * User-facing aggregator swap request as accepted by the Soroban
- * lending controller's strategy methods (`multiply`, `swap_debt`,
- * `swap_collateral`, `repay_debt_with_collateral`). The controller
- * wraps this in `BatchSwap` (filling `sender = current_contract_address`
- * and `totalIn = actual_withdrawn`) before forwarding to the aggregator
- * router.
+ * Full payload encoded into `routeXdr` for the aggregator router's
+ * `execute_strategy(sender, total_in, swap_xdr)` entry point.
+ *
+ * Lending controllers receive the encoded bytes as an opaque `Bytes` value
+ * and forward them to the aggregator; they do not decode this struct.
  */
-export class AggregatorSwapDto {
+export class StrategyPayloadDto {
   @ApiProperty({
     description: 'Parallel paths to execute. Length >= 1.',
     type: () => SwapPathDto,
@@ -132,35 +128,7 @@ export class AggregatorSwapDto {
 
   @ApiProperty({
     description:
-      "Aggregate slippage guard across all paths' final output token (i128 decimal string). Must be > 0.",
-    example: '6679778663',
-  })
-  @IsString()
-  totalMinOut!: string;
-}
-
-/**
- * Full payload for the aggregator router's `batch_execute` entry point.
- * Identical to `AggregatorSwapDto` plus an explicit `sender` (G or
- * C strkey) whose SAC balance funds the swap (the router pulls
- * `totalIn` once at the start) and receives the output.
- *
- * Lending callers never construct `BatchSwap` directly — the controller
- * fills `sender` with `current_contract_address` and `totalIn` with the
- * authoritative withdrawal delta so user funds remain under the
- * controller's custody for the duration of the strategy.
- */
-export class BatchSwapDto {
-  @ApiProperty({ type: () => SwapPathDto, isArray: true })
-  @IsArray()
-  @ArrayMinSize(1)
-  @ValidateNested({ each: true })
-  @Type(() => SwapPathDto)
-  paths!: SwapPathDto[];
-
-  @ApiProperty({
-    description:
-      'Referral identifier. `0` (or omitted) means no referral and no fee — matches rs-aggregator MVX semantics. Non-zero IDs MUST be registered on-chain via `add_referral`; the router rejects unknown IDs at execution.',
+      'Referral identifier. `0` (or omitted) means no referral and no fee. Non-zero IDs must be registered on-chain via `add_referral` or the router rejects execution.',
     example: 0,
     required: false,
   })
@@ -170,23 +138,22 @@ export class BatchSwapDto {
   referralId?: number;
 
   @ApiProperty({
-    description:
-      'Account whose SAC balances fund the swap and receive the output. G-strkey for user-direct swaps, C-strkey when called by another contract.',
-    example: 'GDBBOILYIJBSUQKC3Z3USAW3DGPFHIGVKYA5T4ZUZBO56HBUPHJEN3FV',
+    description: 'Soroban Asset Contract address of the input token.',
+    example: 'CDLZFC3SYJYDZT7K67VZ75HPJVIEUVNIXF47ZG2FB2RMQQVU2HHGCYSC',
   })
   @IsString()
-  sender!: string;
+  tokenIn!: string;
+
+  @ApiProperty({
+    description: 'Soroban Asset Contract address of the output token.',
+    example: 'CBIELTK6YBZJU5UP2WWQEUCYKLPU6AUNZ2BQ4WWFEIE3USCIHMXQDAMA',
+  })
+  @IsString()
+  tokenOut!: string;
 
   @ApiProperty({
     description:
-      "Total input amount the router will pull from `sender` once at the start of `batch_execute` (i128 decimal string). Per-path allocations come from the router's vault using each path's `splitPpm`.",
-    example: '1000000000',
-  })
-  @IsString()
-  totalIn!: string;
-
-  @ApiProperty({
-    description: 'Aggregate slippage guard across all paths.',
+      "Aggregate slippage guard across all paths' final output token (i128 decimal string). Must be > 0.",
     example: '6679778663',
   })
   @IsString()
@@ -194,10 +161,58 @@ export class BatchSwapDto {
 }
 
 /**
+ * Opaque strategy swap payload as returned by the quote server. `routeXdr`
+ * is the base64 ScVal XDR for `StrategyPayloadDto`; callers pass the
+ * decoded bytes to `execute_strategy` or to a lending strategy method.
+ */
+export class StrategySwapDto {
+  @ApiProperty({
+    description:
+      'Base64 ScVal XDR of `StrategyPayloadDto`, passed as Soroban `Bytes` to `execute_strategy(sender, total_in, swap_xdr)`.',
+    example: 'AAAA...',
+  })
+  @IsString()
+  routeXdr!: string;
+}
+
+/**
+ * @deprecated Use `StrategyPayloadDto` for decoded payloads or
+ * `StrategySwapDto.routeXdr` for the executable opaque bytes.
+ */
+export class AggregatorSwapDto extends StrategyPayloadDto {}
+
+/**
+ * @deprecated The current router no longer exposes `batch_execute`.
+ * Use `execute_strategy(sender, total_in, swap_xdr)` with
+ * `StrategySwapDto.routeXdr`.
+ */
+export class BatchSwapDto extends StrategyPayloadDto {
+  @ApiProperty({
+    description:
+      'Deprecated. `execute_strategy` takes the sender as a separate argument.',
+    example: 'GDBBOILYIJBSUQKC3Z3USAW3DGPFHIGVKYA5T4ZUZBO56HBUPHJEN3FV',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  sender?: string;
+
+  @ApiProperty({
+    description:
+      'Deprecated. `execute_strategy` takes the total input as a separate argument.',
+    example: '1000000000',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  totalIn?: string;
+}
+
+/**
  * Execution-plane filter for the quote server.
- *   - `aggregator` (default): Soroban venues only (Soroswap + Aquarius +
- *     Phoenix + static bridges). Produces a `batch_execute` envelope
- *     safe for composable contract-to-contract use (Lending → Router).
+ *   - `aggregator` (default): Soroban venues only (Soroswap, Aquarius,
+ *     Phoenix, Sushi, CometDex). Produces a `routeXdr` payload and,
+ *     when requested, an `execute_strategy` envelope.
  *   - `sdex`: Stellar DEX (native AMM) only.
  *   - `all`: runs both planes and returns the winner with the runner-up
  *     attached as an alternative.
@@ -216,9 +231,10 @@ export type StellarTokenKind = 'native' | 'classic' | 'soroban';
 /**
  * Query parameters for `GET /api/v1/quote` on the Stellar quote server.
  *
- * Exactly one of `amountIn` or `amountOut` must be provided. `router`
- * + `sender` together populate `transaction.envelopeXdr` in the
- * response with a ready-to-sign `batch_execute` envelope.
+ * Exactly one of `amountIn` or `amountOut` must be provided. The response
+ * includes `routeXdr` for the Soroban-only aggregator route. `router`
+ * + `sender` together populate `transaction.envelopeXdr` with a
+ * ready-to-sign `execute_strategy` envelope.
  */
 export class StellarAggregatorQuoteRequestDto {
   @ApiProperty({
@@ -356,7 +372,7 @@ export class StellarAggregatorQuoteRequestDto {
  * quote-hop → contract-hop is:
  *
  * ```
- * { feeBps, poolAddress → pool, from → tokenIn, to → tokenOut, dex → venue }
+ * { amountOut → amountOut, address → pool, from → tokenIn, to → tokenOut, dex → venue }
  * ```
  */
 export class StellarQuoteSwapHopDto {
@@ -377,7 +393,7 @@ export class StellarQuoteSwapHopDto {
 
   @ApiProperty({
     description:
-      'Canonical pool identifier. C-strkey for Soroban pools, L-strkey for native AMM pools. Field name `address` mirrors MVX QuoteSwapResponse exactly so chain-agnostic clients can iterate hops without branching on chain.',
+      'Canonical pool identifier. For aggregator routes this is always a Soroban pool C-strkey. Field name `address` mirrors MVX QuoteSwapResponse exactly so chain-agnostic clients can iterate hops without branching on chain.',
   })
   @IsString()
   address!: string;
@@ -430,8 +446,8 @@ export class StellarQuoteSwapHopDto {
 }
 
 /**
- * Single allocated path in the quote response. Maps 1:1 to `SwapPathDto`
- * (with field renames) when forwarded into the controller.
+ * Single allocated path in the quote response. Maps to `SwapPathDto`
+ * (with field renames) when constructing a decoded strategy payload.
  */
 export class StellarQuotePathDto {
   @ApiProperty({ description: 'Input amount routed through this path.' })
@@ -468,8 +484,9 @@ export class StellarQuotePathDto {
 }
 
 /**
- * Unsigned Soroban transaction envelope returned when the quote
- * request supplied both `sender` and `router`. The caller MUST:
+ * Unsigned Soroban transaction envelope returned when the quote request
+ * supplied both `sender` and `router`. It invokes
+ * `execute_strategy(sender, total_in, swap_xdr)`. The caller MUST:
  *   1. Populate `seqNum` from the sender\'s account state.
  *   2. Run `simulateTransaction` to attach Soroban resource fees.
  *   3. Sign with the sender\'s key (Ed25519 / Stellar Wallets Kit).
@@ -600,6 +617,15 @@ export class StellarAggregatorQuoteResponseDto {
   @IsNumber()
   priceImpact?: number;
 
+  @ApiProperty({
+    description:
+      'Base64 ScVal XDR of `StrategyPayloadDto`. Decode it to bytes and pass it as `swap_xdr` to `execute_strategy`, or forward it as opaque strategy bytes to lending controllers.',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  routeXdr?: string;
+
   @ApiProperty({ description: 'Output per 1 unit of input.' })
   @IsNumber()
   rate!: number;
@@ -704,7 +730,7 @@ export class StellarAggregatorQuoteResponseDto {
 
   @ApiProperty({
     description:
-      '`true` if the fee is charged on the input token, `false` if charged on the output. Mirrors the contract\'s `fee_on_input = !out_whitelisted || in_whitelisted` rule.',
+      "`true` if the fee is charged on the input token, `false` if charged on the output. Mirrors the contract's `fee_on_input = !out_whitelisted || in_whitelisted` rule.",
     required: false,
   })
   @IsOptional()
