@@ -4,20 +4,7 @@ import { AssetConfigRawDto } from './stellar-lending-admin-args.dto';
 import { StellarLendingOracleUpdateStruct } from '../../cosmos-db/documents/lending/lending-oracle';
 
 /**
- * Decoded payloads for the 21 XOXNO Stellar lending controller
- * `#[contractevent]`s (see `rs-lending-xlm/common/src/events.rs`).
- *
- * These are the normalized shapes the `@xoxno/sdk-js` decoder registry
- * produces after funnelling the Soroban event `data` through
- * `scValToNative`: i128/u128/u64 ids and amounts are decimal strings,
- * u32 counts/bps are numbers, addresses/symbols are strings, int-enums are
- * mapped to their string enum, and absent Soroban `Option`s are `undefined`.
- *
- * Borrow-side position deltas carry no collateral risk parameters: the
- * contract zeroes `liquidation_threshold`/`liquidation_bonus`/`loan_to_value`
- * for debt positions, so the decoder surfaces them as `undefined` (not 0) to
- * stop consumers recording a spurious 0% threshold. There is no
- * `liquidationFeesBps` on the delta — that field does not exist on-chain.
+ * Decoded Stellar lending event payload types.
  */
 
 export class StellarMarketStateSnapshot {
@@ -393,7 +380,7 @@ export class StellarRemoveEModeAssetEvent {
   categoryId!: number;
 }
 
-// ---------- topic: debt:ceiling_update (legacy single; not emitted on-chain) ----------
+// ---------- topic: debt:ceiling_update ----------
 export class StellarUpdateDebtCeilingEvent {
   @ApiProperty({ type: String, description: 'Isolated asset address' })
   asset!: string;

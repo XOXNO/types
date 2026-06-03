@@ -1,11 +1,6 @@
 /**
- * Soroban event dispatch keys for the XOXNO Stellar lending controller.
- *
- * Each value is the `"<domain>:<action>"` join of a `#[contractevent]`'s two
- * topic symbols (see `rs-lending-xlm/common/src/events.rs`). This is the single
- * source of truth shared by the `@xoxno/sdk-js` decoder registry and every
- * consumer; it is intentionally distinct from the MVX-named
- * `LendingScEventIdentifier`, whose values do not match the Soroban topics.
+ * Soroban event dispatch keys for the XOXNO Stellar lending controller,
+ * each value joined as `"<domain>:<action>"`.
  */
 export enum StellarLendingTopic {
   MarketCreate = 'market:create',

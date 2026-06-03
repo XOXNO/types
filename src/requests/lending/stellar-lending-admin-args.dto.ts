@@ -7,12 +7,10 @@ import {
 import { LendingOracleAssetRef } from '../../cosmos-db/documents/lending/lending-oracle';
 
 /**
- * Admin / config / keeper argument DTOs for the Stellar lending controller.
+ * Admin/config argument DTOs for the Stellar lending controller.
  *
- * These mirror the on-chain Rust structs in
- * `rs-lending-xlm/common/src/types/{pool,controller,oracle}.rs`. RAY/WAD i128
- * values are decimal strings; bps and counts are numbers; addresses/feed ids
- * are strings. The `@xoxno/sdk-js` Soroban builders encode them to ScVal.
+ * RAY/WAD integers cross as decimal strings; bps and counts are numbers;
+ * addresses and feed ids are strings.
  */
 
 export class InterestRateModelDto {
@@ -51,9 +49,7 @@ export class InterestRateModelDto {
 }
 
 /**
- * Interest rate model plus the pool asset identity, as taken by
- * `create_liquidity_pool`. `upgrade_liquidity_pool_params` takes only the
- * `InterestRateModelDto` portion (asset is addressed separately).
+ * Interest rate model plus the pool asset identity.
  */
 export class MarketParamsRawDto extends InterestRateModelDto {
   @ApiProperty({ type: String, description: 'Pool asset address' })

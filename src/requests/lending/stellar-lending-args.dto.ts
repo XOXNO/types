@@ -1,23 +1,15 @@
 import { ApiProperty } from '@nestjs/swagger';
 
 /**
- * Chain-agnostic argument DTOs for the lending protocol.
+ * Chain-agnostic argument DTOs for the lending protocol, decoupled from
+ * chain-specific types:
  *
- * These shapes mirror the Stellar controller entry points
- * (see /rs-lending/stellar/controller/src/lib.rs) but are deliberately
- * decoupled from any chain-specific types:
- *
- *   - `token` is a string (MVX uses ESDT ticker, Stellar uses contract
- *     address, SUI uses coin type) — callers pass whatever their chain
- *     uses, the SDK builder interprets it.
- *   - `amount` is a string to preserve precision across u64 / u128 /
- *     i128 backends.
+ *   - `token` is a string (an ESDT ticker, a Soroban contract address, a
+ *     SUI coin type — whatever the target chain uses).
+ *   - `amount` is a decimal string to preserve precision across
+ *     u64 / u128 / i128 backends.
  *   - `steps`, `data` are `unknown` — the concrete swap-path / callback
- *     struct is chain-specific and encoded by the SDK transaction
- *     builder.
- *
- * MVX flows can reuse these via a thin adapter; Stellar flows consume
- * them directly in the `@xoxno/sdk-js` Soroban transaction builders.
+ *     struct is chain-specific and encoded by the transaction builder.
  */
 
 export class SupplyArgs {
@@ -176,14 +168,14 @@ export class MultiplyArgs {
 
   @ApiProperty({
     description:
-      'Optional initial collateral payment seeding the leverage entry (maps to the controller `initial_payment: Option<(Address, i128)>`)',
+      'Optional initial collateral payment seeding the leverage entry',
     required: false,
   })
   initialPayment?: { token: string; amount: string };
 
   @ApiProperty({
     description:
-      'Optional secondary swap converting the initial payment into the collateral token (maps to `convert_swap: Option<AggregatorSwap>`); chain-specific shape encoded by the SDK builder',
+      'Optional secondary swap converting the initial payment into the collateral token',
     required: false,
   })
   convertSwap?: unknown;
