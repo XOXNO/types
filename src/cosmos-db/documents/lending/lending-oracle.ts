@@ -254,6 +254,24 @@ export class StellarLendingOracleUpdateStruct {
 
   @ApiProperty({
     type: String,
+    nullable: true,
+    required: false,
+    description:
+      'Quote currency of the primary oracle feed. null = USD-quoted (common case) or RedStone source; non-null = Stellar quote token (e.g. USDC SAC) repriced to USD on-chain',
+  })
+  primaryQuoteToken?: string | null;
+
+  @ApiProperty({
+    type: String,
+    nullable: true,
+    required: false,
+    description:
+      'Quote currency of the anchor oracle feed. null = no anchor, USD-quoted, or RedStone source; non-null = Stellar quote token (e.g. USDC SAC) repriced to USD on-chain',
+  })
+  anchorQuoteToken?: string | null;
+
+  @ApiProperty({
+    type: String,
     required: false,
     description: 'Inclusive lower sanity bound, USD WAD decimal string',
   })

@@ -345,15 +345,10 @@ export class StellarUpdateAssetOracleEvent {
 
   @ApiProperty({
     type: StellarLendingOracleUpdateStruct,
-    description: 'Resolved oracle provider configuration',
+    description:
+      'Resolved oracle provider configuration. Sanity bounds and per-source quote tokens live on this nested struct, matching the contract event wire layout.',
   })
   oracle!: StellarLendingOracleUpdateStruct;
-
-  @ApiProperty({ type: String, required: false, description: 'Inclusive lower sanity bound, USD WAD decimal string' })
-  minSanityPriceWad?: string;
-
-  @ApiProperty({ type: String, required: false, description: 'Inclusive upper sanity bound, USD WAD decimal string' })
-  maxSanityPriceWad?: string;
 }
 
 // ---------- topic: config:emode_category ----------
