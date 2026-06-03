@@ -220,6 +220,9 @@ export class StellarCreateMarketEvent {
   @ApiProperty({ description: 'Optimal utilization, RAY decimal string' })
   optimalUtilization!: string;
 
+  @ApiProperty({ type: String, required: false, description: 'Max utilization, RAY decimal string' })
+  maxUtilization?: string;
+
   @ApiProperty({ type: 'integer', description: 'Reserve factor, bps' })
   reserveFactor!: number;
 
@@ -261,6 +264,9 @@ export class StellarUpdateMarketParamsEvent {
 
   @ApiProperty({ description: 'Optimal utilization, RAY decimal string' })
   optimalUtilizationRay!: string;
+
+  @ApiProperty({ type: String, required: false, description: 'Max utilization, RAY decimal string' })
+  maxUtilizationRay?: string;
 
   @ApiProperty({ type: 'integer', description: 'Reserve factor, bps' })
   reserveFactorBps!: number;
@@ -342,6 +348,12 @@ export class StellarUpdateAssetOracleEvent {
     description: 'Resolved oracle provider configuration',
   })
   oracle!: StellarLendingOracleUpdateStruct;
+
+  @ApiProperty({ type: String, required: false, description: 'Inclusive lower sanity bound, USD WAD decimal string' })
+  minSanityPriceWad?: string;
+
+  @ApiProperty({ type: String, required: false, description: 'Inclusive upper sanity bound, USD WAD decimal string' })
+  maxSanityPriceWad?: string;
 }
 
 // ---------- topic: config:emode_category ----------
