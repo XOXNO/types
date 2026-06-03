@@ -252,6 +252,20 @@ export class StellarLendingOracleUpdateStruct {
   })
   anchor?: LendingOracleSource;
 
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Inclusive lower sanity bound, USD WAD decimal string',
+  })
+  minSanityPriceWad?: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Inclusive upper sanity bound, USD WAD decimal string',
+  })
+  maxSanityPriceWad?: string;
+
   constructor(init?: Partial<StellarLendingOracleUpdateStruct>) {
     Object.assign(this, init);
     if (init?.tolerance) {

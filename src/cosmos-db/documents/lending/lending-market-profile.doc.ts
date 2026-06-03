@@ -11,6 +11,7 @@ import {
 } from './lending-oracle';
 import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto';
 import { ActivityChain } from '../../../enums/common.enum';
+import { MarketStatus } from '../../../enums/lending.enum';
 import { normalizeLendingChain } from './lending-chain';
 
 @ApiExtraModels(LendingOracleUpdateStruct, StellarLendingOracleUpdateStruct)
@@ -243,6 +244,22 @@ export class LendingMarketProfileDoc {
     example: 1732650682,
   })
   _ts!: number;
+
+  @ApiProperty({
+    enum: MarketStatus,
+    enumName: 'MarketStatus',
+    required: false,
+    description:
+      'On-chain market lifecycle status (Stellar): PendingOracle/Active/Disabled',
+  })
+  marketStatus?: MarketStatus;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Max utilization, RAY (1e27) decimal string (Stellar IRM)',
+  })
+  maxUtilizationRay?: string;
 
   constructor(props?: Partial<LendingMarketProfileDoc>) {
     Object.assign(this, props);
