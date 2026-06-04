@@ -261,6 +261,22 @@ export class LendingMarketProfileDoc {
   })
   maxUtilizationRay?: string;
 
+  @ApiProperty({
+    type: String,
+    required: false,
+    description:
+      'Minimum collateral floor, USD WAD (1e18) decimal string (Stellar). 0 = disabled.',
+  })
+  minCollatFloorUsdWad?: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description:
+      'Minimum debt floor, USD WAD (1e18) decimal string (Stellar). 0 = disabled.',
+  })
+  minDebtFloorUsdWad?: string;
+
   constructor(props?: Partial<LendingMarketProfileDoc>) {
     Object.assign(this, props);
     this.pk = this.dataType;
