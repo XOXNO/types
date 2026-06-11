@@ -123,13 +123,6 @@ export class StellarEventPositionDelta {
   amount!: string;
 
   @ApiProperty({
-    required: false,
-    description:
-      'USD WAD price used for the mutation, decimal string when present',
-  })
-  assetPriceWad?: string;
-
-  @ApiProperty({
     type: 'integer',
     required: false,
     description:
