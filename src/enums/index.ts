@@ -27,6 +27,7 @@ export * from "./lending-activity.enum";
 export * from "./lending-average.enum";
 export * from "./lending-data-type.enum";
 export * from "./lending-event-identifier.enum";
+export * from "./lending-governance.enum";
 export * from "./lending-position-type.enum";
 export * from "./lending.enum";
 export * from "./linked-account-type.enum";

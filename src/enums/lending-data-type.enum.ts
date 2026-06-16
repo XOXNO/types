@@ -3,4 +3,5 @@ export enum LendingDataType {
   ACCOUNT_PROFILE = 'accountProfile',
   EMODE_CATEGORY_PROFILE = 'emodeCategoryProfile',
   TOKEN_EMODE_PROFILE = 'tokenEmodeProfile',
+  GOVERNANCE_PROPOSAL = 'governanceProposal',
 }
