@@ -13,8 +13,6 @@ export enum StellarLendingTopic {
   ConfigEModeCategory = 'config:emode_category',
   ConfigEModeAsset = 'config:emode_asset',
   ConfigRemoveEModeAsset = 'config:remove_emode_asset',
-  DebtCeilingUpdate = 'debt:ceiling_update',
-  DebtCeilingBatchUpdate = 'debt:ceiling_batch_update',
   DebtBadDebt = 'debt:bad_debt',
   StrategyInitialPayment = 'strategy:initial_payment',
   ConfigApproveToken = 'config:approve_token',

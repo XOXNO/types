@@ -81,24 +81,11 @@ export class AssetConfigRawDto {
   @ApiProperty({ description: 'Whether the asset can be borrowed' })
   isBorrowable!: boolean;
 
-  @ApiProperty({ description: 'Whether the asset is an isolated collateral' })
-  isIsolatedAsset!: boolean;
-
   @ApiProperty({ description: 'Whether the asset uses siloed borrowing' })
   isSiloedBorrowing!: boolean;
 
   @ApiProperty({ description: 'Whether the asset can be flash-loaned' })
   isFlashloanable!: boolean;
-
-  @ApiProperty({
-    description: 'Whether borrowing against the isolated asset is enabled',
-  })
-  isolationBorrowEnabled!: boolean;
-
-  @ApiProperty({
-    description: 'Isolation debt ceiling, USD WAD decimal string',
-  })
-  isolationDebtCeilingUsdWad!: string;
 
   @ApiProperty({ type: 'integer', description: 'Flash-loan fee, bps' })
   flashloanFeeBps!: number;

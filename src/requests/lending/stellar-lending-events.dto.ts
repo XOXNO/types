@@ -62,12 +62,6 @@ export class StellarEventAccountAttributes {
   owner!: string;
 
   @ApiProperty({
-    description:
-      'True when the account is bound to a single isolated collateral asset',
-  })
-  isIsolatedPosition!: boolean;
-
-  @ApiProperty({
     type: 'integer',
     description: 'E-mode category id; 0 means no e-mode',
   })
@@ -79,13 +73,6 @@ export class StellarEventAccountAttributes {
     description: 'Strategy mode (Normal collapses to None in events)',
   })
   mode!: 'None' | 'Multiply' | 'Long' | 'Short';
-
-  @ApiProperty({
-    type: String,
-    required: false,
-    description: 'Isolated collateral asset when isIsolatedPosition',
-  })
-  isolatedToken?: string;
 }
 
 export class StellarEventPositionDelta {
@@ -145,17 +132,6 @@ export class StellarEventPositionDelta {
       'Loan-to-value, bps — present for Deposit, undefined for Borrow',
   })
   loanToValueBps?: number;
-}
-
-export class StellarEventDebtCeilingEntry {
-  @ApiProperty({ type: String, description: 'Isolated asset address' })
-  asset!: string;
-
-  @ApiProperty({
-    description:
-      'Total isolated debt against the asset, USD WAD decimal string',
-  })
-  totalDebtUsdWad!: string;
 }
 
 export class StellarEventEModeCategory {
@@ -380,28 +356,6 @@ export class StellarRemoveEModeAssetEvent {
   categoryId!: number;
 }
 
-// ---------- topic: debt:ceiling_update ----------
-export class StellarUpdateDebtCeilingEvent {
-  @ApiProperty({ type: String, description: 'Isolated asset address' })
-  asset!: string;
-
-  @ApiProperty({
-    description:
-      'Total isolated debt against the asset, USD WAD decimal string',
-  })
-  totalDebtUsdWad!: string;
-}
-
-// ---------- topic: debt:ceiling_batch_update ----------
-export class StellarUpdateDebtCeilingBatchEvent {
-  @ApiProperty({
-    type: StellarEventDebtCeilingEntry,
-    isArray: true,
-    description: 'Final isolated-debt totals for touched assets',
-  })
-  updates!: StellarEventDebtCeilingEntry[];
-}
-
 // ---------- topic: debt:bad_debt ----------
 export class StellarCleanBadDebtEvent {
   @ApiProperty({
@@ -532,11 +486,6 @@ export type StellarLendingDecodedEvent =
   | { topic: 'config:emode_category'; data: StellarUpdateEModeCategoryEvent }
   | { topic: 'config:emode_asset'; data: StellarUpdateEModeAssetEvent }
   | { topic: 'config:remove_emode_asset'; data: StellarRemoveEModeAssetEvent }
-  | { topic: 'debt:ceiling_update'; data: StellarUpdateDebtCeilingEvent }
-  | {
-      topic: 'debt:ceiling_batch_update';
-      data: StellarUpdateDebtCeilingBatchEvent;
-    }
   | { topic: 'debt:bad_debt'; data: StellarCleanBadDebtEvent }
   | {
       topic: 'strategy:initial_payment';
