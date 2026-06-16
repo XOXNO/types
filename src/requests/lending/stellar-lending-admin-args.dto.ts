@@ -114,14 +114,6 @@ export class AssetConfigRawDto {
   supplyCap!: string;
 
   @ApiProperty({
-    description: 'Minimum collateral floor, USD WAD decimal string',
-  })
-  minCollatFloorUsdWad!: string;
-
-  @ApiProperty({ description: 'Minimum debt floor, USD WAD decimal string' })
-  minDebtFloorUsdWad!: string;
-
-  @ApiProperty({
     type: 'integer',
     isArray: true,
     description: 'E-mode category ids this asset participates in',

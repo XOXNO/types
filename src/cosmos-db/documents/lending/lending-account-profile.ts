@@ -199,8 +199,6 @@ const selectFields = [
   'maxBorrowRate',
   'reserveFactor',
   'maxUtilizationRay',
-  'minCollatFloorUsdWad',
-  'minDebtFloorUsdWad',
   'address',
   'flashLoan',
   'oracleProvider',
