@@ -81,9 +81,6 @@ export class AssetConfigRawDto {
   @ApiProperty({ description: 'Whether the asset can be borrowed' })
   isBorrowable!: boolean;
 
-  @ApiProperty({ description: 'Whether the asset uses siloed borrowing' })
-  isSiloedBorrowing!: boolean;
-
   @ApiProperty({ description: 'Whether the asset can be flash-loaned' })
   isFlashloanable!: boolean;
 
