@@ -16,14 +16,29 @@ export class LendingEModeCategoryProfileDoc {
   @ApiProperty({ description: 'EMode Name', example: 'XOXNO Derivates' })
   name!: string;
 
-  @ApiProperty({ description: 'Loan-to-value ratio', example: 0.75 })
-  ltv!: string;
+  @ApiProperty({
+    description:
+      'Category-level loan-to-value ratio. Present where e-mode params are category-wide (MVX); omitted on chains with per-asset params (Stellar), where each token profile carries its own.',
+    required: false,
+    example: 0.75,
+  })
+  ltv?: string;
 
-  @ApiProperty({ description: 'Liquidation threshold', example: 0.85 })
-  liquidationThreshold!: string;
+  @ApiProperty({
+    description:
+      'Category-level liquidation threshold. Present on MVX; omitted on Stellar (per-asset).',
+    required: false,
+    example: 0.85,
+  })
+  liquidationThreshold?: string;
 
-  @ApiProperty({ description: 'Liquidation bonus', example: 0.1 })
-  liquidationBonus!: string;
+  @ApiProperty({
+    description:
+      'Category-level liquidation bonus. Present on MVX; omitted on Stellar (per-asset).',
+    required: false,
+    example: 0.1,
+  })
+  liquidationBonus?: string;
 
   @ApiProperty({ description: 'Is eMode deprecated', example: false })
   isDeprecated!: boolean;
@@ -61,7 +76,16 @@ export class LendingEModeCategoryProfileDoc {
 
 export class ShortLendingTokenEModeProfileDoc extends PickType(
   LendingTokenEModeProfileDoc,
-  ['token', 'name', 'canBeBorrowed', 'canBeCollateral', 'eModeCategory'] as const,
+  [
+    'token',
+    'name',
+    'canBeBorrowed',
+    'canBeCollateral',
+    'eModeCategory',
+    'ltv',
+    'liquidationThreshold',
+    'liquidationBonus',
+  ] as const,
 ) {}
 
 export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc {
@@ -73,6 +97,13 @@ export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc 
   })
   eModeTokenProfiles!: Pick<
     LendingTokenEModeProfileDoc,
-    'token' | 'name' | 'canBeBorrowed' | 'canBeCollateral' | 'eModeCategory'
+    | 'token'
+    | 'name'
+    | 'canBeBorrowed'
+    | 'canBeCollateral'
+    | 'eModeCategory'
+    | 'ltv'
+    | 'liquidationThreshold'
+    | 'liquidationBonus'
   >[];
 }
