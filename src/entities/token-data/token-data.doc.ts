@@ -72,6 +72,15 @@ class TokenDataDocBase {
   })
   issuer?: string;
 
+  @ApiProperty({
+    type: Boolean,
+    required: false,
+    description:
+      'Whether the token is swappable (present in a DEX/Soroswap token list). Lets the swap picker show only swappable tokens while other views use the full registry.',
+    example: true,
+  })
+  swappable?: boolean;
+
   constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
   }
