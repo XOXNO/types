@@ -63,6 +63,15 @@ class TokenDataDocBase {
   })
   stellarNetwork?: 'mainnet' | 'testnet';
 
+  @ApiProperty({
+    type: String,
+    required: false,
+    description:
+      'Issuer account (G…) of a Stellar classic asset. Absent for native XLM and pure-Soroban tokens. Lets clients build a changeTrust trustline without an on-chain name() lookup.',
+    example: 'GA5ZSEJYB37JRC5AVCIA5MOP4RHTM335X2KGX3IHOJAPP5RE34K4KZVN',
+  })
+  issuer?: string;
+
   constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
   }
