@@ -138,15 +138,6 @@ export class StellarEventEModeCategory {
   @ApiProperty({ type: 'integer', description: 'E-mode category id' })
   categoryId!: number;
 
-  @ApiProperty({ type: 'integer', description: 'Loan-to-value, bps' })
-  loanToValueBps!: number;
-
-  @ApiProperty({ type: 'integer', description: 'Liquidation threshold, bps' })
-  liquidationThresholdBps!: number;
-
-  @ApiProperty({ type: 'integer', description: 'Liquidation bonus, bps' })
-  liquidationBonusBps!: number;
-
   @ApiProperty({ description: 'Whether the category is deprecated' })
   isDeprecated!: boolean;
 }
@@ -161,6 +152,24 @@ export class StellarEModeAssetConfig {
     description: 'Whether the asset is borrowable within the category',
   })
   isBorrowable!: boolean;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Loan-to-value, bps — per-asset within the category',
+  })
+  loanToValueBps!: number;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Liquidation threshold, bps — per-asset within the category',
+  })
+  liquidationThresholdBps!: number;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Liquidation bonus, bps — per-asset within the category',
+  })
+  liquidationBonusBps!: number;
 }
 
 // ---------- topic: market:create ----------

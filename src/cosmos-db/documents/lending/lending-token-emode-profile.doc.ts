@@ -39,6 +39,30 @@ export class LendingTokenEModeProfileDoc {
   eModeCategory!: string;
 
   @ApiProperty({
+    description:
+      'Per-asset loan-to-value ratio within the e-mode category. Present on chains with per-asset e-mode risk params (Stellar); omitted where params are category-level (MVX).',
+    required: false,
+    example: '0.97',
+  })
+  ltv?: string;
+
+  @ApiProperty({
+    description:
+      'Per-asset liquidation threshold within the e-mode category. Present on chains with per-asset e-mode risk params (Stellar).',
+    required: false,
+    example: '0.98',
+  })
+  liquidationThreshold?: string;
+
+  @ApiProperty({
+    description:
+      'Per-asset liquidation bonus within the e-mode category. Present on chains with per-asset e-mode risk params (Stellar).',
+    required: false,
+    example: '0.02',
+  })
+  liquidationBonus?: string;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'EGLD_1_TOKEN_EMODE_PROFILE',
   })
