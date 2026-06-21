@@ -85,6 +85,10 @@ export class ShortLendingTokenEModeProfileDoc extends PickType(
     'ltv',
     'liquidationThreshold',
     'liquidationBonus',
+    'supplyCap',
+    'borrowCap',
+    'suppliedScaledRay',
+    'borrowedScaledRay',
   ] as const,
 ) {}
 
@@ -105,5 +109,9 @@ export class LendingEModeCategoryProfile extends LendingEModeCategoryProfileDoc 
     | 'ltv'
     | 'liquidationThreshold'
     | 'liquidationBonus'
+    | 'supplyCap'
+    | 'borrowCap'
+    | 'suppliedScaledRay'
+    | 'borrowedScaledRay'
   >[];
 }

@@ -63,6 +63,38 @@ export class LendingTokenEModeProfileDoc {
   liquidationBonus?: string;
 
   @ApiProperty({
+    description:
+      'Spoke supply cap in asset-native units (0 = uncapped). Stellar e-mode only.',
+    required: false,
+    example: '100000000000000',
+  })
+  supplyCap?: string;
+
+  @ApiProperty({
+    description:
+      'Spoke borrow cap in asset-native units (0 = uncapped). Stellar e-mode only.',
+    required: false,
+    example: '100000000000000',
+  })
+  borrowCap?: string;
+
+  @ApiProperty({
+    description:
+      'Aggregate supplied scaled amount (RAY) tracked for this asset within the spoke. Stellar indexer only.',
+    required: false,
+    example: '0',
+  })
+  suppliedScaledRay?: string;
+
+  @ApiProperty({
+    description:
+      'Aggregate borrowed scaled amount (RAY) tracked for this asset within the spoke. Stellar indexer only.',
+    required: false,
+    example: '0',
+  })
+  borrowedScaledRay?: string;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'EGLD_1_TOKEN_EMODE_PROFILE',
   })

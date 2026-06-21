@@ -60,6 +60,20 @@ export class MarketParamsRawDto extends InterestRateModelDto {
     description: 'SAC token decimal count used for conversions',
   })
   assetDecimals!: number;
+
+  @ApiProperty({
+    description:
+      'Hub supply cap in asset-native units (0 = uncapped). Lives on the pool MarketParamsRaw.',
+    example: '100000000000000',
+  })
+  supplyCap!: string;
+
+  @ApiProperty({
+    description:
+      'Hub borrow cap in asset-native units (0 = uncapped). Lives on the pool MarketParamsRaw.',
+    example: '100000000000000',
+  })
+  borrowCap!: string;
 }
 
 export class AssetConfigRawDto {
@@ -86,16 +100,6 @@ export class AssetConfigRawDto {
 
   @ApiProperty({ type: 'integer', description: 'Flash-loan fee, bps' })
   flashloanFeeBps!: number;
-
-  @ApiProperty({
-    description: 'Borrow cap, asset units decimal string (0 = uncapped)',
-  })
-  borrowCap!: string;
-
-  @ApiProperty({
-    description: 'Supply cap, asset units decimal string (0 = uncapped)',
-  })
-  supplyCap!: string;
 
   @ApiProperty({
     type: 'integer',

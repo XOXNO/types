@@ -22,6 +22,7 @@ export enum GovernanceProposalKind {
   RevokeToken = 'RevokeToken',
   CreateLiquidityPool = 'CreateLiquidityPool',
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
+  UpdatePoolCaps = 'UpdatePoolCaps',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
   GrantControllerRole = 'GrantControllerRole',

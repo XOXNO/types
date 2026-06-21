@@ -6,6 +6,7 @@ export enum StellarLendingTopic {
   MarketCreate = 'market:create',
   MarketParamsUpdate = 'market:params_update',
   MarketStateBatchUpdate = 'market:batch_state_update',
+  MarketParamsBatchUpdate = 'market:batch_params_update',
   PositionBatchUpdate = 'position:batch_update',
   PositionFlashLoan = 'position:flash_loan',
   ConfigAsset = 'config:asset',

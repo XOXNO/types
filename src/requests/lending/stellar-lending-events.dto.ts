@@ -1,6 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AccountPositionType, PositionMode } from '../../enums/lending.enum';
-import { AssetConfigRawDto } from './stellar-lending-admin-args.dto';
+import {
+  AssetConfigRawDto,
+  MarketParamsRawDto,
+} from './stellar-lending-admin-args.dto';
 import { StellarLendingOracleUpdateStruct } from '../../cosmos-db/documents/lending/lending-oracle';
 
 /**
@@ -170,6 +173,20 @@ export class StellarEModeAssetConfig {
     description: 'Liquidation bonus, bps — per-asset within the category',
   })
   liquidationBonusBps!: number;
+
+  @ApiProperty({
+    description:
+      'Spoke supply cap in asset-native units (0 = uncapped). Enforced per e-mode category.',
+    example: '0',
+  })
+  supplyCap!: string;
+
+  @ApiProperty({
+    description:
+      'Spoke borrow cap in asset-native units (0 = uncapped). Enforced per e-mode category.',
+    example: '0',
+  })
+  borrowCap!: string;
 }
 
 // ---------- topic: market:create ----------
@@ -248,6 +265,27 @@ export class StellarUpdateMarketParamsEvent {
 
   @ApiProperty({ type: 'integer', description: 'Reserve factor, bps' })
   reserveFactorBps!: number;
+}
+
+export class StellarPoolMarketParamsUpdate {
+  @ApiProperty({ type: String, description: 'Pool asset address' })
+  asset!: string;
+
+  @ApiProperty({
+    type: MarketParamsRawDto,
+    description: 'Full pool market params including hub caps',
+  })
+  params!: MarketParamsRawDto;
+}
+
+// ---------- topic: market:batch_params_update ----------
+export class StellarUpdateMarketParamsBatchEvent {
+  @ApiProperty({
+    type: StellarPoolMarketParamsUpdate,
+    isArray: true,
+    description: 'Per-asset hub cap / params updates from the central pool',
+  })
+  updates!: StellarPoolMarketParamsUpdate[];
 }
 
 // ---------- topic: market:batch_state_update ----------
@@ -487,6 +525,10 @@ export type StellarLendingDecodedEvent =
   | {
       topic: 'market:batch_state_update';
       data: StellarUpdateMarketStateBatchEvent;
+    }
+  | {
+      topic: 'market:batch_params_update';
+      data: StellarUpdateMarketParamsBatchEvent;
     }
   | { topic: 'position:batch_update'; data: StellarUpdatePositionBatchEvent }
   | { topic: 'position:flash_loan'; data: StellarFlashLoanEvent }
