@@ -285,6 +285,7 @@ export * from './requests/collection/listings';
 export * from './requests/collection/pinned-collections';
 export * from './requests/collection/ranks';
 export * from './requests/collection/shareholder.dto';
+export * from './requests/lending/blend.dto';
 export * from './requests/lending/hatom-info.dto';
 export * from './requests/lending/lending-governance-proposal.filter';
 export * from './requests/lending/lending-indexes.dto';
