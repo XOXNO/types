@@ -422,6 +422,28 @@ export class StellarCleanBadDebtEvent {
   totalCollateralUsdWad!: string;
 }
 
+// ---------- topic: strategy:fee ----------
+export class StellarStrategyFeeEvent {
+  @ApiProperty({ type: String, description: 'Strategy-borrow asset address' })
+  asset!: string;
+
+  @ApiProperty({
+    description: 'Gross strategy borrow amount, asset-native units decimal string',
+  })
+  amount!: string;
+
+  @ApiProperty({
+    description: 'Strategy fee retained as protocol revenue, asset-native units decimal string',
+  })
+  fee!: string;
+
+  @ApiProperty({
+    description:
+      'Net amount transferred to receiver (amount - fee), asset-native units decimal string',
+  })
+  amountSent!: string;
+}
+
 // ---------- topic: strategy:initial_payment ----------
 export class StellarInitialMultiplyPaymentEvent {
   @ApiProperty({ type: String, description: 'Initial payment token address' })
@@ -542,6 +564,7 @@ export type StellarLendingDecodedEvent =
       topic: 'strategy:initial_payment';
       data: StellarInitialMultiplyPaymentEvent;
     }
+  | { topic: 'strategy:fee'; data: StellarStrategyFeeEvent }
   | { topic: 'config:approve_token'; data: StellarApproveTokenEvent }
   | { topic: 'config:aggregator'; data: StellarUpdateAggregatorEvent }
   | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }

@@ -11,4 +11,6 @@ export enum XoxnoLendingActivity {
   EMODE_CATEGORY = 'lendingEModeCategory',
   TOKEN_EMODE = 'lendingTokenEMode',
   UPDATE_ACCOUNT_PARAMETERS = 'lendingUpdateAccountParameters',
+  /** Pool `StrategyFeeEvent` — strategy-borrow fee accrued as protocol revenue. */
+  LENDING_STRATEGY_FEE = 'lendingStrategyFee',
 }

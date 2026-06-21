@@ -16,6 +16,7 @@ export enum StellarLendingTopic {
   ConfigRemoveEModeAsset = 'config:remove_emode_asset',
   DebtBadDebt = 'debt:bad_debt',
   StrategyInitialPayment = 'strategy:initial_payment',
+  StrategyFee = 'strategy:fee',
   ConfigApproveToken = 'config:approve_token',
   ConfigAggregator = 'config:aggregator',
   ConfigAccumulator = 'config:accumulator',
