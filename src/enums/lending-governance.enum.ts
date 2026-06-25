@@ -1,9 +1,9 @@
 /**
  * Stellar lending governance (timelock) proposal taxonomy.
  *
- * `GovernanceProposalKind` mirrors the `propose_*` entrypoints on the
- * governance contract; the indexer maps an operation's invoked function symbol
- * to one of these so the dashboard can title and group proposals.
+ * `GovernanceProposalKind` mirrors the `AdminOperation` variants the governance
+ * contract schedules; the indexer maps a scheduled operation's invoked function
+ * symbol to one of these so the dashboard can title and group proposals.
  */
 export enum GovernanceProposalKind {
   SetAggregator = 'SetAggregator',
@@ -13,20 +13,20 @@ export enum GovernanceProposalKind {
   SetPositionLimits = 'SetPositionLimits',
   SetMinBorrowCollateral = 'SetMinBorrowCollateral',
   AddEModeCategory = 'AddEModeCategory',
-  EditEModeCategory = 'EditEModeCategory',
   RemoveEModeCategory = 'RemoveEModeCategory',
   AddAssetToEModeCategory = 'AddAssetToEModeCategory',
   EditAssetInEModeCategory = 'EditAssetInEModeCategory',
   RemoveAssetFromEMode = 'RemoveAssetFromEMode',
   ApproveToken = 'ApproveToken',
   RevokeToken = 'RevokeToken',
+  ApproveBlendPool = 'ApproveBlendPool',
+  RevokeBlendPool = 'RevokeBlendPool',
   CreateLiquidityPool = 'CreateLiquidityPool',
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
   UpdatePoolCaps = 'UpdatePoolCaps',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
-  GrantControllerRole = 'GrantControllerRole',
-  RevokeControllerRole = 'RevokeControllerRole',
+  DisableTokenOracle = 'DisableTokenOracle',
   UpgradeController = 'UpgradeController',
   MigrateController = 'MigrateController',
   TransferControllerOwnership = 'TransferControllerOwnership',
@@ -53,7 +53,7 @@ export enum GovernanceProposalStatus {
 
 /**
  * Whether executing the proposal invokes the lending controller (generic
- * `execute`) or the governance contract itself (typed `execute_*`).
+ * `execute`) or the governance contract itself (`execute_self`).
  */
 export enum GovernanceProposalTarget {
   Controller = 'Controller',
