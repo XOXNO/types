@@ -509,6 +509,16 @@ export const CacheKeys = {
     ttl: TTLS.ONE_MINUTE * 15,
   }),
 
+  LendingStatsHistory: (
+    startTime: string,
+    endTime: string,
+    bin: string,
+    chain: string,
+  ): CacheKeyConfig => ({
+    key: `lending:global:stats:history:${chain}:${startTime}:${endTime}:${bin}`,
+    ttl: TTLS.ONE_MINUTE * 15,
+  }),
+
   LendingMarketAverageGraphData: (token: string): CacheKeyConfig => ({
     key: `lending:market:${token}:stats`,
     ttl: TTLS.ONE_HOUR * 4,

@@ -4,6 +4,7 @@ export * from './common/kusto/lending-market-analytics';
 export * from './common/kusto/lending-market-average';
 export * from './common/kusto/lending-overall-stats';
 export * from './common/kusto/lending-position-status';
+export * from './common/kusto/lending-stats-history';
 export * from './common/kusto/user-trading-summary';
 export * from './common/kusto/volume-graph';
 export * from './common/kusto/wallet-stats';
