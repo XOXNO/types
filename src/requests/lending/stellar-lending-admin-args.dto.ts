@@ -191,15 +191,9 @@ export class MarketOracleConfigInputDto {
 
   @ApiProperty({
     type: 'integer',
-    description: 'First (tight) tolerance band, bps',
+    description: 'Primary/anchor deviation tolerance band, bps',
   })
-  firstToleranceBps!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Last (wide) tolerance band, bps',
-  })
-  lastToleranceBps!: number;
+  toleranceBps!: number;
 
   @ApiProperty({
     enum: LendingOracleStrategy,

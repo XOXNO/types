@@ -12,27 +12,15 @@ import {
 export class OraclePriceFluctuation {
   @ApiProperty({
     type: 'integer',
-    description: 'First upper ratio threshold for price fluctuation',
+    description: 'Upper ratio threshold for the primary/anchor price band',
   })
-  firstUpperRatio!: number;
+  upperRatio!: number;
 
   @ApiProperty({
     type: 'integer',
-    description: 'First lower ratio threshold for price fluctuation',
+    description: 'Lower ratio threshold for the primary/anchor price band',
   })
-  firstLowerRatio!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Last upper ratio threshold for price fluctuation',
-  })
-  lastUpperRatio!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Last lower ratio threshold for price fluctuation',
-  })
-  lastLowerRatio!: number;
+  lowerRatio!: number;
 
   constructor(init?: Partial<OraclePriceFluctuation>) {
     Object.assign(this, init);

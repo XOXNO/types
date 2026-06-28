@@ -98,18 +98,6 @@ export class LendingIndexesDto {
     type: Number,
   })
   aggregatorPriceUsdShort!: number;
-  @ApiProperty({
-    description: 'Within first tolerance',
-    example: true,
-    type: Boolean,
-  })
-  withinFirstTolerance!: boolean;
-  @ApiProperty({
-    description: 'Within second tolerance',
-    example: true,
-    type: Boolean,
-  })
-  withinSecondTolerance!: boolean;
 
   @ApiProperty({
     description:

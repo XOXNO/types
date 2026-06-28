@@ -522,21 +522,6 @@ export class StellarOracleDisabledEvent {
   asset!: string;
 }
 
-// ---------- topic: oracle:twap_degraded ----------
-export class StellarOracleTwapDegradedEvent {
-  @ApiProperty({
-    type: String,
-    description: 'Oracle contract address that degraded',
-  })
-  oracle!: string;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Provider-specific degradation reason code',
-  })
-  reasonCode!: number;
-}
-
 /**
  * Discriminated union of every decoded Stellar lending event, keyed by the
  * `"<domain>:<action>"` topic. Narrow on `topic` to access the typed `data`.
@@ -570,5 +555,4 @@ export type StellarLendingDecodedEvent =
   | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }
   | { topic: 'config:pool_template'; data: StellarUpdatePoolTemplateEvent }
   | { topic: 'config:position_limits'; data: StellarUpdatePositionLimitsEvent }
-  | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent }
-  | { topic: 'oracle:twap_degraded'; data: StellarOracleTwapDegradedEvent };
+  | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent };
