@@ -5,10 +5,6 @@ export class StellarHubDoc {
   hubId!: number;
   isActive = true;
   name: string | null = null;
-  totalDepositsUsd = '0';
-  totalBorrowsUsd = '0';
-  availableLiquidityUsd = '0';
-  utilization = 0;
   assetCount = 0;
   updatedAt = 0;
   ledger = 0;

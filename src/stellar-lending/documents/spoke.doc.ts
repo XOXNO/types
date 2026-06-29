@@ -8,8 +8,6 @@ export class StellarSpokeDoc {
   liquidationTargetHfWad = '0';
   healthFactorForMaxBonusWad = '0';
   liquidationBonusFactorBps = 0;
-  totalDepositsUsd = '0';
-  totalBorrowsUsd = '0';
   assetCount = 0;
   connectedHubIds: number[] = [];
   updatedAt = 0;

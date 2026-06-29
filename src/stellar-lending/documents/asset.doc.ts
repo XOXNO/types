@@ -8,11 +8,6 @@ export class StellarAssetDoc {
   name!: string;
   decimals!: number;
   oracleProvider: StellarOracleProvider | null = null;
-  usdPriceWad = '0';
-  usdPriceShort = 0;
-  totalDepositsUsd = '0';
-  totalBorrowsUsd = '0';
-  availableLiquidityUsd = '0';
   hubCount = 0;
   reserveCount = 0;
   updatedAt = 0;
