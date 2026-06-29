@@ -1,0 +1,17 @@
+export enum StellarLendingActivity {
+  Supply = 'supply',
+  Borrow = 'borrow',
+  Withdraw = 'withdraw',
+  Repay = 'repay',
+  LiqRepay = 'liqRepay',
+  LiqSeize = 'liqSeize',
+  Multiply = 'multiply',
+  SwapDebt = 'swapDebt',
+  SwapCollateral = 'swapCollateral',
+  RepayWithCollateral = 'repayWithCollateral',
+  CloseWithdraw = 'closeWithdraw',
+  Migrate = 'migrate',
+  FlashLoan = 'flashLoan',
+  BadDebt = 'badDebt',
+  StrategyFee = 'strategyFee',
+}

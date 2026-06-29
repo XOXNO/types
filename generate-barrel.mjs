@@ -5,6 +5,10 @@ import { join, resolve, relative } from 'path';
 const rootDir = resolve('src');
 const enumsDir = join(rootDir, 'enums');
 
+// Directories that own a self-contained subpath export and must NOT be
+// flattened into the root barrel or have their hand-written index.ts deleted.
+const SELF_CONTAINED_DIRS = new Set(['stellar-lending']);
+
 const exportLinesRoot = [];
 const exportLinesEnums = [];
 
@@ -16,6 +20,7 @@ function walk(dir, collector, baseDir) {
     const stat = statSync(fullPath);
 
     if (stat.isDirectory()) {
+      if (SELF_CONTAINED_DIRS.has(entry)) continue;
       walk(fullPath, collector, baseDir);
     } else if (entry === 'index.ts') {
       const keep = [join(rootDir, 'index.ts'), join(enumsDir, 'index.ts')];
