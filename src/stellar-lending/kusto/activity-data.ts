@@ -58,4 +58,11 @@ export interface StellarLendingActivityData {
   liquidationThresholdBps: number | null;
   liquidationBonusBps: number | null;
   loanToValueBps: number | null;
+  /**
+   * Liquidator (caller) address on liquidation legs (`liqRepay`/`liqSeize`),
+   * correlated by tx from the on-chain `LiquidationEvent`. `null` on all other
+   * rows. Enables a top-liquidators leaderboard (the legs' `accountId`/`owner`
+   * are the liquidatee).
+   */
+  liquidator: string | null;
 }
