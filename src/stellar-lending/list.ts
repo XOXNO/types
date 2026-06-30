@@ -96,3 +96,33 @@ export interface StellarReserveListItem {
   /** Whether the asset can be used as collateral in this spoke. */
   useAsCollateral: boolean;
 }
+
+/**
+ * One row in a user's lending action feed — a single position leg the user
+ * performed, newest first. Sourced from `StellarLendingPositionActivity()`
+ * filtered by `Owner`; `usd` is the action delta valued at the event-time
+ * oracle price (`amountShort * oraclePrice`).
+ */
+export interface StellarUserActivityItem {
+  /** Event time (ISO-8601). */
+  timestamp: string;
+  /** Monotonic event ordinal (`ledger * 1e6 + indexInLedger`); feed sort key. */
+  seq: number;
+  /** Action kind (supply/borrow/withdraw/repay/liqRepay/liqSeize/multiply/…). */
+  action: string;
+  /** Position side this leg mutated; `null` for non-position rows. */
+  side: 'supply' | 'borrow' | null;
+  /** Asset (token) contract address. */
+  token: string;
+  symbol: string;
+  decimals: number;
+  hubId: number;
+  spokeId: number | null;
+  reserveKey: string | null;
+  /** Action delta this tx, human-readable token units. */
+  amountShort: number;
+  /** Action delta valued in USD at event-time oracle price. */
+  usd: number;
+  /** Liquidator (caller) address on liquidation legs; `null` otherwise. */
+  liquidator: string | null;
+}
