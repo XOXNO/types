@@ -49,4 +49,13 @@ export interface StellarLendingActivityData {
    * events yields realized PnL. `null` for non-position events.
    */
   index: string | null;
+  /**
+   * Entry risk params for a collateral (supply) leg, in basis points — carried
+   * to Kusto so health factor is computed there (collateral-weighted), matching
+   * the MVX `LiquidationThreshold`-in-activity pattern. `null` on borrow and
+   * non-position rows.
+   */
+  liquidationThresholdBps: number | null;
+  liquidationBonusBps: number | null;
+  loanToValueBps: number | null;
 }
