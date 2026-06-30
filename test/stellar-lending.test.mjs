@@ -10,7 +10,6 @@ import {
   StellarSpokeDoc,
   StellarSpokeAssetDoc,
   StellarAccountPositionDoc,
-  StellarTopHoldersDoc,
   StellarGovernanceProposalDoc,
   StellarLendingCursorDoc,
 } from '../dist/stellar-lending/index.js';
@@ -87,17 +86,6 @@ test('account-position doc partitions by accountId', () => {
   });
   assert.equal(d.id, 'account:G123:1:CUSDC');
   assert.equal(d.pk, 'G123');
-});
-
-test('top-holders doc derives id + pk', () => {
-  const d = new StellarTopHoldersDoc({
-    spokeId: 2,
-    hubId: 1,
-    asset: 'CUSDC',
-    side: 'deposits',
-  });
-  assert.equal(d.id, 'topHolders:2:1:CUSDC:deposits');
-  assert.equal(d.pk, StellarLendingDataType.TOP_HOLDERS);
 });
 
 test('governance proposal doc id = operationId', () => {

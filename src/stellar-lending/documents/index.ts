@@ -4,6 +4,5 @@ export * from './hub-asset.doc';
 export * from './spoke.doc';
 export * from './spoke-asset.doc';
 export * from './account-position.doc';
-export * from './top-holders.doc';
 export * from './governance-proposal.doc';
 export * from './cursor.doc';
