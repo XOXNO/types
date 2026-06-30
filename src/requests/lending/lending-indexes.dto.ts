@@ -101,6 +101,23 @@ export class LendingIndexesDto {
 
   @ApiProperty({
     description:
+      'Whether the oracle price is within the first (tightest) deviation tolerance band. MVX-only; absent for chains whose oracle does not expose tolerance bands (e.g. Stellar). The UI borrow/withdraw flow reads this flag.',
+    required: false,
+    type: Boolean,
+    example: true,
+  })
+  withinFirstTolerance?: boolean;
+  @ApiProperty({
+    description:
+      'Whether the oracle price is within the second (wider) deviation tolerance band. MVX-only; absent for chains whose oracle does not expose tolerance bands (e.g. Stellar). The UI borrow/withdraw flow reads this flag.',
+    required: false,
+    type: Boolean,
+    example: true,
+  })
+  withinSecondTolerance?: boolean;
+
+  @ApiProperty({
+    description:
       'Blockchain network the indexes belong to (optional, defaults downstream to MVX when absent)',
     required: false,
     enum: ActivityChain,
