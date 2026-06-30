@@ -42,4 +42,11 @@ export interface StellarLendingActivityData {
    * pick each holder's latest balance deterministically.
    */
   seq: number;
+  /**
+   * Pool index (27-dec RAY) on `side` at event time — supply index for supply
+   * legs, borrow index for borrow legs. With `balanceShort` (scaled, denominated)
+   * the actual balance is `balanceShort * index / 1e27`; interval growth across
+   * events yields realized PnL. `null` for non-position events.
+   */
+  index: string | null;
 }

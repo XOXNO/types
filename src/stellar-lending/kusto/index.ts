@@ -1,2 +1,2 @@
 export * from './activity-data';
-export * from './market-snapshot-row';
+export * from './market-state-data';
