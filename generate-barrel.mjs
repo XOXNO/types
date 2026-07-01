@@ -41,6 +41,9 @@ function walk(dir, collector, baseDir) {
 
 // Build full root exports
 walk(rootDir, exportLinesRoot, rootDir);
+for (const dir of SELF_CONTAINED_DIRS) {
+  exportLinesRoot.push(`export * from "./${dir}";`);
+}
 
 // Build enums-only exports with relative paths from `enums/`
 if (existsSync(enumsDir)) {
