@@ -295,6 +295,7 @@ export * from './requests/lending/lending-token-price.dto';
 export * from './requests/lending/stellar-lending-admin-args.dto';
 export * from './requests/lending/stellar-lending-args.dto';
 export * from './requests/lending/stellar-lending-events.dto';
+export * from './stellar-lending';
 export * from './requests/nft-activity-data/analytics-overview';
 export * from './requests/nft-activity-data/analytics-volume';
 export * from './requests/nft-activity-data/nft-activity-data';
