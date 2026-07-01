@@ -73,6 +73,15 @@ export class BlendUserPosition {
   address!: string;
   @ApiProperty({ description: 'Blend pool contract address' })
   blendPool!: string;
+  @ApiProperty({
+    description: 'Existing XOXNO account id, or "0" create new account',
+    example: '0',
+  })
+  migrationAccountId!: string;
+  @ApiProperty({ description: 'Selected XOXNO spoke id', example: 1 })
+  migrationSpokeId!: number;
+  @ApiProperty({ description: 'Selected XOXNO hub id', example: 1 })
+  migrationHubId!: number;
   @ApiProperty({ type: () => BlendLeg, isArray: true })
   collateral!: BlendLeg[];
   @ApiProperty({ type: () => BlendLeg, isArray: true })
@@ -110,8 +119,10 @@ export class MigrateFromBlendArgs {
     example: '0',
   })
   accountId!: string;
-  @ApiProperty({ description: 'eMode category to enter (0 = none)', example: 0 })
-  eModeCategory!: number;
+  @ApiProperty({ description: 'Selected XOXNO spoke id', example: 1 })
+  spokeId!: number;
+  @ApiProperty({ description: 'Selected XOXNO hub id', example: 1 })
+  hubId!: number;
   @ApiProperty({
     description: 'Collateral assets to withdraw from Blend and re-collateralize',
     type: () => String,
