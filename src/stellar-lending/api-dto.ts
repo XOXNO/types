@@ -156,3 +156,9 @@ export interface DefiLlamaDimensionsDto {
   chain: string;
   version: string;
 }
+
+export interface GovernanceProposalsPageDto {
+  resources: unknown[];
+  hasMoreResults: boolean;
+  continuationToken?: string;
+}
