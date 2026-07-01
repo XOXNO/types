@@ -41,6 +41,84 @@ export interface StellarAssetListItem {
   marketCount: number;
 }
 
+/** One (spoke, hub) market row for an asset detail page. */
+export interface StellarAssetPageMarket {
+  spokeId: number;
+  hubId: number;
+  asset: string;
+  spokeName: string | null;
+  hubName: string | null;
+  supplyApy: number;
+  borrowApy: number;
+  utilization: number;
+  suppliedShort: number;
+  borrowedShort: number;
+  availableLiquidityShort: number;
+  usdPrice: number;
+  depositsUsd: number;
+  borrowsUsd: number;
+  availableLiquidityUsd: number;
+  collateralFactorBps: number;
+  liquidationThresholdBps: number;
+  isCollateralizable: boolean;
+  isBorrowable: boolean;
+  paused: boolean;
+  frozen: boolean;
+  supplyCapShort: number;
+  borrowCapShort: number;
+  depositCapFilledPct: number;
+  borrowCapFilledPct: number;
+  remainingSupplyCapacityUsd: number;
+  remainingBorrowCapacityUsd: number;
+  supportedCollateral: string[];
+  borrowableAssets: string[];
+  userSuppliedNative: number;
+  userBorrowedNative: number;
+  userSuppliedUsd: number;
+  userBorrowedUsd: number;
+  liveSupplyIndexRay: string;
+  liveBorrowIndexRay: string;
+}
+
+export interface StellarAssetPageGraphPoint {
+  timestamp: string;
+  supplyApy: number;
+  borrowApy: number;
+  totalDepositsUsd: number;
+  totalBorrowsUsd: number;
+  suppliedNative: number;
+  borrowedNative: number;
+}
+
+export interface StellarAssetPageGraphSeries {
+  spokeId: number;
+  hubId: number;
+  spokeName: string | null;
+  hubName: string | null;
+  points: StellarAssetPageGraphPoint[];
+}
+
+/** One-call payload for the Stellar asset detail page. */
+export interface StellarAssetPage {
+  asset: string;
+  symbol: string;
+  name: string;
+  decimals: number;
+  usdPrice: number;
+  totalDepositsUsd: number;
+  totalBorrowsUsd: number;
+  availableLiquidityUsd: number;
+  hubCount: number;
+  reserveCount: number;
+  minSupplyApy: number;
+  maxSupplyApy: number;
+  minBorrowApy: number;
+  maxBorrowApy: number;
+  depositMarkets: StellarAssetPageMarket[];
+  borrowMarkets: StellarAssetPageMarket[];
+  graphSeries: StellarAssetPageGraphSeries[];
+}
+
 /** One hub aggregated over its hub-assets — a row in the All Hubs table. */
 export interface StellarHubListItem {
   hubId: number;
