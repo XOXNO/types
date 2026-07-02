@@ -12,7 +12,9 @@ import {
   StellarAccountPositionDoc,
   StellarGovernanceProposalDoc,
   StellarLendingCursorDoc,
+  stellarReserveKey,
 } from '../dist/stellar-lending/index.js';
+import { CacheKeys } from '../dist/cache/cache-keys.js';
 
 function test(name, fn) {
   try {
@@ -39,6 +41,22 @@ test('activity enum values', () => {
 
 test('governance kind enum self-contained', () => {
   assert.equal(StellarGovernanceProposalKind.EditAssetConfig, 'EditAssetConfig');
+});
+
+test('shared api cache keys match stellar lending route keys', () => {
+  assert.equal(
+    stellarReserveKey({ spokeId: 2, hubId: 1, asset: 'CUSDC' }),
+    '2:1:CUSDC',
+  );
+  assert.equal(CacheKeys.StellarLendingContext().key, 'sl:context');
+  assert.equal(
+    CacheKeys.StellarLendingReservesList(undefined, undefined, undefined).key,
+    'sl:list:reserves:::',
+  );
+  assert.equal(
+    CacheKeys.StellarLendingReserve(2, 1, 'CUSDC').key,
+    'sl:reserve:2:1:CUSDC',
+  );
 });
 
 test('asset doc derives id + pk', () => {

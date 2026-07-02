@@ -22,6 +22,12 @@ function serializeChain(chain?: string[]): string {
   return (chain ?? []).sort().join(',');
 }
 
+function serializeStellarFilter(value?: string | number | null): string {
+  return value === undefined || value === null || value === ''
+    ? ''
+    : `${value}`;
+}
+
 /**
  * Cache key generators for commonly used patterns.
  * These ensure consistent key formats across repositories.
@@ -532,6 +538,95 @@ export const CacheKeys = {
   UserLendingPositions: (address: string, token?: string): CacheKeyConfig => ({
     key: `user:${address}:lending:positions${token ? `:${token}` : ''}`,
     ttl: TTLS.ONE_MINUTE / 2, // 30 seconds
+  }),
+
+  StellarLendingContext: (): CacheKeyConfig => ({
+    key: 'sl:context',
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingAssetsList: (): CacheKeyConfig => ({
+    key: 'sl:list:assets',
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingHubsList: (): CacheKeyConfig => ({
+    key: 'sl:list:hubs',
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingSpokesList: (): CacheKeyConfig => ({
+    key: 'sl:list:spokes',
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingReservesList: (
+    hubId?: string | number | null,
+    spokeId?: string | number | null,
+    asset?: string | null,
+  ): CacheKeyConfig => ({
+    key: `sl:list:reserves:${serializeStellarFilter(hubId)}:${serializeStellarFilter(spokeId)}:${serializeStellarFilter(asset)}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingReserve: (
+    spokeId: number,
+    hubId: number,
+    asset: string,
+  ): CacheKeyConfig => ({
+    key: `sl:reserve:${spokeId}:${hubId}:${asset}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingAsset: (asset: string): CacheKeyConfig => ({
+    key: `sl:asset:${asset}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingAssetPageBase: (asset: string): CacheKeyConfig => ({
+    key: `sl:asset-page-base:${asset}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingAssetMarkets: (
+    asset: string,
+    side: string,
+  ): CacheKeyConfig => ({
+    key: `sl:asset-markets:${asset}:${side}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingHub: (hubId: number): CacheKeyConfig => ({
+    key: `sl:hub:${hubId}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingSpoke: (spokeId: number): CacheKeyConfig => ({
+    key: `sl:spoke:${spokeId}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingUserPositions: (owner: string): CacheKeyConfig => ({
+    key: `sl:user-positions:${owner}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingAccountPositions: (accountId: string): CacheKeyConfig => ({
+    key: `sl:account-positions:${accountId}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingGovernanceProposals: (
+    top: number,
+    continuationToken?: string | null,
+  ): CacheKeyConfig => ({
+    key: `sl:gov-proposals:${top}:${continuationToken ?? ''}`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
+  StellarLendingLiveIndexes: (hash: string): CacheKeyConfig => ({
+    key: `sl:live-indexes:${hash}`,
+    ttl: TTLS.ONE_SECOND * 3,
   }),
 
   HatomUserInfo: (address: string): CacheKeyConfig => ({

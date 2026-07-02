@@ -1,4 +1,8 @@
 import type {
+  StellarLendingContextDto,
+  StellarReserveDetailItem,
+} from './context';
+import type {
   StellarAssetListItem,
   StellarAssetPage,
   StellarAssetPageMarket,
@@ -12,6 +16,7 @@ export type StellarAssetListItemDto = StellarAssetListItem;
 export type StellarHubListItemDto = StellarHubListItem;
 export type StellarSpokeListItemDto = StellarSpokeListItem;
 export type StellarReserveListItemDto = StellarReserveListItem;
+export type StellarLendingReadContextDto = StellarLendingContextDto;
 export type AssetDto = Omit<
   StellarAssetPage,
   'depositMarkets' | 'borrowMarkets' | 'graphSeries'
@@ -19,18 +24,7 @@ export type AssetDto = Omit<
 export type AssetPageDto = StellarAssetPage;
 export type AssetMarketDto = StellarAssetPageMarket;
 
-export interface ReserveDto extends StellarAssetPageMarket {
-  supplyCapShort: number;
-  borrowCapShort: number;
-  isFlashloanable: boolean;
-  flashloanFeeBps: number;
-  liquidationPenaltyBps: number;
-  liquidationFeesBps: number;
-  useAsCollateral: boolean;
-  targetHealthFactorWad: string;
-  healthFactorForMaxBonusWad: string;
-  liquidationBonusFactorBps: number;
-}
+export interface ReserveDto extends StellarReserveDetailItem {}
 
 export interface HubDto {
   hubId: number;
