@@ -5,7 +5,7 @@ import type {
   StellarSpokeListItem,
 } from './list';
 
-export type StellarReserveKey = `${number}:${number}:${string}`;
+export type StellarReserveKey = string;
 
 export interface StellarReserveKeyInput {
   spokeId: number;
@@ -79,5 +79,5 @@ export function stellarReserveKey({
   hubId,
   asset,
 }: StellarReserveKeyInput): StellarReserveKey {
-  return `${spokeId}:${hubId}:${asset}` as StellarReserveKey;
+  return `${spokeId}:${hubId}:${asset}`;
 }
