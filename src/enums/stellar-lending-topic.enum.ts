@@ -23,4 +23,5 @@ export enum StellarLendingTopic {
   ConfigPoolTemplate = 'config:pool_template',
   ConfigPositionLimits = 'config:position_limits',
   ConfigOracleDisabled = 'config:oracle_disabled',
+  ConfigSpoke = 'config:spoke',
 }

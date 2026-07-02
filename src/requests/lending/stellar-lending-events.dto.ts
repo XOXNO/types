@@ -522,6 +522,38 @@ export class StellarOracleDisabledEvent {
   asset!: string;
 }
 
+// ---------- topic: config:spoke ----------
+export class StellarUpdateSpokeEvent {
+  @ApiProperty({ type: 'integer', description: 'Spoke id' })
+  spokeId!: number;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Whether the spoke is deprecated (all reads gated)',
+  })
+  isDeprecated!: boolean;
+
+  @ApiProperty({
+    type: String,
+    description:
+      'Liquidation curve target health factor (USD WAD). Stamped at spoke creation.',
+  })
+  liquidationTargetHfWad!: string;
+
+  @ApiProperty({
+    type: String,
+    description:
+      'Health factor at which the liquidation bonus reaches its maximum (USD WAD)',
+  })
+  healthFactorForMaxBonusWad!: string;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Liquidation bonus scaling factor (BPS, 10000 = 1.0x)',
+  })
+  liquidationBonusFactorBps!: number;
+}
+
 /**
  * Discriminated union of every decoded Stellar lending event, keyed by the
  * `"<domain>:<action>"` topic. Narrow on `topic` to access the typed `data`.
@@ -555,4 +587,5 @@ export type StellarLendingDecodedEvent =
   | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }
   | { topic: 'config:pool_template'; data: StellarUpdatePoolTemplateEvent }
   | { topic: 'config:position_limits'; data: StellarUpdatePositionLimitsEvent }
-  | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent };
+  | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent }
+  | { topic: 'config:spoke'; data: StellarUpdateSpokeEvent };
