@@ -74,6 +74,12 @@ export class MarketParamsRawDto extends InterestRateModelDto {
     example: '100000000000000',
   })
   borrowCap!: string;
+
+  @ApiProperty({ description: 'Whether the asset can be flash-loaned' })
+  isFlashloanable!: boolean;
+
+  @ApiProperty({ type: 'integer', description: 'Flash-loan fee, bps' })
+  flashloanFeeBps!: number;
 }
 
 export class AssetConfigRawDto {
