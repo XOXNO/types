@@ -58,6 +58,7 @@ export interface StellarLendingActivityData {
   liquidationThresholdBps: number | null;
   liquidationBonusBps: number | null;
   loanToValueBps: number | null;
+  liquidationFeesBps: number | null;
   /**
    * Liquidator (caller) address on liquidation legs (`liqRepay`/`liqSeize`),
    * correlated by tx from the on-chain `LiquidationEvent`. `null` on all other

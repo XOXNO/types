@@ -1,9 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { AccountPositionType, PositionMode } from '../../enums/lending.enum';
-import {
-  AssetConfigRawDto,
-  MarketParamsRawDto,
-} from './stellar-lending-admin-args.dto';
+import { MarketParamsRawDto } from './stellar-lending-admin-args.dto';
 import { StellarLendingOracleUpdateStruct } from '../../cosmos-db/documents/lending/lending-oracle';
 
 /**
@@ -11,6 +8,9 @@ import { StellarLendingOracleUpdateStruct } from '../../cosmos-db/documents/lend
  */
 
 export class StellarMarketStateSnapshot {
+  @ApiProperty({ type: 'integer', description: 'Hub the market belongs to' })
+  hubId!: number;
+
   @ApiProperty({
     type: String,
     description: 'Pool asset whose state was updated',
@@ -36,7 +36,7 @@ export class StellarMarketStateSnapshot {
   @ApiProperty({
     description: 'Live pool token balance, asset-native units decimal string',
   })
-  reservesRay!: string;
+  cash!: string;
 
   @ApiProperty({
     description: 'Total scaled supply shares, RAY decimal string',
@@ -52,12 +52,6 @@ export class StellarMarketStateSnapshot {
     description: 'Scaled protocol revenue shares, RAY decimal string',
   })
   revenueRay!: string;
-
-  @ApiProperty({
-    required: false,
-    description: 'USD WAD price used for accrual, decimal string when present',
-  })
-  assetPriceWad?: string;
 }
 
 export class StellarEventAccountAttributes {
@@ -66,9 +60,9 @@ export class StellarEventAccountAttributes {
 
   @ApiProperty({
     type: 'integer',
-    description: 'E-mode category id; 0 means no e-mode',
+    description: 'Risk spoke the account binds to',
   })
-  eModeCategoryId!: number;
+  spokeId!: number;
 
   @ApiProperty({
     enum: PositionMode,
@@ -92,6 +86,9 @@ export class StellarEventPositionDelta {
     description: 'Deposit (collateral) or Borrow (debt) side',
   })
   positionType!: 'Deposit' | 'Borrow';
+
+  @ApiProperty({ type: 'integer', description: 'Hub the position belongs to' })
+  hubId!: number;
 
   @ApiProperty({ type: String, description: 'Asset address for this position' })
   asset!: string;
@@ -135,62 +132,21 @@ export class StellarEventPositionDelta {
       'Loan-to-value, bps — present for Deposit, undefined for Borrow',
   })
   loanToValueBps?: number;
-}
-
-export class StellarEventEModeCategory {
-  @ApiProperty({ type: 'integer', description: 'E-mode category id' })
-  categoryId!: number;
-
-  @ApiProperty({ description: 'Whether the category is deprecated' })
-  isDeprecated!: boolean;
-}
-
-export class StellarEModeAssetConfig {
-  @ApiProperty({
-    description: 'Whether the asset is collateralizable within the category',
-  })
-  isCollateralizable!: boolean;
-
-  @ApiProperty({
-    description: 'Whether the asset is borrowable within the category',
-  })
-  isBorrowable!: boolean;
 
   @ApiProperty({
     type: 'integer',
-    description: 'Loan-to-value, bps — per-asset within the category',
-  })
-  loanToValueBps!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Liquidation threshold, bps — per-asset within the category',
-  })
-  liquidationThresholdBps!: number;
-
-  @ApiProperty({
-    type: 'integer',
-    description: 'Liquidation bonus, bps — per-asset within the category',
-  })
-  liquidationBonusBps!: number;
-
-  @ApiProperty({
+    required: false,
     description:
-      'Spoke supply cap in asset-native units (0 = uncapped). Enforced per e-mode category.',
-    example: '0',
+      'Protocol liquidation fee, bps — present for Deposit, undefined for Borrow',
   })
-  supplyCap!: string;
-
-  @ApiProperty({
-    description:
-      'Spoke borrow cap in asset-native units (0 = uncapped). Enforced per e-mode category.',
-    example: '0',
-  })
-  borrowCap!: string;
+  liquidationFeesBps?: number;
 }
 
 // ---------- topic: market:create ----------
 export class StellarCreateMarketEvent {
+  @ApiProperty({ type: 'integer', description: 'Hub the market belongs to' })
+  hubId!: number;
+
   @ApiProperty({ type: String, description: 'Base (pool) asset address' })
   baseAsset!: string;
 
@@ -215,8 +171,8 @@ export class StellarCreateMarketEvent {
   @ApiProperty({ description: 'Optimal utilization, RAY decimal string' })
   optimalUtilization!: string;
 
-  @ApiProperty({ type: String, required: false, description: 'Max utilization, RAY decimal string' })
-  maxUtilization?: string;
+  @ApiProperty({ description: 'Max utilization, RAY decimal string' })
+  maxUtilization!: string;
 
   @ApiProperty({ type: 'integer', description: 'Reserve factor, bps' })
   reserveFactor!: number;
@@ -226,12 +182,6 @@ export class StellarCreateMarketEvent {
     description: 'Deployed pool (market) contract address',
   })
   marketAddress!: string;
-
-  @ApiProperty({
-    type: AssetConfigRawDto,
-    description: 'Initial asset risk configuration',
-  })
-  config!: AssetConfigRawDto;
 }
 
 // ---------- topic: market:params_update ----------
@@ -268,6 +218,9 @@ export class StellarUpdateMarketParamsEvent {
 }
 
 export class StellarPoolMarketParamsUpdate {
+  @ApiProperty({ type: 'integer', description: 'Hub the market belongs to' })
+  hubId!: number;
+
   @ApiProperty({ type: String, description: 'Pool asset address' })
   asset!: string;
 
@@ -322,6 +275,9 @@ export class StellarUpdatePositionBatchEvent {
 
 // ---------- topic: position:flash_loan ----------
 export class StellarFlashLoanEvent {
+  @ApiProperty({ type: 'integer', description: 'Hub the market belongs to' })
+  hubId!: number;
+
   @ApiProperty({ type: String, description: 'Flash-loaned asset address' })
   asset!: string;
 
@@ -342,18 +298,6 @@ export class StellarFlashLoanEvent {
   fee!: string;
 }
 
-// ---------- topic: config:asset ----------
-export class StellarUpdateAssetConfigEvent {
-  @ApiProperty({ type: String, description: 'Asset address' })
-  asset!: string;
-
-  @ApiProperty({
-    type: AssetConfigRawDto,
-    description: 'Updated asset risk configuration',
-  })
-  config!: AssetConfigRawDto;
-}
-
 // ---------- topic: config:oracle ----------
 export class StellarUpdateAssetOracleEvent {
   @ApiProperty({ type: String, description: 'Asset address' })
@@ -365,42 +309,6 @@ export class StellarUpdateAssetOracleEvent {
       'Resolved oracle provider configuration. Sanity bounds and per-source quote tokens live on this nested struct, matching the contract event wire layout.',
   })
   oracle!: StellarLendingOracleUpdateStruct;
-}
-
-// ---------- topic: config:emode_category ----------
-export class StellarUpdateEModeCategoryEvent {
-  @ApiProperty({
-    type: StellarEventEModeCategory,
-    description: 'E-mode category snapshot',
-  })
-  category!: StellarEventEModeCategory;
-}
-
-// ---------- topic: config:emode_asset ----------
-export class StellarUpdateEModeAssetEvent {
-  @ApiProperty({ type: String, description: 'Asset address' })
-  asset!: string;
-
-  @ApiProperty({
-    type: StellarEModeAssetConfig,
-    description: 'Per-asset e-mode flags',
-  })
-  config!: StellarEModeAssetConfig;
-
-  @ApiProperty({ type: 'integer', description: 'E-mode category id' })
-  categoryId!: number;
-}
-
-// ---------- topic: config:remove_emode_asset ----------
-export class StellarRemoveEModeAssetEvent {
-  @ApiProperty({
-    type: String,
-    description: 'Asset address removed from the category',
-  })
-  asset!: string;
-
-  @ApiProperty({ type: 'integer', description: 'E-mode category id' })
-  categoryId!: number;
 }
 
 // ---------- topic: debt:bad_debt ----------
@@ -424,6 +332,9 @@ export class StellarCleanBadDebtEvent {
 
 // ---------- topic: strategy:fee ----------
 export class StellarStrategyFeeEvent {
+  @ApiProperty({ type: 'integer', description: 'Hub the market belongs to' })
+  hubId!: number;
+
   @ApiProperty({ type: String, description: 'Strategy-borrow asset address' })
   asset!: string;
 
@@ -522,6 +433,29 @@ export class StellarOracleDisabledEvent {
   asset!: string;
 }
 
+// ---------- topic: position:liquidation ----------
+export class StellarLiquidationEvent {
+  @ApiProperty({ type: String, description: 'Liquidator address' })
+  liquidator!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Account id / nonce that was liquidated',
+  })
+  accountId!: string;
+
+  @ApiProperty({
+    description: 'Aggregate debt repaid, USD WAD decimal string',
+  })
+  repaidUsdWad!: string;
+
+  @ApiProperty({
+    description:
+      'Applied liquidation bonus, bps decimal string; total seized USD is repaid * (1 + bonus)',
+  })
+  bonusBps!: string;
+}
+
 // ---------- topic: config:spoke ----------
 export class StellarUpdateSpokeEvent {
   @ApiProperty({ type: 'integer', description: 'Spoke id' })
@@ -571,11 +505,8 @@ export type StellarLendingDecodedEvent =
     }
   | { topic: 'position:batch_update'; data: StellarUpdatePositionBatchEvent }
   | { topic: 'position:flash_loan'; data: StellarFlashLoanEvent }
-  | { topic: 'config:asset'; data: StellarUpdateAssetConfigEvent }
   | { topic: 'config:oracle'; data: StellarUpdateAssetOracleEvent }
-  | { topic: 'config:emode_category'; data: StellarUpdateEModeCategoryEvent }
-  | { topic: 'config:emode_asset'; data: StellarUpdateEModeAssetEvent }
-  | { topic: 'config:remove_emode_asset'; data: StellarRemoveEModeAssetEvent }
+  | { topic: 'position:liquidation'; data: StellarLiquidationEvent }
   | { topic: 'debt:bad_debt'; data: StellarCleanBadDebtEvent }
   | {
       topic: 'strategy:initial_payment';
