@@ -53,7 +53,7 @@ export class LendingGovernanceProposalDoc {
     enum: GovernanceProposalKind,
     enumName: 'GovernanceProposalKind',
     description: 'Which change this proposal performs',
-    example: GovernanceProposalKind.EditAssetConfig,
+    example: GovernanceProposalKind.CreateLiquidityPool,
   })
   kind!: GovernanceProposalKind;
 
@@ -117,6 +117,20 @@ export class LendingGovernanceProposalDoc {
     example: 'USDC',
   })
   assetSymbol?: string;
+
+  @ApiProperty({
+    required: false,
+    type: 'integer',
+    description: 'Hub the proposal concerns, when hub-scoped',
+  })
+  hubId?: number;
+
+  @ApiProperty({
+    required: false,
+    type: 'integer',
+    description: 'Spoke the proposal concerns, when spoke-scoped',
+  })
+  spokeId?: number;
 
   @ApiProperty({
     description: 'One-line human summary of the proposed change',
