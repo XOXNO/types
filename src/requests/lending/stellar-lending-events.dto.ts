@@ -226,7 +226,7 @@ export class StellarPoolMarketParamsUpdate {
 
   @ApiProperty({
     type: MarketParamsRawDto,
-    description: 'Full pool market params including hub caps',
+    description: 'Full pool market params',
   })
   params!: MarketParamsRawDto;
 }
@@ -236,7 +236,7 @@ export class StellarUpdateMarketParamsBatchEvent {
   @ApiProperty({
     type: StellarPoolMarketParamsUpdate,
     isArray: true,
-    description: 'Per-asset hub cap / params updates from the central pool',
+    description: 'Per-asset params updates from the central pool',
   })
   updates!: StellarPoolMarketParamsUpdate[];
 }

@@ -61,20 +61,6 @@ export class MarketParamsRawDto extends InterestRateModelDto {
   })
   assetDecimals!: number;
 
-  @ApiProperty({
-    description:
-      'Hub supply cap in asset-native units (0 = uncapped). Lives on the pool MarketParamsRaw.',
-    example: '100000000000000',
-  })
-  supplyCap!: string;
-
-  @ApiProperty({
-    description:
-      'Hub borrow cap in asset-native units (0 = uncapped). Lives on the pool MarketParamsRaw.',
-    example: '100000000000000',
-  })
-  borrowCap!: string;
-
   @ApiProperty({ description: 'Whether the asset can be flash-loaned' })
   isFlashloanable!: boolean;
 

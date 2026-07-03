@@ -24,7 +24,6 @@ export enum StellarGovernanceProposalKind {
   RevokeBlendPool = 'RevokeBlendPool',
   CreateLiquidityPool = 'CreateLiquidityPool',
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
-  UpdatePoolCaps = 'UpdatePoolCaps',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
   DisableTokenOracle = 'DisableTokenOracle',

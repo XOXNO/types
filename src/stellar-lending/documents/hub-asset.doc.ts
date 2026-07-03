@@ -31,10 +31,6 @@ export class StellarHubAssetDoc {
   supplyApy = 0;
   borrowApy = 0;
   utilization = 0;
-  supplyCap = '0';
-  borrowCap = '0';
-  supplyCapShort = 0;
-  borrowCapShort = 0;
   isFlashloanable = false;
   flashloanFeeBps = 0;
   updatedAt = 0;
