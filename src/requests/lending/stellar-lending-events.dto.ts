@@ -470,7 +470,7 @@ export class StellarUpdateSpokeEvent {
   @ApiProperty({
     type: String,
     description:
-      'Liquidation curve target health factor (USD WAD). Stamped at spoke creation.',
+      'Liquidation curve target health factor (USD WAD). Defaulted at spoke creation, overridable via SetSpokeLiquidationCurve.',
   })
   liquidationTargetHfWad!: string;
 

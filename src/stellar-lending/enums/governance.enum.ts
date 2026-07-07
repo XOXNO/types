@@ -32,6 +32,7 @@ export enum StellarGovernanceProposalKind {
   TransferControllerOwnership = 'TransferControllerOwnership',
   ConfigureMarketOracle = 'ConfigureMarketOracle',
   EditOracleTolerance = 'EditOracleTolerance',
+  SetSpokeLiquidationCurve = 'SetSpokeLiquidationCurve',
   GovernanceUpgrade = 'GovernanceUpgrade',
   UpdateDelay = 'UpdateDelay',
   GrantGovernanceRole = 'GrantGovernanceRole',

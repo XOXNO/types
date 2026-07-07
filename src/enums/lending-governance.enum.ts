@@ -18,6 +18,7 @@ export enum GovernanceProposalKind {
   AddAssetToSpoke = 'AddAssetToSpoke',
   EditAssetInSpoke = 'EditAssetInSpoke',
   RemoveAssetFromSpoke = 'RemoveAssetFromSpoke',
+  SetSpokeLiquidationCurve = 'SetSpokeLiquidationCurve',
   ApproveToken = 'ApproveToken',
   RevokeToken = 'RevokeToken',
   ApproveBlendPool = 'ApproveBlendPool',
