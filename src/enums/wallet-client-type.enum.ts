@@ -4,6 +4,7 @@ export enum WalletClientType {
   MAIAR_V2 = 'maiar_v2',
   SUI = 'sui',
   LEDGER = 'ledger',
+  TREZOR = 'trezor',
   EXTENSION = 'extension',
   NATIVE = 'native',
   ZK_LOGIN = 'zkLogin',
