@@ -27,7 +27,6 @@ export enum GovernanceProposalKind {
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
-  DisableTokenOracle = 'DisableTokenOracle',
   UpgradeController = 'UpgradeController',
   MigrateController = 'MigrateController',
   TransferControllerOwnership = 'TransferControllerOwnership',
