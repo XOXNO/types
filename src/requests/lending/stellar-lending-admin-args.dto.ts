@@ -141,21 +141,22 @@ export class OracleSourceConfigInputDto {
     type: LendingOracleAssetRef,
     required: false,
     description:
-      'Reflector asset reference (Stellar address / Symbol). Omit for RedStone.',
+      'Reflector asset reference (Stellar address / Symbol). Omit for RedStone/Xoxno.',
   })
   asset?: LendingOracleAssetRef;
 
   @ApiProperty({
     type: String,
     required: false,
-    description: 'RedStone feed id. Omit for Reflector.',
+    description: 'RedStone/Xoxno feed id. Omit for Reflector.',
   })
   feedId?: string;
 
   @ApiProperty({
     enum: LendingOracleReadMode,
     enumName: 'LendingOracleReadMode',
-    description: 'Read mode (Reflector Spot/Twap; RedStone is always Spot)',
+    description:
+      'Read mode (Reflector Spot/Twap; RedStone and Xoxno are always Spot)',
   })
   readMode!: LendingOracleReadMode;
 
@@ -169,7 +170,7 @@ export class OracleSourceConfigInputDto {
   @ApiProperty({
     type: 'integer',
     required: false,
-    description: 'Per-source max stale seconds (RedStone)',
+    description: 'Per-source max stale seconds (RedStone/Xoxno)',
   })
   maxStaleSeconds?: number;
 }

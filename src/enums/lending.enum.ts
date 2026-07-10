@@ -33,6 +33,8 @@ export enum ExchangeSource {
 export enum LendingOracleProviderKind {
   ReflectorSep40 = 'ReflectorSep40',
   RedStonePriceFeed = 'RedStonePriceFeed',
+  /** First-party XOXNO oracle adapter: RedStone wire shape, independent provider. */
+  XoxnoPriceFeed = 'XoxnoPriceFeed',
 }
 
 export enum LendingOracleAssetRefKind {
