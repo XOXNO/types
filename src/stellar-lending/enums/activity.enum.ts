@@ -15,4 +15,5 @@ export enum StellarLendingActivity {
   BadDebt = 'badDebt',
   StrategyFee = 'strategyFee',
   InitialPayment = 'initialPayment',
+  Unknown = 'unknown',
 }
