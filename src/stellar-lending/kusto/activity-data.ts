@@ -66,4 +66,30 @@ export interface StellarLendingActivityData {
    * are the liquidatee).
    */
   liquidator: string | null;
+  /**
+   * Raw on-chain `PositionAction` discriminant (u32) for position legs — kept
+   * verbatim so Kusto can distinguish codes that collapse to one
+   * `StellarLendingActivity` (e.g. RepayCollateralWithdraw vs
+   * RepayCollateralRepay) and never loses an unmapped code.
+   */
+  actionCode?: number;
+  /** Position mode (e-mode) of the account batch this leg belongs to. */
+  positionMode?: number;
+  /** Raw fee in token base units (flash loan / strategy fee), big-int string. */
+  fee?: string;
+  /** Raw amount forwarded after the strategy fee, big-int string. */
+  amountSent?: string;
+  /** Flash-loan receiver contract address. */
+  receiver?: string;
+  /**
+   * Scaled balance (27-dec RAY) written off by a bad-debt zeroing row —
+   * the position's pre-wipe balance on `side`.
+   */
+  writtenOffScaledRay?: string;
+  /** Total seized collateral (USD, 18-dec WAD string) on the bad-debt header. */
+  collateralUsdWad?: string;
+  /** Blend-migration position counts. */
+  collateralCount?: number;
+  supplyCount?: number;
+  debtCount?: number;
 }

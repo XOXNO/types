@@ -34,4 +34,12 @@ export interface StellarLendingMarketStateData {
   borrowIndexRay: string;
   oraclePrice: number | null;
   seq: number;
+  /** Raw asset-native cash (base units), big-int string. */
+  cash?: string;
+  /** Raw scaled totals (27-dec RAY shares), big-int strings from the event. */
+  suppliedScaled?: string;
+  borrowedScaled?: string;
+  revenueScaled?: string;
+  /** Ledger close time (seconds) carried on the on-chain snapshot leg. */
+  chainTimestamp?: string;
 }
