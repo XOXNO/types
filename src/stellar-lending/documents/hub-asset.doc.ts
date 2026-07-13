@@ -3,6 +3,10 @@ import { StellarLendingDataType } from '../enums';
 /**
  * Liquidity truth for one asset on one hub (`hubAsset:{hubId}:{asset}`). IRM +
  * state + derived APY/utilization are event-sourced from the pool contract.
+ * `suppliedScaledRay`/`borrowedScaledRay`/`revenueScaledRay` hold the RAY-scaled
+ * shares straight from the event; multiply by the live supply/borrow index and
+ * denominate on read to recover token amounts. `cash` is the plain token
+ * base-unit balance (not index-scaled).
  */
 export class StellarHubAssetDoc {
   dataType = StellarLendingDataType.HUB_ASSET;
@@ -22,12 +26,9 @@ export class StellarHubAssetDoc {
   supplyIndexRay = '0';
   borrowIndexRay = '0';
   cash = '0';
-  supplied = '0';
-  borrowed = '0';
-  revenue = '0';
-  suppliedShort = 0;
-  borrowedShort = 0;
-  cashShort = 0;
+  suppliedScaledRay = '0';
+  borrowedScaledRay = '0';
+  revenueScaledRay = '0';
   supplyApy = 0;
   borrowApy = 0;
   utilization = 0;
