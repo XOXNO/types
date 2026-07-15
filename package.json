@@ -34,7 +34,7 @@
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "test": "echo \"Error: no test specified\" && exit 1",
     "test:lending-chain": "npm run build && node test/lending-chain.test.mjs",
-    "test:stellar-lending": "npm run build && node test/stellar-lending.test.mjs"
+    "test:stellar-lending": "npm run build && tsc --noEmit --target ES2020 --module commonjs --moduleResolution node --strict --skipLibCheck test/stellar-lending-live-state.types.ts && node test/stellar-lending.test.mjs"
   },
   "repository": {
     "type": "git",

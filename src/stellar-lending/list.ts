@@ -139,6 +139,8 @@ export interface StellarSpokeListItem {
   name: string | null;
   /** Primary connected hub (`connectedHubIds[0]`); a spoke may span hubs. */
   hubId: number;
+  /** Every hub connected to the spoke. */
+  connectedHubIds: number[];
   /** Total value locked (USD); equals total deposits across reserves. */
   tvlUsd: number;
   totalBorrowsUsd: number;
