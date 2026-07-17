@@ -37,6 +37,11 @@ export enum GovernanceProposalKind {
   GrantGovernanceRole = 'GrantGovernanceRole',
   RevokeGovernanceRole = 'RevokeGovernanceRole',
   TransferGovernanceOwnership = 'TransferGovernanceOwnership',
+  /**
+   * Owner-only, non-vetoable Recovery-tier council reset (`reset_cancellers`).
+   * Scheduled at the ~30-day Recovery delay to replace a captured canceller set.
+   */
+  CancellerReset = 'CancellerReset',
   Unknown = 'Unknown',
 }
 
