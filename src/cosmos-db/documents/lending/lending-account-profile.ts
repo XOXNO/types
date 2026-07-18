@@ -136,6 +136,14 @@ export class LendingAccountProfileDoc {
   chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
+    description:
+      'Stellar spoke the account belongs to (rs-lending-xlm `AccountMeta.spoke_id`). Always 0 for MVX.',
+    required: false,
+    example: 1,
+  })
+  spokeId?: number;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'account123_EGLD',
   })
