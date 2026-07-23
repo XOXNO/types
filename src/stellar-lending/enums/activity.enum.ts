@@ -6,6 +6,8 @@ export enum StellarLendingActivity {
   LiqRepay = 'liqRepay',
   LiqSeize = 'liqSeize',
   Multiply = 'multiply',
+  /** On-chain `PositionAction::ParamUpd` (7) — risk-param refresh without flow. */
+  ParamUpdate = 'paramUpdate',
   SwapDebt = 'swapDebt',
   SwapCollateral = 'swapCollateral',
   RepayWithCollateral = 'repayWithCollateral',

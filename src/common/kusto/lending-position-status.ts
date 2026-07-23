@@ -25,7 +25,8 @@ export class LendingPositionStatus {
   })
   borrowed!: number;
   @ApiProperty({
-    description: 'The health factor of the lending account',
+    description:
+      'Health factor of the lending account. Stellar (StellarGetLendingPositions): debt / liquidation-weighted collateral × 100 — higher is riskier; >= 100 is liquidatable. MVX uses the same liquidatable threshold (>= 100) on GetLendingPositions. Do not invert the Stellar formula.',
     example: 30,
   })
   healthFactor!: number;

@@ -15,7 +15,11 @@ export interface StellarLendingActivityData {
   token: string;
   /** Action delta amount (this tx), big-int string. */
   amount: string;
-  amountShort: number;
+  /**
+   * Display-unit delta. `null` when the asset header decimals are not yet
+   * known — never fabricated from a default (append-only activity).
+   */
+  amountShort: number | null;
   oraclePrice: number | null;
   usd: number | null;
   feeShort?: number;
@@ -66,6 +70,17 @@ export interface StellarLendingActivityData {
    * are the liquidatee).
    */
   liquidator: string | null;
+  /**
+   * Aggregate debt repaid (USD WAD string) from `position:liquidation`, stamped
+   * onto same-tx `liqRepay`/`liqSeize` legs. `null` on non-liquidation rows.
+   */
+  repaidUsdWad?: string | null;
+  /**
+   * Applied liquidation bonus (bps string) from `position:liquidation`, stamped
+   * onto same-tx `liqRepay`/`liqSeize` legs. Total seized USD ≈
+   * repaid * (1 + bonus / 10_000). `null` on non-liquidation rows.
+   */
+  bonusBps?: string | null;
   /**
    * Raw on-chain `PositionAction` discriminant (u32) for position legs — kept
    * verbatim so Kusto can distinguish codes that collapse to one

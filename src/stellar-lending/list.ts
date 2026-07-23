@@ -200,7 +200,7 @@ export interface StellarUserActivityItem {
   spokeId: number | null;
   reserveKey: string | null;
   /** Action delta this tx, human-readable token units. */
-  amountShort: number;
+  amountShort: number | null;
   /** Action delta valued in USD at event-time oracle price. */
   usd: number;
   /** Liquidator (caller) address on liquidation legs; `null` otherwise. */

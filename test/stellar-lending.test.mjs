@@ -37,6 +37,7 @@ test('data-type enum values', () => {
 test('activity enum values', () => {
   assert.equal(StellarLendingActivity.Supply, 'supply');
   assert.equal(StellarLendingActivity.FlashLoan, 'flashLoan');
+  assert.equal(StellarLendingActivity.ParamUpdate, 'paramUpdate');
 });
 
 test('governance kind enum self-contained', () => {

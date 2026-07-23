@@ -145,10 +145,19 @@ export interface RateSpreadSeriesDto {
   points: unknown[];
 }
 
+/**
+ * Protocol-wide DefiLlama *dimensions* series (`/stellar-lending/defillama`).
+ * Distinct from the integrations market export (`DefillamaLendingExport` on
+ * `@xoxno/types` root — `/integrations/lending/stellar`).
+ */
 export interface DefiLlamaDimensionsDto {
-  protocol: string;
-  chain: string;
-  version: string;
+  points: Array<{
+    timestamp: string;
+    tvl: number;
+    borrowed: number;
+    fees: number;
+    revenue: number;
+  }>;
 }
 
 export interface GovernanceProposalsPageDto {
