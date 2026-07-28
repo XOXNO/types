@@ -28,11 +28,38 @@ export interface StellarMarketIndexByHub {
    */
   anchorPriceUsd: string;
   anchorPriceUsdShort: number;
-  /** Freshness timestamp of the final blend (seconds). */
+  /** Freshness timestamp of the final blend (seconds). Optional on live-state. */
+  priceTimestamp?: number;
+  stale?: boolean;
+  deviation?: boolean;
+  /** True when the price would pass the fail-closed solvency path. */
+  valid?: boolean;
+  chain: ActivityChain;
+}
+
+/**
+ * Full soft-status market row from controller `get_market_indexes_detailed`
+ * (api-v2 `/stellar-lending/detailed-markets`). Same price legs as
+ * `MarketIndexView` with required validity flags.
+ */
+export interface StellarDetailedMarketDto {
+  hubId: number;
+  asset: string;
+  supplyIndex: string;
+  supplyIndexShort: number;
+  borrowIndex: string;
+  borrowIndexShort: number;
+  usdPrice: string;
+  usdPriceShort: number;
+  /** Primary leg (`safe_price_wad`). */
+  safePriceUsd: string;
+  safePriceUsdShort: number;
+  /** Secondary leg (`aggregator_price_wad`). */
+  aggregatorPriceUsd: string;
+  aggregatorPriceUsdShort: number;
   priceTimestamp: number;
   stale: boolean;
   deviation: boolean;
-  /** True when the price would pass the fail-closed solvency path. */
   valid: boolean;
   chain: ActivityChain;
 }
