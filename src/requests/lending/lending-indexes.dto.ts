@@ -39,65 +39,69 @@ export class LendingIndexesDto {
   })
   egldPriceShort!: number;
   @ApiProperty({
-    description: 'USD price (typically 1.0) as a string',
+    description: 'Final composed USD price as a string to preserve precision',
     example: '1.0',
     type: String,
   })
   usdPrice!: string;
   @ApiProperty({
-    description: 'USD price (typically 1.0) as a number',
+    description: 'Final composed USD price as a number',
     example: 1.0,
     type: Number,
   })
   usdPriceShort!: number;
   @ApiProperty({
-    description: 'Safe price in EGLD as a string to preserve precision',
+    description:
+      'Primary (first) oracle leg in EGLD as a string. Equals the final/anchor under single-source configs. (MVX dual-source leg; Stellar leaves this unused or equal to primary USD denoms.)',
     example: '1000000000000000000',
     type: String,
   })
-  safePriceEgld!: string;
+  primaryPriceEgld!: string;
   @ApiProperty({
-    description: 'Safe price in EGLD as a number (may lose precision)',
+    description: 'Primary oracle leg in EGLD as a number (may lose precision)',
     example: 1,
     type: Number,
   })
-  safePriceEgldShort!: number;
+  primaryPriceEgldShort!: number;
   @ApiProperty({
-    description: 'Safe price in USD as a string to preserve precision',
+    description:
+      'Primary (first) independent oracle leg in USD as a string to preserve precision',
     example: '16124645832563882000',
     type: String,
   })
-  safePriceUsd!: string;
+  primaryPriceUsd!: string;
   @ApiProperty({
-    description: 'Safe price in USD as a number (may lose precision)',
+    description: 'Primary oracle leg in USD as a number (may lose precision)',
     example: 16.124645832563882,
     type: Number,
   })
-  safePriceUsdShort!: number;
+  primaryPriceUsdShort!: number;
   @ApiProperty({
-    description: 'Aggregator price in EGLD as a string to preserve precision',
+    description:
+      'Anchor (second) oracle leg in EGLD as a string. Equals primary under single-source configs.',
     example: '1000000000000000000',
     type: String,
   })
-  aggregatorPriceEgld!: string;
+  anchorPriceEgld!: string;
   @ApiProperty({
-    description: 'Aggregator price in EGLD as a number (may lose precision)',
+    description: 'Anchor oracle leg in EGLD as a number (may lose precision)',
     example: 1,
     type: Number,
   })
-  aggregatorPriceEgldShort!: number;
+  anchorPriceEgldShort!: number;
   @ApiProperty({
-    description: 'Aggregator price in USD as a string to preserve precision',
+    description:
+      'Anchor (second) independent oracle leg in USD as a string to preserve precision',
     example: '16124645832563882000',
     type: String,
   })
-  aggregatorPriceUsd!: string;
+  anchorPriceUsd!: string;
   @ApiProperty({
-    description: 'Aggregator price in USD as a number (may lose precision)',
+    description: 'Anchor oracle leg in USD as a number (may lose precision)',
     example: 16.124645832563882,
     type: Number,
   })
-  aggregatorPriceUsdShort!: number;
+  anchorPriceUsdShort!: number;
 
   @ApiProperty({
     description:

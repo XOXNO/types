@@ -2,9 +2,10 @@ import type { ActivityChain } from '../enums/common.enum';
 
 /**
  * Live controller `MarketIndexView` for one hub market, plus client short
- * scales. `hubId` is client-attached (view has no hub field); price legs keep
- * historical ABI names (`safe_price_wad` / `aggregator_price_wad`) as
- * primary/anchor short aliases for wire compatibility.
+ * scales. `hubId` is client-attached (view has no hub field).
+ *
+ * Price legs: `usdPrice` = final composed answer; `primaryPriceUsd` /
+ * `anchorPriceUsd` = independent oracle legs (equal under single-source).
  */
 export interface StellarMarketIndexByHub {
   hubId: number;
@@ -16,15 +17,12 @@ export interface StellarMarketIndexByHub {
   /** Final composed USD WAD (`price_wad`). */
   usdPrice: string;
   usdPriceShort: number;
-  /**
-   * Primary/first oracle leg WAD (`safe_price_wad` — historical ABI name, not a
-   * safety flag).
-   */
+  /** First independent oracle leg WAD (`primary_price_wad`). */
   primaryPriceUsd: string;
   primaryPriceUsdShort: number;
   /**
-   * Secondary/second oracle leg WAD (`aggregator_price_wad` — historical ABI
-   * name, not the swap aggregator).
+   * Second independent oracle leg WAD (`anchor_price_wad`).
+   * Equals primary under single-source configs.
    */
   anchorPriceUsd: string;
   anchorPriceUsdShort: number;
@@ -51,12 +49,12 @@ export interface StellarDetailedMarketDto {
   borrowIndexShort: number;
   usdPrice: string;
   usdPriceShort: number;
-  /** Primary leg (`safe_price_wad`). */
-  safePriceUsd: string;
-  safePriceUsdShort: number;
-  /** Secondary leg (`aggregator_price_wad`). */
-  aggregatorPriceUsd: string;
-  aggregatorPriceUsdShort: number;
+  /** First independent oracle leg (`primary_price_wad`). */
+  primaryPriceUsd: string;
+  primaryPriceUsdShort: number;
+  /** Second independent oracle leg (`anchor_price_wad`). */
+  anchorPriceUsd: string;
+  anchorPriceUsdShort: number;
   priceTimestamp: number;
   stale: boolean;
   deviation: boolean;
