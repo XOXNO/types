@@ -1,16 +1,15 @@
 /**
  * Stellar lending governance (timelock) proposal taxonomy.
  *
- * `GovernanceProposalKind` mirrors the `AdminOperation` variants the governance
- * contract schedules; the indexer maps a scheduled operation's invoked function
- * symbol to one of these so the dashboard can title and group proposals.
+ * Mirrors live `AdminOperation` variants. Shared with MVX-era names kept only
+ * as deprecated aliases where the old string matched a renamed variant.
  */
 export enum GovernanceProposalKind {
-  SetAggregator = 'SetAggregator',
+  SetSwapAggregator = 'SetSwapAggregator',
+  SetPriceAggregator = 'SetPriceAggregator',
   SetAccumulator = 'SetAccumulator',
-  SetPoolTemplate = 'SetPoolTemplate',
   SetPositionLimits = 'SetPositionLimits',
-  SetMinBorrowCollateral = 'SetMinBorrowCollateral',
+  SetMinBorrowCollateralUsd = 'SetMinBorrowCollateralUsd',
   SetPositionManager = 'SetPositionManager',
   CreateHub = 'CreateHub',
   AddSpoke = 'AddSpoke',
@@ -19,8 +18,6 @@ export enum GovernanceProposalKind {
   EditAssetInSpoke = 'EditAssetInSpoke',
   RemoveAssetFromSpoke = 'RemoveAssetFromSpoke',
   SetSpokeLiquidationCurve = 'SetSpokeLiquidationCurve',
-  ApproveToken = 'ApproveToken',
-  RevokeToken = 'RevokeToken',
   ApproveBlendPool = 'ApproveBlendPool',
   RevokeBlendPool = 'RevokeBlendPool',
   CreateLiquidityPool = 'CreateLiquidityPool',
@@ -29,38 +26,38 @@ export enum GovernanceProposalKind {
   UpgradePool = 'UpgradePool',
   UpgradeController = 'UpgradeController',
   MigrateController = 'MigrateController',
-  TransferControllerOwnership = 'TransferControllerOwnership',
-  ConfigureMarketOracle = 'ConfigureMarketOracle',
+  TransferCtrlOwnership = 'TransferCtrlOwnership',
   EditOracleTolerance = 'EditOracleTolerance',
-  GovernanceUpgrade = 'GovernanceUpgrade',
-  UpdateDelay = 'UpdateDelay',
-  GrantGovernanceRole = 'GrantGovernanceRole',
-  RevokeGovernanceRole = 'RevokeGovernanceRole',
-  TransferGovernanceOwnership = 'TransferGovernanceOwnership',
-  /**
-   * Owner-only, non-vetoable Recovery-tier council reset (`reset_cancellers`).
-   * Scheduled at the ~30-day Recovery delay to replace a captured canceller set.
-   */
+  ForceSocializeBadDebt = 'ForceSocializeBadDebt',
+  Unpause = 'Unpause',
+  UpgradeGov = 'UpgradeGov',
+  UpdateGovDelay = 'UpdateGovDelay',
+  GrantGovRole = 'GrantGovRole',
+  RevokeGovRole = 'RevokeGovRole',
+  TransferGovOwnership = 'TransferGovOwnership',
+  ConfigureAssetOracle = 'ConfigureAssetOracle',
   CancellerReset = 'CancellerReset',
+  /** @deprecated Use `SetSwapAggregator`. */
+  SetAggregator = 'SetSwapAggregator',
+  /** @deprecated Use `ConfigureAssetOracle`. */
+  ConfigureMarketOracle = 'ConfigureAssetOracle',
+  /** @deprecated Use `ApproveBlendPool`. */
+  ApproveToken = 'ApproveBlendPool',
+  /** @deprecated Removed from live AdminOperation. */
+  SetPoolTemplate = 'SetPoolTemplate',
+  /** @deprecated Removed from live AdminOperation. */
+  RevokeToken = 'RevokeToken',
   Unknown = 'Unknown',
 }
 
-/**
- * Coarse, event-derived proposal status. `Waiting`/`Ready`/`Expired` are NOT
- * stored on-chain — clients derive them from `readyLedger`, `expiresLedger`,
- * and the current ledger.
- */
 export enum GovernanceProposalStatus {
   Pending = 'Pending',
   Executed = 'Executed',
   Cancelled = 'Cancelled',
 }
 
-/**
- * Whether executing the proposal invokes the lending controller (generic
- * `execute`) or the governance contract itself (`execute_self`).
- */
 export enum GovernanceProposalTarget {
   Controller = 'Controller',
   Governance = 'Governance',
+  PriceAggregator = 'PriceAggregator',
 }

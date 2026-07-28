@@ -41,7 +41,14 @@ test('activity enum values', () => {
 });
 
 test('governance kind enum self-contained', () => {
-  assert.equal(StellarGovernanceProposalKind.EditAssetConfig, 'EditAssetConfig');
+  assert.equal(
+    StellarGovernanceProposalKind.ConfigureAssetOracle,
+    'ConfigureAssetOracle',
+  );
+  assert.equal(
+    StellarGovernanceProposalKind.SetSwapAggregator,
+    'SetSwapAggregator',
+  );
 });
 
 test('shared api cache keys match stellar lending route keys', () => {

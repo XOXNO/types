@@ -1,10 +1,11 @@
 import { StellarLendingDataType } from '../enums';
-import type { StellarOracleProvider } from '../oracle-provider';
 
 /**
  * Risk truth for one asset in one spoke on one hub
  * (`spokeAsset:{spokeId}:{hubId}:{asset}`). LTV, liquidation params, flags, and
  * per-spoke usage are event-sourced from the controller contract.
+ * Oracle config is asset-level on the price-aggregator (`StellarAssetDoc`), not
+ * per-spoke — there is no on-chain `oracle_override`.
  */
 export class StellarSpokeAssetDoc {
   dataType = StellarLendingDataType.SPOKE_ASSET;
@@ -23,7 +24,6 @@ export class StellarSpokeAssetDoc {
   borrowCap = '0';
   supplyCapShort = 0;
   borrowCapShort = 0;
-  oracleOverride: StellarOracleProvider | null = null;
   suppliedScaledRay = '0';
   borrowedScaledRay = '0';
   updatedAt = 0;

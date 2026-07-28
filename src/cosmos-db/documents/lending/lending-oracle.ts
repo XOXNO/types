@@ -189,99 +189,62 @@ export class LendingOracleUpdateStruct {
   }
 }
 
+/**
+ * API / swagger projection of on-chain `AssetOracle` for Stellar
+ * `config:asset_oracle`. Sources are opaque JSON objects matching
+ * {@link import('../../../stellar-lending/oracle-provider').StellarPriceSource}
+ * so swagger stays stable without nesting every provider variant.
+ */
 export class StellarLendingOracleUpdateStruct {
   @ApiProperty({
-    type: String,
-    description: 'Base token identifier',
-  })
-  baseTokenId!: string;
-
-  @ApiProperty({
-    type: String,
-    description: 'Quote token identifier',
-  })
-  quoteTokenId!: string;
-
-  @ApiProperty({
-    type: OraclePriceFluctuation,
-    description: 'Price fluctuation tolerance thresholds',
-  })
-  tolerance!: OraclePriceFluctuation;
-
-  @ApiProperty({
     type: 'integer',
-    description: 'Number of decimals for the asset',
+    description:
+      'Token decimals (0 for PriceKey::Ref). Matches on-chain asset_decimals.',
   })
   assetDecimals!: number;
 
   @ApiProperty({
     type: 'integer',
-    description: 'Maximum seconds before price is considered stale',
+    description: 'Asset-level staleness ceiling in seconds',
   })
   maxPriceStaleSeconds!: number;
 
   @ApiProperty({
-    enum: LendingOracleStrategy,
-    enumName: 'LendingOracleStrategy',
-    description: 'Oracle composition strategy',
-  })
-  strategy!: LendingOracleStrategy;
-
-  @ApiProperty({
-    type: LendingOracleSource,
-    description: 'Primary oracle source',
-  })
-  primary!: LendingOracleSource;
-
-  @ApiProperty({
-    type: LendingOracleSource,
-    required: false,
-    description: 'Optional anchor oracle source',
-  })
-  anchor?: LendingOracleSource;
-
-  @ApiProperty({
-    type: String,
-    nullable: true,
-    required: false,
+    type: 'array',
+    items: { type: 'object', additionalProperties: true },
     description:
-      'Quote currency of the primary oracle feed. null = USD-quoted (common case) or RedStone source; non-null = Stellar quote token (e.g. USDC SAC) repriced to USD on-chain',
+      'One or two PriceSource variants (Feed / Scaled / LpShare) as decoded from chain',
   })
-  primaryQuoteToken?: string | null;
+  sources!: Record<string, unknown>[];
 
   @ApiProperty({
-    type: String,
-    nullable: true,
-    required: false,
+    type: OraclePriceFluctuation,
+    description: 'Dual-source agreement band (BPS); ignored for single source',
+  })
+  tolerance!: OraclePriceFluctuation;
+
+  @ApiProperty({
     description:
-      'Quote currency of the anchor oracle feed. null = no anchor, USD-quoted, or RedStone source; non-null = Stellar quote token (e.g. USDC SAC) repriced to USD on-chain',
+      'Independence policy: string "RequireDisjoint" or object AllowShared domains',
   })
-  anchorQuoteToken?: string | null;
+  independence!: string | Record<string, unknown>;
 
   @ApiProperty({
     type: String,
-    required: false,
     description: 'Inclusive lower sanity bound, USD WAD decimal string',
   })
-  minSanityPriceWad?: string;
+  minSanityPriceWad!: string;
 
   @ApiProperty({
     type: String,
-    required: false,
     description: 'Inclusive upper sanity bound, USD WAD decimal string',
   })
-  maxSanityPriceWad?: string;
+  maxSanityPriceWad!: string;
 
   constructor(init?: Partial<StellarLendingOracleUpdateStruct>) {
     Object.assign(this, init);
     if (init?.tolerance) {
       this.tolerance = new OraclePriceFluctuation(init.tolerance);
-    }
-    if (init?.primary) {
-      this.primary = new LendingOracleSource(init.primary);
-    }
-    if (init?.anchor) {
-      this.anchor = new LendingOracleSource(init.anchor);
     }
   }
 }

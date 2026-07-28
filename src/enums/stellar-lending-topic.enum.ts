@@ -1,10 +1,10 @@
 /**
- * Soroban event dispatch keys for the XOXNO Stellar lending controller,
- * each value joined as `"<domain>:<action>"`.
+ * Soroban event dispatch keys for XOXNO Stellar lending contracts
+ * (`"<domain>:<action>"`).
  *
- * Keep in parity with az-functions `StellarV2DispatchKey` plus known-but-
- * unindexed config topics (approve_token, aggregator, accumulator, …).
- * Governance schedulable fn names like `approve_blend_pool` are NOT topics.
+ * Keep in parity with az-functions `StellarV2DispatchKey` and live
+ * `#[contractevent]` topics on pool, controller, and price-aggregator.
+ * Legacy topics retained for historical ledger replay are marked deprecated.
  */
 export enum StellarLendingTopic {
   MarketCreate = 'market:create',
@@ -15,7 +15,19 @@ export enum StellarLendingTopic {
   PositionFlashLoan = 'position:flash_loan',
   PositionLiquidation = 'position:liquidation',
   ConfigHub = 'config:hub',
+  /**
+   * Live price-aggregator write topic (`set_oracle` / `set_sanity_band` /
+   * `set_tolerance`). Payload `{ key: PriceKey, oracle: AssetOracle }`.
+   */
+  ConfigAssetOracle = 'config:asset_oracle',
+  /**
+   * @deprecated Pre-composable aggregator topic. Keep for historical ledger
+   * replay only; live chain emits `config:asset_oracle`.
+   */
   ConfigOracle = 'config:oracle',
+  /**
+   * @deprecated Never emitted by the composable aggregator. Historical only.
+   */
   ConfigOracleDisabled = 'config:oracle_disabled',
   ConfigSpoke = 'config:spoke',
   ConfigSpokeAsset = 'config:spoke_asset',
@@ -24,18 +36,24 @@ export enum StellarLendingTopic {
   StrategyInitialPayment = 'strategy:initial_payment',
   StrategyFee = 'strategy:fee',
   StrategyBlendMigration = 'strategy:blend_migration',
-  /** Known topic; currently skipped by the indexer (governance surface). */
+  /** Live controller: blend pool approve/revoke. */
+  ConfigApproveBlendPool = 'config:approve_blend_pool',
+  /**
+   * @deprecated Replaced by `config:approve_blend_pool`. Historical only.
+   */
   ConfigApproveToken = 'config:approve_token',
-  /** Known topic; currently skipped by the indexer. */
+  /**
+   * @deprecated Replaced by `config:swap_aggregator` /
+   * `config:price_aggregator`. Historical only.
+   */
   ConfigAggregator = 'config:aggregator',
-  /** Known topic; currently skipped by the indexer. */
   ConfigAccumulator = 'config:accumulator',
-  /** Known topic; currently skipped by the indexer. */
+  /**
+   * @deprecated No longer emitted by the controller. Historical only.
+   */
   ConfigPoolTemplate = 'config:pool_template',
-  /** Known topic; currently skipped by the indexer. */
   ConfigPositionLimits = 'config:position_limits',
-  /** Known topic; currently skipped by the indexer. */
+  ConfigMinBorrowCollateral = 'config:min_borrow_collateral',
   ConfigSwapAggregator = 'config:swap_aggregator',
-  /** Known topic; currently skipped by the indexer. */
   ConfigPriceAggregator = 'config:price_aggregator',
 }

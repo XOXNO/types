@@ -18,6 +18,10 @@ const index: StellarMarketIndexByHub = {
   primaryPriceUsdShort: 1,
   anchorPriceUsd: '1000000000000000000',
   anchorPriceUsdShort: 1,
+  priceTimestamp: 1_700_000_000,
+  stale: false,
+  deviation: false,
+  valid: true,
   chain: ActivityChain.STELLAR,
 };
 

@@ -298,15 +298,31 @@ export class StellarFlashLoanEvent {
   fee!: string;
 }
 
-// ---------- topic: config:oracle ----------
+// ---------- topic: config:asset_oracle ----------
 export class StellarUpdateAssetOracleEvent {
-  @ApiProperty({ type: String, description: 'Asset address' })
-  asset!: string;
+  @ApiProperty({
+    description:
+      'PriceKey as decoded from chain: `{ Token: "C…" }` or `{ Ref: "BTC" }`',
+  })
+  key!: Record<string, string>;
 
   @ApiProperty({
     type: StellarLendingOracleUpdateStruct,
     description:
-      'Resolved oracle provider configuration. Sanity bounds and per-source quote tokens live on this nested struct, matching the contract event wire layout.',
+      'Composable AssetOracle (`sources`, independence, tolerance, sanity). Emitted by set_oracle / set_sanity_band / set_tolerance.',
+  })
+  oracle!: StellarLendingOracleUpdateStruct;
+}
+
+// ---------- topic: config:oracle (legacy historical) ----------
+/** @deprecated Live chain emits `config:asset_oracle`. */
+export class StellarLegacyUpdateOracleEvent {
+  @ApiProperty({ type: String, description: 'Asset address (legacy payload)' })
+  asset!: string;
+
+  @ApiProperty({
+    type: StellarLendingOracleUpdateStruct,
+    description: 'Legacy flat oracle config',
   })
   oracle!: StellarLendingOracleUpdateStruct;
 }
@@ -377,21 +393,47 @@ export class StellarInitialMultiplyPaymentEvent {
   accountId!: string;
 }
 
-// ---------- topic: config:approve_token ----------
-export class StellarApproveTokenEvent {
-  @ApiProperty({
-    type: String,
-    description: 'Approved WASM hash, 32-byte hex string',
-  })
-  wasmHash!: string;
+// ---------- topic: config:approve_blend_pool ----------
+export class StellarApproveBlendPoolEvent {
+  @ApiProperty({ type: String, description: 'Blend pool contract address' })
+  pool!: string;
 
   @ApiProperty({
-    description: 'Whether the hash was approved (true) or revoked (false)',
+    description: 'Whether the pool was approved (true) or revoked (false)',
   })
   approved!: boolean;
 }
 
-// ---------- topic: config:aggregator ----------
+/** @deprecated Use StellarApproveBlendPoolEvent / config:approve_blend_pool. */
+export class StellarApproveTokenEvent {
+  @ApiProperty({
+    type: String,
+    description: 'Approved WASM hash or pool address (legacy)',
+  })
+  wasmHash!: string;
+
+  @ApiProperty({
+    description: 'Whether approved (true) or revoked (false)',
+  })
+  approved!: boolean;
+}
+
+// ---------- topic: config:swap_aggregator ----------
+export class StellarUpdateSwapAggregatorEvent {
+  @ApiProperty({ type: String, description: 'Swap aggregator contract address' })
+  aggregator!: string;
+}
+
+// ---------- topic: config:price_aggregator ----------
+export class StellarUpdatePriceAggregatorEvent {
+  @ApiProperty({
+    type: String,
+    description: 'Price aggregator (oracle authority) contract address',
+  })
+  aggregator!: string;
+}
+
+/** @deprecated Split into swap / price aggregator events. */
 export class StellarUpdateAggregatorEvent {
   @ApiProperty({ type: String, description: 'Aggregator contract address' })
   aggregator!: string;
@@ -427,7 +469,17 @@ export class StellarUpdatePositionLimitsEvent {
   maxBorrowPositions!: number;
 }
 
-// ---------- topic: config:oracle_disabled ----------
+// ---------- topic: config:min_borrow_collateral ----------
+export class StellarUpdateMinBorrowCollateralEvent {
+  @ApiProperty({
+    type: String,
+    description: 'Minimum borrow collateral floor, USD WAD decimal string',
+  })
+  minBorrowCollateralUsdWad!: string;
+}
+
+// ---------- topic: config:oracle_disabled (legacy historical) ----------
+/** @deprecated Not emitted by the composable price-aggregator. */
 export class StellarOracleDisabledEvent {
   @ApiProperty({ type: String, description: 'Asset whose oracle was disabled' })
   asset!: string;
@@ -505,7 +557,8 @@ export type StellarLendingDecodedEvent =
     }
   | { topic: 'position:batch_update'; data: StellarUpdatePositionBatchEvent }
   | { topic: 'position:flash_loan'; data: StellarFlashLoanEvent }
-  | { topic: 'config:oracle'; data: StellarUpdateAssetOracleEvent }
+  | { topic: 'config:asset_oracle'; data: StellarUpdateAssetOracleEvent }
+  | { topic: 'config:oracle'; data: StellarLegacyUpdateOracleEvent }
   | { topic: 'position:liquidation'; data: StellarLiquidationEvent }
   | { topic: 'debt:bad_debt'; data: StellarCleanBadDebtEvent }
   | {
@@ -513,10 +566,17 @@ export type StellarLendingDecodedEvent =
       data: StellarInitialMultiplyPaymentEvent;
     }
   | { topic: 'strategy:fee'; data: StellarStrategyFeeEvent }
+  | { topic: 'config:approve_blend_pool'; data: StellarApproveBlendPoolEvent }
   | { topic: 'config:approve_token'; data: StellarApproveTokenEvent }
+  | { topic: 'config:swap_aggregator'; data: StellarUpdateSwapAggregatorEvent }
+  | { topic: 'config:price_aggregator'; data: StellarUpdatePriceAggregatorEvent }
   | { topic: 'config:aggregator'; data: StellarUpdateAggregatorEvent }
   | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }
   | { topic: 'config:pool_template'; data: StellarUpdatePoolTemplateEvent }
   | { topic: 'config:position_limits'; data: StellarUpdatePositionLimitsEvent }
+  | {
+      topic: 'config:min_borrow_collateral';
+      data: StellarUpdateMinBorrowCollateralEvent;
+    }
   | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent }
   | { topic: 'config:spoke'; data: StellarUpdateSpokeEvent };
