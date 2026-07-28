@@ -175,6 +175,10 @@ export class OracleSourceConfigInputDto {
   maxStaleSeconds?: number;
 }
 
+/**
+ * @deprecated v1 primary/anchor config. Prefer {@link AssetOracleConfigInputDto}
+ * for the composable price-aggregator.
+ */
 export class MarketOracleConfigInputDto {
   @ApiProperty({
     type: 'integer',
@@ -218,4 +222,77 @@ export class MarketOracleConfigInputDto {
     description: 'Inclusive upper sanity bound, USD WAD decimal string',
   })
   maxSanityPriceWad!: string;
+}
+
+/**
+ * Composable on-chain `AssetOracle` input for governance
+ * `ConfigureAssetOracle` / price-aggregator `set_oracle`.
+ * `sources` mirror PriceSource tagged unions as JSON objects.
+ */
+export class AssetOracleConfigInputDto {
+  @ApiProperty({
+    type: 'integer',
+    description: 'Token decimals (0 for Ref keys)',
+  })
+  assetDecimals!: number;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Asset-level staleness ceiling, seconds',
+  })
+  maxPriceStaleSeconds!: number;
+
+  @ApiProperty({
+    type: 'array',
+    items: { type: 'object', additionalProperties: true },
+    description: 'One or two PriceSource variants (Feed / Scaled / LpShare)',
+  })
+  sources!: Record<string, unknown>[];
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Dual-source deviation tolerance band, bps (upper side of reciprocal pair)',
+  })
+  toleranceBps!: number;
+
+  @ApiProperty({
+    description:
+      'Independence: "RequireDisjoint" or { AllowShared: [{ kind, contract }] }',
+  })
+  independence!: string | Record<string, unknown>;
+
+  @ApiProperty({
+    description: 'Inclusive lower sanity bound, USD WAD decimal string',
+  })
+  minSanityPriceWad!: string;
+
+  @ApiProperty({
+    description: 'Inclusive upper sanity bound, USD WAD decimal string',
+  })
+  maxSanityPriceWad!: string;
+}
+
+/** `ConfigureAssetOracleArgs` — PriceKey + AssetOracle. */
+export class ConfigureAssetOracleArgsDto {
+  @ApiProperty({
+    description: 'PriceKey: { Token: "C…" } or { Ref: "BTC" }',
+  })
+  key!: Record<string, string>;
+
+  @ApiProperty({ type: AssetOracleConfigInputDto })
+  oracle!: AssetOracleConfigInputDto;
+}
+
+/** `EditToleranceArgs` — PriceKey + tolerance bps. */
+export class EditOracleToleranceArgsDto {
+  @ApiProperty({
+    description: 'PriceKey: { Token: "C…" } or { Ref: "BTC" }',
+  })
+  key!: Record<string, string>;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Tolerance band half-width, bps',
+  })
+  toleranceBps!: number;
 }
