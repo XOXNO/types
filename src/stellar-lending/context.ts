@@ -29,6 +29,7 @@ export interface StellarReserveDetailItem {
   spokeId: number;
   hubId: number;
   asset: string;
+  assetDecimals: number;
   supplyApy: number;
   borrowApy: number;
   utilization: number;
@@ -39,6 +40,9 @@ export interface StellarReserveDetailItem {
   depositsUsd: number;
   borrowsUsd: number;
   availableLiquidityUsd: number;
+  /** Raw asset-native i128 cap values used by governance builders. */
+  supplyCap: string;
+  borrowCap: string;
   supplyCapShort: number;
   borrowCapShort: number;
   depositCapFilledPct: number;

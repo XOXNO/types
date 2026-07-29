@@ -1,9 +1,30 @@
 import { ActivityChain } from '../dist/enums/index';
 import type {
+  AssetDto,
+  ReserveDto,
   StellarLendingLiveStateDto,
   StellarMarketIndexByHub,
   StellarSpokeListItem,
 } from '../dist/stellar-lending/index';
+
+type Assert<T extends true> = T;
+type AssetOracleIsNullableAndRequired = Assert<
+  null extends AssetDto['oracleProvider']
+    ? undefined extends AssetDto['oracleProvider']
+      ? false
+      : true
+    : false
+>;
+type ReserveRawCapsAreStrings = Assert<
+  ReserveDto['supplyCap'] extends string
+    ? ReserveDto['borrowCap'] extends string
+      ? true
+      : false
+    : false
+>;
+type ReserveCarriesDecimals = Assert<
+  ReserveDto['assetDecimals'] extends number ? true : false
+>;
 
 const index: StellarMarketIndexByHub = {
   hubId: 1,
@@ -41,3 +62,6 @@ const spoke: StellarSpokeListItem = {
 };
 
 void [liveState, spoke];
+void (0 as unknown as AssetOracleIsNullableAndRequired);
+void (0 as unknown as ReserveRawCapsAreStrings);
+void (0 as unknown as ReserveCarriesDecimals);

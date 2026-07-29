@@ -9,6 +9,8 @@
  * (live), and `*Bps` are basis points.
  */
 
+import type { StellarAssetOracle } from './oracle-provider';
+
 /** `[min, max]` inclusive range. */
 export type StellarApyRange = [min: number, max: number];
 
@@ -114,6 +116,8 @@ export interface StellarAssetPage {
   maxSupplyApy: number;
   minBorrowApy: number;
   maxBorrowApy: number;
+  /** Current indexed asset-oracle configuration; null until first configure. */
+  oracleProvider: StellarAssetOracle | null;
   depositMarkets: StellarAssetPageMarket[];
   borrowMarkets: StellarAssetPageMarket[];
   graphSeries: StellarAssetPageGraphSeries[];
