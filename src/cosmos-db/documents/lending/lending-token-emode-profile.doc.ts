@@ -64,7 +64,7 @@ export class LendingTokenEModeProfileDoc {
 
   @ApiProperty({
     description:
-      'Spoke supply cap in asset-native units (0 = uncapped). Stellar e-mode only.',
+      'Spoke supply cap in asset-native units. Always an enforced ceiling; 0 means the asset accepts no new supply in this spoke (there is no unlimited sentinel). Stellar e-mode only.',
     required: false,
     example: '100000000000000',
   })
@@ -72,7 +72,7 @@ export class LendingTokenEModeProfileDoc {
 
   @ApiProperty({
     description:
-      'Spoke borrow cap in asset-native units (0 = uncapped). Stellar e-mode only.',
+      'Spoke borrow cap in asset-native units. Always an enforced ceiling; 0 means the asset accepts no new borrows in this spoke (there is no unlimited sentinel). Stellar e-mode only.',
     required: false,
     example: '100000000000000',
   })
