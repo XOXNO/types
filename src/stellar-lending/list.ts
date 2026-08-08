@@ -41,7 +41,22 @@ export interface StellarAssetListItem {
   hubCount: number;
   /** Number of reserves (spoke,hub) for this asset. */
   marketCount: number;
+  /**
+   * The two underlying token SACs when this asset is an AMM LP share, so
+   * clients can render the pair (both leg logos) instead of one unresolvable
+   * logo for the share itself.
+   *
+   * Projected from the asset's indexed `LpShare` price source
+   * (`StellarAssetOracle.sources[]`). Present only when BOTH legs are
+   * `{ Token }` price keys — a `{ Ref }` leg is registry-only and has no SAC,
+   * so there is nothing to render. Consumers may therefore treat "present" as
+   * "renderable pair" with no partial case to handle.
+   */
+  lpUnderlying?: StellarLpUnderlying;
 }
+
+/** The two leg SACs of an LP share, in the pool's `[keyA, keyB]` order. */
+export type StellarLpUnderlying = [tokenA: string, tokenB: string];
 
 /** One (spoke, hub) market row for an asset detail page. */
 export interface StellarAssetPageMarket {
