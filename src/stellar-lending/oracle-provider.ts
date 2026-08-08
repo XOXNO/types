@@ -126,10 +126,3 @@ export interface StellarAssetOracle {
   minSanityPriceWad: string;
   maxSanityPriceWad: string;
 }
-
-/**
- * @deprecated Alias of {@link StellarAssetOracle}. Prefer `StellarAssetOracle`.
- * Kept so existing imports continue to resolve while consumers migrate off the
- * v1 primary/anchor flat projection.
- */
-export type StellarOracleProvider = StellarAssetOracle;
