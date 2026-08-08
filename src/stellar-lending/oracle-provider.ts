@@ -5,15 +5,23 @@
  * Mirrors on-chain `PriceKey` + `AssetOracle` (`sources`, independence,
  * tolerance, sanity). `i128` → string; `u32/u64` → number. No Nest
  * decorators — api-v2 owns swagger DTOs; this package owns wire shapes.
+ *
+ * These are the NORMALIZED shapes, not what `scValToNative` hands back. Soroban
+ * renders a payload-carrying enum variant as a `[variant, payload]` tuple and a
+ * unit variant as a one-element `[variant]` tuple, with snake_case fields. The
+ * indexer's decoders convert both into the object form below before persisting:
+ *
+ *   ["AquariusLp", { key_a, … }] → { AquariusLp: { keyA, … } }
+ *   ["RequireDisjoint"]          → 'RequireDisjoint'
+ *
+ * Anything assigning raw `scValToNative` output to these types is a bug — the
+ * shapes differ and a type assertion will hide it.
  */
 
 /** On-chain `PriceKey`: Token SAC or registry-only Ref symbol. */
 export type StellarPriceKey =
   | { Token: string }
   | { Ref: string };
-
-/** On-chain `ProviderKind`. */
-export type StellarProviderKind = 'Reflector' | 'RedStone' | 'Xoxno';
 
 /** On-chain `FeedNature`. */
 export type StellarFeedNature = 'Market' | 'Fundamental';
@@ -39,17 +47,21 @@ export interface StellarReflectorFeedRef {
   readMode: StellarOracleReadMode;
 }
 
+/** On-chain `MultiFeedRef`, shared by the RedStone and Xoxno legs. */
 export interface StellarMultiFeedRef {
   contract: string;
   feedId: string;
-  kind: StellarProviderKind;
   nature: StellarFeedNature;
 }
 
-/** On-chain `ProviderRef`. */
+/**
+ * On-chain `ProviderRef`. The provider kind IS the variant — RedStone and Xoxno
+ * both carry a `MultiFeedRef`, and are told apart by which key is present.
+ */
 export type StellarProviderRef =
   | { Reflector: StellarReflectorFeedRef }
-  | { MultiFeed: StellarMultiFeedRef };
+  | { RedStone: StellarMultiFeedRef }
+  | { Xoxno: StellarMultiFeedRef };
 
 export interface StellarFeedSource {
   provider: StellarProviderRef;
@@ -64,33 +76,41 @@ export interface StellarScaledSource {
   maxFactorWad: string;
 }
 
-export type StellarPoolKind = 'ConstantProduct';
-
-export interface StellarLpShareSource {
+/**
+ * On-chain `AquariusLpSource` — prices an Aquarius LP share token from its two
+ * reserve legs. `plane` is the pool-info contract the aggregator reads reserves
+ * from; `minPoolValueWad` is the liquidity floor below which the source is
+ * rejected.
+ */
+export interface StellarAquariusLpSource {
   pool: string;
-  kind: StellarPoolKind;
+  plane: string;
+  tokenA: string;
+  tokenB: string;
   keyA: StellarPriceKey;
   keyB: StellarPriceKey;
   reserveADecimals: number;
   reserveBDecimals: number;
-  shareDecimals: number;
+  minPoolValueWad: string;
 }
 
-/** On-chain `PriceSource`. */
+/**
+ * On-chain `PriceSource`. Both Aquarius variants carry an `AquariusLpSource`;
+ * the stable variant differs only in the curve the aggregator prices against.
+ */
 export type StellarPriceSource =
   | { Feed: StellarFeedSource }
   | { Scaled: StellarScaledSource }
-  | { LpShare: StellarLpShareSource };
+  | { AquariusLp: StellarAquariusLpSource }
+  | { AquariusStableLp: StellarAquariusLpSource };
 
-export interface StellarTrustDomain {
-  kind: StellarProviderKind;
-  contract: string;
-}
-
-/** On-chain `IndependencePolicy`. */
+/**
+ * On-chain `IndependencePolicy`. `AllowShared` carries the provider contract
+ * addresses two legs are permitted to have in common.
+ */
 export type StellarIndependencePolicy =
   | 'RequireDisjoint'
-  | { AllowShared: StellarTrustDomain[] };
+  | { AllowShared: string[] };
 
 /**
  * On-chain `AssetOracle` — one or two independent opinions for a `PriceKey`.

@@ -5,11 +5,25 @@ export class StellarLendingCursorDoc {
   lastLedger = 0;
   lastPagingToken: string | null = null;
   /**
-   * Controller the cursor position belongs to. A fresh protocol deployment
-   * changes this address; the indexer discards a mismatched cursor and
-   * reseeds from the configured start ledger so setup events are not skipped.
+   * Watch set the cursor position belongs to. A position is only valid for the
+   * exact set of contracts it was recorded against: any of them being
+   * redeployed or repointed leaves that contract's setup events behind the
+   * stored position, and the cursor only moves forward, so resuming would skip
+   * them permanently. The indexer discards a mismatched cursor and reseeds from
+   * the configured start ledger.
+   *
+   * Binding on the controller alone is what let a price-aggregator repoint slip
+   * through and leave every `StellarAssetDoc.oracleProvider` null.
    */
   controllerAddress: string | null = null;
+  poolAddress: string | null = null;
+  priceAggregatorAddress: string | null = null;
+  governanceAddress: string | null = null;
+  /**
+   * Decode-logic version. Bumping it discards the cursor and replays everything
+   * within RPC retention, so a decoder fix reaches already-indexed events.
+   */
+  indexerVersion: string | null = null;
   updatedAt = 0;
   id!: string;
   pk!: string;

@@ -5,4 +5,8 @@ export * from './spoke.doc';
 export * from './spoke-asset.doc';
 export * from './account-position.doc';
 export * from './governance-proposal.doc';
+export * from './contract-config.doc';
+export * from './contract-role.doc';
+export * from './account-delegate.doc';
+export * from './blend-pool.doc';
 export * from './cursor.doc';
