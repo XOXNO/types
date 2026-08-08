@@ -77,11 +77,12 @@ export class SwapHopDto {
 /**
  * One path in a (possibly multi-path) aggregator swap.
  *
- * `splitPpm` is parts-per-million of the batch's total input allocated
- * to this path. The router computes the input for each path from
- * `totalIn` and the ppm split; the last path absorbs PPM rounding. Within
- * a path, output of hop N feeds hop N+1 directly. The single
- * `totalMinOut` guard at the payload level is the final slippage gate.
+ * `splitPpm` is parts-per-million of the balance of this path's *starting*
+ * token allocated to the path. Paths that start from the same token form one
+ * group whose weights may not exceed 1_000_000; when a group routes its whole
+ * balance, the encoder lets the final leg sweep the remainder so ppm rounding
+ * strands nothing. Within a path, output of hop N feeds hop N+1 directly. The
+ * single `totalMinOut` guard at the payload level is the final slippage gate.
  */
 export class SwapPathDto {
   @ApiProperty({
@@ -98,7 +99,7 @@ export class SwapPathDto {
 
   @ApiProperty({
     description:
-      'Parts per million (ppm) of the batch total input to route through this path. Must be > 0; sum of all paths must equal 1_000_000.',
+      'Parts per million (ppm) of the starting token balance to route through this path. Must be > 0; weights for paths sharing a starting token must not exceed 1_000_000, and must sum to exactly 1_000_000 unless the payload has a mint leg that consumes the remainder.',
     example: 1_000_000,
   })
   @IsInt()
@@ -161,14 +162,16 @@ export class StrategyPayloadDto {
 }
 
 /**
- * Opaque strategy swap payload as returned by the quote server. `routeXdr`
- * is the base64 ScVal XDR for `StrategyPayloadDto`; callers pass the
- * decoded bytes to `execute_strategy` or to a lending strategy method.
+ * Opaque strategy swap payload as returned by the quote server. `routeXdr` is
+ * the base64 ScVal XDR of the router's compact wire form — an address registry,
+ * an amount registry, and a packed instruction stream that `StrategyPayloadDto`
+ * is lowered into. Callers pass the decoded bytes to `execute_strategy` or to a
+ * lending strategy method; they never build the wire form by hand.
  */
 export class StrategySwapDto {
   @ApiProperty({
     description:
-      'Base64 ScVal XDR of `StrategyPayloadDto`, passed as Soroban `Bytes` to `execute_strategy(sender, total_in, swap_xdr)`.',
+      'Base64 ScVal XDR of the lowered `StrategyPayloadDto`, passed as Soroban `Bytes` to `execute_strategy(sender, total_in, swap_xdr)`.',
     example: 'AAAA...',
   })
   @IsString()
