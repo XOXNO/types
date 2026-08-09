@@ -81,6 +81,44 @@ class TokenDataDocBase {
   })
   swappable?: boolean;
 
+  @ApiProperty({
+    type: Boolean,
+    required: false,
+    description:
+      'Whether this token is an AMM LP share token. When true, lpDex, lpPool and lpAssets describe the pool it represents.',
+    example: true,
+  })
+  lpToken?: boolean;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'DEX the LP share token belongs to (e.g. Aquarius).',
+    example: 'Aquarius',
+  })
+  lpDex?: string;
+
+  @ApiProperty({
+    type: String,
+    required: false,
+    description:
+      'Pool contract address (C…) behind an LP share token. Resolves a held share token to its exact pool — fee-tier precise — without any third-party or on-chain lookup (e.g. for building an Aquarius withdraw, which needs the pool address and index, not just the share token).',
+    example: 'CAB6MICC2WKRT372U3FRPKGGVB5R3FDJSMWSLPF2UJNJPYMBZ76RQVYE',
+  })
+  lpPool?: string;
+
+  @ApiProperty({
+    type: [String],
+    required: false,
+    description:
+      'Underlying leg token identifiers of an LP share token, in the pool contract order (sorted ascending by contract ID for Soroban AMMs).',
+    example: [
+      'CAUIKL3IYGMERDRUN6YSCLWVAKIFG5Q4YJHUKM4S4NJZQIA3BAS6OJPK',
+      'CD25MNVTZDL4Y3XBCPCJXGXATV5WUHHOWMYFF4YBEGU5FCPGMYTVG5JY',
+    ],
+  })
+  lpAssets?: string[];
+
   constructor(props?: Partial<TokenDataDocBase>) {
     Object.assign(this, props);
   }
