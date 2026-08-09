@@ -22,7 +22,19 @@ export interface StellarLendingActivityData {
   amountShort: number | null;
   oraclePrice: number | null;
   usd: number | null;
+  /**
+   * Fee in display units on rows where `amount` is a gross principal rather
+   * than the fee itself (`position:flash_loan`, `strategy:fee`). Omitted when
+   * the asset decimals are unknown — never a fabricated zero.
+   */
   feeShort?: number;
+  /**
+   * `feeShort` valued at the same `oraclePrice` as `usd`. On a `strategyFee`
+   * row `usd` is the strategy's gross principal, NOT protocol revenue — sum
+   * `feeUsd` for revenue. Omitted when the asset is unpriced or its decimals
+   * are unknown.
+   */
+  feeUsd?: number;
   /**
    * Which side of the position this row mutated (`null` for non-position
    * events: flash loan, strategy fee, bad-debt header).
