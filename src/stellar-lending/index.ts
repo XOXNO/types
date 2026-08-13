@@ -1,4 +1,5 @@
 export * from './enums';
+export * from './network';
 export * from './oracle-provider';
 export * from './documents';
 export * from './list';

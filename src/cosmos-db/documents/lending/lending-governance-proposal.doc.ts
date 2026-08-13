@@ -6,6 +6,10 @@ import {
   GovernanceProposalStatus,
   GovernanceProposalTarget,
 } from '../../../enums/lending-governance.enum';
+import {
+  stellarLendingPartitionKey,
+  type StellarNetwork,
+} from '../../../stellar-lending/network';
 import { createCosmosPaginatedResponse } from '../../cosmos-db-paginated-response.dto';
 
 /**
@@ -42,6 +46,9 @@ export class LendingGovernanceProposalDoc {
     example: LendingDataType.GOVERNANCE_PROPOSAL,
   })
   dataType = LendingDataType.GOVERNANCE_PROPOSAL;
+
+  @ApiProperty({ enum: ['mainnet', 'testnet'] })
+  network!: StellarNetwork;
 
   @ApiProperty({
     description: 'Operation id (keccak256 content hash), hex string',
@@ -221,7 +228,7 @@ export class LendingGovernanceProposalDoc {
 
   @ApiProperty({
     description: 'Cosmos DB partition key',
-    example: 'governanceProposal',
+    example: 'mainnet:governanceProposal',
   })
   pk!: string;
 
@@ -230,7 +237,7 @@ export class LendingGovernanceProposalDoc {
 
   constructor(props?: Partial<LendingGovernanceProposalDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = this.operationId;
   }
 }

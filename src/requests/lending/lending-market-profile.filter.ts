@@ -6,6 +6,7 @@ import {
 import { LendingDataType } from '../../enums/lending-data-type.enum';
 import { LendingMarketProfileDoc } from '../../cosmos-db/documents/lending/lending-market-profile.doc';
 import { ActivityChain } from '../../enums/common.enum';
+import type { StellarNetwork } from '../../stellar-lending/network';
 
 export class LendingMarketProfileFilterCriteriaDto {
   @ApiProperty({ required: false, type: String, isArray: true })
@@ -76,6 +77,8 @@ export class LendingMarketProfileFilter extends CosmosDbGenericFilter<LendingMar
     isDebtCeilingReached?: boolean;
     pk?: string;
     chain?: ActivityChain[];
+    /** Server-owned isolation field; API callers must not choose it. */
+    network?: StellarNetwork;
   } = {
     pk: LendingDataType.MARKET_PROFILE,
   };

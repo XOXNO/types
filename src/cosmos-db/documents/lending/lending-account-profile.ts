@@ -6,6 +6,10 @@ import { LendingEModeCategoryProfileDoc } from './lending-emode-category-profile
 import { LendingMarketProfile } from './lending-market-profile.doc';
 import { ActivityChain } from '../../../enums/common.enum';
 import { normalizeLendingChain } from './lending-chain';
+import {
+  stellarLendingPartitionKey,
+  type StellarNetwork,
+} from '../../../stellar-lending/network';
 
 export class InitialPaymentMultiplier {
   @ApiProperty({
@@ -136,6 +140,13 @@ export class LendingAccountProfileDoc {
   chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
+    description: 'Stellar network discriminator; required for Stellar rows',
+    required: false,
+    enum: ['mainnet', 'testnet'],
+  })
+  network?: StellarNetwork;
+
+  @ApiProperty({
     description:
       'Stellar spoke the account belongs to (rs-lending-xlm `AccountMeta.spoke_id`). Always 0 for MVX.',
     required: false,
@@ -163,9 +174,12 @@ export class LendingAccountProfileDoc {
 
   constructor(props?: Partial<LendingAccountProfileDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
-    this.id = `${this.identifier}_${this.token}`;
     this.chain = normalizeLendingChain(this.chain);
+    this.pk =
+      this.chain === ActivityChain.STELLAR
+        ? stellarLendingPartitionKey(this.network!, this.dataType)
+        : this.dataType;
+    this.id = `${this.identifier}_${this.token}`;
   }
 }
 
@@ -218,6 +232,7 @@ const selectFields = [
   // to MVX, and Stellar users get the "Switch your Wallet" modal on
   // Remove / Withdraw / Repay / Borrow / Swap / Liquidate.
   'chain',
+  'network',
 ] as const;
 
 export class LendingAccountProfile extends LendingAccountProfileDoc {

@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * Config and admin state for one deployed contract, event-sourced from that
@@ -16,6 +18,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarContractConfigDoc {
   dataType = StellarLendingDataType.CONTRACT_CONFIG;
+  network!: StellarNetwork;
 
   /** Contract this row describes. Also the `id` suffix. */
   contractAddress!: string;
@@ -56,7 +59,7 @@ export class StellarContractConfigDoc {
 
   constructor(props?: Partial<StellarContractConfigDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `contractConfig:${this.contractAddress}`;
   }
 }

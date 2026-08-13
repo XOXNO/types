@@ -1,4 +1,5 @@
 import type { StellarLendingActivity } from '../enums';
+import type { StellarNetwork } from '../network';
 
 /**
  * Dynamic JSON written into the existing `NftActivityData.ActivityData` column
@@ -6,6 +7,7 @@ import type { StellarLendingActivity } from '../enums';
  * Not a Cosmos document — rides the existing activity → Kusto change-feed.
  */
 export interface StellarLendingActivityData {
+  network: StellarNetwork;
   action: StellarLendingActivity;
   hubId: number;
   spokeId: number | null;

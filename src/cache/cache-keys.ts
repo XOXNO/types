@@ -1,4 +1,5 @@
 import { TTLS } from './ttl';
+import type { StellarNetwork } from '../stellar-lending/network';
 
 /**
  * Shared cache key definitions for use across xoxno-api-v2 and xoxno-az-functions.
@@ -540,92 +541,117 @@ export const CacheKeys = {
     ttl: TTLS.ONE_MINUTE / 2, // 30 seconds
   }),
 
-  StellarLendingContext: (): CacheKeyConfig => ({
-    key: 'sl:context',
+  StellarLendingContext: (network: StellarNetwork): CacheKeyConfig => ({
+    key: `sl:${network}:context`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingAssetsList: (): CacheKeyConfig => ({
-    key: 'sl:list:assets',
+  StellarLendingAssetsList: (network: StellarNetwork): CacheKeyConfig => ({
+    key: `sl:${network}:list:assets`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingHubsList: (): CacheKeyConfig => ({
-    key: 'sl:list:hubs',
+  StellarLendingHubsList: (network: StellarNetwork): CacheKeyConfig => ({
+    key: `sl:${network}:list:hubs`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingSpokesList: (): CacheKeyConfig => ({
-    key: 'sl:list:spokes',
+  StellarLendingSpokesList: (network: StellarNetwork): CacheKeyConfig => ({
+    key: `sl:${network}:list:spokes`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
   StellarLendingReservesList: (
+    network: StellarNetwork,
     hubId?: string | number | null,
     spokeId?: string | number | null,
     asset?: string | null,
   ): CacheKeyConfig => ({
-    key: `sl:list:reserves:${serializeStellarFilter(hubId)}:${serializeStellarFilter(spokeId)}:${serializeStellarFilter(asset)}`,
+    key: `sl:${network}:list:reserves:${serializeStellarFilter(hubId)}:${serializeStellarFilter(spokeId)}:${serializeStellarFilter(asset)}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
   StellarLendingReserve: (
+    network: StellarNetwork,
     spokeId: number,
     hubId: number,
     asset: string,
   ): CacheKeyConfig => ({
-    key: `sl:reserve:${spokeId}:${hubId}:${asset}`,
+    key: `sl:${network}:reserve:${spokeId}:${hubId}:${asset}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingAsset: (asset: string): CacheKeyConfig => ({
-    key: `sl:asset:${asset}`,
+  StellarLendingAsset: (
+    network: StellarNetwork,
+    asset: string,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:asset:${asset}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingAssetPageBase: (asset: string): CacheKeyConfig => ({
-    key: `sl:asset-page-base:${asset}`,
+  StellarLendingAssetPageBase: (
+    network: StellarNetwork,
+    asset: string,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:asset-page-base:${asset}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
   StellarLendingAssetMarkets: (
+    network: StellarNetwork,
     asset: string,
     side: string,
   ): CacheKeyConfig => ({
-    key: `sl:asset-markets:${asset}:${side}`,
+    key: `sl:${network}:asset-markets:${asset}:${side}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingHub: (hubId: number): CacheKeyConfig => ({
-    key: `sl:hub:${hubId}`,
+  StellarLendingHub: (
+    network: StellarNetwork,
+    hubId: number,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:hub:${hubId}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingSpoke: (spokeId: number): CacheKeyConfig => ({
-    key: `sl:spoke:${spokeId}`,
+  StellarLendingSpoke: (
+    network: StellarNetwork,
+    spokeId: number,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:spoke:${spokeId}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingUserPositions: (owner: string): CacheKeyConfig => ({
-    key: `sl:user-positions:${owner}`,
+  StellarLendingUserPositions: (
+    network: StellarNetwork,
+    owner: string,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:user-positions:${owner}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingAccountPositions: (accountId: string): CacheKeyConfig => ({
-    key: `sl:account-positions:${accountId}`,
+  StellarLendingAccountPositions: (
+    network: StellarNetwork,
+    accountId: string,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:account-positions:${accountId}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
   StellarLendingGovernanceProposals: (
+    network: StellarNetwork,
     top: number,
     continuationToken?: string | null,
   ): CacheKeyConfig => ({
-    key: `sl:gov-proposals:${top}:${continuationToken ?? ''}`,
+    key: `sl:${network}:gov-proposals:${top}:${continuationToken ?? ''}`,
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
-  StellarLendingLiveIndexes: (hash: string): CacheKeyConfig => ({
-    key: `sl:live-indexes:${hash}`,
+  StellarLendingLiveIndexes: (
+    network: StellarNetwork,
+    hash: string,
+  ): CacheKeyConfig => ({
+    key: `sl:${network}:live-indexes:${hash}`,
     ttl: TTLS.ONE_SECOND * 3,
   }),
 

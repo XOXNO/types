@@ -38,14 +38,29 @@ test('new LendingMarketProfileDoc({}) defaults chain to MVX', () => {
   assert.equal(doc.chain, ActivityChain.MVX);
 });
 
-test('new LendingMarketProfileDoc({ chain: STELLAR }) preserves STELLAR', () => {
-  const doc = new LendingMarketProfileDoc({ chain: ActivityChain.STELLAR });
+test('new Stellar market profile is network-partitioned', () => {
+  const doc = new LendingMarketProfileDoc({
+    chain: ActivityChain.STELLAR,
+    network: 'testnet',
+  });
   assert.equal(doc.chain, 'STELLAR');
+  assert.equal(doc.network, 'testnet');
+  assert.equal(doc.pk, 'testnet:marketProfile');
 });
 
 test('new LendingAccountProfileDoc({}) defaults chain to MVX', () => {
   const doc = new LendingAccountProfileDoc({});
   assert.equal(doc.chain, 'MVX');
+});
+
+test('new Stellar account profile is network-partitioned', () => {
+  const doc = new LendingAccountProfileDoc({
+    chain: ActivityChain.STELLAR,
+    network: 'mainnet',
+  });
+  assert.equal(doc.chain, 'STELLAR');
+  assert.equal(doc.network, 'mainnet');
+  assert.equal(doc.pk, 'mainnet:accountProfile');
 });
 
 test('new LendingAccountPnl({}) defaults chain to MVX', () => {

@@ -6,6 +6,7 @@ import {
   GovernanceProposalKind,
   GovernanceProposalStatus,
 } from '../../enums/lending-governance.enum';
+import type { StellarNetwork } from '../../stellar-lending/network';
 import { LendingGovernanceProposalDoc } from '../../cosmos-db/documents/lending/lending-governance-proposal.doc';
 
 export class LendingGovernanceProposalFilterCriteriaDto {
@@ -39,6 +40,8 @@ export class LendingGovernanceProposalFilter extends CosmosDbGenericFilter<Lendi
     kind?: GovernanceProposalKind[];
     proposer?: string[];
     assetAddress?: string[];
+    /** Server-owned isolation field; API callers must not choose it. */
+    network?: StellarNetwork;
     pk?: string;
   } = {
     pk: LendingDataType.GOVERNANCE_PROPOSAL,

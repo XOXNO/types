@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * Approval state for one Blend pool, event-sourced from
@@ -11,6 +13,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarBlendPoolDoc {
   dataType = StellarLendingDataType.BLEND_POOL;
+  network!: StellarNetwork;
 
   /** Blend pool contract address. Also the `id` suffix. */
   pool!: string;
@@ -24,7 +27,7 @@ export class StellarBlendPoolDoc {
 
   constructor(props?: Partial<StellarBlendPoolDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `blendPool:${this.pool}`;
   }
 }

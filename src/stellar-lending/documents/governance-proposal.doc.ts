@@ -4,6 +4,8 @@ import {
   StellarGovernanceProposalTarget,
   StellarLendingDataType,
 } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * One decoded "what will change" row for a governance proposal, rendered as a
@@ -23,6 +25,7 @@ export interface StellarGovernanceProposalField {
  */
 export class StellarGovernanceProposalDoc {
   dataType = StellarLendingDataType.GOVERNANCE_PROPOSAL;
+  network!: StellarNetwork;
   operationId!: string;
   kind!: StellarGovernanceProposalKind;
   status!: StellarGovernanceProposalStatus;
@@ -55,7 +58,7 @@ export class StellarGovernanceProposalDoc {
 
   constructor(props?: Partial<StellarGovernanceProposalDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = this.operationId;
   }
 }

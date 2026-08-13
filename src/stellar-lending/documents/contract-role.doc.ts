@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * One access-control grant, event-sourced from `role_granted` / `role_revoked`.
@@ -15,6 +17,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarContractRoleDoc {
   dataType = StellarLendingDataType.CONTRACT_ROLE;
+  network!: StellarNetwork;
 
   /** Contract whose access control this grant belongs to. */
   contractAddress!: string;
@@ -34,7 +37,7 @@ export class StellarContractRoleDoc {
 
   constructor(props?: Partial<StellarContractRoleDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `contractRole:${this.contractAddress}:${this.role}:${this.account}`;
   }
 }

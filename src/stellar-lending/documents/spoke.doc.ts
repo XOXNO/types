@@ -1,7 +1,10 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 export class StellarSpokeDoc {
   dataType = StellarLendingDataType.SPOKE;
+  network!: StellarNetwork;
   spokeId!: number;
   isDeprecated = false;
   name: string | null = null;
@@ -18,7 +21,7 @@ export class StellarSpokeDoc {
 
   constructor(props?: Partial<StellarSpokeDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `spoke:${this.spokeId}`;
   }
 }

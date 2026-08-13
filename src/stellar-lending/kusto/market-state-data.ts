@@ -1,3 +1,5 @@
+import type { StellarNetwork } from '../network';
+
 /**
  * ActivityType for Stellar-lending market-state activity rows. Deliberately
  * DISTINCT from the MVX `lendingUpdateMarketState` so the existing MVX Kusto
@@ -18,6 +20,7 @@ export const STELLAR_LENDING_MARKET_STATE_ACTIVITY =
  * 27-dec RAY big-int strings.
  */
 export interface StellarLendingMarketStateData {
+  network: StellarNetwork;
   hubId: number;
   spokeId: number | null;
   token: string;

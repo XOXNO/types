@@ -13,6 +13,10 @@ import { LendingIndexesDto } from '../../../requests/lending/lending-indexes.dto
 import { ActivityChain } from '../../../enums/common.enum';
 import { MarketStatus } from '../../../enums/lending.enum';
 import { normalizeLendingChain } from './lending-chain';
+import {
+  stellarLendingPartitionKey,
+  type StellarNetwork,
+} from '../../../stellar-lending/network';
 
 @ApiExtraModels(LendingOracleUpdateStruct, StellarLendingOracleUpdateStruct)
 export class LendingMarketProfileDoc {
@@ -228,6 +232,13 @@ export class LendingMarketProfileDoc {
   chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
+    description: 'Stellar network discriminator; required for Stellar rows',
+    required: false,
+    enum: ['mainnet', 'testnet'],
+  })
+  network?: StellarNetwork;
+
+  @ApiProperty({
     description: 'Cosmos DB document identifier',
     example: 'EGLD_MARKET_PROFILE',
   })
@@ -263,9 +274,12 @@ export class LendingMarketProfileDoc {
 
   constructor(props?: Partial<LendingMarketProfileDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
-    this.id = `${this.token}_${this.dataType}`;
     this.chain = normalizeLendingChain(this.chain);
+    this.pk =
+      this.chain === ActivityChain.STELLAR
+        ? stellarLendingPartitionKey(this.network!, this.dataType)
+        : this.dataType;
+    this.id = `${this.token}_${this.dataType}`;
   }
 }
 

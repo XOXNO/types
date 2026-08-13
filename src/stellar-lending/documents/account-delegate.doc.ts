@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * One position-authorization grant, event-sourced from `account:delegate`.
@@ -13,6 +15,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarAccountDelegateDoc {
   dataType = StellarLendingDataType.ACCOUNT_DELEGATE;
+  network!: StellarNetwork;
 
   /** On-chain numeric account id the delegation applies to. */
   accountId!: number;
@@ -30,7 +33,7 @@ export class StellarAccountDelegateDoc {
 
   constructor(props?: Partial<StellarAccountDelegateDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `accountDelegate:${this.accountId}:${this.delegate}`;
   }
 }

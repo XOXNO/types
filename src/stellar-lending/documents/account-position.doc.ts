@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 export interface StellarInitialPaymentMultiplier {
   initialPaymentAmount: string;
@@ -13,6 +15,7 @@ export interface StellarInitialPaymentMultiplier {
  */
 export class StellarAccountPositionDoc {
   dataType = StellarLendingDataType.ACCOUNT_POSITION;
+  network!: StellarNetwork;
   accountId!: string;
   owner!: string;
   spokeId = 0;
@@ -36,7 +39,7 @@ export class StellarAccountPositionDoc {
 
   constructor(props?: Partial<StellarAccountPositionDoc>) {
     Object.assign(this, props);
-    this.pk = this.accountId;
+    this.pk = stellarLendingPartitionKey(this.network, this.accountId);
     this.id = `account:${this.accountId}:${this.hubId}:${this.asset}`;
   }
 }

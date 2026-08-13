@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * Risk truth for one asset in one spoke on one hub
@@ -9,6 +11,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarSpokeAssetDoc {
   dataType = StellarLendingDataType.SPOKE_ASSET;
+  network!: StellarNetwork;
   spokeId!: number;
   hubId!: number;
   asset!: string;
@@ -34,7 +37,7 @@ export class StellarSpokeAssetDoc {
 
   constructor(props?: Partial<StellarSpokeAssetDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `spokeAsset:${this.spokeId}:${this.hubId}:${this.asset}`;
   }
 }

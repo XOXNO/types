@@ -1,4 +1,6 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 /**
  * Liquidity truth for one asset on one hub (`hubAsset:{hubId}:{asset}`). IRM +
@@ -10,6 +12,7 @@ import { StellarLendingDataType } from '../enums';
  */
 export class StellarHubAssetDoc {
   dataType = StellarLendingDataType.HUB_ASSET;
+  network!: StellarNetwork;
   hubId!: number;
   asset!: string;
   assetDecimals = 0;
@@ -42,7 +45,7 @@ export class StellarHubAssetDoc {
 
   constructor(props?: Partial<StellarHubAssetDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `hubAsset:${this.hubId}:${this.asset}`;
   }
 }

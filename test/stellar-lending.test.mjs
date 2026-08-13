@@ -51,78 +51,103 @@ test('governance kind enum self-contained', () => {
   );
 });
 
-test('shared api cache keys match stellar lending route keys', () => {
+test('shared api cache keys are network scoped', () => {
   assert.equal(
     stellarReserveKey({ spokeId: 2, hubId: 1, asset: 'CUSDC' }),
     '2:1:CUSDC',
   );
-  assert.equal(CacheKeys.StellarLendingContext().key, 'sl:context');
   assert.equal(
-    CacheKeys.StellarLendingReservesList(undefined, undefined, undefined).key,
-    'sl:list:reserves:::',
+    CacheKeys.StellarLendingContext('testnet').key,
+    'sl:testnet:context',
   );
   assert.equal(
-    CacheKeys.StellarLendingReserve(2, 1, 'CUSDC').key,
-    'sl:reserve:2:1:CUSDC',
+    CacheKeys.StellarLendingReservesList(
+      'testnet',
+      undefined,
+      undefined,
+      undefined,
+    ).key,
+    'sl:testnet:list:reserves:::',
+  );
+  assert.equal(
+    CacheKeys.StellarLendingReserve('testnet', 2, 1, 'CUSDC').key,
+    'sl:testnet:reserve:2:1:CUSDC',
   );
 });
 
 test('asset doc derives id + pk', () => {
   const d = new StellarAssetDoc({
+    network: 'testnet',
     asset: 'CUSDC',
     symbol: 'USDC',
     name: 'USD Coin',
     decimals: 7,
   });
   assert.equal(d.id, 'asset:CUSDC');
-  assert.equal(d.pk, StellarLendingDataType.ASSET);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.ASSET}`);
   assert.equal(d.dataType, StellarLendingDataType.ASSET);
 });
 
 test('hub doc derives id + pk', () => {
-  const d = new StellarHubDoc({ hubId: 1 });
+  const d = new StellarHubDoc({ network: 'testnet', hubId: 1 });
   assert.equal(d.id, 'hub:1');
-  assert.equal(d.pk, StellarLendingDataType.HUB);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.HUB}`);
 });
 
 test('hub-asset doc derives id + pk', () => {
-  const d = new StellarHubAssetDoc({ hubId: 1, asset: 'CUSDC' });
+  const d = new StellarHubAssetDoc({
+    network: 'testnet',
+    hubId: 1,
+    asset: 'CUSDC',
+  });
   assert.equal(d.id, 'hubAsset:1:CUSDC');
-  assert.equal(d.pk, StellarLendingDataType.HUB_ASSET);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.HUB_ASSET}`);
 });
 
 test('spoke doc derives id + pk', () => {
-  const d = new StellarSpokeDoc({ spokeId: 2 });
+  const d = new StellarSpokeDoc({ network: 'testnet', spokeId: 2 });
   assert.equal(d.id, 'spoke:2');
-  assert.equal(d.pk, StellarLendingDataType.SPOKE);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.SPOKE}`);
 });
 
 test('spoke-asset doc derives id + pk', () => {
-  const d = new StellarSpokeAssetDoc({ spokeId: 2, hubId: 1, asset: 'CUSDC' });
+  const d = new StellarSpokeAssetDoc({
+    network: 'testnet',
+    spokeId: 2,
+    hubId: 1,
+    asset: 'CUSDC',
+  });
   assert.equal(d.id, 'spokeAsset:2:1:CUSDC');
-  assert.equal(d.pk, StellarLendingDataType.SPOKE_ASSET);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.SPOKE_ASSET}`);
 });
 
 test('account-position doc partitions by accountId', () => {
   const d = new StellarAccountPositionDoc({
+    network: 'testnet',
     accountId: 'G123',
     owner: 'G123',
     hubId: 1,
     asset: 'CUSDC',
   });
   assert.equal(d.id, 'account:G123:1:CUSDC');
-  assert.equal(d.pk, 'G123');
+  assert.equal(d.pk, 'testnet:G123');
 });
 
 test('governance proposal doc id = operationId', () => {
-  const d = new StellarGovernanceProposalDoc({ operationId: 'abc123' });
+  const d = new StellarGovernanceProposalDoc({
+    network: 'testnet',
+    operationId: 'abc123',
+  });
   assert.equal(d.id, 'abc123');
-  assert.equal(d.pk, StellarLendingDataType.GOVERNANCE_PROPOSAL);
+  assert.equal(
+    d.pk,
+    `testnet:${StellarLendingDataType.GOVERNANCE_PROPOSAL}`,
+  );
 });
 
 test('cursor doc fixed id + pk', () => {
-  const d = new StellarLendingCursorDoc({ lastLedger: 42 });
+  const d = new StellarLendingCursorDoc({ network: 'testnet', lastLedger: 42 });
   assert.equal(d.id, 'cursor:stellar-lending');
-  assert.equal(d.pk, StellarLendingDataType.CURSOR);
+  assert.equal(d.pk, `testnet:${StellarLendingDataType.CURSOR}`);
   assert.equal(d.lastLedger, 42);
 });

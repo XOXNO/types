@@ -1,7 +1,10 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 
 export class StellarHubDoc {
   dataType = StellarLendingDataType.HUB;
+  network!: StellarNetwork;
   hubId!: number;
   isActive = true;
   name: string | null = null;
@@ -14,7 +17,7 @@ export class StellarHubDoc {
 
   constructor(props?: Partial<StellarHubDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `hub:${this.hubId}`;
   }
 }

@@ -1,8 +1,11 @@
 import { StellarLendingDataType } from '../enums';
+import { stellarLendingPartitionKey } from '../network';
+import type { StellarNetwork } from '../network';
 import type { StellarAssetOracle } from '../oracle-provider';
 
 export class StellarAssetDoc {
   dataType = StellarLendingDataType.ASSET;
+  network!: StellarNetwork;
   asset!: string;
   symbol!: string;
   name!: string;
@@ -22,7 +25,7 @@ export class StellarAssetDoc {
 
   constructor(props?: Partial<StellarAssetDoc>) {
     Object.assign(this, props);
-    this.pk = this.dataType;
+    this.pk = stellarLendingPartitionKey(this.network, this.dataType);
     this.id = `asset:${this.asset}`;
   }
 }
