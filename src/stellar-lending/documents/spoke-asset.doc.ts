@@ -19,6 +19,14 @@ export class StellarSpokeAssetDoc {
   isBorrowable = false;
   paused = false;
   frozen = false;
+  /**
+   * On-chain `SpokeAssetConfig.no_seize`. Gates ONLY the liquidation seizure
+   * leg — the asset stays fully usable for supply/borrow/withdraw/repay.
+   * Independent of `paused` (blocks every user verb) and `frozen` (blocks new
+   * exposure, permits exits); seizure is deliberately not gated by `paused`
+   * because it is pro-rata across the whole collateral set.
+   */
+  noSeize = false;
   loanToValueBps = 0;
   liquidationThresholdBps = 0;
   liquidationBonusBps = 0;

@@ -81,6 +81,8 @@ export interface StellarAssetPageMarket {
   isBorrowable: boolean;
   paused: boolean;
   frozen: boolean;
+  /** Spoke-asset `no_seize`: cannot be taken as liquidation collateral. */
+  noSeize: boolean;
   supplyCapShort: number;
   borrowCapShort: number;
   depositCapFilledPct: number;

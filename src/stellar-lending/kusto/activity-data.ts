@@ -15,7 +15,14 @@ export interface StellarLendingActivityData {
   accountId: string | null;
   owner: string | null;
   token: string;
-  /** Action delta amount (this tx), big-int string. */
+  /**
+   * Action delta amount (this tx), big-int string.
+   *
+   * Liquidation caveat: a share-credit liquidation emits BOTH a `liqSeize` leg
+   * on the liquidated account (gross of the protocol fee) and a `liqCredit` leg
+   * on the receiving account (net of it) for the same seizure. Summing the two
+   * tags double-counts it — pick one side per query.
+   */
   amount: string;
   /**
    * Display-unit delta. `null` when the asset header decimals are not yet
@@ -78,21 +85,32 @@ export interface StellarLendingActivityData {
   loanToValueBps: number | null;
   liquidationFeesBps: number | null;
   /**
-   * Liquidator (caller) address on liquidation legs (`liqRepay`/`liqSeize`),
-   * correlated by tx from the on-chain `LiquidationEvent`. `null` on all other
-   * rows. Enables a top-liquidators leaderboard (the legs' `accountId`/`owner`
-   * are the liquidatee).
+   * Liquidator (caller) address on liquidation legs
+   * (`liqRepay`/`liqSeize`/`liqCredit`), correlated by tx from the on-chain
+   * `LiquidationEvent`. `null` on all other rows. Enables a top-liquidators
+   * leaderboard.
+   *
+   * Whose account the leg belongs to differs by tag: on `liqRepay`/`liqSeize`
+   * the `accountId`/`owner` are the liquidatee, on `liqCredit` they are the
+   * liquidator's own receiving account (share-credit mode). Do not treat
+   * `owner` as the liquidatee without filtering the tag.
    */
   liquidator: string | null;
   /**
    * Aggregate debt repaid (USD WAD string) from `position:liquidation`, stamped
-   * onto same-tx `liqRepay`/`liqSeize` legs. `null` on non-liquidation rows.
+   * onto same-tx `liqRepay`/`liqSeize`/`liqCredit` legs. `null` on
+   * non-liquidation rows.
+   *
+   * This is the MEASURED receipt — net of refunds and of any shortfall from an
+   * under-delivering debt token — so it agrees with the `liqRepay` legs, not
+   * with the liquidator's requested payment.
    */
   repaidUsdWad?: string | null;
   /**
    * Applied liquidation bonus (bps string) from `position:liquidation`, stamped
-   * onto same-tx `liqRepay`/`liqSeize` legs. Total seized USD ≈
-   * repaid * (1 + bonus / 10_000). `null` on non-liquidation rows.
+   * onto same-tx `liqRepay`/`liqSeize`/`liqCredit` legs. Gross seized USD ≈
+   * repaid * (1 + bonus / 10_000) — the protocol fee is still inside that
+   * figure. `null` on non-liquidation rows.
    */
   bonusBps?: string | null;
   /**

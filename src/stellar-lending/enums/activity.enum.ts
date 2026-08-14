@@ -13,6 +13,19 @@ export enum StellarLendingActivity {
   RepayWithCollateral = 'repayWithCollateral',
   CloseWithdraw = 'closeWithdraw',
   Migrate = 'migrate',
+  /**
+   * On-chain `PositionAction::LiqCredit` (15) — the collateral credited to a
+   * share-credit liquidator's receiving account. Emitted only under
+   * `SeizeMode::Credit`, on the second (receiver) position batch.
+   *
+   * Gross vs net, and the reason this is a separate tag from `LiqSeize`:
+   * `liqSeize` is the liquidated account's debit, **gross** of the protocol fee
+   * (in both seize modes); `liqCredit` is the receiver's credit, **net** of it.
+   * The fee is `liqSeize.amount - liqCredit.amount`. Summing both tags as one
+   * quantity double-counts the seizure, and reading the gross `liqSeize` figure
+   * as liquidator proceeds overstates them by the fee.
+   */
+  LiqCredit = 'liqCredit',
   FlashLoan = 'flashLoan',
   BadDebt = 'badDebt',
   StrategyFee = 'strategyFee',

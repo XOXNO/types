@@ -59,6 +59,13 @@ export interface StellarReserveDetailItem {
   isBorrowable: boolean;
   paused: boolean;
   frozen: boolean;
+  /**
+   * Spoke-asset `no_seize`: the reserve cannot be taken as liquidation
+   * collateral. Gates only the seizure leg — supply/borrow/withdraw/repay stay
+   * open, so a liquidator must exclude this reserve from expected proceeds or
+   * the call reverts (`SpokeError::SpokeAssetSeizureHalted`).
+   */
+  noSeize: boolean;
   useAsCollateral: boolean;
   targetHealthFactorWad: string;
   healthFactorForMaxBonusWad: string;

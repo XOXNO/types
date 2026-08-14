@@ -38,6 +38,10 @@ test('activity enum values', () => {
   assert.equal(StellarLendingActivity.Supply, 'supply');
   assert.equal(StellarLendingActivity.FlashLoan, 'flashLoan');
   assert.equal(StellarLendingActivity.ParamUpdate, 'paramUpdate');
+  // PositionAction::LiqCredit (15) — net-of-fee receiver leg, distinct from the
+  // gross LiqSeize (5) leg on the liquidated account.
+  assert.equal(StellarLendingActivity.LiqSeize, 'liqSeize');
+  assert.equal(StellarLendingActivity.LiqCredit, 'liqCredit');
 });
 
 test('governance kind enum self-contained', () => {
@@ -119,6 +123,10 @@ test('spoke-asset doc derives id + pk', () => {
   });
   assert.equal(d.id, 'spokeAsset:2:1:CUSDC');
   assert.equal(d.pk, `testnet:${StellarLendingDataType.SPOKE_ASSET}`);
+  // Halt flags default open; no_seize gates only the seizure leg.
+  assert.equal(d.paused, false);
+  assert.equal(d.frozen, false);
+  assert.equal(d.noSeize, false);
 });
 
 test('account-position doc partitions by accountId', () => {

@@ -252,6 +252,21 @@ export class StellarUpdateMarketStateBatchEvent {
 }
 
 // ---------- topic: position:batch_update ----------
+/**
+ * One account's net position deltas for a transaction.
+ *
+ * A transaction may emit MORE THAN ONE of these. A share-credit liquidation
+ * (`SeizeMode::Credit`) emits exactly two — the liquidated account first, then
+ * the liquidator's receiving account — and both precede any `debt:bad_debt`.
+ * A transfer-mode liquidation emits exactly one. Consumers must key on
+ * `accountId` per event rather than assuming one batch per transaction.
+ *
+ * The receiver's batch is supply-side only and omits any leg whose net credit
+ * rounds to zero. It is also the ONLY announcement of a `Credit(0)`-created
+ * account: there is no account-creation event, so an indexer that discovers
+ * accounts from a creation event alone will never see it — take the identity
+ * from `accountAttributes`.
+ */
 export class StellarUpdatePositionBatchEvent {
   @ApiProperty({
     type: String,
@@ -497,13 +512,14 @@ export class StellarLiquidationEvent {
   accountId!: string;
 
   @ApiProperty({
-    description: 'Aggregate debt repaid, USD WAD decimal string',
+    description:
+      'Aggregate debt actually repaid, USD WAD decimal string. Measured receipt — net of refunds and of any shortfall from an under-delivering debt token — so it agrees with the LiqRepay legs of the position batch, not with the liquidator requested payment',
   })
   repaidUsdWad!: string;
 
   @ApiProperty({
     description:
-      'Applied liquidation bonus, bps decimal string; total seized USD is repaid * (1 + bonus)',
+      'Applied liquidation bonus, bps decimal string; gross seized USD is repaid * (1 + bonus), with the protocol fee still inside that figure',
   })
   bonusBps!: string;
 }
