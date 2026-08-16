@@ -22,6 +22,8 @@ export enum StellarGovernanceProposalKind {
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
+  DeployPositionNft = 'DeployPositionNft',
+  UpgradePositionNft = 'UpgradePositionNft',
   SetPositionManager = 'SetPositionManager',
   UpgradeController = 'UpgradeController',
   MigrateController = 'MigrateController',

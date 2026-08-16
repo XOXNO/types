@@ -24,6 +24,8 @@ export enum GovernanceProposalKind {
   UpgradeLiquidityPoolParams = 'UpgradeLiquidityPoolParams',
   DeployPool = 'DeployPool',
   UpgradePool = 'UpgradePool',
+  DeployPositionNft = 'DeployPositionNft',
+  UpgradePositionNft = 'UpgradePositionNft',
   UpgradeController = 'UpgradeController',
   MigrateController = 'MigrateController',
   TransferCtrlOwnership = 'TransferCtrlOwnership',
