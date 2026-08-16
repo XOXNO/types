@@ -269,6 +269,16 @@ export class NftDoc extends NftDocBase {
     description: 'The metadata of the NFT',
   })
   metadata?: NftMetadata = { attributes: [] };
+
+  constructor(props?: Partial<NftDoc>) {
+    super(props);
+    // Subclass field initializers run AFTER the base constructor's
+    // Object.assign, so the `= { attributes: [] }` default above would
+    // silently clobber any metadata passed in props. Re-apply it.
+    if (props?.metadata !== undefined) {
+      this.metadata = props.metadata;
+    }
+  }
 }
 
 export class ExtraProperties {
