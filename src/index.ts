@@ -293,6 +293,7 @@ export * from './requests/lending/lending-governance-proposal.filter';
 export * from './requests/lending/lending-indexes.dto';
 export * from './requests/lending/lending-market-profile.filter';
 export * from './requests/lending/lending-token-price.dto';
+export * from './requests/lending/stellar-campaign.dto';
 export * from './requests/lending/stellar-lending-admin-args.dto';
 export * from './requests/lending/stellar-lending-args.dto';
 export * from './requests/lending/stellar-lending-events.dto';
