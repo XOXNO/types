@@ -26,6 +26,13 @@ export enum StellarLendingActivity {
    * as liquidator proceeds overstates them by the fee.
    */
   LiqCredit = 'liqCredit',
+  /**
+   * Position-NFT `transfer` — the whole account (collateral AND debt) changed
+   * hands outside the controller. `owner` is the receiving wallet; the row's
+   * address is the sender. Not an on-chain `PositionAction`: emitted by the
+   * position-NFT contract, not the controller.
+   */
+  NftTransfer = 'nftTransfer',
   FlashLoan = 'flashLoan',
   BadDebt = 'badDebt',
   StrategyFee = 'strategyFee',

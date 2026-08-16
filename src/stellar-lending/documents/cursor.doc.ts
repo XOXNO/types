@@ -22,6 +22,13 @@ export class StellarLendingCursorDoc {
   poolAddress: string | null = null;
   priceAggregatorAddress: string | null = null;
   governanceAddress: string | null = null;
+
+  /**
+   * Position-NFT contract bound to this cursor position. NFT transfers change
+   * account ownership without any controller event, so the indexer watches it;
+   * a repoint invalidates the cursor like every other watched address.
+   */
+  positionNftAddress: string | null = null;
   /**
    * Decode-logic version. Bumping it discards the cursor and replays everything
    * within RPC retention, so a decoder fix reaches already-indexed events.
