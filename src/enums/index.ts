@@ -3,6 +3,7 @@ export * from "./azure-ws-event-name.enum";
 export * from "./azure-ws-hub-name.enum";
 export * from "./binance.enum";
 export * from "./bober-battle-activity.enum";
+export * from "./bridge-activity.enum";
 export * from "./built-in-event-identifier.enum";
 export * from "./chat-data-type.enum";
 export * from "./chat-message-content-type.enum";

@@ -12,4 +12,5 @@ export enum NftActivityEventSource {
   XOXNO_LENDING = 'xoxnoLending',
   BOBER_BATTLE = 'boberBattle',
   BOBER_WHEEL = 'boberWheel',
+  XOXNO_BRIDGE = 'xoxnoBridge',
 }
