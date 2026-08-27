@@ -34,9 +34,32 @@ export enum StellarLendingActivity {
    */
   NftTransfer = 'nftTransfer',
   FlashLoan = 'flashLoan',
+  /**
+   * On-chain `PositionAction::FlashPos` (16) — the strategy-debt mint leg of
+   * `flash_position`. A real borrow against the account, so the leg carries
+   * `side: 'borrow'` and a resulting balance like any other debt movement;
+   * distinct from {@link FlashLoan}, which is uncollateralized and closes
+   * within the transaction.
+   */
+  FlashPosition = 'flashPosition',
   BadDebt = 'badDebt',
   StrategyFee = 'strategyFee',
   InitialPayment = 'initialPayment',
+  /**
+   * Controller `revenue:claim` — accrued protocol revenue swept from the pool
+   * and forwarded to the accumulator.
+   *
+   * This is the ONLY record of realized protocol revenue. The `revenue` field
+   * on the market-state feed is OUTSTANDING unclaimed revenue and is
+   * decremented by every claim, so it is not a cumulative counter and must not
+   * be read as one. Lifetime revenue for a market is
+   * `outstanding (valued at the supply index) + Σ revenueClaim.amount`.
+   *
+   * `amount` is the measured amount actually forwarded, not the pool's
+   * reported figure. Claims can be partial (the burn is capped at the market's
+   * available cash), so one market emits many of these over time.
+   */
+  RevenueClaim = 'revenueClaim',
   Unknown = 'unknown',
 }
 
