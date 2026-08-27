@@ -5,7 +5,18 @@ import type { StellarNetwork } from '../network';
 export interface StellarInitialPaymentMultiplier {
   initialPaymentAmount: string;
   initialPaymentToken: string;
-  usdValue: string;
+  /**
+   * USD value of the initial multiply payment, as a plain decimal string —
+   * NOT 18-dec WAD.
+   *
+   * The on-chain `InitialMultiplyPaymentEvent` carries only
+   * `{token, amount, account_id}`; its `usd_value_wad` field was removed from
+   * the contract, after which the indexer read a missing field and wrote a
+   * literal `'0'` here on every multiply. The value is now derived by the
+   * indexer from the batch oracle price, and is `null` when that price or the
+   * token's decimals are unknown — never a fabricated zero.
+   */
+  usdValue: string | null;
 }
 
 /**

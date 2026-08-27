@@ -124,10 +124,20 @@ export interface StellarLendingActivityData {
   positionMode?: number;
   /** Raw fee in token base units (flash loan / strategy fee), big-int string. */
   fee?: string;
-  /** Raw amount forwarded after the strategy fee, big-int string. */
+  /**
+   * Raw amount forwarded after the strategy fee, big-int string. Also carries
+   * `flash_position`'s `amount_received` — the amount actually delivered to
+   * the receiver, which an inexact-delivery token makes smaller than `amount`.
+   */
   amountSent?: string;
-  /** Flash-loan receiver contract address. */
+  /** Flash-loan / flash-position receiver contract address. */
   receiver?: string;
+  /**
+   * Destination of a `revenueClaim` row: the accumulator address configured at
+   * claim time. Recorded per row because `set_accumulator` can change it, so
+   * the current config does not describe historical claims.
+   */
+  accumulator?: string;
   /**
    * Scaled balance (27-dec RAY) written off by a bad-debt zeroing row —
    * the position's pre-wipe balance on `side`.
