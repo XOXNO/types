@@ -25,6 +25,33 @@ class ActivityDataDto {
     example: ['identifier1'],
   })
   identifier?: string[];
+
+  @ApiProperty({
+    required: false,
+    type: 'array',
+    items: { type: 'string' },
+    example: ['base'],
+    description: 'Bridge transfers: originating chain.',
+  })
+  sourceChain?: string[];
+
+  @ApiProperty({
+    required: false,
+    type: 'array',
+    items: { type: 'string' },
+    example: ['delivered'],
+    description: 'Bridge transfers: lifecycle status.',
+  })
+  status?: string[];
+
+  @ApiProperty({
+    required: false,
+    type: 'array',
+    items: { type: 'string' },
+    example: ['XOXNO001'],
+    description: 'Bridge transfers: integrator tag carried in the hook data.',
+  })
+  integrator?: string[];
 }
 
 export class NftActivityFilterCriteriaDto {
@@ -89,8 +116,11 @@ export class NftActivityFilter extends CosmosDbGenericFilter<NftActivityDoc> {
     activityData?: {
       collection?: string[];
       identifier?: string[];
+      sourceChain?: string[];
+      status?: string[];
+      integrator?: string[];
     };
-    pk?: string[]; // no need to set this, it will be set automatically
+    pk?: string[]; // derived from collection/identifier; set it directly only for domains that partition by their own key
   } = {};
   @ApiProperty({ required: false, type: 'boolean', default: false })
   strictSelect?: boolean = false;
@@ -133,6 +163,11 @@ export class NftActivityFilter extends CosmosDbGenericFilter<NftActivityDoc> {
       });
     }
 
-    this.filters.pk = Array.from(uniqueCollections);
+    const derived = Array.from(uniqueCollections);
+
+    // Sources without an NFT collection (bridge, lending) partition by their
+    // own key and pass `pk` directly. Overwriting it here would turn every one
+    // of their reads into a cross-partition scan.
+    this.filters.pk = derived.length > 0 ? derived : (this.filters.pk ?? []);
   }
 }

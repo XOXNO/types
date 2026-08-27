@@ -1,3 +1,4 @@
+export * from './bridge/kusto/activity-data';
 export * from './cache/cache-keys';
 export * from './cache/ttl';
 export * from './common/kusto/lending-market-analytics';
@@ -190,6 +191,7 @@ export * from './enums/azure-ws-event-name.enum';
 export * from './enums/azure-ws-hub-name.enum';
 export * from './enums/binance.enum';
 export * from './enums/bober-battle-activity.enum';
+export * from './enums/bridge-activity.enum';
 export * from './enums/built-in-event-identifier.enum';
 export * from './enums/chat-data-type.enum';
 export * from './enums/chat-message-content-type.enum';

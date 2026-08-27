@@ -1267,6 +1267,42 @@ export const CacheKeys = {
   }),
 
   // ==========================================
+  // Bridge explorer cache keys
+  // ==========================================
+
+  /** Aggregates served from Kusto; short TTL because the feed is live. */
+  BridgeStats: (
+    startTime: string,
+    endTime: string,
+    bin: string,
+    sourceChain?: string,
+  ): CacheKeyConfig => ({
+    key: `bridge:stats:${startTime}:${endTime}:${bin}:${sourceChain ?? 'all'}`,
+    ttl: TTLS.ONE_MINUTE * 5,
+  }),
+
+  /**
+   * Circle's fast-burn allowance. Global, not per-user — Circle blocks every
+   * caller for five minutes past 40 req/s, so this is fetched once and shared.
+   */
+  BridgeCircleAllowance: (): CacheKeyConfig => ({
+    key: 'bridge:circle:allowance',
+    ttl: TTLS.ONE_MINUTE,
+  }),
+
+  /** Relayer + per-chain listener health. */
+  BridgeServiceStatus: (): CacheKeyConfig => ({
+    key: 'bridge:service:status',
+    ttl: TTLS.ONE_MINUTE,
+  }),
+
+  /** Merged transfer detail, keyed by the source burn transaction. */
+  BridgeTransferDetail: (sourceTxHash: string): CacheKeyConfig => ({
+    key: `bridge:transfer:${sourceTxHash}`,
+    ttl: TTLS.ONE_MINUTE,
+  }),
+
+  // ==========================================
   // Search-related cache keys
   // ==========================================
   GlobalSearch: (filter: string): CacheKeyConfig => ({
