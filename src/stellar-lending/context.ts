@@ -1,5 +1,6 @@
 import type {
   StellarAssetListItem,
+  StellarHubPool,
   StellarHubListItem,
   StellarReserveListItem,
   StellarSpokeListItem,
@@ -40,6 +41,8 @@ export interface StellarReserveDetailItem {
   depositsUsd: number;
   borrowsUsd: number;
   availableLiquidityUsd: number;
+  /** The shared hub pool behind this spoke reserve — see {@link StellarHubPool}. */
+  hubPool?: StellarHubPool;
   /** Raw asset-native i128 cap values used by governance builders. */
   supplyCap: string;
   borrowCap: string;

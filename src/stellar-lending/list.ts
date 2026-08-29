@@ -58,6 +58,25 @@ export interface StellarAssetListItem {
 /** The two leg SACs of an LP share, in the pool's `[keyA, keyB]` order. */
 export type StellarLpUnderlying = [tokenA: string, tokenB: string];
 
+/**
+ * Totals for the hub pool a spoke-scoped row draws on.
+ *
+ * Rows that carry this have their own `suppliedShort`/`borrowedShort`/
+ * `depositsUsd`/`borrowsUsd` scoped to ONE spoke, while interest rates, the
+ * contract's utilization guard and every IRM simulation price the hub pool all
+ * spokes share. Read these — not the row's own totals — for anything that
+ * projects a rate or a utilization; inferring them (summing spoke rows, or
+ * dividing cash by utilization) drifts from the pool's own numbers.
+ *
+ * Optional while api-v2 rolls the field out; treat absence as "fall back".
+ */
+export interface StellarHubPool {
+  suppliedShort: number;
+  borrowedShort: number;
+  depositsUsd: number;
+  borrowsUsd: number;
+}
+
 /** One (spoke, hub) market row for an asset detail page. */
 export interface StellarAssetPageMarket {
   spokeId: number;
@@ -75,6 +94,8 @@ export interface StellarAssetPageMarket {
   depositsUsd: number;
   borrowsUsd: number;
   availableLiquidityUsd: number;
+  /** The shared hub pool behind this spoke row — see {@link StellarHubPool}. */
+  hubPool?: StellarHubPool;
   collateralFactorBps: number;
   liquidationThresholdBps: number;
   isCollateralizable: boolean;
