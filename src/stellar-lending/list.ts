@@ -147,6 +147,15 @@ export interface StellarAssetPage {
   usdPrice: number;
   totalDepositsUsd: number;
   totalBorrowsUsd: number;
+  /**
+   * Total supplied across hubs, human-readable token units (live) — the same
+   * quantity `StellarAssetListItem` carries. Optional: added after the initial
+   * shape shipped, so a response from an older api-v2 still type-checks and
+   * consumers keep their `usd / price` fallback until it is everywhere.
+   */
+  totalDepositsNative?: number;
+  /** Total borrowed across hubs, human-readable token units (live). */
+  totalBorrowsNative?: number;
   availableLiquidityUsd: number;
   hubCount: number;
   reserveCount: number;
