@@ -546,6 +546,20 @@ export const CacheKeys = {
     ttl: TTLS.ONE_MINUTE / 2,
   }),
 
+  /**
+   * The COMPOSED context response, one layer above `StellarLendingContext`.
+   *
+   * `StellarLendingContext` caches the raw Cosmos docs; this caches the built
+   * + serialized DTO on top of them (~177 KB), which is why it exists at all.
+   * Both must be dropped together: purging only the inner key still serves the
+   * previously composed body until this one expires, so an indexer that
+   * invalidates on a state write has to name this key too.
+   */
+  StellarLendingContextDto: (network: StellarNetwork): CacheKeyConfig => ({
+    key: `sl:${network}:context-dto`,
+    ttl: TTLS.ONE_MINUTE / 2,
+  }),
+
   StellarLendingAssetsList: (network: StellarNetwork): CacheKeyConfig => ({
     key: `sl:${network}:list:assets`,
     ttl: TTLS.ONE_MINUTE / 2,
