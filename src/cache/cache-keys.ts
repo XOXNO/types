@@ -321,6 +321,16 @@ export const CacheKeys = {
     ttl: TTLS.ONE_SECOND * 6,
   }),
 
+  UserStakingSummary: (address: string): CacheKeyConfig => ({
+    key: `user:${address}:staking:summary`,
+    ttl: TTLS.ONE_MINUTE * 5,
+  }),
+
+  UserPotentialStakingPools: (address: string): CacheKeyConfig => ({
+    key: `user:${address}:staking:potentialPools`,
+    ttl: TTLS.ONE_MINUTE,
+  }),
+
   StakingDataDocs: (query: string): CacheKeyConfig => ({
     key: `query:staking:data:${query}`,
     ttl: TTLS.ONE_MINUTE * 30, // Invalidated on pool create/update events
@@ -1457,6 +1467,10 @@ export const CachePatterns = {
  * - API: When setting a cache, also SADD the key to relevant index sets
  * - Azure Functions: When invalidating, use SMEMBERS to get keys from index sets
  *
+ * Index SET TTL must be max(existing remaining, member TTL) — never the
+ * latest writer's TTL alone, or a short-lived query expires the index while
+ * longer-lived members remain.
+ *
  * This reduces O(n) SCAN operations to O(1) SMEMBERS lookups.
  */
 export const CacheIndexKeys = {
@@ -1521,6 +1535,17 @@ export const CacheIndexKeys = {
     `idx:activity:query:address:${address.toLowerCase()}`,
 
   ActivityQueryGlobal: 'idx:activity:query:global',
+
+  // ==========================================
+  // Lending / staking query index sets
+  // ==========================================
+  LendingQueryByAddress: (address: string) =>
+    `idx:lending:query:address:${address.toLowerCase()}`,
+
+  LendingQueryGlobal: 'idx:lending:query:global',
+
+  StakingQueryByAddress: (address: string) =>
+    `idx:staking:query:address:${address.toLowerCase()}`,
 };
 
 /**
@@ -1541,4 +1566,10 @@ export interface CacheIndexMetadata {
 /**
  * Type of query cache for determining which index keys to use.
  */
-export type CacheIndexType = 'nft' | 'offer' | 'collection' | 'activity';
+export type CacheIndexType =
+  | 'nft'
+  | 'offer'
+  | 'collection'
+  | 'activity'
+  | 'lending'
+  | 'staking';
