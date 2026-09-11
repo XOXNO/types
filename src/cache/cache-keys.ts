@@ -137,6 +137,11 @@ export const CacheKeys = {
     ttl: TTLS.ONE_MINUTE * 10,
   }),
 
+  WalletNonce: (address: string): CacheKeyConfig => ({
+    key: `user:${address}:wallet:nonce`,
+    ttl: TTLS.ONE_MINUTE * 5,
+  }),
+
   // ==========================================
   // Collection-related cache keys
   // ==========================================
@@ -184,6 +189,16 @@ export const CacheKeys = {
   CollectionListedCount: (collection: string): CacheKeyConfig => ({
     key: `collection:${collection}:listed:count`,
     ttl: TTLS.ONE_DAY,
+  }),
+
+  CollectionAuctionCount: (collection: string): CacheKeyConfig => ({
+    key: `collection:${collection}:auction:count`,
+    ttl: TTLS.ONE_MONTH * 3,
+  }),
+
+  CollectionSize: (collection: string): CacheKeyConfig => ({
+    key: `collection:${collection}:size`,
+    ttl: TTLS.ONE_MONTH * 3,
   }),
 
   CollectionListingDistribution: (collection: string): CacheKeyConfig => ({
@@ -247,6 +262,14 @@ export const CacheKeys = {
     ttl: TTLS.ONE_YEAR,
   }),
 
+  CollectionTickerByMintStageEvent: (
+    contract: string,
+    tag: string,
+  ): CacheKeyConfig => ({
+    key: `collection:ticker:${contract}:${tag}:mint:stage`,
+    ttl: TTLS.ONE_MONTH * 3,
+  }),
+
   CollectionListings: (collection: string): CacheKeyConfig => ({
     key: `collection:${collection}:listings`,
     ttl: TTLS.ONE_HOUR,
@@ -273,6 +296,11 @@ export const CacheKeys = {
   NftHasOffer: (identifier: string): CacheKeyConfig => ({
     key: `nft:${identifier}:offer:exists`,
     ttl: TTLS.ONE_YEAR,
+  }),
+
+  NftOriginalOwner: (token: string): CacheKeyConfig => ({
+    key: `nft:${token}:owner:original`,
+    ttl: TTLS.ONE_MINUTE * 5,
   }),
 
   NftOffers: (identifier: string): CacheKeyConfig => {
@@ -895,6 +923,11 @@ export const CacheKeys = {
     ttl: TTLS.ONE_MONTH,
   }),
 
+  TicketingLaunchpadAllRegisteredContracts: (): CacheKeyConfig => ({
+    key: 'launchpad:ticketing:contracts:registered:all',
+    ttl: TTLS.ONE_MONTH * 12,
+  }),
+
   UserCreatorProfile: (address: string): CacheKeyConfig => ({
     key: `launchpad:creator:${address}:profile`,
     ttl: TTLS.ONE_MONTH,
@@ -1003,6 +1036,16 @@ export const CacheKeys = {
   LowVolumeCollections: (): CacheKeyConfig => ({
     key: 'system:collections:low:volume',
     ttl: TTLS.ONE_HOUR,
+  }),
+
+  TransactionDetails: (txHash: string): CacheKeyConfig => ({
+    key: `transaction:${txHash}:details`,
+    ttl: TTLS.ONE_MINUTE * 5,
+  }),
+
+  OriginalTransactionHash: (txHash: string): CacheKeyConfig => ({
+    key: `transaction:${txHash}:hash:original`,
+    ttl: TTLS.ONE_MINUTE * 5,
   }),
 
   // ==========================================
