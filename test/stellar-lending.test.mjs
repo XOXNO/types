@@ -1,4 +1,6 @@
 import assert from 'node:assert/strict';
+import { validateSync } from 'class-validator';
+import { SWAP_VENUES, SwapHopDto, StellarQuoteSwapHopDto } from '../dist/requests/aggregator/stellar-aggregator.dto.js';
 
 import {
   StellarLendingDataType,
@@ -26,6 +28,17 @@ function test(name, fn) {
     process.exitCode = 1;
   }
 }
+
+test('Curve venue accepted by strategy and quote validators', () => {
+  assert.deepEqual(SWAP_VENUES, ['Soroswap', 'Aquarius', 'Phoenix', 'Sushi', 'CometDex', 'Curve']);
+  for (const [Dto, field] of [[SwapHopDto, 'venue'], [StellarQuoteSwapHopDto, 'dex']]) {
+    const hop = new Dto();
+    hop[field] = 'Curve';
+    assert(!validateSync(hop).some((error) => error.property === field));
+    hop[field] = 'Unknown';
+    assert(validateSync(hop).some((error) => error.property === field));
+  }
+});
 
 test('data-type enum values', () => {
   assert.equal(StellarLendingDataType.HUB_ASSET, 'hubAsset');

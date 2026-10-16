@@ -25,6 +25,7 @@ export const SWAP_VENUES = [
   'Phoenix',
   'Sushi',
   'CometDex',
+  'Curve',
 ] as const;
 export type SwapVenue = (typeof SWAP_VENUES)[number];
 
