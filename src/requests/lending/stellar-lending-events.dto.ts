@@ -186,6 +186,14 @@ export class StellarCreateMarketEvent {
 
 // ---------- topic: market:params_update ----------
 export class StellarUpdateMarketParamsEvent {
+  @ApiProperty({
+    type: 'integer',
+    required: false,
+    description:
+      'Hub id; with asset, identifies the market. Absent on ledgers before hubs.',
+  })
+  hubId?: number;
+
   @ApiProperty({ type: String, description: 'Pool asset address' })
   asset!: string;
 
@@ -210,7 +218,11 @@ export class StellarUpdateMarketParamsEvent {
   @ApiProperty({ description: 'Optimal utilization, RAY decimal string' })
   optimalUtilizationRay!: string;
 
-  @ApiProperty({ type: String, required: false, description: 'Max utilization, RAY decimal string' })
+  @ApiProperty({
+    type: String,
+    required: false,
+    description: 'Max utilization, RAY decimal string',
+  })
   maxUtilizationRay?: string;
 
   @ApiProperty({ type: 'integer', description: 'Reserve factor, bps' })
@@ -370,12 +382,14 @@ export class StellarStrategyFeeEvent {
   asset!: string;
 
   @ApiProperty({
-    description: 'Gross strategy borrow amount, asset-native units decimal string',
+    description:
+      'Gross strategy borrow amount, asset-native units decimal string',
   })
   amount!: string;
 
   @ApiProperty({
-    description: 'Strategy fee retained as protocol revenue, asset-native units decimal string',
+    description:
+      'Strategy fee retained as protocol revenue, asset-native units decimal string',
   })
   fee!: string;
 
@@ -397,9 +411,12 @@ export class StellarInitialMultiplyPaymentEvent {
   amount!: string;
 
   @ApiProperty({
-    description: 'USD WAD value of the initial payment, decimal string',
+    type: String,
+    required: false,
+    description:
+      'USD WAD value of the initial payment, decimal string. Current contracts do not emit it; present only on older ledgers.',
   })
-  usdValueWad!: string;
+  usdValueWad?: string;
 
   @ApiProperty({
     type: String,
@@ -435,7 +452,10 @@ export class StellarApproveTokenEvent {
 
 // ---------- topic: config:swap_aggregator ----------
 export class StellarUpdateSwapAggregatorEvent {
-  @ApiProperty({ type: String, description: 'Swap aggregator contract address' })
+  @ApiProperty({
+    type: String,
+    description: 'Swap aggregator contract address',
+  })
   aggregator!: string;
 }
 
@@ -556,6 +576,236 @@ export class StellarUpdateSpokeEvent {
   liquidationBonusFactorBps!: number;
 }
 
+// ---------- topic: position:flash_position ----------
+export class StellarFlashPositionEvent {
+  @ApiProperty({
+    type: String,
+    description: 'Account id that received the debt',
+  })
+  accountId!: string;
+
+  @ApiProperty({
+    type: 'integer',
+    description: 'Hub id of the borrowed market',
+  })
+  hubId!: number;
+
+  @ApiProperty({ type: String, description: 'Borrowed asset address' })
+  asset!: string;
+
+  @ApiProperty({ type: String, description: 'Callback receiver contract' })
+  receiver!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Caller that started the flash position',
+  })
+  caller!: string;
+
+  @ApiProperty({
+    description: 'Debt minted, asset-native units decimal string',
+  })
+  amount!: string;
+
+  @ApiProperty({
+    description:
+      'Amount the receiver received, asset-native units decimal string',
+  })
+  amountReceived!: string;
+
+  @ApiProperty({ description: 'Fee, asset-native units decimal string' })
+  fee!: string;
+}
+
+// ---------- topic: revenue:claim ----------
+export class StellarClaimRevenueEvent {
+  @ApiProperty({ type: 'integer', description: 'Hub id' })
+  hubId!: number;
+
+  @ApiProperty({ type: String, description: 'Asset address' })
+  asset!: string;
+
+  @ApiProperty({ type: String, description: 'Caller that claimed' })
+  caller!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Accumulator that received the revenue',
+  })
+  accumulator!: string;
+
+  @ApiProperty({
+    description: 'Claimed amount, asset-native units decimal string',
+  })
+  amount!: string;
+}
+
+// ---------- topic: account:delegate ----------
+export class StellarAccountDelegateEvent {
+  @ApiProperty({ type: String, description: 'Account id' })
+  accountId!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Account owner that granted or revoked',
+  })
+  owner!: string;
+
+  @ApiProperty({ type: String, description: 'Delegate address' })
+  delegate!: string;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'true when granted, false when revoked',
+  })
+  granted!: boolean;
+}
+
+// ---------- topic: config:hub ----------
+export class StellarCreateHubEvent {
+  @ApiProperty({ type: 'integer', description: 'Created hub id' })
+  hubId!: number;
+}
+
+export class StellarSpokeAssetConfig {
+  @ApiProperty({
+    type: Boolean,
+    description: 'Supplied balances count as collateral',
+  })
+  isCollateralizable!: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'The asset can be borrowed on this spoke',
+  })
+  isBorrowable!: boolean;
+
+  @ApiProperty({ type: Boolean, description: 'Blocks ordinary entry and exit' })
+  paused!: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Blocks new supply and borrowing',
+  })
+  frozen!: boolean;
+
+  @ApiProperty({
+    type: Boolean,
+    description: 'Blocks liquidation seizure of this asset',
+  })
+  noSeize!: boolean;
+
+  @ApiProperty({ type: 'integer', description: 'Loan-to-value, bps' })
+  loanToValueBps!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Liquidation threshold, bps' })
+  liquidationThresholdBps!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Liquidation bonus, bps' })
+  liquidationBonusBps!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Liquidation fee, bps' })
+  liquidationFeesBps!: number;
+
+  @ApiProperty({ description: 'Supply cap, asset-native units decimal string' })
+  supplyCap!: string;
+
+  @ApiProperty({ description: 'Borrow cap, asset-native units decimal string' })
+  borrowCap!: string;
+}
+
+// ---------- topic: config:spoke_asset ----------
+export class StellarUpdateSpokeAssetEvent {
+  @ApiProperty({ type: 'integer', description: 'Spoke id' })
+  spokeId!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Hub id' })
+  hubId!: number;
+
+  @ApiProperty({ type: String, description: 'Asset address' })
+  asset!: string;
+
+  @ApiProperty({
+    type: StellarSpokeAssetConfig,
+    description: 'Listing configuration',
+  })
+  config!: StellarSpokeAssetConfig;
+}
+
+// ---------- topic: config:remove_spoke_asset ----------
+export class StellarRemoveSpokeAssetEvent {
+  @ApiProperty({ type: 'integer', description: 'Spoke id' })
+  spokeId!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Hub id' })
+  hubId!: number;
+
+  @ApiProperty({ type: String, description: 'Asset address' })
+  asset!: string;
+}
+
+// ---------- topic: strategy:blend_migration ----------
+export class StellarBlendMigrationEvent {
+  @ApiProperty({
+    type: String,
+    description: 'XOXNO account id that received the migration',
+  })
+  accountId!: string;
+
+  @ApiProperty({ type: String, description: 'Source Blend pool' })
+  blendPool!: string;
+
+  @ApiProperty({ type: 'integer', description: 'Collateral entries migrated' })
+  collateralCount!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Supply entries migrated' })
+  supplyCount!: number;
+
+  @ApiProperty({ type: 'integer', description: 'Debt entries migrated' })
+  debtCount!: number;
+}
+
+// ---------- topic: strategy:harvest (DeFindex strategy adapter) ----------
+export class StellarHarvestEvent {
+  @ApiProperty({ type: String, description: 'Caller' })
+  from!: string;
+
+  @ApiProperty({
+    description: 'Collateral balance, asset-native units decimal string',
+  })
+  amount!: string;
+
+  @ApiProperty({ description: 'Price per share, 12-decimal decimal string' })
+  pricePerShare!: string;
+}
+
+// ---------- topic: governance:deploy_controller ----------
+export class StellarDeployControllerEvent {
+  @ApiProperty({ type: String, description: 'Deployed controller address' })
+  controller!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Controller WASM hash, 64-char hex',
+  })
+  wasmHash!: string;
+}
+
+// ---------- topic: governance:deploy_price_aggregator ----------
+export class StellarDeployPriceAggregatorEvent {
+  @ApiProperty({
+    type: String,
+    description: 'Deployed price aggregator address',
+  })
+  priceAggregator!: string;
+
+  @ApiProperty({
+    type: String,
+    description: 'Price aggregator WASM hash, 64-char hex',
+  })
+  wasmHash!: string;
+}
+
 /**
  * Discriminated union of every decoded Stellar lending event, keyed by the
  * `"<domain>:<action>"` topic. Narrow on `topic` to access the typed `data`.
@@ -585,7 +835,10 @@ export type StellarLendingDecodedEvent =
   | { topic: 'config:approve_blend_pool'; data: StellarApproveBlendPoolEvent }
   | { topic: 'config:approve_token'; data: StellarApproveTokenEvent }
   | { topic: 'config:swap_aggregator'; data: StellarUpdateSwapAggregatorEvent }
-  | { topic: 'config:price_aggregator'; data: StellarUpdatePriceAggregatorEvent }
+  | {
+      topic: 'config:price_aggregator';
+      data: StellarUpdatePriceAggregatorEvent;
+    }
   | { topic: 'config:aggregator'; data: StellarUpdateAggregatorEvent }
   | { topic: 'config:accumulator'; data: StellarUpdateAccumulatorEvent }
   | { topic: 'config:pool_template'; data: StellarUpdatePoolTemplateEvent }
@@ -595,4 +848,20 @@ export type StellarLendingDecodedEvent =
       data: StellarUpdateMinBorrowCollateralEvent;
     }
   | { topic: 'config:oracle_disabled'; data: StellarOracleDisabledEvent }
-  | { topic: 'config:spoke'; data: StellarUpdateSpokeEvent };
+  | { topic: 'config:spoke'; data: StellarUpdateSpokeEvent }
+  | { topic: 'position:flash_position'; data: StellarFlashPositionEvent }
+  | { topic: 'revenue:claim'; data: StellarClaimRevenueEvent }
+  | { topic: 'account:delegate'; data: StellarAccountDelegateEvent }
+  | { topic: 'config:hub'; data: StellarCreateHubEvent }
+  | { topic: 'config:spoke_asset'; data: StellarUpdateSpokeAssetEvent }
+  | { topic: 'config:remove_spoke_asset'; data: StellarRemoveSpokeAssetEvent }
+  | { topic: 'strategy:blend_migration'; data: StellarBlendMigrationEvent }
+  | { topic: 'strategy:harvest'; data: StellarHarvestEvent }
+  | {
+      topic: 'governance:deploy_controller';
+      data: StellarDeployControllerEvent;
+    }
+  | {
+      topic: 'governance:deploy_price_aggregator';
+      data: StellarDeployPriceAggregatorEvent;
+    };
