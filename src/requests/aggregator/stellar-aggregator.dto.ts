@@ -2,6 +2,7 @@ import { ApiProperty } from '@nestjs/swagger';
 import { Type } from 'class-transformer';
 import {
   ArrayMinSize,
+  ArrayMaxSize,
   IsArray,
   IsBoolean,
   IsIn,
@@ -213,13 +214,10 @@ export class BatchSwapDto extends StrategyPayloadDto {
 }
 
 /**
- * Execution-plane filter for the quote server.
- *   - `aggregator` (default): Soroban venues only (Soroswap, Aquarius,
- *     Phoenix, Sushi, CometDex). Produces a `routeXdr` payload and,
- *     when requested, an `execute_strategy` envelope.
- *   - `sdex`: Stellar DEX (native AMM) only.
- *   - `all`: runs both planes and returns the winner with the runner-up
- *     attached as an alternative.
+ * Quote platform vocabulary. Requests accept `aggregator` (Soroban only) or
+ * `all` (default, compare complete Soroban and Classic routes). Responses report
+ * `aggregator` or `sdex` (Classic order books and native AMMs). Only one winner
+ * is returned; native and Soroban paths are never combined.
  */
 export const STELLAR_QUOTE_PLATFORMS = ['aggregator', 'sdex', 'all'] as const;
 export type StellarQuotePlatform = (typeof STELLAR_QUOTE_PLATFORMS)[number];
@@ -288,13 +286,14 @@ export class StellarAggregatorQuoteRequestDto {
 
   @ApiProperty({
     description:
-      'Maximum number of parallel paths the allocator may produce. Default 1 (no split).',
+      'Maximum parallel paths for Soroban or disjoint Classic routes. Default 8, maximum 8; 1 disables splitting.',
     required: false,
     example: 4,
   })
   @IsOptional()
   @IsInt()
   @Min(1)
+  @Max(8)
   maxSplits?: number;
 
   @ApiProperty({
@@ -549,11 +548,129 @@ export class StellarQuoteAlternativeDto {
   quote!: Omit<StellarAggregatorQuoteResponseDto, 'alternatives'>;
 }
 
-/**
- * Response DTO for `GET /api/v1/quote` on the Stellar quote server.
- * Mirrors the Rust `QuoteResponse` in
- * `arb-algo/stellar-indexer/src/quote/types.rs` exactly.
- */
+/** Classic asset identity; credit assets require both code and issuer. */
+export class StellarClassicAssetDto {
+  @ApiProperty({ enum: ['native', 'credit_alphanum4', 'credit_alphanum12'] })
+  @IsIn(['native', 'credit_alphanum4', 'credit_alphanum12'])
+  assetType!: 'native' | 'credit_alphanum4' | 'credit_alphanum12';
+
+  @ApiProperty({ required: false })
+  @IsOptional()
+  @IsString()
+  assetCode?: string;
+
+  @ApiProperty({
+    required: false,
+    description: 'Issuer G-address; absent for XLM.',
+  })
+  @IsOptional()
+  @IsString()
+  assetIssuer?: string;
+}
+
+export class StellarNativeSwapPathDto {
+  @ApiProperty({ type: () => StellarClassicAssetDto, isArray: true })
+  @IsArray()
+  @ArrayMaxSize(5)
+  @ValidateNested({ each: true })
+  @Type(() => StellarClassicAssetDto)
+  path!: StellarClassicAssetDto[];
+
+  @ApiProperty({ description: 'Exact strict-send input in atomic units.' })
+  @IsString()
+  sendAmount!: string;
+
+  @ApiProperty({
+    description: 'Gross minimum received by this path, in atomic units.',
+  })
+  @IsString()
+  destinationMin!: string;
+}
+
+export class StellarNativeFeePaymentDto {
+  @ApiProperty({ enum: ['protocol', 'referral'] })
+  @IsIn(['protocol', 'referral'])
+  kind!: 'protocol' | 'referral';
+
+  @ApiProperty({ description: 'Fee recipient G-address.' })
+  @IsString()
+  recipient!: string;
+
+  @ApiProperty({ type: () => StellarClassicAssetDto })
+  @ValidateNested()
+  @Type(() => StellarClassicAssetDto)
+  asset!: StellarClassicAssetDto;
+
+  @ApiProperty({ description: 'Fixed payment amount in atomic units.' })
+  @IsString()
+  amount!: string;
+}
+
+export class StellarNativeSwapDto {
+  @ApiProperty({ type: () => StellarClassicAssetDto })
+  @ValidateNested()
+  @Type(() => StellarClassicAssetDto)
+  sourceAsset!: StellarClassicAssetDto;
+
+  @ApiProperty({ type: () => StellarClassicAssetDto })
+  @ValidateNested()
+  @Type(() => StellarClassicAssetDto)
+  destinationAsset!: StellarClassicAssetDto;
+
+  @ApiProperty({
+    required: false,
+    type: () => StellarClassicAssetDto,
+    isArray: true,
+    description:
+      'Single payment path. Absent for splits; execute paths instead.',
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMaxSize(5)
+  @ValidateNested({ each: true })
+  @Type(() => StellarClassicAssetDto)
+  path?: StellarClassicAssetDto[];
+
+  @ApiProperty({
+    required: false,
+    type: () => StellarNativeSwapPathDto,
+    isArray: true,
+    description: 'Execute every path in order, in the same atomic transaction.',
+  })
+  @IsOptional()
+  @IsArray()
+  @ArrayMinSize(2)
+  @ArrayMaxSize(8)
+  @ValidateNested({ each: true })
+  @Type(() => StellarNativeSwapPathDto)
+  paths?: StellarNativeSwapPathDto[];
+
+  @ApiProperty({
+    description: 'Sum of path inputs after input fees, in atomic units.',
+  })
+  @IsString()
+  sendAmount!: string;
+
+  @ApiProperty({
+    description: 'Sum of gross path minima, including fixed output fees.',
+  })
+  @IsString()
+  destinationMin!: string;
+
+  @ApiProperty({
+    type: () => StellarNativeFeePaymentDto,
+    isArray: true,
+    description:
+      'Pay input-asset fees before all paths, output-asset fees after all paths.',
+  })
+  @IsArray()
+  @ArrayMaxSize(2)
+  @ValidateNested({ each: true })
+  @Type(() => StellarNativeFeePaymentDto)
+  feePayments!: StellarNativeFeePaymentDto[];
+}
+
+/** Quote response from the Stellar aggregator, including native execution when selected. */
 export class StellarAggregatorQuoteResponseDto {
   @ApiProperty({ enum: ['forward', 'reverse'] })
   @IsIn(['forward', 'reverse'])
@@ -629,6 +746,16 @@ export class StellarAggregatorQuoteResponseDto {
   @IsOptional()
   @IsString()
   routeXdr?: string;
+
+  @ApiProperty({
+    required: false,
+    type: () => StellarNativeSwapDto,
+    description: 'Native Classic execution. Mutually exclusive with routeXdr.',
+  })
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => StellarNativeSwapDto)
+  nativeSwap?: StellarNativeSwapDto;
 
   @ApiProperty({ description: 'Output per 1 unit of input.' })
   @IsNumber()
