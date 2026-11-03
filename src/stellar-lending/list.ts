@@ -1,3 +1,4 @@
+import type { MarketExtraApy } from '../cosmos-db/documents/lending/lending-market-profile.doc';
 /**
  * Global list-item contracts for the Stellar-lending read API. These are the
  * row shapes the SDK and UI consume for the Aave-V4 style Deposit/Borrow tables,
@@ -20,6 +21,9 @@ export type StellarApyRange = [min: number, max: number];
  * over the asset's hub-assets at live indexes.
  */
 export interface StellarAssetListItem {
+  /** Embedded annualized yield; base lending rates and history exclude it. */
+  extraApy?: MarketExtraApy;
+
   asset: string;
   symbol: string;
   name: string;
@@ -79,6 +83,9 @@ export interface StellarHubPool {
 
 /** One (spoke, hub) market row for an asset detail page. */
 export interface StellarAssetPageMarket {
+  /** Embedded annualized yield; base lending rates and history exclude it. */
+  extraApy?: MarketExtraApy;
+
   spokeId: number;
   hubId: number;
   asset: string;
@@ -140,6 +147,9 @@ export interface StellarAssetPageGraphSeries {
 
 /** One-call payload for the Stellar asset detail page. */
 export interface StellarAssetPage {
+  /** Embedded annualized yield; base lending rates and history exclude it. */
+  extraApy?: MarketExtraApy;
+
   asset: string;
   symbol: string;
   name: string;
@@ -205,6 +215,9 @@ export interface StellarSpokeListItem {
  * liquidity truth at live indexes. Capacity reflects the supply (deposit) cap.
  */
 export interface StellarReserveListItem {
+  /** Embedded annualized yield; base lending rates and history exclude it. */
+  extraApy?: MarketExtraApy;
+
   spokeId: number;
   hubId: number;
   asset: string;

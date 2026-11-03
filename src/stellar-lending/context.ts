@@ -1,3 +1,4 @@
+import type { MarketExtraApy } from '../cosmos-db/documents/lending/lending-market-profile.doc';
 import type {
   StellarAssetListItem,
   StellarHubPool,
@@ -27,6 +28,9 @@ export interface StellarReserveIrmCurve {
 }
 
 export interface StellarReserveDetailItem {
+  /** Embedded annualized yield; base lending rates and history exclude it. */
+  extraApy?: MarketExtraApy;
+
   spokeId: number;
   hubId: number;
   asset: string;
