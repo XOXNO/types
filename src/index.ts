@@ -53,6 +53,8 @@ export * from './cosmos-db/documents/lending/lending-nft-attributes';
 export * from './cosmos-db/documents/lending/lending-oracle';
 export * from './cosmos-db/documents/lending/lending-token-emode-profile.doc';
 export * from './cosmos-db/documents/notification/notification.doc';
+export * from './cosmos-db/documents/short/marketplace-collection-list-item.doc';
+export * from './cosmos-db/documents/short/marketplace-nft-list-item.doc';
 export * from './cosmos-db/documents/short/short-collection-info.doc';
 export * from './cosmos-db/documents/short/short-collection.doc';
 export * from './cosmos-db/documents/short/short-creator.doc';

@@ -234,9 +234,9 @@ export type StellarTokenKind = 'native' | 'classic' | 'soroban';
  * Query parameters for `GET /api/v1/quote` on the Stellar quote server.
  *
  * Exactly one of `amountIn` or `amountOut` must be provided. The response
- * includes `routeXdr` for the Soroban-only aggregator route. `router`
- * + `sender` together populate `transaction.envelopeXdr` with a
- * ready-to-sign `execute_strategy` envelope.
+ * includes `routeXdr` for the Soroban-only aggregator route. `sender` with
+ * slippage requests an unsigned envelope using the service's configured router.
+ * A C-address sender requires a separate G-address `sourceAccount`.
  */
 export class StellarAggregatorQuoteRequestDto {
   @ApiProperty({
@@ -319,13 +319,22 @@ export class StellarAggregatorQuoteRequestDto {
 
   @ApiProperty({
     description:
-      'Sender G-strkey. When combined with `router`, the response contains `transaction.envelopeXdr` (an unsigned envelope ready to sign + submit).',
+      'Authorizing sender and output recipient (G account or C smart account). With slippage, requests an unsigned envelope. C senders require sourceAccount.',
     required: false,
     example: 'GDBBOILYIJBSUQKC3Z3USAW3DGPFHIGVKYA5T4ZUZBO56HBUPHJEN3FV',
   })
   @IsOptional()
   @IsString()
   sender?: string;
+
+  @ApiProperty({
+    description:
+      'G-address transaction source and sequence owner. Defaults to a G sender; required for a C sender. A source different from sender uses Soroban execution; explicit sdex is rejected.',
+    required: false,
+  })
+  @IsOptional()
+  @IsString()
+  sourceAccount?: string;
 
   @ApiProperty({
     description: 'Aggregator router C-strkey for envelope construction.',
@@ -488,11 +497,12 @@ export class StellarQuotePathDto {
 
 /**
  * Unsigned Soroban transaction envelope returned when the quote request
- * supplied both `sender` and `router`. It invokes
+ * supplied `sender` and slippage. It invokes
  * `execute_strategy(sender, total_in, swap_xdr)`. The caller MUST:
- *   1. Populate `seqNum` from the sender\'s account state.
- *   2. Run `simulateTransaction` to attach Soroban resource fees.
- *   3. Sign with the sender\'s key (Ed25519 / Stellar Wallets Kit).
+ *   1. Populate `seqNum` from sourceAccount unless already prepared.
+ *   2. Prepare resource data; authorize address entries and enforce simulation
+ *      when authorizationRequired is true.
+ *   3. Sign with the transaction source's key.
  *   4. Submit via `sendTransaction`.
  */
 export class StellarQuoteTransactionPayloadDto {
@@ -500,9 +510,20 @@ export class StellarQuoteTransactionPayloadDto {
   @IsString()
   envelopeXdr!: string;
 
-  @ApiProperty({ description: 'Sender G-strkey (echo of request).' })
+  @ApiProperty({
+    description: 'G-address transaction source and sequence owner.',
+  })
   @IsString()
   sourceAccount!: string;
+
+  @ApiProperty({
+    description:
+      'Address authorization is still required. Authorize entries and re-simulate with authorization enforced before source signing. Omitted for legacy same-source G envelopes.',
+    required: false,
+  })
+  @IsOptional()
+  @IsBoolean()
+  authorizationRequired?: boolean;
 
   @ApiProperty({ description: 'Router contract C-strkey (echo of request).' })
   @IsString()
@@ -801,7 +822,7 @@ export class StellarAggregatorQuoteResponseDto {
 
   @ApiProperty({
     description:
-      'Unsigned envelope ready to sign + submit. Populated when both `sender` and `router` query params were provided.',
+      'Unsigned envelope requested by sender and slippage. Address entries require authorization and enforced simulation when authorizationRequired is true.',
     required: false,
     type: () => StellarQuoteTransactionPayloadDto,
   })
