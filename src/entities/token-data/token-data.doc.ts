@@ -170,29 +170,6 @@ export class TokenDataDocHydrated extends TokenDataDoc {
   usdPrice!: number;
 }
 
-export class SuiCoinObjectDto {
-  @ApiProperty({
-    type: String,
-    description: 'Unique object identifier on SUI blockchain',
-  })
-  objectId!: string;
-  @ApiProperty({
-    type: String,
-    description: 'Balance amount as string',
-  })
-  balance!: string;
-  @ApiProperty({
-    type: String,
-    description: 'Transaction digest hash',
-  })
-  digest!: string;
-  @ApiProperty({
-    type: String,
-    description: 'Object version on SUI blockchain',
-  })
-  version!: string;
-}
-
 export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 12.160648172030305 })
   usdPrice!: number;
@@ -215,10 +192,4 @@ export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 83.21 })
   weight!: number;
 
-  @ApiProperty({
-    type: [SuiCoinObjectDto],
-    description: 'Array of SUI coin objects',
-    required: false,
-  })
-  objects?: SuiCoinObjectDto[];
 }

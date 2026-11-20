@@ -18,31 +18,6 @@ import {
 } from '../../../enums/common.enum';
 import { XoxnoMarketplaceScCollectionConfig } from './collectionConfig';
 
-export class Rule {
-  @ApiProperty({ description: 'Rule type' })
-  type!: 'kiosk_lock_rule' | 'royalty_rule';
-
-  @ApiProperty({ description: 'Rule amount bp', required: false })
-  amount_bp?: number;
-
-  @ApiProperty({ description: 'Rule min amount', required: false })
-  min_amount?: string;
-}
-
-export class TransferPolicy {
-  @ApiProperty({ description: 'Transfer policy id' })
-  id!: string;
-
-  @ApiProperty({ description: 'Transfer policy type' })
-  type!: string;
-
-  @ApiProperty({ description: 'Transfer policy rules' })
-  rules!: Rule[];
-
-  @ApiProperty({ description: 'Transfer policy is origin byte' })
-  is_origin_byte!: boolean;
-}
-
 export class CollectionFeatures {
   @ApiProperty({ required: false })
   @IsBoolean()
@@ -159,12 +134,6 @@ export class CollectionProfileDoc {
   chain: ActivityChain = ActivityChain.MVX;
 
   @ApiProperty({
-    description: 'Transfer policies for the collection',
-    type: [TransferPolicy],
-  })
-  transferPolicies: TransferPolicy[] = [];
-
-  @ApiProperty({
     description: 'Owner address of the collection',
     example: 'erd1...',
   })
@@ -265,12 +234,6 @@ export class CollectionProfileDoc {
   followCount?: number = 0;
 
   @ApiProperty({
-    description: 'Minimum sale price of the collection',
-    required: false,
-  })
-  minSalePrice?: string;
-
-  @ApiProperty({
     description: 'Unique identifier for the document',
     example: 'COLLECTION-123456-CollectionProfile',
     required: false,
@@ -286,21 +249,7 @@ export class CollectionProfileDoc {
 
   constructor(props?: Partial<CollectionProfileDoc>) {
     Object.assign(this, props);
-    this.collection = this.collection.replace('::', '-');
     this.id = `${this.collection}-${this.dataType}`;
-    if (this.transferPolicies?.length > 0) {
-      for (const policy of this.transferPolicies) {
-        this.royalty = policy.rules.find(
-          (rule) => rule.type === 'royalty_rule',
-        )?.amount_bp;
-        const minPrice = policy.rules.find(
-          (rule) => rule.type === 'royalty_rule',
-        )?.min_amount;
-        if (minPrice && minPrice !== '0') {
-          this.minSalePrice = minPrice;
-        }
-      }
-    }
   }
 }
 

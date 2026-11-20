@@ -111,8 +111,8 @@ test('normalizeLendingChain("MVX") -> MVX', () => {
   assert.equal(normalizeLendingChain('MVX'), 'MVX');
 });
 
-test('normalizeLendingChain("SUI") -> SUI', () => {
-  assert.equal(normalizeLendingChain('SUI'), 'SUI');
+test('normalizeLendingChain("FUTURE_CHAIN") -> FUTURE_CHAIN', () => {
+  assert.equal(normalizeLendingChain('FUTURE_CHAIN'), 'FUTURE_CHAIN');
 });
 
 if (failed > 0) {

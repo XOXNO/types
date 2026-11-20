@@ -4,8 +4,8 @@ import { ApiProperty } from '@nestjs/swagger';
  * Chain-agnostic argument DTOs for the lending protocol, decoupled from
  * chain-specific types:
  *
- *   - `token` is a string (an ESDT ticker, a Soroban contract address, a
- *     SUI coin type — whatever the target chain uses).
+ *   - `token` is a string (an ESDT ticker, a Soroban contract address,
+ *     or the identifier format used by the target chain).
  *   - `amount` is a decimal string to preserve precision across
  *     u64 / u128 / i128 backends.
  *   - `steps`, `data` are `unknown` — the concrete swap-path / callback

@@ -1408,66 +1408,6 @@ export const CacheKeys = {
   }),
 
   // ==========================================
-  // Sui-related cache keys
-  // ==========================================
-  SuiTransactionSender: (txDigest: string): CacheKeyConfig => ({
-    key: `platform:sui:transaction:${txDigest}:sender`,
-    ttl: TTLS.ONE_YEAR,
-  }),
-
-  SuiObject: (objectId: string): CacheKeyConfig => ({
-    key: `platform:sui:object:${objectId}`,
-    ttl: TTLS.ONE_YEAR,
-  }),
-
-  SuiEvents: (
-    packageId: string,
-    startTime: number,
-    endTime: number,
-    eventTypes: string[],
-  ): CacheKeyConfig => ({
-    key: `platform:sui:events:${packageId}:${startTime}:${endTime}:${eventTypes.join(',')}`,
-    ttl: TTLS.ONE_HOUR * 6,
-  }),
-
-  SuiUserCoins: (userAddress: string): CacheKeyConfig => ({
-    key: `platform:sui:user:${userAddress}:coins`,
-    ttl: TTLS.ONE_MINUTE,
-  }),
-
-  SuiCollectionInfo: (collectionType: string): CacheKeyConfig => ({
-    key: `platform:sui:collection:${collectionType}:info`,
-    ttl: TTLS.ONE_MINUTE * 5,
-  }),
-
-  SuiAllCollectionTypes: (): CacheKeyConfig => ({
-    key: 'platform:sui:collections:types:all',
-    ttl: TTLS.ONE_HOUR,
-  }),
-
-  SuiTokenPrices: (coinTypes: string[]): CacheKeyConfig => ({
-    key: `platform:sui:tokens:${coinTypes.join(',')}:prices`,
-    ttl: TTLS.ONE_MINUTE * 5,
-  }),
-
-  SuiQueryEventsPage: (
-    moveEventType: string,
-    order: 'ascending' | 'descending' | null | undefined,
-    limit: number | null | undefined,
-    cursor: { txDigest: string; eventSeq: string } | null | undefined,
-  ): CacheKeyConfig => {
-    const cursorKey = cursor
-      ? `${cursor.txDigest}:${cursor.eventSeq}`
-      : 'start';
-    const orderKey = order ?? 'ascending';
-    const limitKey = limit ?? 'default';
-    return {
-      key: `platform:sui:queryEvents:${moveEventType}:${orderKey}:${limitKey}:${cursorKey}`,
-      ttl: TTLS.ONE_MINUTE,
-    };
-  },
-
-  // ==========================================
   // Kusto-related cache keys
   // ==========================================
   KustoXoxnoLiquidStats: (): CacheKeyConfig => ({

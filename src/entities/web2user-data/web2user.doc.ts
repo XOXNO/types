@@ -53,10 +53,6 @@ export class Web2UserDoc {
   @ValidateNested()
   wallet?: Web2UserWallet;
 
-  @ApiProperty({ description: 'Salt for the user, used for SUI ZK Login' })
-  @IsString()
-  salt!: string;
-
   @ApiProperty({
     type: () => Web2UserAccount,
     description: "User's Google account information",

@@ -203,7 +203,6 @@ export class CollectionStatsDoc {
       throw new Error('collection is required');
     }
     Object.assign(this, props);
-    this.collection = this.collection.replace(/::/g, '-');
     this.id = `${this.collection}-${this.dataType}`;
   }
 }

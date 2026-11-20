@@ -201,12 +201,6 @@ class NftDocBase {
   tags?: string[];
 
   @ApiProperty({
-    type: String,
-    description: 'SUI specific: The Kiosk ID if the NFT is listed on a kiosk.',
-    required: false,
-  })
-  kiosk?: string;
-  @ApiProperty({
     type: Boolean,
     required: true,
     description: 'Whether the NFT is on sale',
