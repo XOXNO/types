@@ -192,4 +192,24 @@ export class TokenDataDocWithBalance extends TokenDataDocBase {
   @ApiProperty({ example: 83.21 })
   weight!: number;
 
+  @ApiProperty({
+    required: false,
+    type: String,
+    description:
+      'Spendable amount in the same integer scale as `balance` (10^decimals). ' +
+      'Set for Stellar rows: `balance` minus open-offer selling liabilities ' +
+      'and, for XLM, the minimum account reserve. Absent when unknown; ' +
+      'fall back to `balance`.',
+    example: '512000000',
+  })
+  availableBalance?: string;
+
+  @ApiProperty({
+    required: false,
+    description:
+      'Spendable amount in whole tokens, like `shortBalance`. Set together ' +
+      'with `availableBalance`.',
+    example: 51.2,
+  })
+  availableShortBalance?: number;
 }
